@@ -18,6 +18,7 @@ class KaiBOT(commands.Bot):
         log.debug(f'Running with the following intents: {fmt_intents}')
 
         super().__init__(*args, **kwargs)
+        self.load_all_extensions(config.EXTENSIONS)
 
     def load_all_extensions(self, extensions):
         for extension in extensions:
