@@ -1,0 +1,2 @@
+INTENTS = ('guilds',)
+PREFIX = 'k.'
