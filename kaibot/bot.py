@@ -21,5 +21,14 @@ class KaiBOT(commands.Bot):
 
         super().__init__(*args, **kwargs)
 
+    def load_all_extensions(self, extensions):
+        for extension in extensions:
+            try:
+                self.load_extension(extension, package=__package__)
+            except:
+                log.exception(f'[{extension}] Not loaded.')
+            else:
+                log.info(f'[{extension}] Loaded.')
+
     def prefix_getter(self, _, message):
         return config.PREFIX
