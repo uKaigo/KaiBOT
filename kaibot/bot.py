@@ -1,18 +1,17 @@
 import logging
 
-import discord
 from discord.ext import commands
 
 from . import config
-from .utils import get_selected_intents, get_intents_for
+from .utils import get_selected_intents, get_intents_from
 
 log = logging.getLogger('kaibot')
 
 
 class KaiBOT(commands.Bot):
     def __init__(self, *args, **kwargs):
-        kwargs.setdefault('intents', get_intents_for(config.INTENTS))
-        kwargs.setdefault('command_prefix', self.prefix_getter)
+        kwargs.setdefault('intents', get_intents_from(config.INTENTS))
+        kwargs['command_prefix'] = self.prefix_getter
 
         fmt_intents = ', '.join(get_selected_intents(kwargs['intents']))
         log.debug(f'Running with the following intents: {fmt_intents}')
@@ -24,10 +23,12 @@ class KaiBOT(commands.Bot):
         for extension in extensions:
             try:
                 self.load_extension(extension, package=__package__)
-            except:
-                log.exception(f'Failed to load {extension}.')
+            except Exception as e:
+                e = e.__cause__ or e
+                exc_info = (type(e), e, e.__traceback__)
+                log.error(f'Failed to load {extension}.', exc_info=exc_info)
             else:
                 log.info(f'Loaded "{extension}".')
 
-    def prefix_getter(self, _, message):
+    def prefix_getter(self, *_):
         return config.PREFIX

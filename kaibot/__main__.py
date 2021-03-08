@@ -6,7 +6,7 @@ from pathlib import Path
 
 from .logging import config_logging
 from .bot import KaiBOT
-from .utils import get_intents_for
+from .utils import get_intents_from
 
 log = logging.getLogger('kaibot.main')
 
@@ -35,9 +35,12 @@ def main():
 
     intents = None
     if options.intents:
-        intents = get_intents_for(options.intents)
+        intents = get_intents_from(options.intents)
 
-    bot = KaiBOT(intents=intents)
+    if intents:
+        bot = KaiBOT(intents=intents)
+    else:
+        bot = KaiBOT()
     bot.run(options.token)
 
 
