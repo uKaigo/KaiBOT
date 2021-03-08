@@ -6,6 +6,7 @@ from pathlib import Path
 
 from .logging import config_logging
 from .bot import KaiBOT
+from .utils import get_intents_for
 
 log = logging.getLogger('kaibot.main')
 
@@ -17,6 +18,11 @@ def parse_args():
         '--token',
         help='Run with the given token.'
     )
+    parser.add_argument(
+        '--intents',
+        help='Run with custom intents.',
+        nargs='+'
+    )
     return parser.parse_args()
 
 
@@ -27,8 +33,11 @@ def main():
         if not options.token:
             raise RuntimeError('Token must be set.')
 
-    bot = KaiBOT()
+    intents = None
+    if options.intents:
+        intents = get_intents_for(options.intents)
 
+    bot = KaiBOT(intents=intents)
     bot.run(options.token)
 
 
