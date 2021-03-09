@@ -17,6 +17,8 @@ class KaiBOT(commands.Bot):
         log.debug(f'Running with the following intents: {fmt_intents}')
 
         super().__init__(*args, **kwargs)
+
+        self.uptime = None
         self.load_all_extensions(config.EXTENSIONS)
 
     def load_all_extensions(self, extensions):
@@ -32,3 +34,6 @@ class KaiBOT(commands.Bot):
 
     def prefix_getter(self, *_):
         return config.PREFIX
+
+    async def on_ready(self):
+        log.info('Bot is ready.')
