@@ -1,4 +1,4 @@
 git+https://github.com/Rapptz/discord.py@a3f700c11f72202f6a7710ce07c7144a8b8c947d#egg=discord-py
-jishaku
+git+https://github.com/Gorialis/jishaku@1d7905a6984597176c1b7e3817c9f5c13934d29a#egg=jishaku
 Babel
 python-dotenv
