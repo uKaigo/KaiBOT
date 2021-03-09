@@ -4,6 +4,8 @@ import sys
 import argparse
 from pathlib import Path
 
+from dotenv import load_dotenv
+
 from .logging import config_logging
 from .bot import KaiBOT
 from .utils import get_intents_from
@@ -49,6 +51,8 @@ if __name__ == '__main__':
 
     log.debug('Changing dir to "kaibot".')
     os.chdir('kaibot')
+
+    load_dotenv()
 
     try:
         main()

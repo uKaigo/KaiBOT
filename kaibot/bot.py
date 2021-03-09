@@ -32,6 +32,8 @@ class KaiBOT(commands.Bot):
             else:
                 log.info(f'Loaded "{extension}".')
 
+        log.debug(f'Loaded {len(self.extensions)} extensions with {len(self.commands)} commands.')
+
     def prefix_getter(self, *_):
         return config.PREFIX
 
