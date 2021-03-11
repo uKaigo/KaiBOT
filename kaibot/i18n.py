@@ -1,5 +1,4 @@
 # Inspired by Cog-Creators/Red-DiscordBot, bot not copied from them.
-
 import gettext
 from contextvars import ContextVar
 
@@ -20,7 +19,7 @@ class Translator:
                 return message.format(*args, **kwargs)
             return message
 
-        if not lang in self.__cache:
+        if lang not in self.__cache:
             self.__cache[lang] = gettext.translation(
                 self.__domain,
                 '../locales',
