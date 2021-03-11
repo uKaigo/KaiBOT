@@ -1,5 +1,7 @@
 import logging
+import os
 
+from discord import Activity, ActivityType
 from discord.ext import commands
 
 from . import config
@@ -7,11 +9,14 @@ from .utils import get_intents_from
 
 log = logging.getLogger('kaibot')
 
+os.environ.update({f'JISHAKU_{FLAG}': '1' for FLAG in config.JISHAKU_FLAGS})
+
 
 class KaiBOT(commands.Bot):
     def __init__(self, *args, **kwargs):
         kwargs.setdefault('intents', get_intents_from(config.INTENTS))
         kwargs['command_prefix'] = self.prefix_getter
+        kwargs['activity'] = Activity(name='k.help', type=ActivityType.listening)
 
         super().__init__(*args, **kwargs)
 
