@@ -29,19 +29,21 @@ class BotEvents(commands.Cog):
 
     @commands.Cog.listener()
     async def on_ready(self):
-        if self.bot.uptime is not None:
+        bot = self.bot
+        if bot.uptime is not None:
             return
-        self.bot.uptime = datetime.utcnow()
+        bot.uptime = datetime.utcnow()
 
         console = get_console()
         console.print(f'[{color}]{ASCII_ART}\n')
 
         stats = Table(show_edge=False, show_header=False, box=box.MINIMAL)
 
-        members = len(set(self.bot.get_all_members()))
+        members = len(set(bot.get_all_members()))
 
         stats.add_row('Guilds', str(len(self.bot.guilds)))
-        stats.add_row('Members', str(members))
+        if bot.intents.members:
+            stats.add_row('Members', str(members))
 
         versions = Table(show_edge=False, show_header=False, box=box.MINIMAL)
         fmt = '{0.major}.{0.minor}.{0.minor}'
