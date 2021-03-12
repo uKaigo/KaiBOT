@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kaibot\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-11 13:09-0300\n"
-"PO-Revision-Date: 2021-03-11 00:22-0300\n"
+"POT-Creation-Date: 2021-03-12 11:49-0300\n"
+"PO-Revision-Date: 2021-03-12 11:50-0300\n"
 "Last-Translator: \n"
 "Language: en_US\n"
 "Language-Team: English\n"
@@ -14,41 +14,21 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.9.0\n"
 
-#: kaibot/cogs/meta.py:14
-msgid "Sem descrição."
-msgstr "No description."
-
-#: kaibot/cogs/meta.py:25
-msgid "Aqui estão todos os meus comandos."
-msgstr "Here's all my commands."
-
-#: kaibot/cogs/meta.py:28
-msgid "Ajuda"
-msgstr "Help"
-
-#: kaibot/cogs/meta.py:44
-msgid ""
-"Use \"{prefix}help [comando]\" para mais informações sobre um comando, ou"
-" \"{prefix}help [categoria]\" para mais informações sobre uma categoria."
-msgstr ""
-"Use \"{prefix} help [command]\" for more information about a command, or"
-" \"{prefix}help [category]\" for fore information about a category."
-
-#: kaibot/cogs/meta.py:56
+#: kaibot/cogs/meta.py:10
 #, docstring
 msgid "Comandos diversos."
 msgstr "Miscelaneous commands."
 
-#: kaibot/cogs/meta.py:63
+#: kaibot/cogs/meta.py:18
 msgid "Mostra essa mensagem."
 msgstr "Shows this message."
 
-#: kaibot/cogs/meta.py:70
+#: kaibot/cogs/meta.py:25
 #, docstring
 msgid "Envia a latência da websocket e o tempo de resposta."
-msgstr "Sends the websocket's latency and response time."
+msgstr "Sends the websocket latency and response time."
 
-#: kaibot/cogs/meta.py:71
+#: kaibot/cogs/meta.py:26
 msgid ""
 "🏓 Ping\n"
 "- Websocket: {}ms\n"
