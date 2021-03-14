@@ -1,7 +1,7 @@
 import logging
 import os
 
-from discord import Activity, ActivityType
+from discord import Activity, ActivityType, DMChannel
 from discord.ext import commands
 
 from . import config
@@ -36,8 +36,10 @@ class KaiBOT(commands.Bot):
 
         log.debug(f'Loaded {len(self.extensions)} extensions with {len(self.commands)} commands.')
 
-    def prefix_getter(self, *_):
-        return config.PREFIX
+    def prefix_getter(self, bot, message):
+        if isinstance(message.channel, DMChannel):
+            return commands.when_mentioned_or('', config.PREFIX)(bot, message)
+        return commands.when_mentioned_or(config.PREFIX)(bot, message)
 
     async def on_ready(self):
         log.info('Bot is ready.')
