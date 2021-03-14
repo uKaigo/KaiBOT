@@ -6,8 +6,8 @@ from ..i18n import Translator
 _ = Translator(__name__)
 
 
-class Meta(commands.Cog):
-    """Comandos diversos."""
+class Miscelaneous(commands.Cog):
+    """Comandos que não se encaixam em outra categoria."""
 
     def __init__(self, bot):
         self.bot = bot
@@ -35,4 +35,4 @@ class Meta(commands.Cog):
 
 
 def setup(bot):
-    bot.add_cog(Meta(bot))
+    bot.add_cog(Miscelaneous(bot))
