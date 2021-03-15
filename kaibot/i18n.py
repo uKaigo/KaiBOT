@@ -2,10 +2,19 @@
 import gettext
 from contextvars import ContextVar
 
+from babel import Locale
+
 current_language = ContextVar('current_language', default='pt_BR')
 
 
+def get_babel_locale():
+    lang = current_language.get()
+    return Locale.parse(lang)
+
+
 class Translator:
+    __slots__ = ('__domain', '__cache')
+
     def __init__(self, name):
         self.__domain = name.split('.')[-1]
         self.__cache = dict()
