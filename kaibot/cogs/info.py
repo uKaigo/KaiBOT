@@ -4,9 +4,11 @@ from typing import Union
 import discord
 from discord.ext import commands, menus
 from babel.dates import format_date, format_time
+from discord.member import Member
 
 from .. import config
-from ..utils.decorators import needs_chunk, needs_chunk_hook
+from ..utils.decorators import needs_chunk
+from ..utils.converters import MemberOrUser
 from ..utils.translations import PERMISSIONS
 from ..i18n import Translator, get_babel_locale
 
@@ -27,11 +29,10 @@ class UserinfoMenu(menus.Menu):
 
 
 class Info(commands.Cog):
+    """Comandos de informações de objetos Discord."""
+
     def __init__(self, bot):
         self.bot = bot
-
-    async def cog_before_invoke(self, ctx):
-        await needs_chunk_hook(self, ctx)
 
     def _format_datetime(self, datetime, date_fmt='medium', time_fmt='short'):
         locale = get_babel_locale()
@@ -42,7 +43,7 @@ class Info(commands.Cog):
         ).capitalize()
 
     @commands.group(invoke_without_command=True)
-    async def avatar(self, ctx, member: discord.User = None):
+    async def avatar(self, ctx, member: MemberOrUser = None):
         """
         Mostra o avatar de um usuário.
 
@@ -70,13 +71,14 @@ class Info(commands.Cog):
 
     @avatar.command()
     @commands.guild_only()
+    @needs_chunk()
     async def random(self, ctx):
         """Mostra um avatar aleatório."""
         member = choice(ctx.guild.members)
         await self.avatar(ctx, member)
 
     @commands.command()
-    async def userinfo(self, ctx, member: Union[discord.Member, discord.User] = None):
+    async def userinfo(self, ctx, member: MemberOrUser = None):
         """
         Mostra informações de um usuário.
 
@@ -84,6 +86,7 @@ class Info(commands.Cog):
         """
         if member is None:
             member = ctx.author
+
         embed_info = discord.Embed(color=member.color)
         embed_info.set_author(name=member, icon_url=member.avatar_url)
 

@@ -40,9 +40,9 @@ def main():
         intents = get_intents_from(options.intents)
 
     if intents:
-        bot = KaiBOT(intents=intents)
+        bot = KaiBOT(intents=intents, chunk_guilds_at_startup=False)
     else:
-        bot = KaiBOT()
+        bot = KaiBOT(chunk_guilds_at_startup=False)
     bot.run(options.token)
 
 
