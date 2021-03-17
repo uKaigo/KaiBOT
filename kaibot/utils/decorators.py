@@ -10,6 +10,7 @@ async def needs_chunk_hook(self, ctx):
 
 
 def needs_chunk():
+    """Registers a before_invoke that'll chunk the guild."""
     def decorator(func):
         if isinstance(func, commands.Command):
             func.before_invoke(needs_chunk_hook)

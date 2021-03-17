@@ -67,7 +67,7 @@ class Info(commands.Cog):
 
         embed.set_image(url=member.avatar_url)
 
-        return await ctx.send(embed=embed)
+        await ctx.send(embed=embed)
 
     @avatar.command()
     @commands.guild_only()

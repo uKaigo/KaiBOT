@@ -7,7 +7,8 @@ from babel import Locale
 current_language = ContextVar('current_language', default='pt_BR')
 
 
-def get_babel_locale():
+def get_babel_locale() -> Locale:
+    """Returns the Babel Locale for the current language."""
     lang = current_language.get()
     return Locale.parse(lang)
 
@@ -19,7 +20,8 @@ class Translator:
         self.__domain = name.split('.')[-1]
         self.__cache = dict()
 
-    def __call__(self, message, *args, **kwargs):
+    def __call__(self, message: str, *args, **kwargs) -> str:
+        """Translates the given text to the current language."""
         lang = current_language.get()
         if lang == 'pt_BR':
             # Since the bot is written in pt_BR, no need to translate
