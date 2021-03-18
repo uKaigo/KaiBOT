@@ -29,7 +29,7 @@ def main(path: Path, log: logging.Logger = log):
             res = 1
             continue
 
-        initialize_options(compiler, directory=path.name, domain=domains, locale=language.name)
+        initialize_options(compiler, directory=str(path), domain=domains, locale=language.name)
 
         compiler.log = log
         res = compiler.run()
@@ -43,7 +43,7 @@ def main(path: Path, log: logging.Logger = log):
 
 if __name__ == '__main__':
     handler = logging.StreamHandler()
-    handler.setLevel(logging.INFO)
     log.addHandler(handler)
+    log.setLevel(logging.INFO)
 
     sys.exit(main(Path('locales')))

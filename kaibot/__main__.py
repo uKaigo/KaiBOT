@@ -9,6 +9,7 @@ from dotenv import load_dotenv
 from .logging import config_logging
 from .bot import KaiBOT
 from .utils import get_intents_from
+from .scripts import mo_compiler as compile_mo
 
 log = logging.getLogger('kaibot.main')
 
@@ -53,6 +54,13 @@ if __name__ == '__main__':
     os.chdir('kaibot')
 
     load_dotenv()
+
+    log.info('Compiling mo...')
+
+    compile_mo.log.setLevel(logging.WARNING)
+    compile_mo.main(Path('../locales'))
+
+    log.info('Compiled.')
 
     try:
         main()
