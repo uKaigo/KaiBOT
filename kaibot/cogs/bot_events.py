@@ -39,11 +39,10 @@ class BotEvents(commands.Cog):
 
         stats = Table(show_edge=False, show_header=False, box=box.MINIMAL)
 
-        members = len(set(bot.get_all_members()))
-
         stats.add_row('Guilds', str(len(self.bot.guilds)))
-        if bot.intents.members:
-            stats.add_row('Members', str(members))
+
+        channels = len(tuple(bot.get_all_channels()))
+        stats.add_row('Channels', str(channels))
 
         versions = Table(show_edge=False, show_header=False, box=box.MINIMAL)
         fmt = '{0.major}.{0.minor}.{0.minor}'
