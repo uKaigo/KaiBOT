@@ -1,0 +1,143 @@
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: kaibot\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-03-17 22:23-0300\n"
+"PO-Revision-Date: 2021-03-17 22:25-0300\n"
+"Last-Translator: \n"
+"Language: en_US\n"
+"Language-Team: English\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.9.0\n"
+
+#: kaibot/utils/translations.py:17
+msgid "Criar convite"
+msgstr "Create Invite"
+
+#: kaibot/utils/translations.py:18
+msgid "Expulsar membros"
+msgstr "Kick Members"
+
+#: kaibot/utils/translations.py:19
+msgid "Banir membros"
+msgstr "Ban Members"
+
+#: kaibot/utils/translations.py:20
+msgid "Administrador"
+msgstr "Administrator"
+
+#: kaibot/utils/translations.py:21
+msgid "Gerenciar canais"
+msgstr "Manage channels"
+
+#: kaibot/utils/translations.py:22
+msgid "Gerenciar servidor"
+msgstr "Manage Server"
+
+#: kaibot/utils/translations.py:23
+msgid "Adicionar reações"
+msgstr "Add Reactions"
+
+#: kaibot/utils/translations.py:24
+msgid "Ver o registro de auditoria"
+msgstr "View Audit Log"
+
+#: kaibot/utils/translations.py:25
+msgid "Voz Prioritária"
+msgstr "Priority Speaker"
+
+#: kaibot/utils/translations.py:26
+msgid "Vídeo"
+msgstr "Video"
+
+#: kaibot/utils/translations.py:27
+msgid "Ver canal"
+msgstr "View Channel"
+
+#: kaibot/utils/translations.py:28
+msgid "Enviar mensagens"
+msgstr "Send Messages"
+
+#: kaibot/utils/translations.py:29
+msgid "Enviar mensagens em TTS"
+msgstr "Send TTS Messages"
+
+#: kaibot/utils/translations.py:30
+msgid "Gerenciar mensagens"
+msgstr "Manage Messages"
+
+#: kaibot/utils/translations.py:31
+msgid "Inserir links"
+msgstr "Embed Links"
+
+#: kaibot/utils/translations.py:32
+msgid "Anexar arquivos"
+msgstr "Attach Files"
+
+#: kaibot/utils/translations.py:33
+msgid "Ver histórico de mensagens"
+msgstr "View Message History"
+
+#: kaibot/utils/translations.py:34
+msgid "Mencionar todos"
+msgstr "Mention Everyone"
+
+#: kaibot/utils/translations.py:35
+msgid "Usar emojis externos"
+msgstr "Use External Emoji"
+
+#: kaibot/utils/translations.py:36
+msgid "Ver Análises do Servidor"
+msgstr "View Server Insights"
+
+#: kaibot/utils/translations.py:37
+msgid "Conectar"
+msgstr "Connect"
+
+#: kaibot/utils/translations.py:38
+msgid "Falar"
+msgstr "Speak"
+
+#: kaibot/utils/translations.py:39
+msgid "Silenciar membros"
+msgstr "Mute Members"
+
+#: kaibot/utils/translations.py:40
+msgid "Ensurdecer membros"
+msgstr "Deafen Members"
+
+#: kaibot/utils/translations.py:41
+msgid "Mover membros"
+msgstr "Move Members"
+
+#: kaibot/utils/translations.py:42
+msgid "Usar detecção de voz"
+msgstr "Use Voice Activity"
+
+#: kaibot/utils/translations.py:43
+msgid "Alterar apelido"
+msgstr "Change Nickname"
+
+#: kaibot/utils/translations.py:44
+msgid "Gerenciar apelidos"
+msgstr "Manage Nicknames"
+
+#: kaibot/utils/translations.py:45
+msgid "Gerenciar cargos"
+msgstr "Manage Roles"
+
+#: kaibot/utils/translations.py:46
+msgid "Gerenciar webhooks"
+msgstr "Manage Webhooks"
+
+#: kaibot/utils/translations.py:47
+msgid "Gerenciar emojis"
+msgstr "Manage Emojis"
+
+#: kaibot/utils/translations.py:48
+msgid "Usar comandos /"
+msgstr "Use Slash Commands"

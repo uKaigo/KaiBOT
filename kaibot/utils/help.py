@@ -128,7 +128,7 @@ class Help(commands.HelpCommand):
                 embed.add_field(name=_('Subcomandos:'), value=txt)
 
             extra = _(
-                'Use "{prefix}{group} [subcomando]" para mais informações sobre um comando.',
+                'Use "{prefix}help {group} [subcomando]" para mais informações sobre um comando.',
                 prefix=self.clean_prefix,
                 group=group.qualified_name
             )

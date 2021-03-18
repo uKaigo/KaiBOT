@@ -1,0 +1,75 @@
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: kaibot\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-03-17 22:23-0300\n"
+"PO-Revision-Date: 2021-03-17 22:25-0300\n"
+"Last-Translator: \n"
+"Language: en_US\n"
+"Language-Team: English\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.9.0\n"
+
+#: kaibot/cogs/info.py:32
+#, docstring
+msgid "Comandos de informações de objetos Discord."
+msgstr "Information commands about Discord objects."
+
+#: kaibot/cogs/info.py:39
+msgid "{date} às {time}"
+msgstr "{date} at {time}"
+
+#: kaibot/cogs/info.py:51
+#, docstring
+msgid ""
+"Mostra o avatar de um usuário.\n"
+"\n"
+"O usuário não precisa estar no servidor."
+msgstr ""
+"Shows the avatar of an user.\n"
+"\n"
+"The user doesn't need to be in the server."
+
+#: kaibot/cogs/info.py:61
+msgid "Avatar de {member}"
+msgstr "{member}'s avatar"
+
+#: kaibot/cogs/info.py:80
+#, docstring
+msgid "Mostra um avatar aleatório."
+msgstr "Shows a random avatar."
+
+#: kaibot/cogs/info.py:86
+#, docstring
+msgid ""
+"Mostra informações de um usuário.\n"
+"\n"
+"O usuário não precisa estar no servidor."
+msgstr ""
+"Shows information of an user.\n"
+"\n"
+"The user doesn't need to be in the server."
+
+#: kaibot/cogs/info.py:97
+msgid "🔢 ID"
+msgstr "🔢 ID"
+
+#: kaibot/cogs/info.py:100
+msgid "🗓️ Criou a conta em"
+msgstr "🗓️ Created the account in"
+
+#: kaibot/cogs/info.py:106
+msgid "🗓️ Entrou no servidor em"
+msgstr "🗓️ Joined the server in"
+
+#: kaibot/cogs/info.py:114
+msgid "🛠️ Cargos"
+msgstr "🛠️ Roles"
+
+#: kaibot/cogs/info.py:125
+msgid "🛡️ Permissões"
+msgstr "🛡️ Permissions"

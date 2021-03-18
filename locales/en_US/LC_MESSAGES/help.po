@@ -1,0 +1,83 @@
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: kaibot\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-03-17 22:23-0300\n"
+"PO-Revision-Date: 2021-03-17 22:24-0300\n"
+"Last-Translator: \n"
+"Language: en_US\n"
+"Language-Team: English\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.9.0\n"
+
+#: kaibot/utils/help.py:14
+msgid "Sem descrição."
+msgstr "No description."
+
+#: kaibot/utils/help.py:21
+msgid "Comando \"{string}\" não foi encontrado."
+msgstr "The command \"{string}\" wasn't found."
+
+#: kaibot/utils/help.py:25
+msgid "O comando \"{command}\" não possui um subcomando chamado \"{string}\""
+msgstr "The command \"{command}\" doesn't have a subcommand called \"{string}\""
+
+#: kaibot/utils/help.py:30
+msgid "O comando \"{command}\" não possui subcomandos."
+msgstr "The command \"{command}\" doesn't have subcommands."
+
+#: kaibot/utils/help.py:41
+msgid "Aqui estão todos os meus comandos."
+msgstr "Here's all my commands."
+
+#: kaibot/utils/help.py:44
+msgid "Ajuda"
+msgstr "Help"
+
+#: kaibot/utils/help.py:60
+msgid ""
+"Use \"{prefix}help [comando]\" para mais informações sobre um comando, ou"
+" \"{prefix}help [categoria]\" para mais informações sobre uma categoria."
+msgstr ""
+"Use \"{prefix}help [command]\" for more information about a command, or "
+"\"{prefix}help [category]\" for more information about a category."
+
+#: kaibot/utils/help.py:65 kaibot/utils/help.py:135 kaibot/utils/help.py:169
+msgid "Comandos começando com `*` são grupos, portanto possuem subcomandos."
+msgstr "Commands starting with `*` are groups, therefore have subcommands."
+
+#: kaibot/utils/help.py:79 kaibot/utils/help.py:103 kaibot/utils/help.py:147
+msgid "Ajuda | {bucket}"
+msgstr "Help | {bucket}"
+
+#: kaibot/utils/help.py:83 kaibot/utils/help.py:107
+msgid "Modo de usar:"
+msgstr "Usage:"
+
+#: kaibot/utils/help.py:88 kaibot/utils/help.py:112
+msgid "Sinônimos:"
+msgstr "Aliases:"
+
+#: kaibot/utils/help.py:91 kaibot/utils/help.py:115
+msgid "Parente:"
+msgstr "Parent:"
+
+#: kaibot/utils/help.py:128
+msgid "Subcomandos:"
+msgstr "Subcommands:"
+
+#: kaibot/utils/help.py:130
+msgid ""
+"Use \"{prefix}help {group} [subcomando]\" para mais informações sobre um "
+"comando."
+msgstr ""
+"Use \"{prefix}help {group} [subcommand]\" for more information about a "
+"command."
+
+#: kaibot/utils/help.py:165
+msgid "Use \"{prefix}help [comando]\" para mais informações sobre um comando."
+msgstr "Use \"{prefix}help [command]\" for more information about a command."
