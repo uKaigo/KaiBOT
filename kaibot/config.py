@@ -1,4 +1,4 @@
-PREFIX = 'k.'
+PREFIXES = ('k.', 'kaibot ')
 
 INTENTS = ('guilds', 'messages', 'reactions', 'members')
 

@@ -38,8 +38,8 @@ class KaiBOT(commands.Bot):
 
     def prefix_getter(self, bot, message):
         if isinstance(message.channel, DMChannel):
-            return commands.when_mentioned_or('', config.PREFIX)(bot, message)
-        return commands.when_mentioned_or(config.PREFIX)(bot, message)
+            return commands.when_mentioned_or('', *config.PREFIXES)(bot, message)
+        return commands.when_mentioned_or(*config.PREFIXES)(bot, message)
 
     async def on_ready(self):
         log.info('Bot is ready.')
