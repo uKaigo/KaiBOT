@@ -4,7 +4,7 @@ from typing import Union
 import discord
 from discord.ext import commands, menus
 from babel.dates import format_date, format_time
-from discord.member import Member
+from babel.lists import format_list
 
 from .. import config
 from ..utils.decorators import needs_chunk
@@ -41,6 +41,10 @@ class Info(commands.Cog):
             date=format_date(datetime, date_fmt, locale),
             time=format_time(datetime, time_fmt, None, locale)
         ).capitalize()
+
+    def _format_list(self, lst, style='standard'):
+        locale = get_babel_locale()
+        return format_list(tuple(lst), style, locale)
 
     @commands.group(invoke_without_command=True)
     async def avatar(self, ctx, member: MemberOrUser = None):
@@ -107,7 +111,7 @@ class Info(commands.Cog):
             roles = [r.mention for r in reversed(member.roles) if r.id != ctx.guild.id]
             roles.append('@everyone')
 
-            embed_info.add_field(name=_('🛠️ Cargos'), value=', '.join(roles), inline=False)
+            embed_info.add_field(name=_('🛠️ Cargos'), value=self._format_list(roles), inline=False)
 
         msg = await ctx.send(embed=embed_info)
         if not isinstance(member, discord.Member):
@@ -118,7 +122,7 @@ class Info(commands.Cog):
 
         perms = (f'`{PERMISSIONS[k]}`' for k, v in member.permissions_in(ctx.channel) if v)
 
-        embed_perms.add_field(name=_('🛡️ Permissões'), value=', '.join(perms), inline=False)
+        embed_perms.add_field(name=_('🛡️ Permissões'), value=self._format_list(perms), inline=False)
 
         menu = UserinfoMenu((embed_info, embed_perms), timeout=60, message=msg, check_embeds=True)
         await menu.start(ctx=ctx, wait=True)
