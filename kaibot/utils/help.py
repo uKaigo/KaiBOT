@@ -43,27 +43,29 @@ class Help(commands.HelpCommand):
         )
         embed.set_author(name=_('Ajuda'), icon_url=self.context.me.avatar_url)
 
-        for cog, commands in mapping.items():
-            commands = await self.filter_commands(commands, sort=True)
-            if not commands:
+        for cog, cmds in mapping.items():
+            cmds = await self.filter_commands(cmds, sort=True)
+            if not cmds:
                 continue
 
             txt = ''
-            for command in commands:
+            for command in cmds:
                 cmd_text = self.get_command_signature(command)
+                if isinstance(command, commands.Group) and command.commands:
+                    txt += '\*'
                 txt += f'**{cmd_text}** — {self._get_short_doc(command)}\n'
 
             embed.add_field(name=cog.qualified_name, value=txt, inline=False)
 
-        embed.add_field(
-            name='\N{ZERO WIDTH SPACE}',
-            value=_(
-                'Use "{prefix}help [comando]" para mais informações sobre um comando, ou '
-                '"{prefix}help [categoria]" para mais informações sobre uma categoria.',
-                prefix=self.clean_prefix
-            ),
-            inline=False
+        extra = _(
+            'Use "{prefix}help [comando]" para mais informações sobre um comando, ou '
+            '"{prefix}help [categoria]" para mais informações sobre uma categoria.',
+            prefix=self.clean_prefix
         )
+        extra += '\n\n' + _(
+            'Comandos começando com `*` são grupos, portanto possuem subcomandos.'
+        )
+        embed.add_field(name='\N{ZERO WIDTH SPACE}', value=extra, inline=False)
         await self.get_destination().send(embed=embed)
 
     async def send_command_help(self, command):
@@ -113,20 +115,27 @@ class Help(commands.HelpCommand):
             embed.add_field(name=_('Parente:'), value=group.parent.qualified_name, inline=False)
 
         if group.commands:
-            commands = await self.filter_commands(group.commands, sort=True)
-            if commands:
+            cmds = await self.filter_commands(group.commands, sort=True)
+            if cmds:
                 txt = ''
-                for command in commands:
+                for command in cmds:
                     cmd_doc = self._get_short_doc(command)
+                    if isinstance(command, commands.Group) and commands.commands:
+                        txt += '\*'
+
                     txt += f'**{command.name} {command.signature}** — {cmd_doc}\n'
 
                 embed.add_field(name=_('Subcomandos:'), value=txt)
 
-            embed.add_field(name='\N{ZERO WIDTH SPACE}', inline=False, value=_(
+            extra = _(
                 'Use "{prefix}{group} [subcomando]" para mais informações sobre um comando.',
                 prefix=self.clean_prefix,
                 group=group.qualified_name
-            ))
+            )
+            extra += '\n\n' + _(
+                'Comandos começando com `*` são grupos, portanto possuem subcomandos.'
+            )
+            embed.add_field(name='\N{ZERO WIDTH SPACE}', value=extra, inline=False)
 
         await self.get_destination().send(embed=embed)
 
@@ -139,18 +148,25 @@ class Help(commands.HelpCommand):
             icon_url=self.context.me.avatar_url
         )
 
-        commands = await self.filter_commands(cog.get_commands(), sort=True)
-        if not commands:
+        cmds = await self.filter_commands(cog.get_commands(), sort=True)
+        if not cmds:
             return await self.send_error_message(self.command_not_found(cog.qualified_name))
 
         txt = ''
-        for command in commands:
+        for command in cmds:
             cmd_text = self.get_command_signature(command)
+
+            if isinstance(command, commands.Group) and command.commands:
+                txt = '\*'
+
             txt += f'**{cmd_text}** — {self._get_short_doc(command)}\n'
 
         embed.description += f'\n\n{txt}'
         embed.description += '\n' + _(
             'Use "{prefix}help [comando]" para mais informações sobre um comando.',
             prefix=self.clean_prefix
+        )
+        embed.description += '\n\n' + _(
+            'Comandos começando com `*` são grupos, portanto possuem subcomandos.'
         )
         await self.get_destination().send(embed=embed)
