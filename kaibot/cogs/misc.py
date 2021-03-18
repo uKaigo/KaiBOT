@@ -1,3 +1,5 @@
+import sys
+
 from discord.ext import commands
 
 from kaibot.utils.help import Help
@@ -11,6 +13,7 @@ class Miscelaneous(commands.Cog):
 
     def __init__(self, bot):
         self.bot = bot
+        bot._old_help_command = bot.help_command
         bot.help_command = Help(
             verify_checks=False,
             command_attrs={
@@ -36,3 +39,9 @@ class Miscelaneous(commands.Cog):
 
 def setup(bot):
     bot.add_cog(Miscelaneous(bot))
+
+
+def teardown(bot):
+    bot.help_command = bot._old_help_command
+    # Uncache the help command to allow reloading.
+    sys.modules.pop('kaibot.utils.help', None)
