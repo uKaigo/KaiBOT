@@ -1,0 +1,47 @@
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: kaibot\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-03-19 23:37-0300\n"
+"PO-Revision-Date: 2021-03-19 23:39-0300\n"
+"Last-Translator: \n"
+"Language: en_US\n"
+"Language-Team: English\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.9.0\n"
+
+#: kaibot/cogs/error_handler.py:34
+msgid "Este comando só pode ser executado em servidores."
+msgstr "This command can only run in guilds."
+
+#: kaibot/cogs/error_handler.py:41
+msgid "O membro \"{string}\" não foi encontrado."
+msgstr "The member \"{string}\" wasn't found."
+
+#: kaibot/cogs/error_handler.py:47
+msgid "membro"
+msgstr "member"
+
+#: kaibot/cogs/error_handler.py:48
+msgid "usuário"
+msgstr "user"
+
+#: kaibot/cogs/error_handler.py:56
+msgid "Não foi possível converter \"{string}\" para {converters}."
+msgstr "Couldn't convert \"{string}\" to {converters}."
+
+#: kaibot/cogs/error_handler.py:78
+msgid ""
+"Ocorreu um erro ao executar este comando.\n"
+"Tente contatar o suporte para resolver o problema.\n"
+"\n"
+"{error}"
+msgstr ""
+"An error occurred running this command.\n"
+"Try contacting the support to solve the problem.\n"
+"\n"
+"{error}"

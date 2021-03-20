@@ -3,14 +3,13 @@ from typing import Union
 
 import discord
 from discord.ext import commands, menus
-from babel.dates import format_date, format_time
-from babel.lists import format_list
 
 from .. import config
+from ..utils.formatters import format_datetime, format_list
 from ..utils.decorators import needs_chunk
 from ..utils.converters import MemberOrUser
 from ..utils.translations import PERMISSIONS
-from ..i18n import Translator, get_babel_locale
+from ..i18n import Translator
 
 
 _ = Translator(__name__)
@@ -33,18 +32,6 @@ class Info(commands.Cog):
 
     def __init__(self, bot):
         self.bot = bot
-
-    def _format_datetime(self, datetime, date_fmt='medium', time_fmt='short'):
-        locale = get_babel_locale()
-        return _(
-            '{date} às {time}',
-            date=format_date(datetime, date_fmt, locale),
-            time=format_time(datetime, time_fmt, None, locale)
-        ).capitalize()
-
-    def _format_list(self, lst, style='standard'):
-        locale = get_babel_locale()
-        return format_list(tuple(lst), style, locale)
 
     @commands.group(invoke_without_command=True)
     async def avatar(self, ctx, member: MemberOrUser = None):
@@ -98,20 +85,20 @@ class Info(commands.Cog):
 
         embed_info.add_field(
             name=_('🗓️ Criou a conta em'),
-            value=self._format_datetime(member.created_at),
+            value=format_datetime(member.created_at),
             inline=False
         )
         if isinstance(member, discord.Member):
             embed_info.add_field(
                 name=_('🗓️ Entrou no servidor em'),
-                value=self._format_datetime(member.joined_at),
+                value=format_datetime(member.joined_at),
                 inline=False
             )
 
             roles = [r.mention for r in reversed(member.roles) if r.id != ctx.guild.id]
             roles.append('@everyone')
 
-            embed_info.add_field(name=_('🛠️ Cargos'), value=self._format_list(roles), inline=False)
+            embed_info.add_field(name=_('🛠️ Cargos'), value=format_list(roles), inline=False)
 
         msg = await ctx.send(embed=embed_info)
         if not isinstance(member, discord.Member):
@@ -122,7 +109,7 @@ class Info(commands.Cog):
 
         perms = (f'`{PERMISSIONS[k]}`' for k, v in member.permissions_in(ctx.channel) if v)
 
-        embed_perms.add_field(name=_('🛡️ Permissões'), value=self._format_list(perms), inline=False)
+        embed_perms.add_field(name=_('🛡️ Permissões'), value=format_list(perms), inline=False)
 
         menu = UserinfoMenu((embed_info, embed_perms), timeout=60, message=msg, check_embeds=True)
         await menu.start(ctx=ctx, wait=True)

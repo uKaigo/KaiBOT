@@ -1,5 +1,6 @@
 import logging
 import os
+import aiohttp
 
 from discord import Activity, ActivityType, DMChannel
 from discord.ext import commands
@@ -21,6 +22,7 @@ class KaiBOT(commands.Bot):
         super().__init__(*args, **kwargs)
 
         self.uptime = None
+        self.session = aiohttp.ClientSession()
         self.load_all_extensions(config.EXTENSIONS)
 
     def load_all_extensions(self, extensions):
@@ -43,3 +45,7 @@ class KaiBOT(commands.Bot):
 
     async def on_ready(self):
         log.info('Bot is ready.')
+
+    async def close(self):
+        await self.session.close()
+        await super().close()
