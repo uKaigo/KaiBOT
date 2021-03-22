@@ -25,9 +25,9 @@ class ErrorHandler(commands.Cog):
 
     @commands.Cog.listener()
     async def on_command_error(self, ctx, error):
-        original = error.__cause__
+        error = error.__cause__ or error
 
-        if isinstance(error, self.IGNORED_ERRORS) or isinstance(original, self.IGNORED_ERRORS):
+        if isinstance(error, self.IGNORED_ERRORS):
             return
 
         if isinstance(error, commands.NoPrivateMessage):
@@ -60,10 +60,8 @@ class ErrorHandler(commands.Cog):
                 converters=format_list(converters, style='or')
             ))
 
-        err = original or error
-
         log.error(f'An error ocurred in the command "{ctx.command.qualified_name}". '
-                  f'Message ID: {ctx.message.id}.', exc_info=err)
+                  f'Message ID: {ctx.message.id}.', exc_info=error)
 
         embed = discord.Embed(
             title=f'Erro no comando "{ctx.command.qualified_name}"',
@@ -71,7 +69,7 @@ class ErrorHandler(commands.Cog):
             color=config.MAIN_COLOR
         )
 
-        fmt = traceback.format_exception(None, err, err.__traceback__)
+        fmt = traceback.format_exception(None, error, error.__traceback__)
         embed.add_field(name='\N{ZERO WIDTH SPACE}', value=f"```py\n{''.join(fmt)}```")
 
         await self.webhook.send(embed=embed)

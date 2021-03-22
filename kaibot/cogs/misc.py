@@ -2,7 +2,7 @@ import sys
 
 from discord.ext import commands
 
-from kaibot.utils.help import Help
+from .utils.help import Help
 from ..i18n import Translator
 
 _ = Translator(__name__)
@@ -23,6 +23,9 @@ class Miscelaneous(commands.Cog):
         )
         bot.help_command.cog = self
 
+    def cog_unload(self):
+        self.bot.help_command = self.bot._old_help_command
+
     @commands.command()
     async def ping(self, ctx):
         """Envia a latência da websocket e o tempo de resposta."""
@@ -41,7 +44,6 @@ def setup(bot):
     bot.add_cog(Miscelaneous(bot))
 
 
-def teardown(bot):
-    bot.help_command = bot._old_help_command
+def teardown():
     # Uncache the help command to allow reloading.
-    sys.modules.pop('kaibot.utils.help', None)
+    sys.modules.pop('kaibot.cogs.utils.help', None)

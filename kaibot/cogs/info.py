@@ -95,6 +95,13 @@ class Info(commands.Cog):
                 inline=False
             )
 
+            if ps := member.premium_since:
+                embed_info.add_field(
+                    name=_('♦️ Impulsionando desde'),
+                    value=format_datetime(ps),
+                    inline=False
+                )
+
             roles = [r.mention for r in reversed(member.roles) if r.id != ctx.guild.id]
             roles.append('@everyone')
 
