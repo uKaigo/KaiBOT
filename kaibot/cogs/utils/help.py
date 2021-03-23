@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
 
-from .. import config
+from ... import config
 from ...i18n import Translator
 
 _ = Translator(__name__)

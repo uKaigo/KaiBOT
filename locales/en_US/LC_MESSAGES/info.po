@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  kaibot\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-19 23:37-0300\n"
+"POT-Creation-Date: 2021-03-22 22:14-0300\n"
 "PO-Revision-Date: 2021-03-17 22:25-0300\n"
 "Last-Translator: \n"
 "Language: en_US\n"
@@ -62,10 +62,23 @@ msgstr "🗓️ Created the account in"
 msgid "🗓️ Entrou no servidor em"
 msgstr "🗓️ Joined the server in"
 
-#: kaibot/cogs/info.py:101
+#: kaibot/cogs/info.py:100
+msgid "♦️ Impulsionando desde"
+msgstr "♦️ Boosting since"
+
+#: kaibot/cogs/info.py:107
+msgid "Nenhum."
+msgstr "None."
+
+#: kaibot/cogs/info.py:109
 msgid "🛠️ Cargos"
 msgstr "🛠️ Roles"
 
-#: kaibot/cogs/info.py:112
+#: kaibot/cogs/info.py:121
+msgid "Nenhuma."
+msgstr "None."
+
+#: kaibot/cogs/info.py:123
 msgid "🛡️ Permissões"
 msgstr "🛡️ Permissions"
+

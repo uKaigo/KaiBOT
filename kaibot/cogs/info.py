@@ -103,7 +103,8 @@ class Info(commands.Cog):
                 )
 
             roles = [r.mention for r in reversed(member.roles) if r.id != ctx.guild.id]
-            roles.append('@everyone')
+            if not roles:
+                roles = [_('Nenhum.')]
 
             embed_info.add_field(name=_('🛠️ Cargos'), value=format_list(roles), inline=False)
 
@@ -114,12 +115,15 @@ class Info(commands.Cog):
         embed_perms = discord.Embed(color=member.color)
         embed_perms.set_author(name=member, icon_url=member.avatar_url)
 
-        perms = (f'`{PERMISSIONS[k]}`' for k, v in member.permissions_in(ctx.channel) if v)
+        perms = [f'`{PERMISSIONS[k]}`' for k, v in member.permissions_in(ctx.channel) if v]
+
+        if not perms:
+            perms = [_('Nenhuma.')]
 
         embed_perms.add_field(name=_('🛡️ Permissões'), value=format_list(perms), inline=False)
 
         menu = UserinfoMenu((embed_info, embed_perms), timeout=60, message=msg, check_embeds=True)
-        await menu.start(ctx=ctx, wait=True)
+        await menu.start(ctx=ctx)
 
 
 def setup(bot):

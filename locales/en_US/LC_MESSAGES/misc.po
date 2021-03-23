@@ -1,9 +1,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: kaibot\n"
+"Project-Id-Version:  kaibot\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-17 22:23-0300\n"
+"POT-Creation-Date: 2021-03-22 22:14-0300\n"
 "PO-Revision-Date: 2021-03-17 22:25-0300\n"
 "Last-Translator: \n"
 "Language: en_US\n"
@@ -14,21 +14,21 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.9.0\n"
 
-#: kaibot/cogs/misc.py:12
+#: kaibot/cogs/misc.py:13
 #, docstring
 msgid "Comandos que não se encaixam em outra categoria."
 msgstr "Commands that doesn't fit in another category."
 
-#: kaibot/cogs/misc.py:21
+#: kaibot/cogs/misc.py:22
 msgid "Mostra essa mensagem."
 msgstr "Shows this message."
 
-#: kaibot/cogs/misc.py:28
+#: kaibot/cogs/misc.py:32
 #, docstring
 msgid "Envia a latência da websocket e o tempo de resposta."
 msgstr "Sends the websocket's latency and the response time."
 
-#: kaibot/cogs/misc.py:29
+#: kaibot/cogs/misc.py:33
 msgid ""
 "🏓 Ping\n"
 "- Websocket: {}ms\n"
@@ -37,3 +37,23 @@ msgstr ""
 "🏓 Ping\n"
 "- Websocket: {}ms\n"
 "- Response time: {}ms"
+
+#: kaibot/cogs/misc.py:45
+#, docstring
+msgid ""
+"Rola um dado de `SIDES` lados.\n"
+"\n"
+"O dado precisa ter pelo menos 2 lados."
+msgstr ""
+"Rolls a `SIDES` sided dice.\n"
+"\n"
+"The dice need to have at least 2 sides."
+
+#: kaibot/cogs/misc.py:51
+msgid "Insira um dado de pelo menos 2 lados."
+msgstr "Insert a dice of at least 2 sides."
+
+#: kaibot/cogs/misc.py:54
+msgid "Seu dado resultou em: {result}"
+msgstr "Your dice result: {result}"
+
