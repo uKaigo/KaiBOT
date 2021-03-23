@@ -1,0 +1,58 @@
+#
+msgid ""
+msgstr ""
+"Project-Id-Version:  kaibot\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-03-22 23:41-0300\n"
+"PO-Revision-Date: 2021-03-22 23:33-0300\n"
+"Last-Translator: \n"
+"Language: en_US\n"
+"Language-Team: English\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.9.0\n"
+
+#: kaibot/cogs/fun.py:23
+#, docstring
+msgid "Comandos de diversão."
+msgstr "Fun commands."
+
+#: kaibot/cogs/fun.py:42
+msgid "Jogo da velha"
+msgstr "TicTacToe"
+
+#: kaibot/cogs/fun.py:48
+msgid "Vez de {player}."
+msgstr "{player}'s turn."
+
+#: kaibot/cogs/fun.py:51
+msgid "Deu velha!"
+msgstr "It's a draw!"
+
+#: kaibot/cogs/fun.py:53
+msgid "{player} ganhou!"
+msgstr "{player} won!"
+
+#: kaibot/cogs/fun.py:59
+#, docstring
+msgid "Começa um jogo da velha."
+msgstr "Starts a TicTacToe game."
+
+#: kaibot/cogs/fun.py:61
+msgid "O outro jogador não pode ser um bot."
+msgstr "The other player can't be a bot."
+
+#: kaibot/cogs/fun.py:63
+msgid "Você não pode jogar com você mesmo."
+msgstr "You can't play with yourself."
+
+#: kaibot/cogs/fun.py:65
+msgid "Você já está em um jogo."
+msgstr "You're already in a game."
+
+#: kaibot/cogs/fun.py:67
+msgid "{player} já está em um jogo."
+msgstr "{player}'s already in a game."
+

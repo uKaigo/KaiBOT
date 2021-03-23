@@ -1,3 +1,5 @@
+DEFAULT_LANGUAGE = 'pt_BR'
+
 PREFIXES = ('k.', 'kaibot ')
 
 INTENTS = ('guilds', 'messages', 'reactions', 'members')
@@ -11,4 +13,5 @@ EXTENSIONS = (
     '.cogs.misc',
     '.cogs.info',
     '.cogs.error_handler',
+    '.cogs.fun',
 )
