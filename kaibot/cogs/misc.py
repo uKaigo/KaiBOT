@@ -3,7 +3,7 @@ from secrets import randbelow
 
 from discord.ext import commands
 
-from .utils.help import Help
+from .resources.help import Help
 from ..i18n import Translator
 
 _ = Translator(__name__)

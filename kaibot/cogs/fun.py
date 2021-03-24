@@ -3,9 +3,9 @@ from itertools import chain
 import discord
 from discord.ext import commands
 
-from .utils.ttt_impl import TicTacToe
 from .. import config
 from ..i18n import Translator, current_language
+from .resources.ttt_impl import TicTacToe
 
 _ = Translator(__name__)
 
