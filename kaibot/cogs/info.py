@@ -123,10 +123,6 @@ class Info(commands.Cog):
         menu = UserinfoMenu((embed_info, embed_perms), timeout=60, message=msg, check_embeds=True)
         await menu.start(ctx=ctx)
 
-    @commands.command(aliases=['si', 'gi', 'guildinfo'])
-    async def serverinfo(self, ctx):
-        embed = discord.Embed(title=ctx.guild.name, color=config.MAIN_COLOR)
-
 
 def setup(bot):
     bot.add_cog(Info(bot))
