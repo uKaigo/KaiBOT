@@ -1,6 +1,7 @@
 from sys import version_info as py_version_i
 from datetime import datetime
 
+import discord
 from discord import version_info as dpy_version_i
 from discord.ext import commands
 from rich import get_console, box
@@ -64,6 +65,38 @@ class BotEvents(commands.Cog):
             ), equal=True),
             style=color
         )
+
+    @commands.Cog.listener()
+    async def on_command(self, ctx):
+        channel = self.bot.get_channel(config.LOGS['commands'])
+
+        embed = discord.Embed(
+            title=f'Comando "{ctx.command.qualified_name}" executado.',
+            color=self.bot.color
+        )
+
+        embed.set_author(name=f'{ctx.author} ({ctx.author.id})', icon_url=ctx.author.avatar_url)
+
+        embed.add_field(name='Servidor', inline=False, value=(
+            f'\> Nome: {ctx.guild.name}\n'
+            f'\> ID: {ctx.guild.id}\n'
+            f'\> Dono: {ctx.guild.owner} ({ctx.guild.owner.id})'
+        ))
+
+        embed.add_field(name='Canal', inline=False, value=(
+            f'\> Nome: {ctx.channel.name}\n'
+            f'\> ID: {ctx.channel.id}\n'
+            f'\> NSFW: {ctx.channel.nsfw}'
+        ))
+
+        embed.add_field(name='Mensagem', inline=False, value=(
+            f'\> Conteúdo: "{ctx.message.clean_content}"\n'
+            f'\> ID: {ctx.message.id}\n'
+            f'\> URL: [Link]({ctx.message.jump_url})'
+        ))
+
+        embed.timestamp = ctx.message.created_at
+        await channel.send(embed=embed)
 
 
 def setup(bot):

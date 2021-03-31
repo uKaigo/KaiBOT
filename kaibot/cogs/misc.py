@@ -1,9 +1,11 @@
 import sys
 from secrets import randbelow
 
+import discord
 from discord.ext import commands
 
 from .resources.help import Help
+from .. import config
 from ..i18n import Translator
 
 _ = Translator(__name__)
@@ -52,6 +54,23 @@ class Miscelaneous(commands.Cog):
 
         result = randbelow(sides + 1) or 1
         return await ctx.send(_('Seu dado resultou em: {result}', result=result))
+
+    @commands.command(aliases=['privacidade'])
+    async def privacy(self, ctx):
+        """Políticas de privacidade."""
+        embed = discord.Embed(color=config.MAIN_COLOR)
+        embed.set_author(name=_('Políticas de privacidade | KaiBOT'), icon_url=ctx.me.avatar_url)
+
+        embed.description += _(
+            'As políticas de privacidade podem ser encontradas [nesse link]({policy}).',
+            policy='https://gist.github.com/uKaigo/ac2c76098eae2c2abc5e82bb19b80cb9'
+        )
+        embed.description += _(
+            'Caso você não concorda com essa política, pare de usar o bot e (opcionalmente) '
+            'peça a exclusão dos seus dados.'
+        )
+
+        await ctx.send(embed=embed)
 
 
 def setup(bot):
