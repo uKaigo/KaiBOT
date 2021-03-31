@@ -8,7 +8,7 @@ class TicTacToe:
             [-1, -1, -1],
             [-1, -1, -1]
         )
-        self.turn = 0
+        self.turn = 1
 
     def _valid_moves_iter(self):
         for column, rows in enumerate(self.table):
