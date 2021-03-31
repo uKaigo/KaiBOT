@@ -1,4 +1,4 @@
-import os
+import io
 import traceback
 from logging import getLogger
 
@@ -18,10 +18,6 @@ class ErrorHandler(commands.Cog):
 
     def __init__(self, bot):
         self.bot = bot
-        self.webhook = discord.Webhook.from_url(
-            os.environ['CMD_ERROR_WEBHOOK'],
-            adapter=discord.AsyncWebhookAdapter(self.bot.session)
-        )
 
     @commands.Cog.listener()
     async def on_command_error(self, ctx, error):
@@ -75,16 +71,28 @@ class ErrorHandler(commands.Cog):
             color=config.MAIN_COLOR
         )
 
-        fmt = traceback.format_exception(None, err, err.__traceback__)
-        embed.add_field(name='\N{ZERO WIDTH SPACE}', value=f"```py\n{''.join(fmt)}```")
+        tb_exc = traceback.TracebackException.from_exception(err)
 
-        await self.webhook.send(embed=embed)
+        paginator = commands.Paginator('```py\n', '```', 1024, '')
+        for line in tb_exc.format():
+            paginator.add_line(line)
+
+        file = None
+        if len(paginator) > 5850:  # Other texts needs to be <151 chrs.
+            stream = io.StringIO(''.join(paginator.pages))
+            file = discord.File(stream, 'error.txt')
+        else:
+            for page in paginator.pages:
+                embed.add_field(name='\N{ZERO WIDTH SPACE}', value=page, inline=False)
+
+        channel = self.bot.get_channel(config.LOGS['errors'])
+        await channel.send(embed=embed, file=file)
 
         await ctx.send(_(
             'Ocorreu um erro ao executar este comando.\n'
             'Tente contatar o suporte para resolver o problema.\n\n'
             '{error}',
-            error=f'```py\n{fmt[-1]}```'
+            error=f'```py\n{list(tb_exc.format(chain=False))[-1]}```'
         ))
 
 
