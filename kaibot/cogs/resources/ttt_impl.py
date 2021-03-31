@@ -1,4 +1,6 @@
 class TicTacToe:
+    __slots__ = ('table', 'turn')
+
     def __init__(self):
         # -1 = Nothing
         # 0 = Circle
