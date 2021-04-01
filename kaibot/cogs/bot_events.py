@@ -72,7 +72,7 @@ class BotEvents(commands.Cog):
 
         embed = discord.Embed(
             title=f'Comando "{ctx.command.qualified_name}" executado.',
-            color=self.bot.color
+            color=config.MAIN_COLOR
         )
 
         embed.set_author(name=f'{ctx.author} ({ctx.author.id})', icon_url=ctx.author.avatar_url)
