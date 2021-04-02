@@ -25,6 +25,22 @@ class UserinfoMenu(menus.Menu):
         await self.message.edit(embed=self.embeds[self.current_embed])
 
 
+class OldMembersSource(menus.ListPageSource):
+    def format_page(self, menu, pages):
+        embed = discord.Embed(
+            title=_('OldMembers'),
+            description=_('Estes são os membros mais antigos do servidor.'),
+            color=config.MAIN_COLOR
+        )
+        embed.set_footer(text=_(
+            'Página {current} de {max}',
+            current=menu.current_page + 1,
+            max=self.get_max_pages()
+        ))
+        embed.description = '\n'.join(pages)
+        return embed
+
+
 class Info(commands.Cog):
     """Comandos de informações de objetos Discord."""
 
@@ -120,6 +136,20 @@ class Info(commands.Cog):
 
         menu = UserinfoMenu((embed_info, embed_perms), timeout=60, message=msg, check_embeds=True)
         await menu.start(ctx=ctx)
+
+    @commands.command()
+    @needs_chunk()
+    async def oldmembers(self, ctx):
+        async with ctx.typing():
+            def mapper(member):
+                idx, member = member
+                you = f' - {_("Você")}' if member == ctx.author else ''
+                return f'`{idx+1}º` — `{member}`' + you
+            members = map(mapper, enumerate(sorted(ctx.guild.members, key=lambda m: m.joined_at)))
+
+        source = OldMembersSource(tuple(members), per_page=10)
+        pages = menus.MenuPages(source=source, clear_reactions_after=True)
+        await pages.start(ctx)
 
 
 def setup(bot):
