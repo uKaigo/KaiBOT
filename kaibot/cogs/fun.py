@@ -27,6 +27,7 @@ class Fun(commands.Cog):
         self._ttt_games = {}  # ID: (message, game, players)
         # X should be at index 1
 
+    # ---- TIC TAC TOE ---- #
     async def _update_ttt_game(self, message, game, players):
         symbols = ('⭕', '❌')
         emojis = []
@@ -113,6 +114,7 @@ class Fun(commands.Cog):
 
         current_language.set(await self.bot.get_language_for(message.guild))
         await self._update_ttt_game(message, game, players)
+    # --------------------- #
 
 
 def setup(bot):
