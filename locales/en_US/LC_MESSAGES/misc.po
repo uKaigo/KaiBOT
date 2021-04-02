@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  kaibot\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-31 16:33-0300\n"
+"POT-Creation-Date: 2021-04-01 22:56-0300\n"
 "PO-Revision-Date: 2021-03-31 16:26-0300\n"
 "Last-Translator: \n"
 "Language: en_US\n"
@@ -14,21 +14,21 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.9.0\n"
 
-#: kaibot/cogs/misc.py:15
+#: kaibot/cogs/misc.py:14
 #, docstring
 msgid "Comandos que não se encaixam em outra categoria."
 msgstr "Commands that doesn't fit in another category."
 
-#: kaibot/cogs/misc.py:24
+#: kaibot/cogs/misc.py:23
 msgid "Mostra essa mensagem."
 msgstr "Shows this message."
 
-#: kaibot/cogs/misc.py:34
+#: kaibot/cogs/misc.py:33
 #, docstring
 msgid "Envia a latência da websocket e o tempo de resposta."
 msgstr "Sends the websocket's latency and the response time."
 
-#: kaibot/cogs/misc.py:35
+#: kaibot/cogs/misc.py:34
 msgid ""
 "🏓 Ping\n"
 "- Websocket: {}ms\n"
@@ -38,39 +38,20 @@ msgstr ""
 "- Websocket: {}ms\n"
 "- Response time: {}ms"
 
-#: kaibot/cogs/misc.py:47
-#, docstring
-msgid ""
-"Rola um dado de `SIDES` lados.\n"
-"\n"
-"O dado precisa ter pelo menos 2 lados."
-msgstr ""
-"Rolls a `SIDES` sided dice.\n"
-"\n"
-"The dice need to have at least 2 sides."
-
-#: kaibot/cogs/misc.py:53
-msgid "Insira um dado de pelo menos 2 lados."
-msgstr "Insert a dice of at least 2 sides."
-
-#: kaibot/cogs/misc.py:56
-msgid "Seu dado resultou em: {result}"
-msgstr "Your dice result: {result}"
-
-#: kaibot/cogs/misc.py:60
+#: kaibot/cogs/misc.py:46
 #, docstring
 msgid "Políticas de privacidade."
 msgstr "Privacy policies."
 
-#: kaibot/cogs/misc.py:62
+#: kaibot/cogs/misc.py:48
 msgid "Políticas de privacidade | KaiBOT"
 msgstr "Privacy policies | KaiBOT"
 
-#: kaibot/cogs/misc.py:64
+#: kaibot/cogs/misc.py:50
 msgid "As políticas de privacidade podem ser encontradas [nesse link]({policy})."
 msgstr "The privacy policies can be found at [this link]({policy})"
 
-#: kaibot/cogs/misc.py:68
+#: kaibot/cogs/misc.py:54
 msgid ""
 "Caso você não concorda com essa política, pare de usar o bot e "
 "(opcionalmente) peça a exclusão dos seus dados."

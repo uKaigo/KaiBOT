@@ -1,5 +1,4 @@
 import sys
-from secrets import randbelow
 
 import discord
 from discord.ext import commands
@@ -41,19 +40,6 @@ class Miscelaneous(commands.Cog):
         diff = (msg.created_at - ctx.message.created_at).total_seconds()
 
         await msg.edit(content=txt.format(int(self.bot.latency * 1000), int(diff * 1000)))
-
-    @commands.command()
-    async def roll(self, ctx, sides: int):
-        """
-        Rola um dado de `SIDES` lados.
-
-        O dado precisa ter pelo menos 2 lados.
-        """
-        if sides < 2:
-            return await ctx.send(_('Insira um dado de pelo menos 2 lados.'))
-
-        result = randbelow(sides + 1) or 1
-        return await ctx.send(_('Seu dado resultou em: {result}', result=result))
 
     @commands.command(aliases=['privacidade'])
     async def privacy(self, ctx):

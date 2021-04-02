@@ -14,6 +14,7 @@ EXTENSIONS = (
     '.cogs.info',
     '.cogs.error_handler',
     '.cogs.fun',
+    '.cogs.utilities'
 )
 
 LOGS = {
