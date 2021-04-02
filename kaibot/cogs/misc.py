@@ -65,4 +65,4 @@ def setup(bot):
 
 def teardown():
     # Uncache the help command to allow reloading.
-    sys.modules.pop('kaibot.cogs.utils.help', None)
+    sys.modules.pop('kaibot.cogs.resources.help')
