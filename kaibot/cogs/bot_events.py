@@ -75,12 +75,17 @@ class BotEvents(commands.Cog):
             color=config.MAIN_COLOR
         )
 
-        embed.set_author(name=f'{ctx.author} ({ctx.author.id})', icon_url=ctx.author.avatar_url)
+        embed.set_author(name=f'{ctx.author} [{ctx.author.id}]', icon_url=ctx.author.avatar_url)
+
+        if ctx.guild.chunked:
+            owner = f'\> Dono: {ctx.guild.owner} ({ctx.guild.owner.id})'
+        else:
+            owner = f'\> Dono: {ctx.guild.owner_id} (id)'
 
         embed.add_field(name='Servidor', inline=False, value=(
             f'\> Nome: {ctx.guild.name}\n'
             f'\> ID: {ctx.guild.id}\n'
-            f'\> Dono: {ctx.guild.owner} ({ctx.guild.owner.id})'
+            + owner
         ))
 
         embed.add_field(name='Canal', inline=False, value=(
