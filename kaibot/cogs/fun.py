@@ -27,7 +27,22 @@ class Fun(commands.Cog):
         self._ttt_games = {}  # ID: (message, game, players)
         # X should be at index 1
 
+    async def _do_rollover(self, message):
+        channel = message.channel
+        if channel.last_message == message:
+            return message
+
+        history = await channel.history(limit=6, after=message).flatten()
+        if len(history) > 5:
+            try:
+                await message.delete()
+            except discord.HTTPException:
+                pass
+            return await channel.send('\N{ZERO WIDTH SPACE}')
+        return message
+
     # ---- TIC TAC TOE ---- #
+
     async def _update_ttt_game(self, message, game, players):
         symbols = ('⭕', '❌')
         emojis = []
@@ -53,7 +68,18 @@ class Fun(commands.Cog):
             else:
                 embed.description += _('{player} ganhou!', player=players[winner].mention)
 
-        await message.edit(content=None, embed=embed)
+        msg = await self._do_rollover(message)
+
+        if msg != message:
+            async def add_reactions():
+                for move in game.valid_moves:
+                    await msg.add_reaction(NUMBERS[move-1])
+            self.bot.loop.create_task(add_reactions())
+
+            for player in players:
+                self._ttt_games[player.id] = (msg, game, players)
+
+        await msg.edit(content=None, embed=embed)
 
     @commands.command(aliases=['tictactoe', 'jogodavelha', 'jdv'])
     async def ttt(self, ctx, player: discord.Member):
