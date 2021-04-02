@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  kaibot\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-22 22:14-0300\n"
+"POT-Creation-Date: 2021-04-01 21:50-0300\n"
 "PO-Revision-Date: 2021-03-17 22:25-0300\n"
 "Last-Translator: \n"
 "Language: en_US\n"
@@ -14,12 +14,12 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.9.0\n"
 
-#: kaibot/cogs/info.py:31
+#: kaibot/cogs/info.py:29
 #, docstring
 msgid "Comandos de informações de objetos Discord."
 msgstr "Information commands about Discord objects."
 
-#: kaibot/cogs/info.py:38
+#: kaibot/cogs/info.py:36
 #, docstring
 msgid ""
 "Mostra o avatar de um usuário.\n"
@@ -30,16 +30,16 @@ msgstr ""
 "\n"
 "The user doesn't need to be in the server."
 
-#: kaibot/cogs/info.py:48
+#: kaibot/cogs/info.py:46
 msgid "Avatar de {member}"
 msgstr "{member}'s avatar"
 
-#: kaibot/cogs/info.py:67
+#: kaibot/cogs/info.py:65
 #, docstring
 msgid "Mostra um avatar aleatório."
 msgstr "Shows a random avatar."
 
-#: kaibot/cogs/info.py:73
+#: kaibot/cogs/info.py:71
 #, docstring
 msgid ""
 "Mostra informações de um usuário.\n"
@@ -50,35 +50,30 @@ msgstr ""
 "\n"
 "The user doesn't need to be in the server."
 
-#: kaibot/cogs/info.py:84
-msgid "🔢 ID"
-msgstr "🔢 ID"
-
-#: kaibot/cogs/info.py:87
+#: kaibot/cogs/info.py:83
 msgid "🗓️ Criou a conta em"
 msgstr "🗓️ Created the account in"
 
-#: kaibot/cogs/info.py:93
+#: kaibot/cogs/info.py:89
 msgid "🗓️ Entrou no servidor em"
 msgstr "🗓️ Joined the server in"
 
-#: kaibot/cogs/info.py:100
+#: kaibot/cogs/info.py:96
 msgid "♦️ Impulsionando desde"
 msgstr "♦️ Boosting since"
 
-#: kaibot/cogs/info.py:107
+#: kaibot/cogs/info.py:103
 msgid "Nenhum."
 msgstr "None."
 
-#: kaibot/cogs/info.py:109
+#: kaibot/cogs/info.py:105
 msgid "🛠️ Cargos"
 msgstr "🛠️ Roles"
 
-#: kaibot/cogs/info.py:121
+#: kaibot/cogs/info.py:117
 msgid "Nenhuma."
 msgstr "None."
 
-#: kaibot/cogs/info.py:123
+#: kaibot/cogs/info.py:119
 msgid "🛡️ Permissões"
 msgstr "🛡️ Permissions"
-

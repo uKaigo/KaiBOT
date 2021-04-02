@@ -77,9 +77,7 @@ class Info(commands.Cog):
             member = ctx.author
 
         embed_info = discord.Embed(color=member.color)
-        embed_info.set_author(name=member, icon_url=member.avatar_url)
-
-        embed_info.add_field(name=_('🔢 ID'), value=member.id)
+        embed_info.set_author(name=f'{member} [{member.id}]', icon_url=member.avatar_url)
 
         embed_info.add_field(
             name=_('🗓️ Criou a conta em'),
@@ -113,7 +111,7 @@ class Info(commands.Cog):
         embed_perms = discord.Embed(color=member.color)
         embed_perms.set_author(name=member, icon_url=member.avatar_url)
 
-        perms = [f'`{PERMISSIONS[k]}`' for k, v in member.permissions_in(ctx.channel) if v]
+        perms = [str(PERMISSIONS[k]) for k, v in member.permissions_in(ctx.channel) if v]
 
         if not perms:
             perms = [_('Nenhuma.')]
