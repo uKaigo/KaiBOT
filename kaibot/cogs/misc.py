@@ -44,14 +44,14 @@ class Miscelaneous(commands.Cog):
     @commands.command(aliases=['privacidade'])
     async def privacy(self, ctx):
         """Políticas de privacidade."""
-        embed = discord.Embed(color=config.MAIN_COLOR)
+        embed = discord.Embed(color=config.MAIN_COLOR, description='')
         embed.set_author(name=_('Políticas de privacidade | KaiBOT'), icon_url=ctx.me.avatar_url)
 
         embed.description += _(
             'As políticas de privacidade podem ser encontradas [nesse link]({policy}).',
             policy='https://gist.github.com/uKaigo/ac2c76098eae2c2abc5e82bb19b80cb9'
         )
-        embed.description += _(
+        embed.description += '\n' + _(
             'Caso você não concorda com essa política, pare de usar o bot e (opcionalmente) '
             'peça a exclusão dos seus dados.'
         )
