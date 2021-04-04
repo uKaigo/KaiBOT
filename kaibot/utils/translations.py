@@ -46,4 +46,5 @@ PERMISSIONS = {
     'manage_webhooks': _('Gerenciar webhooks'),
     'manage_emojis': _('Gerenciar emojis'),
     'use_slash_commands': _('Usar comandos /'),
+    'request_to_speak': _('Pedir para falar'),
 }
