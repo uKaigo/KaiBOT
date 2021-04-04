@@ -8,5 +8,8 @@ install:
 compile:
 	@$(PYTHON) -m kaibot.scripts.mo_compiler
 
+update-po:
+	@$(PYTHON) -m kaibot.scripts.po_updater
+
 gettext:
 	@$(PYTHON) -m dpygettext kaibot --omit-empty -rVcRm

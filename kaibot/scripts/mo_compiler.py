@@ -28,10 +28,13 @@ def main(path: Path, log: logging.Logger = log):
             continue
 
         initialize_options(
-            compiler, directory=str(path), domain=domains, locale=language.name
+            compiler,
+            directory=str(path),
+            domain=domains,
+            locale=language.name,
+            log=log,
         )
 
-        compiler.log = log
         res = compiler.run()
 
     if not languages:
