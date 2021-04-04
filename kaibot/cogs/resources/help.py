@@ -137,7 +137,7 @@ class Help(commands.HelpCommand):
                     cmd_doc = self._get_short_doc(command)
                     if (
                         isinstance(command, commands.Group)
-                        and commands.commands
+                        and command.commands
                     ):
                         txt += '\*'
 
