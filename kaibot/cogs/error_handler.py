@@ -31,21 +31,25 @@ class ErrorHandler(commands.Cog):
                 return await ctx.send(_('Insira um número válido.'))
 
         if isinstance(error, commands.NoPrivateMessage):
-            return await ctx.send(_('Este comando só pode ser executado em servidores.'))
+            return await ctx.send(
+                _('Este comando só pode ser executado em servidores.')
+            )
 
         if isinstance(error, commands.MissingRequiredArgument):
             return await ctx.send_help(ctx.command)
 
         if isinstance(error, commands.MemberNotFound):
-            return await ctx.send(_(
-                'O membro "{string}" não foi encontrado.',
-                string=error.argument
-            ))
+            return await ctx.send(
+                _(
+                    'O membro "{string}" não foi encontrado.',
+                    string=error.argument,
+                )
+            )
 
         if isinstance(error, commands.BadUnionArgument):
             CONVERTER_MAPPING = {
                 discord.Member: _('membro'),
-                discord.User: _('usuário')
+                discord.User: _('usuário'),
             }
             converters = [
                 CONVERTER_MAPPING.get(c, c.__name__.lower())
@@ -54,21 +58,26 @@ class ErrorHandler(commands.Cog):
 
             arg = error.errors[0].argument
 
-            return await ctx.send(_(
-                'Não foi possível converter "{string}" para {converters}.',
-                string=arg,
-                converters=format_list(converters, style='or')
-            ))
+            return await ctx.send(
+                _(
+                    'Não foi possível converter "{string}" para {converters}.',
+                    string=arg,
+                    converters=format_list(converters, style='or'),
+                )
+            )
 
         err = original or error
 
-        log.error(f'An error ocurred in the command "{ctx.command.qualified_name}". '
-                  f'Message ID: {ctx.message.id}.', exc_info=err)
+        log.error(
+            f'An error ocurred in the command "{ctx.command.qualified_name}". '
+            f'Message ID: {ctx.message.id}.',
+            exc_info=err,
+        )
 
         embed = discord.Embed(
             title=f'Erro no comando "{ctx.command.qualified_name}"',
             description=f'ID da mensagem: {ctx.message.id}',
-            color=config.MAIN_COLOR
+            color=config.MAIN_COLOR,
         )
 
         tb_exc = traceback.TracebackException.from_exception(err)
@@ -83,17 +92,21 @@ class ErrorHandler(commands.Cog):
             file = discord.File(stream, 'error.txt')
         else:
             for page in paginator.pages:
-                embed.add_field(name='\N{ZERO WIDTH SPACE}', value=page, inline=False)
+                embed.add_field(
+                    name='\N{ZERO WIDTH SPACE}', value=page, inline=False
+                )
 
         channel = self.bot.get_channel(config.LOGS['errors'])
         await channel.send(embed=embed, file=file)
 
-        await ctx.send(_(
-            'Ocorreu um erro ao executar este comando.\n'
-            'Tente contatar o suporte para resolver o problema.\n\n'
-            '{error}',
-            error=f'```py\n{list(tb_exc.format(chain=False))[-1]}```'
-        ))
+        await ctx.send(
+            _(
+                'Ocorreu um erro ao executar este comando.\n'
+                'Tente contatar o suporte para resolver o problema.\n\n'
+                '{error}',
+                error=f'```py\n{list(tb_exc.format(chain=False))[-1]}```',
+            )
+        )
 
 
 def setup(bot):

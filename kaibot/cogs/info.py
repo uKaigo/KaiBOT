@@ -30,13 +30,15 @@ class OldMembersSource(menus.ListPageSource):
         embed = discord.Embed(
             title=_('OldMembers'),
             description=_('Estes são os membros mais antigos do servidor.'),
-            color=config.MAIN_COLOR
+            color=config.MAIN_COLOR,
         )
-        embed.set_footer(text=_(
-            'Página {current} de {max}',
-            current=menu.current_page + 1,
-            max=self.get_max_pages()
-        ))
+        embed.set_footer(
+            text=_(
+                'Página {current} de {max}',
+                current=menu.current_page + 1,
+                max=self.get_max_pages(),
+            )
+        )
         embed.description = '\n'.join(pages)
         return embed
 
@@ -60,7 +62,7 @@ class Info(commands.Cog):
         embed = discord.Embed(color=config.MAIN_COLOR, description='')
         embed.set_author(
             name=_('Avatar de {member}', member=member.display_name),
-            icon_url=member.avatar_url
+            icon_url=member.avatar_url,
         )
 
         formats = ['png', 'jpg', 'webp']
@@ -68,7 +70,9 @@ class Info(commands.Cog):
             formats.append('gif')
 
         for fmt in formats:
-            embed.description += f'[`{fmt.upper()}`]({member.avatar_url_as(format=fmt)}) '
+            embed.description += (
+                f'[`{fmt.upper()}`]({member.avatar_url_as(format=fmt)}) '
+            )
 
         embed.set_image(url=member.avatar_url)
 
@@ -93,32 +97,40 @@ class Info(commands.Cog):
             member = ctx.author
 
         embed_info = discord.Embed(color=member.color)
-        embed_info.set_author(name=f'{member} [{member.id}]', icon_url=member.avatar_url)
+        embed_info.set_author(
+            name=f'{member} [{member.id}]', icon_url=member.avatar_url
+        )
 
         embed_info.add_field(
             name=_('🗓️ Criou a conta em'),
             value=format_datetime(member.created_at),
-            inline=False
+            inline=False,
         )
         if isinstance(member, discord.Member):
             embed_info.add_field(
                 name=_('🗓️ Entrou no servidor em'),
                 value=format_datetime(member.joined_at),
-                inline=False
+                inline=False,
             )
 
             if ps := member.premium_since:
                 embed_info.add_field(
                     name=_('♦️ Impulsionando desde'),
                     value=format_datetime(ps),
-                    inline=False
+                    inline=False,
                 )
 
-            roles = [r.mention for r in reversed(member.roles) if r.id != ctx.guild.id]
+            roles = [
+                r.mention
+                for r in reversed(member.roles)
+                if r.id != ctx.guild.id
+            ]
             if not roles:
                 roles = [_('Nenhum.')]
 
-            embed_info.add_field(name=_('🛠️ Cargos'), value=format_list(roles), inline=False)
+            embed_info.add_field(
+                name=_('🛠️ Cargos'), value=format_list(roles), inline=False
+            )
 
         msg = await ctx.send(embed=embed_info)
         if not isinstance(member, discord.Member):
@@ -127,25 +139,43 @@ class Info(commands.Cog):
         embed_perms = discord.Embed(color=member.color)
         embed_perms.set_author(name=member, icon_url=member.avatar_url)
 
-        perms = [str(PERMISSIONS[k]) for k, v in member.permissions_in(ctx.channel) if v]
+        perms = [
+            str(PERMISSIONS[k])
+            for k, v in member.permissions_in(ctx.channel)
+            if v
+        ]
 
         if not perms:
             perms = [_('Nenhuma.')]
 
-        embed_perms.add_field(name=_('🛡️ Permissões'), value=format_list(perms), inline=False)
+        embed_perms.add_field(
+            name=_('🛡️ Permissões'), value=format_list(perms), inline=False
+        )
 
-        menu = UserinfoMenu((embed_info, embed_perms), timeout=60, message=msg, check_embeds=True)
+        menu = UserinfoMenu(
+            (embed_info, embed_perms),
+            timeout=60,
+            message=msg,
+            check_embeds=True,
+        )
         await menu.start(ctx=ctx)
 
     @commands.command()
     @needs_chunk()
     async def oldmembers(self, ctx):
         async with ctx.typing():
+
             def mapper(member):
                 idx, member = member
                 you = f' - {_("Você")}' if member == ctx.author else ''
                 return f'`{idx+1}º` — `{member}`' + you
-            members = map(mapper, enumerate(sorted(ctx.guild.members, key=lambda m: m.joined_at)))
+
+            members = map(
+                mapper,
+                enumerate(
+                    sorted(ctx.guild.members, key=lambda m: m.joined_at)
+                ),
+            )
 
         source = OldMembersSource(tuple(members), per_page=10)
         pages = menus.MenuPages(source=source, clear_reactions_after=True)

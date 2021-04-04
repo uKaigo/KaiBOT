@@ -26,7 +26,7 @@ class CustomLogRender(LogRender):
         path=None,
         line_no=None,
         link_path=None,
-        logger_name=None
+        logger_name=None,
     ):
         output = Table.grid(padding=(0, 1))
         output.expand = True
@@ -42,7 +42,9 @@ class CustomLogRender(LogRender):
         row = []
         if self.show_time:
             log_time = log_time or console.get_datetime()
-            log_time_display = log_time.strftime(time_format or self.time_format)
+            log_time_display = log_time.strftime(
+                time_format or self.time_format
+            )
             if log_time_display == self._last_time:
                 row.append(Text(' ' * len(log_time_display)))
             else:
@@ -53,7 +55,9 @@ class CustomLogRender(LogRender):
 
         row.append(Renderables(renderables))
 
-        hyperlink_style = f'link file://{quote(link_path)}' if link_path else ''
+        hyperlink_style = (
+            f'link file://{quote(link_path)}' if link_path else ''
+        )
         if logger_name:
             logger_name_text = Text.from_markup(
                 f'[[{hyperlink_style}]{logger_name}[/]]'
@@ -90,7 +94,7 @@ class CustomRichHandler(RichHandler):
         """
         level_name = record.levelname
         level_text = Text.styled(
-            level_name.ljust(8), f"logging.level.{level_name.lower()}"
+            level_name.ljust(8), f'logging.level.{level_name.lower()}'
         )
         return level_text
 
@@ -99,7 +103,9 @@ class CustomRichHandler(RichHandler):
         path = Path(record.pathname).name
         level = self.get_level_text(record)
         message = self.format(record)
-        time_format = None if self.formatter is None else self.formatter.datefmt
+        time_format = (
+            None if self.formatter is None else self.formatter.datefmt
+        )
         log_time = datetime.fromtimestamp(record.created)
 
         traceback = None
@@ -126,7 +132,9 @@ class CustomRichHandler(RichHandler):
             message = record.getMessage()
 
         use_markup = (
-            getattr(record, 'markup') if hasattr(record, 'markup') else self.markup
+            getattr(record, 'markup')
+            if hasattr(record, 'markup')
+            else self.markup
         )
         if use_markup:
             message_text = Text.from_markup(message)
@@ -148,7 +156,7 @@ class CustomRichHandler(RichHandler):
                 path=path,
                 line_no=record.lineno,
                 link_path=record.pathname if self.enable_link_path else None,
-                logger_name=record.name
+                logger_name=record.name,
             )
         )
 
@@ -163,16 +171,22 @@ def config_logging(levels: Dict[str, int] = None, location: Path = Path()):
     dpy_logger.setLevel(logging.WARNING)
 
     file_formatter = logging.Formatter(
-        '[{asctime}] [{levelname}] {name}: {message}', datefmt="%Y-%m-%d %H:%M:%S", style='{'
+        '[{asctime}] [{levelname}] {name}: {message}',
+        datefmt='%Y-%m-%d %H:%M:%S',
+        style='{',
     )
 
-    theme = Theme({
-        'logging.level.warning': Style(color='yellow'),
-        'logging.level.info': Style(color='bright_blue')
-    })
+    theme = Theme(
+        {
+            'logging.level.warning': Style(color='yellow'),
+            'logging.level.info': Style(color='bright_blue'),
+        }
+    )
     console = Console(theme=theme)
     rich_formatter = logging.Formatter(datefmt='[%X]')
-    stdout_handler = CustomRichHandler(console=console, show_path=False, rich_tracebacks=True)
+    stdout_handler = CustomRichHandler(
+        console=console, show_path=False, rich_tracebacks=True
+    )
     stdout_handler.setFormatter(rich_formatter)
 
     stdout_handler.setLevel(levels['stdout'])
@@ -183,6 +197,8 @@ def config_logging(levels: Dict[str, int] = None, location: Path = Path()):
         location.mkdir(parents=True, exist_ok=True)
 
     for logger in (bot_logger, dpy_logger):
-        handler = logging.FileHandler(filename=f'{location.resolve() / logger.name}.log')
+        handler = logging.FileHandler(
+            filename=f'{location.resolve() / logger.name}.log'
+        )
         handler.setFormatter(file_formatter)
         logger.addHandler(handler)

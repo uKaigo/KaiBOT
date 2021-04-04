@@ -4,7 +4,7 @@ PREFIXES = ('k.', 'kaibot ')
 
 INTENTS = ('guilds', 'messages', 'reactions', 'members')
 
-MAIN_COLOR = 0xff6eff
+MAIN_COLOR = 0xFF6EFF
 
 JISHAKU_FLAGS = ('HIDE', 'NO_DM_TRACEBACK', 'NO_UNDERSCORE')
 EXTENSIONS = (
@@ -14,10 +14,7 @@ EXTENSIONS = (
     '.cogs.info',
     '.cogs.error_handler',
     '.cogs.fun',
-    '.cogs.utilities'
+    '.cogs.utilities',
 )
 
-LOGS = {
-    'commands': 822644877673496626,
-    'errors': 822644820170113057
-}
+LOGS = {'commands': 822644877673496626, 'errors': 822644820170113057}

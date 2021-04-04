@@ -26,12 +26,16 @@ class Utilities(commands.Cog):
             return await ctx.send(_('Insira um dado de pelo menos 2 lados.'))
 
         result = randbelow(sides + 1) or 1
-        return await ctx.send(_('Seu dado resultou em: {result}', result=result))
+        return await ctx.send(
+            _('Seu dado resultou em: {result}', result=result)
+        )
 
     @commands.command()
     async def resolve(self, ctx, link):
         """Mostra todos os redirecionamentos do link."""
-        embed = discord.Embed(title=_('Redirecionamentos'), color=config.MAIN_COLOR)
+        embed = discord.Embed(
+            title=_('Redirecionamentos'), color=config.MAIN_COLOR
+        )
 
         description = ''
         async with ctx.typing():

@@ -45,5 +45,5 @@ PERMISSIONS = {
     'manage_roles': _('Gerenciar cargos'),
     'manage_webhooks': _('Gerenciar webhooks'),
     'manage_emojis': _('Gerenciar emojis'),
-    'use_slash_commands': _('Usar comandos /')
+    'use_slash_commands': _('Usar comandos /'),
 }

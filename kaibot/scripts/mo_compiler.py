@@ -14,9 +14,7 @@ def initialize_options(compiler: compile_catalog, **options):
 
 
 def main(path: Path, log: logging.Logger = log):
-    languages = tuple(
-        l for l in path.iterdir() if not l.name.endswith('.pot')
-    )
+    languages = tuple(l for l in path.iterdir() if not l.name.endswith('.pot'))
 
     res = 0
 
@@ -29,7 +27,9 @@ def main(path: Path, log: logging.Logger = log):
             res = 1
             continue
 
-        initialize_options(compiler, directory=str(path), domain=domains, locale=language.name)
+        initialize_options(
+            compiler, directory=str(path), domain=domains, locale=language.name
+        )
 
         compiler.log = log
         res = compiler.run()

@@ -32,10 +32,7 @@ class Translator:
 
         if lang not in self.__cache:
             self.__cache[lang] = gettext.translation(
-                self.__domain,
-                '../locales',
-                languages=[lang],
-                fallback=True
+                self.__domain, '../locales', languages=[lang], fallback=True
             )
         translated = self.__cache[lang].gettext(message)
         if args or kwargs:

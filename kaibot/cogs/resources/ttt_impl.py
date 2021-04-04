@@ -1,6 +1,7 @@
 class TicTacToe:
     __slots__ = ('table', 'turn')
 
+    # fmt: off
     def __init__(self):
         # -1 = Nothing
         # 0 = Circle
@@ -43,13 +44,13 @@ class TicTacToe:
 
         # Check vertical
         for n in range(3):
-            if check(n) == check(n+3) == check(n+6) != -1:
+            if check(n) == check(n + 3) == check(n + 6) != -1:
                 return check(n)
 
         # Check horizontal:
         for n in range(3):
             col = 3 * n
-            if check(col) == check(col+1) == check(col+2) != -1:
+            if check(col) == check(col + 1) == check(col + 2) != -1:
                 return check(col)
 
         # Check diagonals

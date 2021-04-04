@@ -12,14 +12,16 @@ from rich.columns import Columns
 from .. import config
 
 
-ASCII_ART = r"""
+ASCII_ART = r'''
  _   __      _______  _____ _____ 
 | | / /     (_) ___ \|  _  |_   _|
 | |/ /  __ _ _| |_/ /| | | | | |  
 |    \ / _` | | ___ \| | | | | |  
 | |\  \ (_| | | |_/ /\ \_/ / | |  
 \_| \_/\__,_|_\____/  \___/  \_/  
-""".strip('\n')
+'''.strip(
+    '\n'
+)
 
 color = f'#{hex(config.MAIN_COLOR)[2:]}'
 
@@ -51,19 +53,14 @@ class BotEvents(commands.Cog):
         versions.add_row('discord.py', fmt.format(dpy_version_i))
 
         console.print(
-            Columns((
-                Panel(
-                    stats,
-                    title='Stats',
-                    expand=False
+            Columns(
+                (
+                    Panel(stats, title='Stats', expand=False),
+                    Panel(versions, title='Version', expand=False),
                 ),
-                Panel(
-                    versions,
-                    title='Version',
-                    expand=False
-                )
-            ), equal=True),
-            style=color
+                equal=True,
+            ),
+            style=color,
         )
 
     @commands.Cog.listener()
@@ -72,33 +69,47 @@ class BotEvents(commands.Cog):
 
         embed = discord.Embed(
             title=f'Comando "{ctx.command.qualified_name}" executado.',
-            color=config.MAIN_COLOR
+            color=config.MAIN_COLOR,
         )
 
-        embed.set_author(name=f'{ctx.author} [{ctx.author.id}]', icon_url=ctx.author.avatar_url)
+        embed.set_author(
+            name=f'{ctx.author} [{ctx.author.id}]',
+            icon_url=ctx.author.avatar_url,
+        )
 
         if ctx.guild.chunked:
             owner = f'\> Dono: {ctx.guild.owner} ({ctx.guild.owner.id})'
         else:
             owner = f'\> Dono: {ctx.guild.owner_id} (id)'
 
-        embed.add_field(name='Servidor', inline=False, value=(
-            f'\> Nome: {ctx.guild.name}\n'
-            f'\> ID: {ctx.guild.id}\n'
-            + owner
-        ))
+        embed.add_field(
+            name='Servidor',
+            inline=False,
+            value=(
+                f'\> Nome: {ctx.guild.name}\n'
+                f'\> ID: {ctx.guild.id}\n' + owner
+            ),
+        )
 
-        embed.add_field(name='Canal', inline=False, value=(
-            f'\> Nome: {ctx.channel.name}\n'
-            f'\> ID: {ctx.channel.id}\n'
-            f'\> NSFW: {ctx.channel.nsfw}'
-        ))
+        embed.add_field(
+            name='Canal',
+            inline=False,
+            value=(
+                f'\> Nome: {ctx.channel.name}\n'
+                f'\> ID: {ctx.channel.id}\n'
+                f'\> NSFW: {ctx.channel.nsfw}'
+            ),
+        )
 
-        embed.add_field(name='Mensagem', inline=False, value=(
-            f'\> Conteúdo: "{ctx.message.clean_content}"\n'
-            f'\> ID: {ctx.message.id}\n'
-            f'\> URL: [Link]({ctx.message.jump_url})'
-        ))
+        embed.add_field(
+            name='Mensagem',
+            inline=False,
+            value=(
+                f'\> Conteúdo: "{ctx.message.clean_content}"\n'
+                f'\> ID: {ctx.message.id}\n'
+                f'\> URL: [Link]({ctx.message.jump_url})'
+            ),
+        )
 
         embed.timestamp = ctx.message.created_at
         await channel.send(embed=embed)

@@ -11,7 +11,7 @@ def format_datetime(datetime, date_fmt='medium', time_fmt='short'):
     return _(
         '{date} às {time}',
         date=_fmt_date(datetime, date_fmt, locale),
-        time=_fmt_time(datetime, time_fmt, None, locale)
+        time=_fmt_time(datetime, time_fmt, None, locale),
     ).capitalize()
 
 
