@@ -1,2 +1,3 @@
 git+https://github.com/uKaigo/dpygettext
 git+https://github.com/bryanforbes/discord.py-stubs
+blue
