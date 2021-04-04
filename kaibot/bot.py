@@ -1,5 +1,4 @@
 import logging
-import os
 import aiohttp
 
 from discord import Activity, ActivityType, DMChannel
@@ -10,8 +9,6 @@ from .i18n import current_language
 from .utils import get_intents_from
 
 log = logging.getLogger('kaibot')
-
-os.environ.update({f'JISHAKU_{FLAG}': '1' for FLAG in config.JISHAKU_FLAGS})
 
 
 class KaiBOT(commands.Bot):
