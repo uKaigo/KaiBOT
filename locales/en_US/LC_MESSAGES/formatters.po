@@ -1,9 +1,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: kaibot\n"
+"Project-Id-Version:  kaibot\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-19 23:37-0300\n"
+"POT-Creation-Date: 2021-04-04 20:35-0300\n"
 "PO-Revision-Date: 2021-03-19 23:39-0300\n"
 "Last-Translator: \n"
 "Language: en_US\n"

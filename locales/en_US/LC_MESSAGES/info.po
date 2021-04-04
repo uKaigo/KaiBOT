@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  kaibot\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-02 00:59-0300\n"
+"POT-Creation-Date: 2021-04-04 20:35-0300\n"
 "PO-Revision-Date: 2021-03-17 22:25-0300\n"
 "Last-Translator: \n"
 "Language: en_US\n"
@@ -22,16 +22,16 @@ msgstr "OldMembers"
 msgid "Estes são os membros mais antigos do servidor."
 msgstr "These are the oldest guild members."
 
-#: kaibot/cogs/info.py:35
+#: kaibot/cogs/info.py:36
 msgid "Página {current} de {max}"
 msgstr "Page {current} of {max}"
 
-#: kaibot/cogs/info.py:45
+#: kaibot/cogs/info.py:47
 #, docstring
 msgid "Comandos de informações de objetos Discord."
 msgstr "Information commands about Discord objects."
 
-#: kaibot/cogs/info.py:52
+#: kaibot/cogs/info.py:54
 #, docstring
 msgid ""
 "Mostra o avatar de um usuário.\n"
@@ -42,16 +42,16 @@ msgstr ""
 "\n"
 "The user doesn't need to be in the server."
 
-#: kaibot/cogs/info.py:62
+#: kaibot/cogs/info.py:64
 msgid "Avatar de {member}"
 msgstr "{member}'s avatar"
 
-#: kaibot/cogs/info.py:81
+#: kaibot/cogs/info.py:85
 #, docstring
 msgid "Mostra um avatar aleatório."
 msgstr "Shows a random avatar."
 
-#: kaibot/cogs/info.py:87
+#: kaibot/cogs/info.py:91
 #, docstring
 msgid ""
 "Mostra informações de um usuário.\n"
@@ -62,35 +62,35 @@ msgstr ""
 "\n"
 "The user doesn't need to be in the server."
 
-#: kaibot/cogs/info.py:99
+#: kaibot/cogs/info.py:105
 msgid "🗓️ Criou a conta em"
 msgstr "🗓️ Created the account in"
 
-#: kaibot/cogs/info.py:105
+#: kaibot/cogs/info.py:111
 msgid "🗓️ Entrou no servidor em"
 msgstr "🗓️ Joined the server in"
 
-#: kaibot/cogs/info.py:112
+#: kaibot/cogs/info.py:118
 msgid "♦️ Impulsionando desde"
 msgstr "♦️ Boosting since"
 
-#: kaibot/cogs/info.py:119
+#: kaibot/cogs/info.py:129
 msgid "Nenhum."
 msgstr "None."
 
-#: kaibot/cogs/info.py:121
+#: kaibot/cogs/info.py:132
 msgid "🛠️ Cargos"
 msgstr "🛠️ Roles"
 
-#: kaibot/cogs/info.py:133
+#: kaibot/cogs/info.py:149
 msgid "Nenhuma."
 msgstr "None."
 
-#: kaibot/cogs/info.py:135
+#: kaibot/cogs/info.py:152
 msgid "🛡️ Permissões"
 msgstr "🛡️ Permissions"
 
-#: kaibot/cogs/info.py:146
+#: kaibot/cogs/info.py:170
 msgid "Você"
 msgstr "You"
 

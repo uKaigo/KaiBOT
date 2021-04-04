@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  kaibot\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-01 22:57-0300\n"
+"POT-Creation-Date: 2021-04-04 20:35-0300\n"
 "PO-Revision-Date: 2021-04-01 22:56-0300\n"
 "Last-Translator: \n"
 "Language: en_US\n"
@@ -34,16 +34,16 @@ msgstr ""
 msgid "Insira um dado de pelo menos 2 lados."
 msgstr "Insert a dice of at least 2 sides."
 
-#: kaibot/cogs/utilities.py:29
+#: kaibot/cogs/utilities.py:30
 msgid "Seu dado resultou em: {result}"
 msgstr "Your dice result: {result}"
 
-#: kaibot/cogs/utilities.py:33
+#: kaibot/cogs/utilities.py:35
 #, docstring
 msgid "Mostra todos os redirecionamentos do link."
 msgstr "Shows all the redirects of the link."
 
-#: kaibot/cogs/utilities.py:34
+#: kaibot/cogs/utilities.py:37
 msgid "Redirecionamentos"
 msgstr "Redirects"
 
