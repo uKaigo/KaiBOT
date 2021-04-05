@@ -84,31 +84,31 @@ class BotEvents(commands.Cog):
 
         embed.add_field(
             name='Servidor',
-            inline=False,
             value=(
                 f'\> Nome: {ctx.guild.name}\n'
                 f'\> ID: {ctx.guild.id}\n' + owner
             ),
+            inline=False,
         )
 
         embed.add_field(
             name='Canal',
-            inline=False,
             value=(
                 f'\> Nome: {ctx.channel.name}\n'
                 f'\> ID: {ctx.channel.id}\n'
                 f'\> NSFW: {ctx.channel.nsfw}'
             ),
+            inline=False,
         )
 
         embed.add_field(
             name='Mensagem',
-            inline=False,
             value=(
                 f'\> Conteúdo: "{ctx.message.clean_content}"\n'
                 f'\> ID: {ctx.message.id}\n'
                 f'\> URL: [Link]({ctx.message.jump_url})'
             ),
+            inline=False,
         )
 
         embed.timestamp = ctx.message.created_at

@@ -167,7 +167,7 @@ class Info(commands.Cog):
 
             def mapper(member):
                 idx, member = member
-                you = f' - {_("Você")}' if member == ctx.author else ''
+                you = ' - ' + _('Você') if member == ctx.author else ''
                 return f'`{idx+1}º` — `{member}`' + you
 
             members = map(
