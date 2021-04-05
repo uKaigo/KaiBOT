@@ -168,7 +168,7 @@ def config_logging(levels: Dict[str, int] = None, location: Path = Path()):
     bot_logger = logging.getLogger('kaibot')
     bot_logger.setLevel(levels['file'])
     dpy_logger = logging.getLogger('discord')
-    dpy_logger.setLevel(logging.WARNING)
+    dpy_logger.setLevel(logging.INFO)
 
     file_formatter = logging.Formatter(
         '[{asctime}] [{levelname}] {name}: {message}',
