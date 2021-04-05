@@ -4,7 +4,7 @@ import discord
 from discord.ext import commands, menus
 
 from .. import config
-from ..utils.formatters import format_datetime, format_list
+from ..utils import format_datetime, format_list
 from ..utils.decorators import needs_chunk
 from ..utils.converters import MemberOrUser
 from ..utils.translations import PERMISSIONS

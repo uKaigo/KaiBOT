@@ -1,6 +1,6 @@
 PYTHON ?= python3
 
-.PHONY: install compile gettext
+.PHONY: install compile update-po gettext
 
 install:
 	@$(PYTHON) -m pip install -r requirements.txt

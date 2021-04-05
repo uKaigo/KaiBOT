@@ -48,3 +48,5 @@ PERMISSIONS = {
     'use_slash_commands': _('Usar comandos /'),
     'request_to_speak': _('Pedir para falar'),
 }
+
+DATETIME = _('{date} às {time}')

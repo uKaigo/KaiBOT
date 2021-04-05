@@ -7,7 +7,7 @@ from discord.ext import commands
 
 from .. import config
 from ..i18n import Translator
-from ..utils.formatters import format_list
+from ..utils import format_list
 
 _ = Translator(__name__)
 log = getLogger('kaibot.error_handler')
