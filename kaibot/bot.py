@@ -45,7 +45,7 @@ class KaiBOT(commands.Bot):
 
     def prefix_getter(self, bot, message):
         if isinstance(message.channel, DMChannel):
-            return commands.when_mentioned_or('', *config.PREFIXES)(
+            return commands.when_mentioned_or(*config.PREFIXES, '')(
                 bot, message
             )
         return commands.when_mentioned_or(*config.PREFIXES)(bot, message)
