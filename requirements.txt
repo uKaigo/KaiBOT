@@ -1,4 +1,6 @@
 discord.py
-git+https://github.com/Gorialis/jishaku@1d7905a6984597176c1b7e3817c9f5c13934d29a#egg=jishaku
+git+https://github.com/Gorialis/jishaku
+git+https://github.com/Rapptz/discord-ext-menus
 Babel
 python-dotenv
+aiohttp
