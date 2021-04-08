@@ -16,9 +16,19 @@ class Help(commands.HelpCommand):
         cmd_help = command.translator(command.help)
         return cmd_help.split('\n', 1)[0]
 
-    def _add_to_bot(self, bot):
-        super()._add_to_bot(bot)
-        self._command_impl.translator = _
+    @property
+    def cog(self):
+        return self._command_impl.cog
+
+    @cog.setter
+    def cog(self, cog):
+        self._command_impl._eject_cog()
+
+        # If a new cog is set then inject it.
+        if cog is not None:
+            self._command_impl._inject_into_cog(cog)
+            # Set the translator
+            self._command_impl.translator = cog.__translator__
 
     def command_not_found(self, string):
         return _('Comando "{string}" não foi encontrado.', string=string)
