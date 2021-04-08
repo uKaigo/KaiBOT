@@ -61,7 +61,7 @@ class Fun(custom.Cog, translator=_):
             color=config.MAIN_COLOR,
         )
         embed.description += '\n'
-        if not winner:
+        if winner is None:
             embed.description += _(
                 'Vez de {player}.', player=players[game.turn].mention
             )
