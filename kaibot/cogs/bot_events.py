@@ -84,10 +84,7 @@ class BotEvents(commands.Cog):
 
         embed.add_field(
             name='Servidor',
-            value=(
-                f'\> Nome: {ctx.guild.name}\n'
-                f'\> ID: {ctx.guild.id}\n' + owner
-            ),
+            value=f'\> Nome: {ctx.guild.name}\n\> ID: {ctx.guild.id}\n' + owner,
             inline=False,
         )
 

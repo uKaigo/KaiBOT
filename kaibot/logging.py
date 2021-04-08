@@ -42,9 +42,7 @@ class CustomLogRender(LogRender):
         row = []
         if self.show_time:
             log_time = log_time or console.get_datetime()
-            log_time_display = log_time.strftime(
-                time_format or self.time_format
-            )
+            log_time_display = log_time.strftime(time_format or self.time_format)
             if log_time_display == self._last_time:
                 row.append(Text(' ' * len(log_time_display)))
             else:
@@ -55,13 +53,9 @@ class CustomLogRender(LogRender):
 
         row.append(Renderables(renderables))
 
-        hyperlink_style = (
-            f'link file://{quote(link_path)}' if link_path else ''
-        )
+        hyperlink_style = f'link file://{quote(link_path)}' if link_path else ''
         if logger_name:
-            logger_name_text = Text.from_markup(
-                f'[[{hyperlink_style}]{logger_name}[/]]'
-            )
+            logger_name_text = Text.from_markup(f'[[{hyperlink_style}]{logger_name}[/]]')
             row.append(logger_name_text)
         if self.show_path and path:
             path_text = Text(path, style=hyperlink_style)
@@ -93,9 +87,7 @@ class CustomRichHandler(RichHandler):
             Text: A tuple of the style and level name.
         """
         level_name = record.levelname
-        level_text = Text.styled(
-            level_name.ljust(8), f'logging.level.{level_name.lower()}'
-        )
+        level_text = Text.styled(level_name.ljust(8), f'logging.level.{level_name.lower()}')
         return level_text
 
     def emit(self, record) -> None:
@@ -103,17 +95,11 @@ class CustomRichHandler(RichHandler):
         path = Path(record.pathname).name
         level = self.get_level_text(record)
         message = self.format(record)
-        time_format = (
-            None if self.formatter is None else self.formatter.datefmt
-        )
+        time_format = None if self.formatter is None else self.formatter.datefmt
         log_time = datetime.fromtimestamp(record.created)
 
         traceback = None
-        if (
-            self.rich_tracebacks
-            and record.exc_info
-            and record.exc_info != (None, None, None)
-        ):
+        if self.rich_tracebacks and record.exc_info and record.exc_info != (None, None, None):
             exc_type, exc_value, exc_traceback = record.exc_info
             assert exc_type is not None
             assert exc_value is not None
@@ -131,11 +117,7 @@ class CustomRichHandler(RichHandler):
             )
             message = record.getMessage()
 
-        use_markup = (
-            getattr(record, 'markup')
-            if hasattr(record, 'markup')
-            else self.markup
-        )
+        use_markup = getattr(record, 'markup') if hasattr(record, 'markup') else self.markup
         if use_markup:
             message_text = Text.from_markup(message)
         else:
@@ -184,9 +166,7 @@ def config_logging(levels: Dict[str, int] = None, location: Path = Path()):
     )
     console = Console(theme=theme)
     rich_formatter = logging.Formatter(datefmt='[%X]')
-    stdout_handler = CustomRichHandler(
-        console=console, show_path=False, rich_tracebacks=True
-    )
+    stdout_handler = CustomRichHandler(console=console, show_path=False, rich_tracebacks=True)
     stdout_handler.setFormatter(rich_formatter)
 
     stdout_handler.setLevel(levels['stdout'])
@@ -197,8 +177,6 @@ def config_logging(levels: Dict[str, int] = None, location: Path = Path()):
         location.mkdir(parents=True, exist_ok=True)
 
     for logger in (bot_logger, dpy_logger):
-        handler = logging.FileHandler(
-            filename=f'{location.resolve() / logger.name}.log'
-        )
+        handler = logging.FileHandler(filename=f'{location.resolve() / logger.name}.log')
         handler.setFormatter(file_formatter)
         logger.addHandler(handler)

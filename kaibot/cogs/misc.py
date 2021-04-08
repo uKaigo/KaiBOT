@@ -36,9 +36,7 @@ class Miscelaneous(custom.Cog, translator=_):
         msg = await ctx.send(txt.format('NaN', 'NaN'))
         diff = (msg.created_at - ctx.message.created_at).total_seconds()
 
-        await msg.edit(
-            content=txt.format(int(self.bot.latency * 1000), int(diff * 1000))
-        )
+        await msg.edit(content=txt.format(int(self.bot.latency * 1000), int(diff * 1000)))
 
     @commands.command(aliases=['privacidade'])
     async def privacy(self, ctx):

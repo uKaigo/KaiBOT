@@ -70,9 +70,7 @@ class Info(custom.Cog, translator=_):
             formats.append('gif')
 
         for fmt in formats:
-            embed.description += (
-                f'[`{fmt.upper()}`]({member.avatar_url_as(format=fmt)}) '
-            )
+            embed.description += f'[`{fmt.upper()}`]({member.avatar_url_as(format=fmt)}) '
 
         embed.set_image(url=member.avatar_url)
 
@@ -97,9 +95,7 @@ class Info(custom.Cog, translator=_):
             member = ctx.author
 
         embed_info = discord.Embed(color=member.color)
-        embed_info.set_author(
-            name=f'{member} [{member.id}]', icon_url=member.avatar_url
-        )
+        embed_info.set_author(name=f'{member} [{member.id}]', icon_url=member.avatar_url)
 
         embed_info.add_field(
             name=_('🗓️ Criou a conta em'),
@@ -120,17 +116,11 @@ class Info(custom.Cog, translator=_):
                     inline=False,
                 )
 
-            roles = [
-                r.mention
-                for r in reversed(member.roles)
-                if r.id != ctx.guild.id
-            ]
+            roles = [r.mention for r in reversed(member.roles) if r.id != ctx.guild.id]
             if not roles:
                 roles = [_('Nenhum.')]
 
-            embed_info.add_field(
-                name=_('🛠️ Cargos'), value=format_list(roles), inline=False
-            )
+            embed_info.add_field(name=_('🛠️ Cargos'), value=format_list(roles), inline=False)
 
         msg = await ctx.send(embed=embed_info)
         if not isinstance(member, discord.Member):
@@ -139,18 +129,12 @@ class Info(custom.Cog, translator=_):
         embed_perms = discord.Embed(color=member.color)
         embed_perms.set_author(name=member, icon_url=member.avatar_url)
 
-        perms = [
-            str(PERMISSIONS[k])
-            for k, v in member.permissions_in(ctx.channel)
-            if v
-        ]
+        perms = [str(PERMISSIONS[k]) for k, v in member.permissions_in(ctx.channel) if v]
 
         if not perms:
             perms = [_('Nenhuma.')]
 
-        embed_perms.add_field(
-            name=_('🛡️ Permissões'), value=format_list(perms), inline=False
-        )
+        embed_perms.add_field(name=_('🛡️ Permissões'), value=format_list(perms), inline=False)
 
         menu = UserinfoMenu(
             (embed_info, embed_perms),
@@ -172,9 +156,7 @@ class Info(custom.Cog, translator=_):
 
             members = map(
                 mapper,
-                enumerate(
-                    sorted(ctx.guild.members, key=lambda m: m.joined_at)
-                ),
+                enumerate(sorted(ctx.guild.members, key=lambda m: m.joined_at)),
             )
 
         source = OldMembersSource(tuple(members), per_page=10)

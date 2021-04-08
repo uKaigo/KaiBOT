@@ -20,9 +20,7 @@ class CogAttrMeta(commands.CogMeta):
             if isinstance(attr, commands.Command):
                 # Dinamically create the class so we don't break the
                 # cls kwarg.
-                cmd_cls = type(
-                    attr.__class__.__name__, (_Cmd, attr.__class__), {}
-                )
+                cmd_cls = type(attr.__class__.__name__, (_Cmd, attr.__class__), {})
 
                 kwgs = attr.__original_kwargs__ | {'translator': translator}
                 new_attr = cmd_cls(attr.callback, **kwgs)

@@ -31,9 +31,7 @@ class ErrorHandler(commands.Cog):
                 return await ctx.send(_('Insira um número válido.'))
 
         if isinstance(error, commands.NoPrivateMessage):
-            return await ctx.send(
-                _('Este comando só pode ser executado em servidores.')
-            )
+            return await ctx.send(_('Este comando só pode ser executado em servidores.'))
 
         if isinstance(error, commands.MissingRequiredArgument):
             return await ctx.send_help(ctx.command)
@@ -51,10 +49,7 @@ class ErrorHandler(commands.Cog):
                 discord.Member: _('membro'),
                 discord.User: _('usuário'),
             }
-            converters = [
-                CONVERTER_MAPPING.get(c, c.__name__.lower())
-                for c in error.converters
-            ]
+            converters = [CONVERTER_MAPPING.get(c, c.__name__.lower()) for c in error.converters]
 
             arg = error.errors[0].argument
 
@@ -92,9 +87,7 @@ class ErrorHandler(commands.Cog):
             file = discord.File(stream, 'error.txt')
         else:
             for page in paginator.pages:
-                embed.add_field(
-                    name='\N{ZERO WIDTH SPACE}', value=page, inline=False
-                )
+                embed.add_field(name='\N{ZERO WIDTH SPACE}', value=page, inline=False)
 
         channel = self.bot.get_channel(config.LOGS['errors'])
         await channel.send(embed=embed, file=file)

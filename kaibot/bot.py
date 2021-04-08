@@ -15,9 +15,7 @@ class KaiBOT(commands.Bot):
     def __init__(self, *args, **kwargs):
         kwargs.setdefault('intents', get_intents_from(config.INTENTS))
         kwargs['command_prefix'] = self.prefix_getter
-        kwargs['activity'] = Activity(
-            name='k.help', type=ActivityType.listening
-        )
+        kwargs['activity'] = Activity(name='k.help', type=ActivityType.listening)
 
         super().__init__(*args, **kwargs)
 
@@ -36,18 +34,14 @@ class KaiBOT(commands.Bot):
             else:
                 log.info(f'Loaded "{extension}".')
 
-        log.debug(
-            f'Loaded {len(self.extensions)} extensions with {len(self.commands)} commands.'
-        )
+        log.debug(f'Loaded {len(self.extensions)} extensions with {len(self.commands)} commands.')
 
     async def get_language_for(self, guild):
         return config.DEFAULT_LANGUAGE
 
     def prefix_getter(self, bot, message):
         if isinstance(message.channel, DMChannel):
-            return commands.when_mentioned_or(*config.PREFIXES, '')(
-                bot, message
-            )
+            return commands.when_mentioned_or(*config.PREFIXES, '')(bot, message)
         return commands.when_mentioned_or(*config.PREFIXES)(bot, message)
 
     async def on_ready(self):

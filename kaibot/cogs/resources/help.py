@@ -78,18 +78,14 @@ class Help(commands.HelpCommand):
             '"{prefix}help [categoria]" para mais informações sobre uma categoria.',
             prefix=self.clean_prefix,
         )
-        extra += '\n\n' + _(
-            'Comandos começando com `*` são grupos, portanto possuem subcomandos.'
-        )
+        extra += '\n\n' + _('Comandos começando com `*` são grupos, portanto possuem subcomandos.')
         embed.add_field(name='\N{ZERO WIDTH SPACE}', value=extra, inline=False)
         await self.get_destination().send(embed=embed)
 
     async def send_command_help(self, command):
         translator = command.translator
 
-        embed = discord.Embed(
-            description=translator(command.help), color=config.MAIN_COLOR
-        )
+        embed = discord.Embed(description=translator(command.help), color=config.MAIN_COLOR)
         embed.set_author(
             name=_('Ajuda | {bucket}', bucket=command.name.title()),
             icon_url=self.context.me.avatar_url,
@@ -107,18 +103,14 @@ class Help(commands.HelpCommand):
             )
 
         if command.parent:
-            embed.add_field(
-                name=_('Parente:'), value=command.parent.qualified_name
-            )
+            embed.add_field(name=_('Parente:'), value=command.parent.qualified_name)
 
         await self.get_destination().send(embed=embed)
 
     async def send_group_help(self, group: commands.Group):
         translator = group.translator
 
-        embed = discord.Embed(
-            description=translator(group.help), color=config.MAIN_COLOR
-        )
+        embed = discord.Embed(description=translator(group.help), color=config.MAIN_COLOR)
         embed.set_author(
             name=_('Ajuda | {bucket}', bucket=group.name.title()),
             icon_url=self.context.me.avatar_url,
@@ -148,15 +140,10 @@ class Help(commands.HelpCommand):
                 txt = ''
                 for command in cmds:
                     cmd_doc = self._get_short_doc(command)
-                    if (
-                        isinstance(command, commands.Group)
-                        and command.commands
-                    ):
+                    if isinstance(command, commands.Group) and command.commands:
                         txt += '\*'
 
-                    txt += (
-                        f'**{command.name} {command.signature}** — {cmd_doc}\n'
-                    )
+                    txt += f'**{command.name} {command.signature}** — {cmd_doc}\n'
 
                 embed.add_field(name=_('Subcomandos:'), value=txt)
 
@@ -168,18 +155,14 @@ class Help(commands.HelpCommand):
             extra += '\n\n' + _(
                 'Comandos começando com `*` são grupos, portanto possuem subcomandos.'
             )
-            embed.add_field(
-                name='\N{ZERO WIDTH SPACE}', value=extra, inline=False
-            )
+            embed.add_field(name='\N{ZERO WIDTH SPACE}', value=extra, inline=False)
 
         await self.get_destination().send(embed=embed)
 
     async def send_cog_help(self, cog: commands.Cog):
         translator = cog.__translator__
 
-        embed = discord.Embed(
-            color=config.MAIN_COLOR, description=translator(cog.description)
-        )
+        embed = discord.Embed(color=config.MAIN_COLOR, description=translator(cog.description))
         embed.set_author(
             name=_('Ajuda | {bucket}', bucket=cog.qualified_name),
             icon_url=self.context.me.avatar_url,
@@ -187,9 +170,7 @@ class Help(commands.HelpCommand):
 
         cmds = await self.filter_commands(cog.get_commands(), sort=True)
         if not cmds:
-            return await self.send_error_message(
-                self.command_not_found(cog.qualified_name)
-            )
+            return await self.send_error_message(self.command_not_found(cog.qualified_name))
 
         txt = ''
         for command in cmds:

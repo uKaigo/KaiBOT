@@ -17,9 +17,7 @@ log = logging.getLogger('kaibot.main')
 def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument('-t', '--token', help='Run with the given token.')
-    parser.add_argument(
-        '--intents', help='Run with custom intents.', nargs='+'
-    )
+    parser.add_argument('--intents', help='Run with custom intents.', nargs='+')
     return parser.parse_args()
 
 
@@ -42,9 +40,7 @@ def main():
 
 
 if __name__ == '__main__':
-    config_logging(
-        {'file': logging.DEBUG, 'stdout': logging.INFO}, location=Path('logs')
-    )
+    config_logging({'file': logging.DEBUG, 'stdout': logging.INFO}, location=Path('logs'))
 
     log.debug('Changing dir to "kaibot".')
     os.chdir('kaibot')
