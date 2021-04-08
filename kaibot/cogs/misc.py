@@ -5,12 +5,13 @@ from discord.ext import commands
 
 from .resources.help import Help
 from .. import config
+from ..utils import custom
 from ..i18n import Translator
 
 _ = Translator(__name__)
 
 
-class Miscelaneous(commands.Cog):
+class Miscelaneous(custom.Cog, translator=_):
     """Comandos que não se encaixam em outra categoria."""
 
     def __init__(self, bot):

@@ -4,12 +4,13 @@ import discord
 from discord.ext import commands
 
 from .. import config
+from ..utils import custom
 from ..i18n import Translator
 
 _ = Translator(__name__)
 
 
-class Utilities(commands.Cog):
+class Utilities(custom.Cog, translator=_):
     """Comandos úteis."""
 
     def __init__(self, bot):

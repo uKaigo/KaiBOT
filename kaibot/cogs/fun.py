@@ -5,6 +5,7 @@ from discord.ext import commands
 
 from .. import config
 from ..i18n import Translator, current_language
+from ..utils import custom
 from .resources.ttt_impl import TicTacToe
 
 _ = Translator(__name__)
@@ -19,7 +20,7 @@ TTT_GRID = '''
 '''
 
 
-class Fun(commands.Cog):
+class Fun(custom.Cog, translator=_):
     """Comandos de diversão."""
 
     def __init__(self, bot):

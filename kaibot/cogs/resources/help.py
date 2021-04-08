@@ -12,10 +12,13 @@ class Help(commands.HelpCommand):
         # We can't translate command.short_doc
         if not command.help:
             return _('Sem descrição.')
-        translate = Translator(command.cog.__module__)
 
-        cmd_help = translate(command.help)
+        cmd_help = command.translator(command.help)
         return cmd_help.split('\n', 1)[0]
+
+    def _add_to_bot(self, bot):
+        super()._add_to_bot(bot)
+        self._command_impl.translator = _
 
     def command_not_found(self, string):
         return _('Comando "{string}" não foi encontrado.', string=string)
@@ -72,7 +75,7 @@ class Help(commands.HelpCommand):
         await self.get_destination().send(embed=embed)
 
     async def send_command_help(self, command):
-        translator = Translator(command.cog.__module__)
+        translator = command.translator
 
         embed = discord.Embed(
             description=translator(command.help), color=config.MAIN_COLOR
@@ -101,7 +104,7 @@ class Help(commands.HelpCommand):
         await self.get_destination().send(embed=embed)
 
     async def send_group_help(self, group: commands.Group):
-        translator = Translator(group.cog.__module__)
+        translator = group.translator
 
         embed = discord.Embed(
             description=translator(group.help), color=config.MAIN_COLOR
@@ -162,7 +165,7 @@ class Help(commands.HelpCommand):
         await self.get_destination().send(embed=embed)
 
     async def send_cog_help(self, cog: commands.Cog):
-        translator = Translator(cog.__module__)
+        translator = cog.__translator__
 
         embed = discord.Embed(
             color=config.MAIN_COLOR, description=translator(cog.description)

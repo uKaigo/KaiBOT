@@ -26,9 +26,7 @@ class Translator:
         if lang == 'pt_BR':
             # Since the bot is written in pt_BR, no need to translate
             # it.
-            if args or kwargs:
-                return message.format(*args, **kwargs)
-            return message
+            return self._noop(message, *args, **kwargs)
 
         if lang not in self.__cache:
             self.__cache[lang] = gettext.translation(
@@ -39,3 +37,9 @@ class Translator:
             translated = translated.format(*args, **kwargs)
 
         return translated
+
+    @classmethod
+    def _noop(cls, message: str, *args, **kwargs) -> str:
+        if args or kwargs:
+            message = message.format(*args, **kwargs)
+        return message
