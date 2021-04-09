@@ -30,6 +30,32 @@ class BotEvents(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
+    def _set_info_from_server(self, ctx, embed):
+        if ctx.guild.chunked:
+            owner = f'\> Dono: {ctx.guild.owner} ({ctx.guild.owner.id})'
+        else:
+            owner = f'\> Dono: {ctx.guild.owner_id} (id)'
+
+        embed.add_field(
+            name='Servidor',
+            value=f'\> Nome: {ctx.guild.name}\n\> ID: {ctx.guild.id}\n' + owner,
+            inline=False,
+        )
+
+        embed.add_field(
+            name='Canal',
+            value=(
+                f'\> Nome: {ctx.channel.name}\n'
+                f'\> ID: {ctx.channel.id}\n'
+                f'\> NSFW: {ctx.channel.nsfw}'
+            ),
+            inline=False,
+        )
+
+    def _set_info_from_dm(self, ctx, embed):
+        embed.add_field(name='Servidor', value='_Executado em DM._', inline=False)
+        embed.add_field(name='Canal', value=f'\> ID: {ctx.channel.id}', inline=False)
+
     @commands.Cog.listener()
     async def on_ready(self):
         bot = self.bot
@@ -48,7 +74,7 @@ class BotEvents(commands.Cog):
         stats.add_row('Channels', str(channels))
 
         versions = Table(show_edge=False, show_header=False, box=box.MINIMAL)
-        fmt = '{0.major}.{0.minor}.{0.minor}'
+        fmt = '{0.major}.{0.minor}.{0.micro}'
         versions.add_row('Python', fmt.format(py_version_i))
         versions.add_row('discord.py', fmt.format(dpy_version_i))
 
@@ -77,26 +103,10 @@ class BotEvents(commands.Cog):
             icon_url=ctx.author.avatar_url,
         )
 
-        if ctx.guild.chunked:
-            owner = f'\> Dono: {ctx.guild.owner} ({ctx.guild.owner.id})'
+        if ctx.guild:
+            self._set_info_from_server(ctx, embed)
         else:
-            owner = f'\> Dono: {ctx.guild.owner_id} (id)'
-
-        embed.add_field(
-            name='Servidor',
-            value=f'\> Nome: {ctx.guild.name}\n\> ID: {ctx.guild.id}\n' + owner,
-            inline=False,
-        )
-
-        embed.add_field(
-            name='Canal',
-            value=(
-                f'\> Nome: {ctx.channel.name}\n'
-                f'\> ID: {ctx.channel.id}\n'
-                f'\> NSFW: {ctx.channel.nsfw}'
-            ),
-            inline=False,
-        )
+            self._set_info_from_dm(ctx, embed)
 
         embed.add_field(
             name='Mensagem',
