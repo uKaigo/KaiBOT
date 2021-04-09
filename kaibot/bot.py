@@ -23,6 +23,12 @@ class KaiBOT(commands.Bot):
         self.session = aiohttp.ClientSession()
         self.load_all_extensions(config.EXTENSIONS)
 
+    # - HELPERS -
+
+    async def close(self):
+        await self.session.close()
+        await super().close()
+
     def load_all_extensions(self, extensions):
         for extension in extensions:
             try:
@@ -44,13 +50,11 @@ class KaiBOT(commands.Bot):
             return commands.when_mentioned_or(*config.PREFIXES, '')(bot, message)
         return commands.when_mentioned_or(*config.PREFIXES)(bot, message)
 
+    # - EVENTS -
+
     async def on_ready(self):
         log.info('Bot is ready.')
 
     async def on_message(self, message):
         current_language.set(await self.get_language_for(message.guild))
         await self.process_commands(message)
-
-    async def close(self):
-        await self.session.close()
-        await super().close()

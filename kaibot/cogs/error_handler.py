@@ -1,3 +1,4 @@
+import sys
 import io
 import traceback
 from logging import getLogger
@@ -18,6 +19,18 @@ class ErrorHandler(commands.Cog):
 
     def __init__(self, bot):
         self.bot = bot
+        bot.event(self.on_error)
+
+    def _get_kwargs_from_paginator(self, embed, paginator):
+        file = None
+        if len(paginator) > 5850:  # Other texts needs to be <151 chrs.
+            stream = io.StringIO(''.join(paginator.pages))
+            file = discord.File(stream, 'error.txt')
+        else:
+            for page in paginator.pages:
+                embed.add_field(name='\N{ZERO WIDTH SPACE}', value=page, inline=False)
+
+        return {'embed': embed, 'file': file}
 
     @commands.Cog.listener()
     async def on_command_error(self, ctx, error):
@@ -81,16 +94,10 @@ class ErrorHandler(commands.Cog):
         for line in tb_exc.format():
             paginator.add_line(line)
 
-        file = None
-        if len(paginator) > 5850:  # Other texts needs to be <151 chrs.
-            stream = io.StringIO(''.join(paginator.pages))
-            file = discord.File(stream, 'error.txt')
-        else:
-            for page in paginator.pages:
-                embed.add_field(name='\N{ZERO WIDTH SPACE}', value=page, inline=False)
+        kwgs = self._get_kwargs_from_paginator(embed, paginator)
 
         channel = self.bot.get_channel(config.LOGS['errors'])
-        await channel.send(embed=embed, file=file)
+        await channel.send(**kwgs)
 
         await ctx.send(
             _(
@@ -100,6 +107,31 @@ class ErrorHandler(commands.Cog):
                 error=f'```py\n{list(tb_exc.format(chain=False))[-1]}```',
             )
         )
+
+    async def on_error(self, event, *args, **kwargs):
+        error = sys.exc_info()[1]
+
+        log.error(
+            f'An error occurred in the event "{event}". Args: {args} Kwargs: {kwargs}',
+            exc_info=error,
+        )
+
+        tb_exc = traceback.TracebackException.from_exception(error)
+
+        embed = discord.Embed(
+            title=f'Erro no evento "{event}"',
+            description=f'**Args:** {args}\n**Kwargs:** {kwargs}',
+            color=config.MAIN_COLOR,
+        )
+
+        paginator = commands.Paginator('```py\n', '```', 1024, '')
+        for line in tb_exc.format():
+            paginator.add_line(line)
+
+        kwgs = self._get_kwargs_from_paginator(embed, paginator)
+
+        channel = self.bot.get_channel(config.LOGS['errors'])
+        await channel.send(**kwgs)
 
 
 def setup(bot):
