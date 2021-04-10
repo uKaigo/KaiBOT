@@ -56,6 +56,8 @@ if __name__ == '__main__':
 
     try:
         main()
+    except SystemExit:
+        raise
     except:
         log.critical('Unhandled error occurred.', exc_info=True)
         sys.exit(1)
