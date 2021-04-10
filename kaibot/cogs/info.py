@@ -145,6 +145,7 @@ class Info(custom.Cog, translator=_):
         await menu.start(ctx=ctx)
 
     @commands.command()
+    @commands.guild_only()
     @needs_chunk()
     async def oldmembers(self, ctx):
         async with ctx.typing():

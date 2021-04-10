@@ -21,6 +21,7 @@ class Fun(custom.Cog, translator=_):
         self._ttt_game.destroy(self.bot)
 
     @commands.command(aliases=['tictactoe', 'jogodavelha', 'jdv'])
+    @commands.guild_only()
     async def ttt(self, ctx, player: discord.Member):
         """Começa um jogo da velha."""
         if player.bot:
