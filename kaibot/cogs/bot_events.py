@@ -108,10 +108,11 @@ class BotEvents(commands.Cog):
         else:
             self._set_info_from_dm(ctx, embed)
 
+        content = discord.utils.escape_markdown(ctx.message.clean_content)
         embed.add_field(
             name='Mensagem',
             value=(
-                f'\> Conteúdo: "{ctx.message.clean_content}"\n'
+                f'\> Conteúdo: "{content}"\n'
                 f'\> ID: {ctx.message.id}\n'
                 f'\> URL: [Link]({ctx.message.jump_url})'
             ),
