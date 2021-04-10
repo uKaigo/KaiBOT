@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  kaibot\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-04 20:35-0300\n"
+"POT-Creation-Date: 2021-04-10 15:35-0300\n"
 "PO-Revision-Date: 2021-03-19 23:39-0300\n"
 "Last-Translator: \n"
 "Language: en_US\n"
@@ -14,27 +14,27 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.9.0\n"
 
-#: kaibot/cogs/error_handler.py:31
+#: kaibot/cogs/error_handler.py:44
 msgid "Insira um número válido."
 msgstr "Insert a valid number."
 
-#: kaibot/cogs/error_handler.py:35
+#: kaibot/cogs/error_handler.py:47
 msgid "Este comando só pode ser executado em servidores."
-msgstr "This command can only run in guilds."
+msgstr "This command can only run in servers."
 
-#: kaibot/cogs/error_handler.py:43
+#: kaibot/cogs/error_handler.py:54
 msgid "O membro \"{string}\" não foi encontrado."
 msgstr "The member \"{string}\" wasn't found."
 
-#: kaibot/cogs/error_handler.py:51
+#: kaibot/cogs/error_handler.py:62
 msgid "membro"
 msgstr "member"
 
-#: kaibot/cogs/error_handler.py:52
+#: kaibot/cogs/error_handler.py:63
 msgid "usuário"
 msgstr "user"
 
-#: kaibot/cogs/error_handler.py:62
+#: kaibot/cogs/error_handler.py:70
 msgid "Não foi possível converter \"{string}\" para {converters}."
 msgstr "Couldn't convert \"{string}\" to {converters}."
 

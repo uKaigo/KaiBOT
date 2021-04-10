@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  kaibot\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-04 20:35-0300\n"
+"POT-Creation-Date: 2021-04-10 15:35-0300\n"
 "PO-Revision-Date: 2021-03-17 22:24-0300\n"
 "Last-Translator: \n"
 "Language: en_US\n"
@@ -18,49 +18,49 @@ msgstr ""
 msgid "Sem descrição."
 msgstr "No description."
 
-#: kaibot/cogs/resources/help.py:21
+#: kaibot/cogs/resources/help.py:34
 msgid "Comando \"{string}\" não foi encontrado."
 msgstr "The command \"{string}\" wasn't found."
 
-#: kaibot/cogs/resources/help.py:25
+#: kaibot/cogs/resources/help.py:38
 msgid "O comando \"{command}\" não possui um subcomando chamado \"{string}\""
 msgstr "The command \"{command}\" doesn't have a subcommand called \"{string}\""
 
-#: kaibot/cogs/resources/help.py:30
+#: kaibot/cogs/resources/help.py:43
 msgid "O comando \"{command}\" não possui subcomandos."
 msgstr "The command \"{command}\" doesn't have subcommands."
 
-#: kaibot/cogs/resources/help.py:44
+#: kaibot/cogs/resources/help.py:57
 msgid "Aqui estão todos os meus comandos."
 msgstr "Here's all my commands."
 
-#: kaibot/cogs/resources/help.py:47
+#: kaibot/cogs/resources/help.py:60
 msgid "Ajuda"
 msgstr "Help"
 
-#: kaibot/cogs/resources/help.py:63
+#: kaibot/cogs/resources/help.py:76
 msgid "Use \"{prefix}help [comando]\" para mais informações sobre um comando, ou \"{prefix}help [categoria]\" para mais informações sobre uma categoria."
 msgstr "Use \"{prefix}help [command]\" for more information about a command, or \"{prefix}help [category]\" for more information about a category."
 
-#: kaibot/cogs/resources/help.py:68 kaibot/cogs/resources/help.py:155
-#: kaibot/cogs/resources/help.py:195
+#: kaibot/cogs/resources/help.py:81 kaibot/cogs/resources/help.py:155
+#: kaibot/cogs/resources/help.py:189
 msgid "Comandos começando com `*` são grupos, portanto possuem subcomandos."
 msgstr "Commands starting with `*` are groups, therefore have subcommands."
 
-#: kaibot/cogs/resources/help.py:81 kaibot/cogs/resources/help.py:110
-#: kaibot/cogs/resources/help.py:171
+#: kaibot/cogs/resources/help.py:90 kaibot/cogs/resources/help.py:115
+#: kaibot/cogs/resources/help.py:167
 msgid "Ajuda | {bucket}"
 msgstr "Help | {bucket}"
 
-#: kaibot/cogs/resources/help.py:85 kaibot/cogs/resources/help.py:114
+#: kaibot/cogs/resources/help.py:94 kaibot/cogs/resources/help.py:119
 msgid "Modo de usar:"
 msgstr "Usage:"
 
-#: kaibot/cogs/resources/help.py:91 kaibot/cogs/resources/help.py:120
+#: kaibot/cogs/resources/help.py:100 kaibot/cogs/resources/help.py:125
 msgid "Sinônimos:"
 msgstr "Aliases:"
 
-#: kaibot/cogs/resources/help.py:98 kaibot/cogs/resources/help.py:127
+#: kaibot/cogs/resources/help.py:106 kaibot/cogs/resources/help.py:132
 msgid "Parente:"
 msgstr "Parent:"
 
@@ -72,7 +72,7 @@ msgstr "Subcommands:"
 msgid "Use \"{prefix}help {group} [subcomando]\" para mais informações sobre um comando."
 msgstr "Use \"{prefix}help {group} [subcommand]\" for more information about a command."
 
-#: kaibot/cogs/resources/help.py:191
+#: kaibot/cogs/resources/help.py:185
 msgid "Use \"{prefix}help [comando]\" para mais informações sobre um comando."
 msgstr "Use \"{prefix}help [command]\" for more information about a command."
 

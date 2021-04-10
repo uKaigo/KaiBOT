@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  kaibot\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-04 20:35-0300\n"
+"POT-Creation-Date: 2021-04-10 15:35-0300\n"
 "PO-Revision-Date: 2021-04-01 22:56-0300\n"
 "Last-Translator: \n"
 "Language: en_US\n"
@@ -14,12 +14,12 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.9.0\n"
 
-#: kaibot/cogs/utilities.py:13
+#: kaibot/cogs/utilities.py:14
 #, docstring
 msgid "Comandos úteis."
 msgstr "Useful commands."
 
-#: kaibot/cogs/utilities.py:20
+#: kaibot/cogs/utilities.py:21
 #, docstring
 msgid ""
 "Rola um dado de `SIDES` lados.\n"
@@ -30,7 +30,7 @@ msgstr ""
 "\n"
 "The dice needs to have at least 2 sides."
 
-#: kaibot/cogs/utilities.py:26
+#: kaibot/cogs/utilities.py:27
 msgid "Insira um dado de pelo menos 2 lados."
 msgstr "Insert a dice of at least 2 sides."
 
@@ -38,12 +38,12 @@ msgstr "Insert a dice of at least 2 sides."
 msgid "Seu dado resultou em: {result}"
 msgstr "Your dice result: {result}"
 
-#: kaibot/cogs/utilities.py:35
+#: kaibot/cogs/utilities.py:34
 #, docstring
 msgid "Mostra todos os redirecionamentos do link."
 msgstr "Shows all the redirects of the link."
 
-#: kaibot/cogs/utilities.py:37
+#: kaibot/cogs/utilities.py:35
 msgid "Redirecionamentos"
 msgstr "Redirects"
 

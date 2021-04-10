@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  kaibot\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-08 19:30-0300\n"
+"POT-Creation-Date: 2021-04-10 15:35-0300\n"
 "PO-Revision-Date: 2021-03-22 23:33-0300\n"
 "Last-Translator: \n"
 "Language: en_US\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.9.0\n"
 
-#: kaibot/cogs/fun.py:15
+#: kaibot/cogs/fun.py:14
 #, docstring
 msgid "Comandos de diversão."
 msgstr "Fun commands."
