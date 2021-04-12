@@ -50,7 +50,7 @@ class Info(custom.Cog, translator=_):
         self.bot = bot
 
     @commands.group(invoke_without_command=True)
-    async def avatar(self, ctx, member: MemberOrUser = None):
+    async def avatar(self, ctx, *, member: MemberOrUser = None):
         """
         Mostra o avatar de um usuário.
 
@@ -82,10 +82,10 @@ class Info(custom.Cog, translator=_):
     async def random(self, ctx):
         """Mostra um avatar aleatório."""
         member = choice(ctx.guild.members)
-        await self.avatar(ctx, member)
+        await self.avatar(ctx, member=member)
 
     @commands.command()
-    async def userinfo(self, ctx, member: MemberOrUser = None):
+    async def userinfo(self, ctx, *, member: MemberOrUser = None):
         """
         Mostra informações de um usuário.
 
