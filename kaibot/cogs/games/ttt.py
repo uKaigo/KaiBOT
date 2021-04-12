@@ -1,9 +1,10 @@
+import asyncio
 from enum import IntEnum
 from itertools import chain
 
 import discord
 
-from ...i18n import Translator, current_language
+from ...i18n import Translator
 from ... import config
 
 _ = Translator(__name__)
@@ -64,7 +65,8 @@ class TicTacToe:
         self.table[column][row] = self.turn
         self.turn = Players(not self.turn)
 
-    def check_winner(self):
+    @property
+    def winner(self):
         check = self._get_position
 
         # Check vertical
@@ -97,17 +99,22 @@ class TicTacToeGame:
         self.bot = bot
         self.games = {}  # ID: (message, game, players)
         # X should be at index 0
-
-        bot.add_listener(self.on_reaction_add)
+        self.__tasks = []
 
     def __contains__(self, value):
         return value in self.games
 
     def destroy(self):
-        self.bot.remove_listener(self.on_reaction_add)
+        for task in self.tasks:
+            task.cancel()
         self.games = {}
 
     # HELPERS
+
+    def _create_task(self, coro):
+        task = self.bot.loop.create_task(coro)
+        self.__tasks.append(task)
+        task.add_done_callback(lambda f: self.__tasks.remove(task))
 
     async def _add_reactions(self, msg, game):
         for move in game.valid_moves:
@@ -127,44 +134,56 @@ class TicTacToeGame:
             return await channel.send('\N{ZERO WIDTH SPACE}')
         return message
 
+    def _get_check(self, message, game, players):
+        def predicate(reaction, user):
+            checks = (
+                user.id in self.games,
+                reaction.emoji in NUMBERS,
+                message.id == reaction.message.id,
+            )
+            return all(checks) and game.turn == Players(players.index(user))
+
+        return predicate
+
     # GAME
 
     async def start(self, message, player_x, player_o):
         game = TicTacToe()
 
-        self.bot.loop.create_task(self._add_reactions(message, game))
+        self._create_task(self._add_reactions(message, game))
 
         info = (message, game, (player_x, player_o))
         self.games[player_x.id] = info
         self.games[player_o.id] = info
 
+        self._create_task(self._internal_loop(*info))
         await self._update_game(*info)
 
-    async def on_reaction_add(self, reaction, user):
-        if not all((user.id in self.games, reaction.emoji in NUMBERS)):
-            return
-
-        message, game, players = self.games[user.id]
-        player_role = Players(players.index(user))
-
-        if not all((message.id == reaction.message.id, game.turn == player_role)):
-            return
-
-        move = NUMBERS.index(reaction.emoji)
+    async def _internal_loop(self, _, game, players):
         try:
-            game.make_move(move)
-        except ValueError:
+            bot = self.bot
+            while game.winner is None:
+                # We need to dinamically access message, so rollover
+                # works.
+                message = self.games[players[0].id][0]
+
+                check = self._get_check(message, game, players)
+                reaction, _ = await bot.wait_for('reaction_add', check=check, timeout=60 * 5)
+
+                move = NUMBERS.index(reaction.emoji)
+                try:
+                    game.make_move(move)
+                except ValueError:
+                    continue
+                else:
+                    if message.guild.me.permissions_in(message.channel).manage_messages:
+                        self._create_task(message.clear_reaction(NUMBERS[move]))
+
+                await self._update_game(message, game, players)
+        except asyncio.TimeoutError:
             return
-        else:
-            me = message.guild.me
-            if me.permissions_in(message.channel).manage_messages:
-                self.bot.loop.create_task(message.clear_reaction(NUMBERS[move]))
-
-        if game.check_winner() != None:
+        finally:
             del self.games[players[0].id], self.games[players[1].id]
-
-        current_language.set(await self.bot.get_language_for(message.guild))
-        await self._update_game(message, game, players)
 
     async def _update_game(self, message, game, players):
         symbols = ('⭕', '❌')
@@ -184,7 +203,7 @@ class TicTacToeGame:
         )
         embed.description += '\n'
 
-        winner = game.check_winner()
+        winner = game.winner
         if winner is None:
             embed.description += _('Vez de {player}.', player=players[game.turn].mention)
         else:
@@ -196,7 +215,7 @@ class TicTacToeGame:
         msg = await self._do_rollover(message)
 
         if msg != message:
-            self.bot.loop.create_task(self._add_reactions(msg, game))
+            self._create_task(self._add_reactions(msg, game))
 
             for player in players:
                 self.games[player.id] = (msg, game, players)
