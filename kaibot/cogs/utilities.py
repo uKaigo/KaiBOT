@@ -62,6 +62,9 @@ class Utilities(custom.Cog, translator=_):
         """Mostra todos os redirecionamentos do link."""
         embed = discord.Embed(title=_('Redirecionamentos'), color=config.MAIN_COLOR)
 
+        if not link.startswith(('http://', 'https://')):
+            link = f'http://{link}'  # Https will auto-redirect.
+
         description = ''
         async with ctx.typing():
             dest = await self.bot.session.get(link.strip('<>'))
