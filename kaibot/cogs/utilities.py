@@ -15,11 +15,11 @@ class Utilities(custom.Cog, translator=_):
     """Comandos úteis."""
 
     def __init__(self, bot):
-        self.DICE_REGEX = re.compile(r"((?P<count>\d*)d)?(?P<sides>\d+(?!\d*d))")  # Regex Sucks
+        self.DICE_REGEX = re.compile(r'((?P<count>\d*)d)?(?P<sides>\d+(?!\d*d))')  # Regex Sucks
         self.bot = bot
 
     @commands.command()
-    async def roll(self, ctx, dice="d20"):
+    async def roll(self, ctx, dice='d20'):
         """
         Rola um dado.
 
@@ -32,43 +32,43 @@ class Utilities(custom.Cog, translator=_):
         if not match:
             return await ctx.send_help(ctx.command)
 
-        count = int(match.group("count") or 1)
-        sides = int(match.group("sides"))
+        count = int(match.group('count') or 1)
+        sides = int(match.group('sides'))
 
         if 0 in (count, sides):
-            return await ctx.send(_("Nenhum dos valores pode ser 0."))
+            return await ctx.send(_('Nenhum dos valores pode ser 0.'))
         if sides == 1:
-            return await ctx.send(_("O dado não pode ter somente 1 lado."))
+            return await ctx.send(_('O dado não pode ter somente 1 lado.'))
         if sides > 1000:
-            return await ctx.send(_("O dado precisa ter menos que 1000 lados."))
+            return await ctx.send(_('O dado precisa ter menos que 1000 lados.'))
         if count > 200:
-            return await ctx.send(_("Você pode rolar no máximo 200 dados por vez."))
+            return await ctx.send(_('Você pode rolar no máximo 200 dados por vez.'))
 
         results = []
         for i in range(count):
             results.append(randint(1, sides))
 
         if count == 1:
-            return await ctx.send(_("Seu dado resultou em: {result}", result=results[0]))
+            return await ctx.send(_('Seu dado resultou em: {result}', result=results[0]))
 
         return await ctx.send(
-            _("Seus dados resultaram em: {results}", results=format_list(results))
-            + "\n\n"
-            + _("Soma: {sum}", sum=sum(results))
+            _('Seus dados resultaram em: {results}', results=format_list(results))
+            + '\n\n'
+            + _('Soma: {sum}', sum=sum(results))
         )
 
     @commands.command()
     async def resolve(self, ctx, link):
         """Mostra todos os redirecionamentos do link."""
-        embed = discord.Embed(title=_("Redirecionamentos"), color=config.MAIN_COLOR)
+        embed = discord.Embed(title=_('Redirecionamentos'), color=config.MAIN_COLOR)
 
-        description = ""
+        description = ''
         async with ctx.typing():
-            dest = await self.bot.session.get(link.strip("<>"))
-
+            dest = await self.bot.session.get(link.strip('<>'))
+            h_len = len(dest.history)
             for index, res in enumerate(dest.history + (dest,)):
-                em = "🔷" if index in (0, len(dest.history)) else "🔹"
-                description += f"{em} `{res.status}` - {res.url}\n"
+                em = '🔷' if index in (0, h_len) else '🔹'
+                description += f'{em} `{res.status}` - {res.url}\n'
 
         embed.description = description
 
