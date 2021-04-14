@@ -40,6 +40,8 @@ class ErrorHandler(commands.Cog):
             return
 
         if isinstance(error, commands.BadArgument):
+            if getattr(error, 'is_kaibot', False):
+                return await ctx.send(str(error))
             if 'int' in str(error):
                 return await ctx.send(_('Insira um número válido.'))
 
