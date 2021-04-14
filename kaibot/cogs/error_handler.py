@@ -9,6 +9,7 @@ from discord.ext import commands
 from .. import config
 from ..i18n import Translator
 from ..utils import format_list
+from ..utils.translations import PERMISSIONS
 
 _ = Translator(__name__)
 log = getLogger('kaibot.error_handler')
@@ -73,6 +74,24 @@ class ErrorHandler(commands.Cog):
                     'Não foi possível converter "{string}" para {converters}.',
                     string=arg,
                     converters=format_list(converters, style='or'),
+                )
+            )
+
+        if isinstance(error, commands.MissingPermissions):
+            missing_perms = [str(PERMISSIONS[p]) for p in error.missing_perms]
+            return await ctx.send(
+                _(
+                    'Você precisa da permissão "{perm}" para executar esse comando.',
+                    perm=missing_perms[0],
+                )
+            )
+
+        if isinstance(error, commands.BotMissingPermissions):
+            missing_perms = [str(PERMISSIONS[p]) for p in error.missing_perms]
+            return await ctx.send(
+                _(
+                    'Eu preciso da permissão {perm} para executar esse comando.',
+                    perm=missing_perms[0],
                 )
             )
 
