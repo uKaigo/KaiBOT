@@ -1,3 +1,5 @@
+"""Translation for text not related to cogs."""
+
 from babel.support import LazyProxy
 
 from ..i18n import Translator

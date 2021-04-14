@@ -15,6 +15,7 @@ EXTENSIONS = (
     '.cogs.error_handler',
     '.cogs.fun',
     '.cogs.utilities',
+    '.cogs.moderation',
 )
 
 LOGS = {'commands': 822644877673496626, 'errors': 822644820170113057}
