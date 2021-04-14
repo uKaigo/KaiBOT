@@ -18,7 +18,7 @@ class Fun(custom.Cog, translator=_):
         self._ttt_game = TicTacToeGame(bot)
 
     def cog_unload(self):
-        self._ttt_game.destroy(self.bot)
+        self._ttt_game.destroy()
 
     @commands.command(aliases=['tictactoe', 'jogodavelha', 'jdv'])
     @commands.guild_only()
