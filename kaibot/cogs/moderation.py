@@ -19,7 +19,7 @@ class Moderation(custom.Cog, translator=_):
     @commands.bot_has_permissions(manage_messages=True)
     async def clear(self, ctx, member: Optional[discord.Member], count: Range[2, 100] = 100):
         """
-        Limpa as `count` mensagens do canal.
+        Limpa `count` mensagens do canal.
 
         Um membro pode ser definido pelo primeiro argumento.
         """
