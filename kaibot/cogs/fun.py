@@ -5,7 +5,7 @@ from discord.ext import commands
 
 from ..i18n import Translator
 from ..utils import custom
-from .games.ttt import TicTacToeGame
+from .games.ttt import TTTIntegration
 
 _ = Translator(__name__)
 
@@ -15,7 +15,7 @@ class Fun(custom.Cog, translator=_):
 
     def __init__(self, bot):
         self.bot = bot
-        self._ttt_game = TicTacToeGame(bot)
+        self._ttt_game = TTTIntegration(bot)
 
     def cog_unload(self):
         self._ttt_game.destroy()

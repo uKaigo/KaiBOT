@@ -25,7 +25,7 @@ class Players(IntEnum):
     UNSET = 2
 
 
-class TicTacToe:
+class TTTImplementation:
     __slots__ = ('table', 'turn')
 
     def __init__(self):
@@ -94,7 +94,7 @@ class TicTacToe:
             return None
 
 
-class TicTacToeGame:
+class TTTIntegration:
     def __init__(self, bot):
         self.bot = bot
         self.games = {}  # ID: (message, game, players)
@@ -148,7 +148,7 @@ class TicTacToeGame:
     # GAME
 
     async def start(self, message, player_x, player_o):
-        game = TicTacToe()
+        game = TTTImplementation()
 
         self._create_task(self._add_reactions(message, game))
 
