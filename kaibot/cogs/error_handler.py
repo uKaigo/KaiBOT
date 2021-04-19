@@ -40,6 +40,9 @@ class ErrorHandler(commands.Cog):
         if isinstance(error, self.IGNORED_ERRORS):
             return
 
+        if isinstance(original, self.IGNORED_ERRORS):
+            return
+
         if isinstance(error, commands.BadArgument):
             if getattr(error, 'is_kaibot', False):
                 return await ctx.send(str(error))
