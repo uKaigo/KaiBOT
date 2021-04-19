@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  kaibot\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-12 16:51-0300\n"
+"POT-Creation-Date: 2021-04-18 21:06-0300\n"
 "PO-Revision-Date: 2021-04-01 22:56-0300\n"
 "Last-Translator: \n"
 "Language: en_US\n"
@@ -14,12 +14,12 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.9.0\n"
 
-#: kaibot/cogs/utilities.py:15
+#: kaibot/cogs/utilities.py:16
 #, docstring
 msgid "Comandos úteis."
 msgstr "Useful commands."
 
-#: kaibot/cogs/utilities.py:23
+#: kaibot/cogs/utilities.py:24
 #, docstring
 msgid ""
 "Rola um dado.\n"
@@ -36,41 +36,60 @@ msgstr ""
 "`d100` will roll 1 100-sided dice.\n"
 "`100` will roll 1 100-sided dice."
 
-#: kaibot/cogs/utilities.py:39
+#: kaibot/cogs/utilities.py:40
 msgid "Nenhum dos valores pode ser 0."
 msgstr "None of the values can be 0."
 
-#: kaibot/cogs/utilities.py:41
+#: kaibot/cogs/utilities.py:42
 msgid "O dado não pode ter somente 1 lado."
 msgstr "The dice can't have only 1 side."
 
-#: kaibot/cogs/utilities.py:43
+#: kaibot/cogs/utilities.py:44
 #, fuzzy
 msgid "O dado precisa ter menos que 1000 lados."
 msgstr "The dice can't have only 1 side."
 
-#: kaibot/cogs/utilities.py:45
+#: kaibot/cogs/utilities.py:46
 msgid "Você pode rolar no máximo 200 dados por vez."
 msgstr "You can roll up to 200 dices at a time."
 
-#: kaibot/cogs/utilities.py:52
+#: kaibot/cogs/utilities.py:53
 msgid "Seu dado resultou em: {result}"
 msgstr "Your dice result: {result}"
 
-#: kaibot/cogs/utilities.py:55
+#: kaibot/cogs/utilities.py:56
 msgid "Seus dados resultaram em: {results}"
 msgstr "Your dice results: {results}"
 
-#: kaibot/cogs/utilities.py:57
+#: kaibot/cogs/utilities.py:58
 msgid "Soma: {sum}"
 msgstr "Sum: {sum}"
 
-#: kaibot/cogs/utilities.py:62
+#: kaibot/cogs/utilities.py:63
 #, docstring
 msgid "Mostra todos os redirecionamentos do link."
 msgstr "Shows all the redirects of the link."
 
-#: kaibot/cogs/utilities.py:63
+#: kaibot/cogs/utilities.py:64
 msgid "Redirecionamentos"
 msgstr "Redirects"
+
+#: kaibot/cogs/utilities.py:85
+#, docstring
+msgid ""
+"Cria uma nova sessão do YouTube Together.\n"
+"\n"
+"Apenas disponível em desktop."
+msgstr ""
+"Creates a new YouTube Together session."
+"\n"
+"Only available in desktop."
+
+#: kaibot/cogs/utilities.py:95
+msgid "Criando sessão Youtube Together."
+msgstr ""
+
+#: kaibot/cogs/utilities.py:99
+msgid "[Clique aqui]({invite}) para abrir a sessão YouTube Together."
+msgstr ""
 

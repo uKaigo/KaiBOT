@@ -2,6 +2,7 @@ import re
 from random import randint
 
 import discord
+import discord.http
 from discord.ext import commands
 
 from .. import config
@@ -74,6 +75,33 @@ class Utilities(custom.Cog, translator=_):
                 description += f'{em} `{res.status}` - {res.url}\n'
 
         embed.description = description
+
+        return await ctx.send(embed=embed)
+
+    # I don't think these aliases are good, but idk another name.
+    @commands.command(aliases=['ytt', 'youtubetogether', 'watchtogether'])
+    @commands.bot_has_guild_permissions(create_instant_invite=True)
+    async def watchyt(self, ctx, channel: discord.VoiceChannel):
+        """
+        Cria uma nova sessão do YouTube Together.
+
+        Apenas disponível em desktop.
+        """
+        # We're making the request ourselves because d.py doesn't
+        # support this.
+        route = discord.http.Route('POST', '/channels/{channel_id}/invites', channel_id=channel.id)
+        payload = {'target_type': 2, 'target_application_id': '755600276941176913'}
+        invite_data = await self.bot.http.request(
+            route, json=payload, reason=_('Criando sessão Youtube Together.')
+        )
+
+        embed = discord.Embed(
+            description=_(
+                '[Clique aqui]({invite}) para abrir a sessão YouTube Together.',
+                invite=f'https://discord.gg/{invite_data["code"]}',
+            ),
+            color=config.MAIN_COLOR,
+        )
 
         return await ctx.send(embed=embed)
 
