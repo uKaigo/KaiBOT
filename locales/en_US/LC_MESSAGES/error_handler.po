@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  kaibot\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-14 14:43-0300\n"
+"POT-Creation-Date: 2021-04-18 21:06-0300\n"
 "PO-Revision-Date: 2021-03-19 23:39-0300\n"
 "Last-Translator: \n"
 "Language: en_US\n"
@@ -14,31 +14,39 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.9.0\n"
 
-#: kaibot/cogs/error_handler.py:46
+#: kaibot/cogs/error_handler.py:47
 msgid "Insira um número válido."
 msgstr "Insert a valid number."
 
-#: kaibot/cogs/error_handler.py:49
+#: kaibot/cogs/error_handler.py:50
 msgid "Este comando só pode ser executado em servidores."
 msgstr "This command can only run in servers."
 
-#: kaibot/cogs/error_handler.py:56
+#: kaibot/cogs/error_handler.py:57
 msgid "O membro \"{string}\" não foi encontrado."
 msgstr "The member \"{string}\" wasn't found."
 
-#: kaibot/cogs/error_handler.py:64
+#: kaibot/cogs/error_handler.py:65
 msgid "membro"
 msgstr "member"
 
-#: kaibot/cogs/error_handler.py:65
+#: kaibot/cogs/error_handler.py:66
 msgid "usuário"
 msgstr "user"
 
-#: kaibot/cogs/error_handler.py:72
+#: kaibot/cogs/error_handler.py:73
 msgid "Não foi possível converter \"{string}\" para {converters}."
 msgstr "Couldn't convert \"{string}\" to {converters}."
 
-#: kaibot/cogs/error_handler.py:105
+#: kaibot/cogs/error_handler.py:83
+msgid "Você precisa da permissão \"{perm}\" para executar esse comando."
+msgstr ""
+
+#: kaibot/cogs/error_handler.py:92
+msgid "Eu preciso da permissão {perm} para executar esse comando."
+msgstr ""
+
+#: kaibot/cogs/error_handler.py:124
 msgid ""
 "Ocorreu um erro ao executar este comando.\n"
 "Tente contatar o suporte para resolver o problema.\n"
