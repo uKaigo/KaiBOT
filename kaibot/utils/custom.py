@@ -6,7 +6,7 @@ from ..i18n import Translator
 class _Cmd(commands.Command):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.translator = kwargs.pop('translator', Translator._noop)
+        self.translator = kwargs.pop('translator')
 
 
 class _CogAttrMeta(commands.CogMeta):
