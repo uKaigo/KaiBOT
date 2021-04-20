@@ -1,15 +1,15 @@
+import argparse
 import logging
 import os
 import sys
-import argparse
 from pathlib import Path
 
 from dotenv import load_dotenv
 
-from .logging import config_logging
 from .bot import KaiBOT
-from .utils import get_intents_from
+from .logging import config_logging
 from .scripts import mo_compiler as compile_mo
+from .utils import get_intents_from
 
 log = logging.getLogger('kaibot.main')
 

@@ -1,17 +1,17 @@
 import logging
-from pathlib import Path
 from datetime import datetime
+from pathlib import Path
 from typing import Dict
 from urllib.parse import quote
 
-from rich.console import Console
-from rich.style import Style
-from rich.theme import Theme
 from rich._log_render import LogRender
-from rich.table import Table
-from rich.text import Text
+from rich.console import Console
 from rich.containers import Renderables
 from rich.logging import RichHandler
+from rich.style import Style
+from rich.table import Table
+from rich.text import Text
+from rich.theme import Theme
 from rich.traceback import Traceback
 
 

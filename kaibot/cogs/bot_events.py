@@ -1,16 +1,15 @@
-from sys import version_info as py_version_i
 from datetime import datetime
+from sys import version_info as py_version_i
 
 import discord
 from discord import version_info as dpy_version_i
 from discord.ext import commands
-from rich import get_console, box
+from rich import box, get_console
+from rich.columns import Columns
 from rich.panel import Panel
 from rich.table import Table
-from rich.columns import Columns
 
 from .. import config
-
 
 ASCII_ART = r'''
  _   __      _______  _____ _____ 

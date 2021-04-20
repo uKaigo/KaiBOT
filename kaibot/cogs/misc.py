@@ -3,10 +3,10 @@ import sys
 import discord
 from discord.ext import commands
 
-from .resources.help import Help
 from .. import config
-from ..utils import custom
 from ..i18n import Translator
+from ..utils import custom
+from .resources.help import Help
 
 _ = Translator(__name__)
 

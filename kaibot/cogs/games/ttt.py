@@ -5,8 +5,8 @@ from typing import NamedTuple
 
 import discord
 
-from ...i18n import Translator
 from ... import config
+from ...i18n import Translator
 
 _ = Translator(__name__)
 

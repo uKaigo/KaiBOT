@@ -1,6 +1,6 @@
 import logging
-import aiohttp
 
+import aiohttp
 from discord import Activity, ActivityType, DMChannel
 from discord.ext import commands
 
