@@ -43,4 +43,4 @@ def setup(bot):
 
 
 def teardown(bot):
-    sys.modules.pop('kaibot.cogs.games.ttt', None)
+    sys.modules.pop('kaibot.cogs.games.ttt')
