@@ -17,12 +17,13 @@ class UserinfoMenu(menus.Menu):
     def __init__(self, embeds, **kwargs):
         super().__init__(**kwargs)
         self.embeds = embeds
-        self.current_embed = 0
+        self.is_first_embed = True
 
     @menus.button('🛡️')
     async def update_embed(self, _):
-        self.current_embed = int(not self.current_embed)
-        await self.message.edit(embed=self.embeds[self.current_embed])
+        self.is_first_embed = not self.is_first_embed
+        idx = not self.is_first_embed
+        await self.message.edit(embed=self.embeds[idx])
 
 
 class OldMembersSource(menus.ListPageSource):
