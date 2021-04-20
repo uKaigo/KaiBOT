@@ -44,8 +44,8 @@ class OldMembersSource(menus.ListPageSource):
         return embed
 
 
-class Info(custom.Cog, translator=_):
-    """Comandos de informações de objetos Discord."""
+class Info(custom.Cog, name=_('Informação'), translator=_):
+    """Comandos de informações."""
 
     def __init__(self, bot):
         self.bot = bot

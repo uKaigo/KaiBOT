@@ -12,7 +12,8 @@ class _Cmd(commands.Command):
 class _CogAttrMeta(commands.CogMeta):
     """Adds the translator kwarg."""
 
-    def __new__(cls, name, bases, attrs, **kwargs):
+    def __new__(cls, *args, **kwargs):
+        name, bases, attrs = args
         translator = kwargs.pop('translator', Translator._noop)
         attrs['__translator__'] = translator
 
@@ -27,7 +28,6 @@ class _CogAttrMeta(commands.CogMeta):
 
                 attr._ensure_assignment_on_copy(new_attr)
                 attrs[aname] = new_attr
-
         return super().__new__(cls, name, bases, attrs, **kwargs)
 
 

@@ -11,7 +11,7 @@ from .resources.help import Help
 _ = Translator(__name__)
 
 
-class Miscelaneous(custom.Cog, translator=_):
+class Miscelaneous(custom.Cog, name=_('Miscelâneas'), translator=_):
     """Comandos que não se encaixam em outra categoria."""
 
     def __init__(self, bot):

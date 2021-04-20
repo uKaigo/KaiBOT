@@ -12,7 +12,7 @@ from ..utils import custom, format_list
 _ = Translator(__name__)
 
 
-class Utilities(custom.Cog, translator=_):
+class Utilities(custom.Cog, name=_('Utilitários'), translator=_):
     """Comandos úteis."""
 
     def __init__(self, bot):

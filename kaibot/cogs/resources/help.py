@@ -43,9 +43,10 @@ class BotSource(menus.GroupByPageSource):
         key, cmds = entry
         ctx = self.help.context
         cog = ctx.bot.get_cog(key)
+        cog_name = cog.__translator__(cog.qualified_name)
 
         embed = discord.Embed(color=config.MAIN_COLOR)
-        embed.set_author(name=_('Comandos de {name}', name=key), icon_url=ctx.me.avatar_url)
+        embed.set_author(name=_('Comandos de {name}', name=cog_name), icon_url=ctx.me.avatar_url)
         embed.description = cog.__translator__(cog.description)
 
         for command in cmds:
