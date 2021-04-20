@@ -186,7 +186,7 @@ class TTTIntegration:
             del self.games[players[0].id], self.games[players[1].id]
 
     async def _update_game(self, message, game, players):
-        symbols = ('⭕', '❌')
+        symbols = ('❌', '⭕')
         emojis = []
         for k, v in enumerate(chain(*game.table)):
             if v != Players.UNSET:
