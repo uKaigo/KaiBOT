@@ -1,6 +1,7 @@
 import asyncio
 from enum import IntEnum
 from itertools import chain
+from typing import NamedTuple
 
 import discord
 
@@ -9,6 +10,7 @@ from ... import config
 
 _ = Translator(__name__)
 
+# DISPLAY #
 NUMBERS = ('1️⃣', '2️⃣', '3️⃣', '4️⃣', '5️⃣', '6️⃣', '7️⃣', '8️⃣', '9️⃣')
 TTT_GRID = '''
 ⁣{}❕{}❕{}
@@ -18,6 +20,8 @@ TTT_GRID = '''
 {}❕{}❕{}
 '''
 
+# State Helpers #
+
 
 class Players(IntEnum):
     X = 0
@@ -25,17 +29,22 @@ class Players(IntEnum):
     UNSET = 2
 
 
+class GameInfo(NamedTuple):
+    message: discord.Message
+    game: 'TTTImplementation'
+    players: tuple[discord.Member, discord.Member]
+
+
+# Implementation #
 class TTTImplementation:
     __slots__ = ('table', 'turn')
 
     def __init__(self):
-        # fmt: off
         self.table = (
             [Players.UNSET, Players.UNSET, Players.UNSET],
             [Players.UNSET, Players.UNSET, Players.UNSET],
-            [Players.UNSET, Players.UNSET, Players.UNSET]
+            [Players.UNSET, Players.UNSET, Players.UNSET],
         )
-        # fmt: on
 
         self.turn = Players.X
 
@@ -94,11 +103,11 @@ class TTTImplementation:
             return None
 
 
+# Integration #
 class TTTIntegration:
     def __init__(self, bot):
         self.bot = bot
-        self.games = {}  # ID: (message, game, players)
-        # X should be at index 0
+        self.games: dict[int, GameInfo] = {}
         self.__tasks = []
 
     def __contains__(self, value):
@@ -152,7 +161,7 @@ class TTTIntegration:
 
         self._create_task(self._add_reactions(message, game))
 
-        info = (message, game, (player_x, player_o))
+        info = GameInfo(message, game, (player_x, player_o))
         self.games[player_x.id] = info
         self.games[player_o.id] = info
 
@@ -168,7 +177,7 @@ class TTTIntegration:
                 message = self.games[players[0].id][0]
 
                 check = self._get_check(message, game, players)
-                reaction, _ = await bot.wait_for('reaction_add', check=check, timeout=60 * 5)
+                reaction, _ = await bot.wait_for('reaction_add', check=check, timeout=60 * 3)
 
                 move = NUMBERS.index(reaction.emoji)
                 try:
