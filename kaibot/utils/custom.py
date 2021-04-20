@@ -9,7 +9,7 @@ class _Cmd(commands.Command):
         self.translator = kwargs.pop('translator', Translator._noop)
 
 
-class CogAttrMeta(commands.CogMeta):
+class _CogAttrMeta(commands.CogMeta):
     """Adds the translator kwarg."""
 
     def __new__(cls, name, bases, attrs, **kwargs):
@@ -31,5 +31,5 @@ class CogAttrMeta(commands.CogMeta):
         return super().__new__(cls, name, bases, attrs, **kwargs)
 
 
-class Cog(commands.Cog, metaclass=CogAttrMeta):
+class Cog(commands.Cog, metaclass=_CogAttrMeta):
     pass
