@@ -51,7 +51,7 @@ class BotSource(menus.GroupByPageSource):
         embed.description = cog.__translator__(cog.description)
 
         for command in cmds:
-            signature = f'{self.help.clean_prefix}{command.qualified_name} {command.signature}'
+            signature = f'{self.help.clean_prefix}{self.help.get_command_signature(command)}'
 
             doc = _get_short_doc(command).strip()
             if isinstance(command, commands.Group) and command.commands:
