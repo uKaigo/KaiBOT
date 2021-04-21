@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  kaibot\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-18 21:06-0300\n"
+"POT-Creation-Date: 2021-04-20 21:03-0300\n"
 "PO-Revision-Date: 2021-03-19 23:39-0300\n"
 "Last-Translator: \n"
 "Language: en_US\n"
@@ -14,39 +14,43 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.9.0\n"
 
-#: kaibot/cogs/error_handler.py:47
+#: kaibot/cogs/error_handler.py:50
 msgid "Insira um número válido."
 msgstr "Insert a valid number."
 
-#: kaibot/cogs/error_handler.py:50
+#: kaibot/cogs/error_handler.py:53
 msgid "Este comando só pode ser executado em servidores."
 msgstr "This command can only run in servers."
 
-#: kaibot/cogs/error_handler.py:57
+#: kaibot/cogs/error_handler.py:60
 msgid "O membro \"{string}\" não foi encontrado."
 msgstr "The member \"{string}\" wasn't found."
 
-#: kaibot/cogs/error_handler.py:65
+#: kaibot/cogs/error_handler.py:67
+msgid "Canal não encontrado."
+msgstr "Channel not found."
+
+#: kaibot/cogs/error_handler.py:71
 msgid "membro"
 msgstr "member"
 
-#: kaibot/cogs/error_handler.py:66
+#: kaibot/cogs/error_handler.py:72
 msgid "usuário"
 msgstr "user"
 
-#: kaibot/cogs/error_handler.py:73
+#: kaibot/cogs/error_handler.py:79
 msgid "Não foi possível converter \"{string}\" para {converters}."
 msgstr "Couldn't convert \"{string}\" to {converters}."
 
-#: kaibot/cogs/error_handler.py:83
+#: kaibot/cogs/error_handler.py:89
 msgid "Você precisa da permissão \"{perm}\" para executar esse comando."
 msgstr ""
 
-#: kaibot/cogs/error_handler.py:92
+#: kaibot/cogs/error_handler.py:98
 msgid "Eu preciso da permissão {perm} para executar esse comando."
 msgstr ""
 
-#: kaibot/cogs/error_handler.py:124
+#: kaibot/cogs/error_handler.py:130
 msgid ""
 "Ocorreu um erro ao executar este comando.\n"
 "Tente contatar o suporte para resolver o problema.\n"

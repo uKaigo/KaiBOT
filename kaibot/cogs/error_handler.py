@@ -63,6 +63,9 @@ class ErrorHandler(commands.Cog):
                 )
             )
 
+        if isinstance(error, commands.ChannelNotFound):
+            return await ctx.send(_('Canal não encontrado.'))
+
         if isinstance(error, commands.BadUnionArgument):
             CONVERTER_MAPPING = {
                 discord.Member: _('membro'),
