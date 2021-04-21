@@ -63,6 +63,6 @@ def setup(bot):
     bot.add_cog(Miscelaneous(bot))
 
 
-def teardown():
+def teardown(bot):
     # Uncache the help command to allow reloading.
     sys.modules.pop('kaibot.cogs.resources.help')
