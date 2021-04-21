@@ -3,6 +3,7 @@ from discord.ext import commands, menus
 
 from ... import config
 from ...i18n import Translator
+from ...utils import format_list
 
 _ = Translator(__name__)
 
@@ -115,3 +116,28 @@ class Help(commands.HelpCommand):
         pages = HelpMenuPages(source=source, check_embeds=True, clear_reactions_after=True)
 
         await pages.start(self.context)
+
+    async def send_command_help(self, command):
+        translator = command.translator
+
+        embed = discord.Embed(description=translator(command.help), color=config.MAIN_COLOR)
+        embed.set_author(
+            name=_('Ajuda | {bucket}', bucket=command.name),
+            icon_url=self.context.me.avatar_url,
+        )
+        embed.add_field(
+            name=_('Modo de usar:'),
+            value=f'{self.clean_prefix}{self.get_command_signature(command)}',
+            inline=False,
+        )
+        if command.aliases:
+            embed.add_field(
+                name=_('Sinônimos:'),
+                value=format_list(command.aliases),
+                inline=False,
+            )
+
+        if command.parent:
+            embed.add_field(name=_('Parente:'), value=command.parent.qualified_name)
+
+        await self.get_destination().send(embed=embed)
