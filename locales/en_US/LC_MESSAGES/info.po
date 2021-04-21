@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  kaibot\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-10 15:35-0300\n"
+"POT-Creation-Date: 2021-04-20 21:03-0300\n"
 "PO-Revision-Date: 2021-03-17 22:25-0300\n"
 "Last-Translator: \n"
 "Language: en_US\n"
@@ -14,24 +14,24 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.9.0\n"
 
-#: kaibot/cogs/info.py:31
+#: kaibot/cogs/info.py:32
 msgid "OldMembers"
 msgstr "OldMembers"
 
-#: kaibot/cogs/info.py:32
+#: kaibot/cogs/info.py:33
 msgid "Estes são os membros mais antigos do servidor."
 msgstr "These are the oldest members of the server."
 
-#: kaibot/cogs/info.py:36
+#: kaibot/cogs/info.py:37
 msgid "Página {current} de {max}"
 msgstr "Page {current} of {max}"
 
-#: kaibot/cogs/info.py:47
+#: kaibot/cogs/info.py:48
 #, docstring
 msgid "Comandos de informações de objetos Discord."
 msgstr "Information commands about Discord objects."
 
-#: kaibot/cogs/info.py:54
+#: kaibot/cogs/info.py:55
 #, docstring
 msgid ""
 "Mostra o avatar de um usuário.\n"
@@ -42,16 +42,16 @@ msgstr ""
 "\n"
 "The user doesn't need to be in the server."
 
-#: kaibot/cogs/info.py:64
+#: kaibot/cogs/info.py:65
 msgid "Avatar de {member}"
 msgstr "{member}'s avatar"
 
-#: kaibot/cogs/info.py:83
+#: kaibot/cogs/info.py:84
 #, docstring
 msgid "Mostra um avatar aleatório."
 msgstr "Shows a random avatar."
 
-#: kaibot/cogs/info.py:89
+#: kaibot/cogs/info.py:90
 #, docstring
 msgid ""
 "Mostra informações de um usuário.\n"
@@ -62,40 +62,40 @@ msgstr ""
 "\n"
 "The user doesn't need to be in the server."
 
-#: kaibot/cogs/info.py:101
+#: kaibot/cogs/info.py:102
 msgid "🗓️ Criou a conta em"
 msgstr "🗓️ Created the account in"
 
-#: kaibot/cogs/info.py:107
+#: kaibot/cogs/info.py:108
 msgid "🗓️ Entrou no servidor em"
 msgstr "🗓️ Joined the server in"
 
-#: kaibot/cogs/info.py:114
+#: kaibot/cogs/info.py:115
 msgid "♦️ Impulsionando desde"
 msgstr "♦️ Boosting since"
 
-#: kaibot/cogs/info.py:121
+#: kaibot/cogs/info.py:122
 msgid "Nenhum."
 msgstr "None."
 
-#: kaibot/cogs/info.py:123
+#: kaibot/cogs/info.py:124
 msgid "🛠️ Cargos"
 msgstr "🛠️ Roles"
 
-#: kaibot/cogs/info.py:135
+#: kaibot/cogs/info.py:136
 msgid "Nenhuma."
 msgstr "None."
 
-#: kaibot/cogs/info.py:137
+#: kaibot/cogs/info.py:138
 msgid "🛡️ Permissões"
 msgstr "🛡️ Permissions"
 
-#: kaibot/cogs/info.py:151
+#: kaibot/cogs/info.py:152
 #, docstring
 msgid "Mostra os membros mais antigos do servidor."
 msgstr "Shows the oldest members of the server."
 
-#: kaibot/cogs/info.py:156
+#: kaibot/cogs/info.py:157
 msgid "Você"
 msgstr "You"
 
