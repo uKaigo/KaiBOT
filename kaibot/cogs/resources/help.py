@@ -21,7 +21,7 @@ class HelpMenuPages(menus.MenuPages):
     @menus.button('❔', position=menus.Last(3))
     async def show_help(self, payload):
         embed = discord.Embed(color=config.MAIN_COLOR)
-        embed.description = _('A organização é simples.')
+        embed.description = _('A estrutura é simples.')
         embed.set_author(name=_('Ajuda'), icon_url=self.ctx.me.avatar_url)
 
         fields = (
