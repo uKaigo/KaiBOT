@@ -10,7 +10,7 @@ from ..utils.converters import Range
 _ = Translator(__name__)
 
 
-class Moderation(custom.Cog, name=_('Moderação'), translator=_):
+class Moderation(custom.Cog, translator=_):
     def __init__(self, bot):
         self.bot = bot
 

@@ -10,7 +10,7 @@ from .games.ttt import TTTIntegration
 _ = Translator(__name__)
 
 
-class Fun(custom.Cog, name=_('Diversão'), translator=_):
+class Fun(custom.Cog, translator=_):
     """Comandos de diversão."""
 
     def __init__(self, bot):
