@@ -169,3 +169,23 @@ class Help(commands.HelpCommand):
         embed.add_field(name=_('Subcomandos:'), value=subcommands, inline=False)
 
         await self.get_destination().send(embed=embed)
+
+    async def send_cog_help(self, cog):
+        translator = cog.__translator__
+
+        embed = discord.Embed(description=translator(cog.description), color=config.MAIN_COLOR)
+        embed.set_author(
+            name=_('Ajuda | {bucket}', bucket=cog.qualified_name, icon_url=self.bot.user.avatar_url)
+        )
+
+        cmds = await self.filter_commands(cog.get_commands())
+        for command in cmds:
+            signature = f'{self.clean_prefix}{self.get_command_signature(command)}'
+
+            doc = _get_short_doc(command).strip()
+            if isinstance(command, commands.Group):
+                doc += '\n' + _('_Possui subcomandos._')
+
+            embed.add_field(name=signature, value=doc, inline=False)
+
+        await self.get_destination().send(embed=embed)
