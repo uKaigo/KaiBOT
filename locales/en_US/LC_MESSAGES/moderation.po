@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  kaibot\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-14 14:50-0300\n"
+"POT-Creation-Date: 2021-04-22 00:17-0300\n"
 "PO-Revision-Date: 2021-04-14 14:39-0300\n"
 "Last-Translator: \n"
 "Language: en_US\n"
@@ -14,7 +14,12 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.9.0\n"
 
-#: kaibot/cogs/moderation.py:21
+#: kaibot/cogs/moderation.py:14
+#, docstring
+msgid "Comandos de moderação."
+msgstr "Moderation commands."
+
+#: kaibot/cogs/moderation.py:23
 #, docstring
 msgid ""
 "Limpa `count` mensagens do canal.\n"
@@ -25,32 +30,33 @@ msgstr ""
 "\n"
 "A member may be defined in the first argument."
 
-#: kaibot/cogs/moderation.py:34
+#: kaibot/cogs/moderation.py:36
 msgid "{count} mensagens foram deletadas."
 msgstr "{cuont} messages were deleted."
 
-#: kaibot/cogs/moderation.py:42
+#: kaibot/cogs/moderation.py:44
 #, docstring
 msgid "Bloqueia um canal."
 msgstr "Locks a channel."
 
-#: kaibot/cogs/moderation.py:48
+#: kaibot/cogs/moderation.py:50
 msgid "O canal já está bloqueado."
 msgstr "The channel is already locked."
 
-#: kaibot/cogs/moderation.py:58
+#: kaibot/cogs/moderation.py:60
 msgid "Canal bloqueado."
 msgstr "Channel locked."
 
-#: kaibot/cogs/moderation.py:64
+#: kaibot/cogs/moderation.py:66
 #, docstring
 msgid "Desbloqueia um canal."
 msgstr "Unlocks a channel."
 
-#: kaibot/cogs/moderation.py:70
+#: kaibot/cogs/moderation.py:72
 msgid "O canal já está desbloqueado."
 msgstr "The channel is already unlocked."
 
-#: kaibot/cogs/moderation.py:80
+#: kaibot/cogs/moderation.py:82
 msgid "Canal desbloqueado."
 msgstr "Channel unlocked"
+

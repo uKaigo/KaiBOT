@@ -11,6 +11,8 @@ _ = Translator(__name__)
 
 
 class Moderation(custom.Cog, translator=_):
+    """Comandos de moderação."""
+
     def __init__(self, bot):
         self.bot = bot
 
