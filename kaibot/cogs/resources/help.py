@@ -21,7 +21,7 @@ class HelpMenuPages(menus.MenuPages):
     @menus.button('❔', position=menus.Last(3))
     async def show_help(self, payload):
         embed = discord.Embed(color=config.MAIN_COLOR)
-        embed.description = _('Este help está organizado de maneira simples.')
+        embed.description = _('A organização é simples.')
         embed.set_author(name=_('Ajuda'), icon_url=self.ctx.me.avatar_url)
 
         fields = (
@@ -54,7 +54,7 @@ class BotSource(menus.GroupByPageSource):
             signature = f'{self.help.clean_prefix}{self.help.get_command_signature(command)}'
 
             doc = _get_short_doc(command).strip()
-            if isinstance(command, commands.Group) and command.commands:
+            if isinstance(command, commands.Group):
                 doc += '\n' + _('_Possui subcomandos._')
 
             embed.add_field(name=signature, value=doc, inline=False)
@@ -115,16 +115,9 @@ class Help(commands.HelpCommand):
         source = BotSource(entries=commands, per_page=10, key=key, help=self)
         pages = HelpMenuPages(source=source, check_embeds=True, clear_reactions_after=True)
 
-        await pages.start(self.context)
+        await pages.start(self.context, channel=self.get_destination())
 
-    async def send_command_help(self, command):
-        translator = command.translator
-
-        embed = discord.Embed(description=translator(command.help), color=config.MAIN_COLOR)
-        embed.set_author(
-            name=_('Ajuda | {bucket}', bucket=command.name),
-            icon_url=self.context.me.avatar_url,
-        )
+    def _insert_command_info(self, embed, command):
         embed.add_field(
             name=_('Modo de usar:'),
             value=f'{self.clean_prefix}{self.get_command_signature(command)}',
@@ -139,5 +132,41 @@ class Help(commands.HelpCommand):
 
         if command.parent:
             embed.add_field(name=_('Parente:'), value=command.parent.qualified_name)
+
+    async def send_command_help(self, command):
+        translator = command.translator
+
+        embed = discord.Embed(description=translator(command.help), color=config.MAIN_COLOR)
+        embed.set_author(
+            name=_('Ajuda | {bucket}', bucket=command.name),
+            icon_url=self.bot.user.avatar_url,
+        )
+
+        self._insert_command_info(embed, command)
+
+        await self.get_destination().send(embed=embed)
+
+    async def send_group_help(self, group):
+        translator = group.translator
+
+        embed = discord.Embed(description=translator(group.help), color=config.MAIN_COLOR)
+        embed.set_author(
+            name=_('Ajuda | {bucket}', bucket=group.name), icon_url=self.bot.user.avatar_url
+        )
+
+        self._insert_command_info(embed, group)
+
+        subcommands = ''
+
+        for command in group.commands:
+            signature = f'{self.clean_prefix}{self.get_command_signature(command)}'
+
+            doc = _get_short_doc(command).strip()
+            if isinstance(command, commands.Group):
+                doc += '\n' + _('_Possui subcomandos._')
+
+            subcommands += f'**{signature}**\n{doc}\n\n'
+
+        embed.add_field(name=_('Subcomandos:'), value=subcommands, inline=False)
 
         await self.get_destination().send(embed=embed)
