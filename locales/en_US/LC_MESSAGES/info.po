@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  kaibot\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-20 21:03-0300\n"
+"POT-Creation-Date: 2021-04-22 00:52-0300\n"
 "PO-Revision-Date: 2021-03-17 22:25-0300\n"
 "Last-Translator: \n"
 "Language: en_US\n"
@@ -28,8 +28,8 @@ msgstr "Page {current} of {max}"
 
 #: kaibot/cogs/info.py:48
 #, docstring
-msgid "Comandos de informações de objetos Discord."
-msgstr "Information commands about Discord objects."
+msgid "Comandos de informações."
+msgstr "Information commands."
 
 #: kaibot/cogs/info.py:55
 #, docstring

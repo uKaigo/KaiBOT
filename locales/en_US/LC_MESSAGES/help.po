@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  kaibot\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-10 15:35-0300\n"
+"POT-Creation-Date: 2021-04-22 00:52-0300\n"
 "PO-Revision-Date: 2021-03-17 22:24-0300\n"
 "Last-Translator: \n"
 "Language: en_US\n"
@@ -18,61 +18,64 @@ msgstr ""
 msgid "Sem descrição."
 msgstr "No description."
 
-#: kaibot/cogs/resources/help.py:34
-msgid "Comando \"{string}\" não foi encontrado."
-msgstr "The command \"{string}\" wasn't found."
+#: kaibot/cogs/resources/help.py:24
+msgid "A estrutura é simples."
+msgstr "The structure is simple."
 
-#: kaibot/cogs/resources/help.py:38
-msgid "O comando \"{command}\" não possui um subcomando chamado \"{string}\""
-msgstr "The command \"{command}\" doesn't have a subcommand called \"{string}\""
-
-#: kaibot/cogs/resources/help.py:43
-msgid "O comando \"{command}\" não possui subcomandos."
-msgstr "The command \"{command}\" doesn't have subcommands."
-
-#: kaibot/cogs/resources/help.py:57
-msgid "Aqui estão todos os meus comandos."
-msgstr "Here's all my commands."
-
-#: kaibot/cogs/resources/help.py:60
+#: kaibot/cogs/resources/help.py:25
 msgid "Ajuda"
 msgstr "Help"
 
-#: kaibot/cogs/resources/help.py:76
-msgid "Use \"{prefix}help [comando]\" para mais informações sobre um comando, ou \"{prefix}help [categoria]\" para mais informações sobre uma categoria."
-msgstr "Use \"{prefix}help [command]\" for more information about a command, or \"{prefix}help [category]\" for more information about a category."
+#: kaibot/cogs/resources/help.py:28
+msgid "Isto significa que o argumento é __**obrigatório**__."
+msgstr "This means that the argument is __**required**__."
 
-#: kaibot/cogs/resources/help.py:81 kaibot/cogs/resources/help.py:155
-#: kaibot/cogs/resources/help.py:189
-msgid "Comandos começando com `*` são grupos, portanto possuem subcomandos."
-msgstr "Commands starting with `*` are groups, therefore have subcommands."
+#: kaibot/cogs/resources/help.py:29
+msgid "Isto significa que o argumento é __**opcional**__."
+msgstr "This means that the argument is __**optional**__."
 
-#: kaibot/cogs/resources/help.py:90 kaibot/cogs/resources/help.py:115
-#: kaibot/cogs/resources/help.py:167
-msgid "Ajuda | {bucket}"
-msgstr "Help | {bucket}"
+#: kaibot/cogs/resources/help.py:49
+msgid "Comandos de {name}"
+msgstr "{name} commands"
 
-#: kaibot/cogs/resources/help.py:94 kaibot/cogs/resources/help.py:119
+#: kaibot/cogs/resources/help.py:57 kaibot/cogs/resources/help.py:165
+#: kaibot/cogs/resources/help.py:187
+msgid "_Possui subcomandos._"
+msgstr "Subcommands:"
+
+#: kaibot/cogs/resources/help.py:63
+msgid "Página {current}/{max}"
+msgstr "Page {current}/{max}"
+
+#: kaibot/cogs/resources/help.py:90
+msgid "Comando \"{string}\" não foi encontrado."
+msgstr "The command \"{string}\" wasn't found."
+
+#: kaibot/cogs/resources/help.py:94
+msgid "O comando \"{command}\" não possui um subcomando chamado \"{string}\""
+msgstr "The command \"{command}\" doesn't have a subcommand called \"{string}\""
+
+#: kaibot/cogs/resources/help.py:99
+msgid "O comando \"{command}\" não possui subcomandos."
+msgstr "The command \"{command}\" doesn't have subcommands."
+
+#: kaibot/cogs/resources/help.py:121
 msgid "Modo de usar:"
 msgstr "Usage:"
 
-#: kaibot/cogs/resources/help.py:100 kaibot/cogs/resources/help.py:125
+#: kaibot/cogs/resources/help.py:127
 msgid "Sinônimos:"
 msgstr "Aliases:"
 
-#: kaibot/cogs/resources/help.py:106 kaibot/cogs/resources/help.py:132
+#: kaibot/cogs/resources/help.py:133
 msgid "Parente:"
 msgstr "Parent:"
 
-#: kaibot/cogs/resources/help.py:148
+#: kaibot/cogs/resources/help.py:140 kaibot/cogs/resources/help.py:153
+#: kaibot/cogs/resources/help.py:178
+msgid "Ajuda | {bucket}"
+msgstr "Help | {bucket}"
+
+#: kaibot/cogs/resources/help.py:169
 msgid "Subcomandos:"
 msgstr "Subcommands:"
-
-#: kaibot/cogs/resources/help.py:150
-msgid "Use \"{prefix}help {group} [subcomando]\" para mais informações sobre um comando."
-msgstr "Use \"{prefix}help {group} [subcommand]\" for more information about a command."
-
-#: kaibot/cogs/resources/help.py:185
-msgid "Use \"{prefix}help [comando]\" para mais informações sobre um comando."
-msgstr "Use \"{prefix}help [command]\" for more information about a command."
-
