@@ -45,7 +45,7 @@ class OldMembersSource(menus.ListPageSource):
 
 
 class Info(custom.Cog, translator=_):
-    """Comandos de informações de objetos Discord."""
+    """Comandos de informações."""
 
     def __init__(self, bot):
         self.bot = bot
