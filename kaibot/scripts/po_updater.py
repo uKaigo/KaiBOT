@@ -15,31 +15,24 @@ def initialize_options(updater: update_catalog, **options):
 
 def main(path: Path):
     pot_files = tuple(l for l in path.iterdir() if l.name.endswith('.pot'))
-    languages = tuple(l for l in path.iterdir() if not l.name.endswith('.pot'))
 
     if not pot_files:
         res = 1
         log.error('No pot files.')
-    if not languages:
-        res = 1
-        log.error('No language folders.')
-
     res = 0
 
     for file in pot_files:
-        for language in languages:
-            updater = update_catalog()
-            initialize_options(
-                updater,
-                domain=file.name[:-4],
-                input_file=file,
-                output_dir=str(path),
-                locale=language.name,
-                update_header_comment=True,
-                log=log,
-            )
+        updater = update_catalog()
+        initialize_options(
+            updater,
+            domain=file.name[:-4],
+            input_file=file,
+            output_dir=str(path),
+            update_header_comment=True,
+            log=log,
+        )
 
-            res = updater.run()
+        res = updater.run()
 
     return res
 
