@@ -4,7 +4,7 @@ import discord
 from discord.ext import commands
 
 from ..i18n import Translator
-from ..utils import custom
+from ..utils import custom, escape_text
 from .games.ttt import TTTIntegration
 
 _ = Translator(__name__)
@@ -31,7 +31,9 @@ class Fun(custom.Cog, translator=_):
         if ctx.author.id in self._ttt_game:
             return await ctx.send(_('Você já está em um jogo.'))
         if player.id in self._ttt_game:
-            return await ctx.send(_('{player} já está em um jogo.', player=player.display_name))
+            return await ctx.send(
+                _('**{player}** já está em um jogo.', player=escape_text(player.display_name))
+            )
 
         msg = await ctx.send('\N{ZERO WIDTH SPACE}')
 

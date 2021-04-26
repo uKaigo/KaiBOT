@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  kaibot\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-10 15:35-0300\n"
-"PO-Revision-Date: 2021-04-26 15:25-0300\n"
+"POT-Creation-Date: 2021-04-26 16:18-0300\n"
+"PO-Revision-Date: 2021-04-26 16:18-0300\n"
 "Last-Translator: \n"
 "Language: en_US\n"
 "Language-Team: English\n"
@@ -36,7 +36,7 @@ msgstr "You can't play with yourself."
 msgid "Você já está em um jogo."
 msgstr "You're already in a game."
 
-#: kaibot/cogs/fun.py:34
-msgid "{player} já está em um jogo."
-msgstr "{player}'s already in a game."
+#: kaibot/cogs/fun.py:35
+msgid "**{player}** já está em um jogo."
+msgstr "**{player}** is already in a game."
 
