@@ -1,7 +1,7 @@
 import logging
 
 import aiohttp
-from discord import Activity, ActivityType, DMChannel
+from discord import Activity, ActivityType, DMChannel, AllowedMentions
 from discord.ext import commands
 
 from . import config
@@ -16,6 +16,7 @@ class KaiBOT(commands.Bot):
         kwargs.setdefault('intents', get_intents_from(config.INTENTS))
         kwargs['command_prefix'] = self.prefix_getter
         kwargs['activity'] = Activity(name='k.help', type=ActivityType.listening)
+        kwargs['allowed_mentions'] = AllowedMentions(everyone=False, users=False, roles=False)
 
         super().__init__(*args, **kwargs)
 

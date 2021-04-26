@@ -8,7 +8,7 @@ from discord.ext import commands
 
 from .. import config
 from ..i18n import Translator
-from ..utils import format_list
+from ..utils import escape_text, format_list
 from ..utils.translations import PERMISSIONS
 
 _ = Translator(__name__)
@@ -59,7 +59,7 @@ class ErrorHandler(commands.Cog):
             return await ctx.send(
                 _(
                     'O membro "{string}" não foi encontrado.',
-                    string=error.argument,
+                    string=escape_text(error.argument),
                 )
             )
 
@@ -78,7 +78,7 @@ class ErrorHandler(commands.Cog):
             return await ctx.send(
                 _(
                     'Não foi possível converter "{string}" para {converters}.',
-                    string=arg,
+                    string=escape_text(arg),
                     converters=format_list(converters, style='or'),
                 )
             )
