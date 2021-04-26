@@ -16,6 +16,7 @@ from rich.traceback import Traceback
 
 
 class CustomLogRender(LogRender):
+    # Copyright 2020 Will McGugan
     def __call__(
         self,
         console,
@@ -68,6 +69,7 @@ class CustomLogRender(LogRender):
 
 
 class CustomRichHandler(RichHandler):
+    # Copyright 2020 Will McGugan
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self._log_render = CustomLogRender(
