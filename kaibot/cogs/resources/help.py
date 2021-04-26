@@ -27,6 +27,7 @@ class HelpMenuPages(menus.MenuPages):
         fields = (
             ('<argument>', _('Isto significa que o argumento é __**obrigatório**__.')),
             ('[argument]', _('Isto significa que o argumento é __**opcional**__.')),
+            ('[argument=X]', _('Isto significa que o valor padrão do argumento é __**X**__. ')),
         )
 
         for name, value in fields:

@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  kaibot\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-22 00:52-0300\n"
-"PO-Revision-Date: 2021-04-26 15:26-0300\n"
+"POT-Creation-Date: 2021-04-26 15:54-0300\n"
+"PO-Revision-Date: 2021-04-26 15:55-0300\n"
 "Last-Translator: \n"
 "Language: en_US\n"
 "Language-Team: English\n"
@@ -34,49 +34,53 @@ msgstr "This means that the argument is __**required**__."
 msgid "Isto significa que o argumento é __**opcional**__."
 msgstr "This means that the argument is __**optional**__."
 
-#: kaibot/cogs/resources/help.py:49
+#: kaibot/cogs/resources/help.py:30
+msgid "Isto significa que o valor padrão do argumento é __**X**__. "
+msgstr "This means that the default value of the argument is __**X**__."
+
+#: kaibot/cogs/resources/help.py:50
 msgid "Comandos de {name}"
 msgstr "{name} commands"
 
-#: kaibot/cogs/resources/help.py:57 kaibot/cogs/resources/help.py:165
-#: kaibot/cogs/resources/help.py:187
+#: kaibot/cogs/resources/help.py:58 kaibot/cogs/resources/help.py:166
+#: kaibot/cogs/resources/help.py:188
 msgid "_Possui subcomandos._"
 msgstr "Subcommands:"
 
-#: kaibot/cogs/resources/help.py:63
+#: kaibot/cogs/resources/help.py:64
 msgid "Página {current}/{max}"
 msgstr "Page {current}/{max}"
 
-#: kaibot/cogs/resources/help.py:90
+#: kaibot/cogs/resources/help.py:91
 msgid "Comando \"{string}\" não foi encontrado."
 msgstr "The command \"{string}\" wasn't found."
 
-#: kaibot/cogs/resources/help.py:94
+#: kaibot/cogs/resources/help.py:95
 msgid "O comando \"{command}\" não possui um subcomando chamado \"{string}\""
 msgstr "The command \"{command}\" doesn't have a subcommand called \"{string}\""
 
-#: kaibot/cogs/resources/help.py:99
+#: kaibot/cogs/resources/help.py:100
 msgid "O comando \"{command}\" não possui subcomandos."
 msgstr "The command \"{command}\" doesn't have subcommands."
 
-#: kaibot/cogs/resources/help.py:121
+#: kaibot/cogs/resources/help.py:122
 msgid "Modo de usar:"
 msgstr "Usage:"
 
-#: kaibot/cogs/resources/help.py:127
+#: kaibot/cogs/resources/help.py:128
 msgid "Sinônimos:"
 msgstr "Aliases:"
 
-#: kaibot/cogs/resources/help.py:133
+#: kaibot/cogs/resources/help.py:134
 msgid "Parente:"
 msgstr "Parent:"
 
-#: kaibot/cogs/resources/help.py:140 kaibot/cogs/resources/help.py:153
-#: kaibot/cogs/resources/help.py:178
+#: kaibot/cogs/resources/help.py:141 kaibot/cogs/resources/help.py:154
+#: kaibot/cogs/resources/help.py:179
 msgid "Ajuda | {bucket}"
 msgstr "Help | {bucket}"
 
-#: kaibot/cogs/resources/help.py:169
+#: kaibot/cogs/resources/help.py:170
 msgid "Subcomandos:"
 msgstr "Subcommands:"
 
