@@ -29,6 +29,7 @@ def main(path: Path):
             input_file=file,
             output_dir=str(path),
             update_header_comment=True,
+            ignore_obsolete=True,
             log=log,
         )
 
