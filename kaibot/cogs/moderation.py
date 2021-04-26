@@ -1,5 +1,3 @@
-from typing import Optional
-
 import discord
 from discord.ext import commands
 
@@ -19,12 +17,8 @@ class Moderation(custom.Cog, translator=_):
     @commands.command()
     @commands.has_permissions(manage_messages=True)
     @commands.bot_has_permissions(manage_messages=True)
-    async def clear(self, ctx, member: Optional[discord.Member], count: Range[2, 100] = 100):
-        """
-        Limpa `count` mensagens do canal.
-
-        Um membro pode ser definido pelo primeiro argumento.
-        """
+    async def clear(self, ctx, count: Range[2, 100] = 100, member: discord.Member = None):
+        """Limpa `count` mensagens do canal."""
         if member:
             check = lambda m: m.author == member and m != ctx.message
         else:
