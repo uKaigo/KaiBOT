@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version:  kaibot\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-04-20 21:03-0300\n"
-"PO-Revision-Date: 2021-03-19 23:39-0300\n"
+"PO-Revision-Date: 2021-04-26 15:25-0300\n"
 "Last-Translator: \n"
 "Language: en_US\n"
 "Language-Team: English\n"
@@ -44,11 +44,11 @@ msgstr "Couldn't convert \"{string}\" to {converters}."
 
 #: kaibot/cogs/error_handler.py:89
 msgid "Você precisa da permissão \"{perm}\" para executar esse comando."
-msgstr ""
+msgstr "You need the \"{perm}\" permission to run this command."
 
 #: kaibot/cogs/error_handler.py:98
 msgid "Eu preciso da permissão {perm} para executar esse comando."
-msgstr ""
+msgstr "I need the {perm} permission to run this command."
 
 #: kaibot/cogs/error_handler.py:130
 msgid ""
