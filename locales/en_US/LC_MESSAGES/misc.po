@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version:  kaibot\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-04-10 15:35-0300\n"
-"PO-Revision-Date: 2021-04-26 15:26-0300\n"
+"PO-Revision-Date: 2021-04-30 11:28-0300\n"
 "Last-Translator: \n"
 "Language: en_US\n"
 "Language-Team: English\n"
@@ -49,7 +49,7 @@ msgstr "Privacy policies | KaiBOT"
 
 #: kaibot/cogs/misc.py:50
 msgid "As políticas de privacidade podem ser encontradas [nesse link]({policy})."
-msgstr "The privacy policies can be found at [this link]({policy})"
+msgstr "The privacy policies can be found at [this link]({policy})."
 
 #: kaibot/cogs/misc.py:54
 msgid "Caso você não concorda com essa política, pare de usar o bot e (opcionalmente) peça a exclusão dos seus dados."
