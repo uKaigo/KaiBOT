@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  kaibot\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-26 15:54-0300\n"
+"POT-Creation-Date: 2021-05-01 12:03-0300\n"
 "PO-Revision-Date: 2021-04-26 15:55-0300\n"
 "Last-Translator: \n"
 "Language: en_US\n"
@@ -42,8 +42,8 @@ msgstr "This means that the default value of the argument is __**X**__."
 msgid "Comandos de {name}"
 msgstr "{name} commands"
 
-#: kaibot/cogs/resources/help.py:58 kaibot/cogs/resources/help.py:166
-#: kaibot/cogs/resources/help.py:188
+#: kaibot/cogs/resources/help.py:58 kaibot/cogs/resources/help.py:169
+#: kaibot/cogs/resources/help.py:196
 msgid "_Possui subcomandos._"
 msgstr "Subcommands:"
 
@@ -51,36 +51,36 @@ msgstr "Subcommands:"
 msgid "Página {current}/{max}"
 msgstr "Page {current}/{max}"
 
-#: kaibot/cogs/resources/help.py:91
+#: kaibot/cogs/resources/help.py:94
 msgid "Comando \"{string}\" não foi encontrado."
 msgstr "The command \"{string}\" wasn't found."
 
-#: kaibot/cogs/resources/help.py:95
+#: kaibot/cogs/resources/help.py:98
 msgid "O comando \"{command}\" não possui um subcomando chamado \"{string}\""
 msgstr "The command \"{command}\" doesn't have a subcommand called \"{string}\""
 
-#: kaibot/cogs/resources/help.py:100
+#: kaibot/cogs/resources/help.py:103
 msgid "O comando \"{command}\" não possui subcomandos."
 msgstr "The command \"{command}\" doesn't have subcommands."
 
-#: kaibot/cogs/resources/help.py:122
+#: kaibot/cogs/resources/help.py:125
 msgid "Modo de usar:"
 msgstr "Usage:"
 
-#: kaibot/cogs/resources/help.py:128
+#: kaibot/cogs/resources/help.py:131
 msgid "Sinônimos:"
 msgstr "Aliases:"
 
-#: kaibot/cogs/resources/help.py:134
+#: kaibot/cogs/resources/help.py:137
 msgid "Parente:"
 msgstr "Parent:"
 
-#: kaibot/cogs/resources/help.py:141 kaibot/cogs/resources/help.py:154
-#: kaibot/cogs/resources/help.py:179
+#: kaibot/cogs/resources/help.py:144 kaibot/cogs/resources/help.py:157
+#: kaibot/cogs/resources/help.py:184
 msgid "Ajuda | {bucket}"
 msgstr "Help | {bucket}"
 
-#: kaibot/cogs/resources/help.py:170
+#: kaibot/cogs/resources/help.py:173
 msgid "Subcomandos:"
 msgstr "Subcommands:"
 
