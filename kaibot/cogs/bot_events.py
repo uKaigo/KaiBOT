@@ -1,4 +1,5 @@
 from datetime import datetime
+from io import StringIO
 from sys import version_info as py_version_i
 
 import discord
@@ -114,18 +115,24 @@ class BotEvents(commands.Cog):
             self._set_info_from_dm(ctx, embed)
 
         content = discord.utils.escape_markdown(ctx.message.clean_content)
+        croped_content = content[:850] + '...' if len(content) > 850 else ''
         embed.add_field(
             name='Mensagem',
             value=(
-                f'\> Conteúdo: "{content}"\n'
+                f'\> Conteúdo: "{croped_content}"\n'
                 f'\> ID: {ctx.message.id}\n'
                 f'\> URL: [Link]({ctx.message.jump_url})'
             ),
             inline=False,
         )
 
+        file = None
+        if len(content) > 850:
+            stream = StringIO(content[851:])
+            file = discord.File(stream, 'message_content.txt')
+
         embed.timestamp = ctx.message.created_at
-        await channel.send(embed=embed)
+        await channel.send(embed=embed, file=file)
 
 
 def setup(bot):
