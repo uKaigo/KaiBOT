@@ -87,6 +87,9 @@ class Help(commands.HelpCommand):
         if self.context:
             return self.context.bot
 
+    def _fake_command_not_found(self):
+        return self.send_error_message(self.command_not_found(self.context.kwargs['command']))
+
     def command_not_found(self, string):
         return _('Comando "{string}" não foi encontrado.', string=string)
 
@@ -182,6 +185,9 @@ class Help(commands.HelpCommand):
         )
 
         cmds = await self.filter_commands(cog.get_commands())
+        if not cmds:
+            return await self._fake_command_not_found()
+
         for command in cmds:
             signature = f'{self.clean_prefix}{self.get_command_signature(command)}'
 
