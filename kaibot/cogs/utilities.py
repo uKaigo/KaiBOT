@@ -78,26 +78,55 @@ class Utilities(custom.Cog, translator=_):
 
         return await ctx.send(embed=embed)
 
+    async def _create_application_invite(self, channel_id, application_id, app_name):
+        # We're making the request ourselves because d.py doesn't
+        # support this.
+        route = discord.http.Route('POST', '/channels/{channel_id}/invites', channel_id=channel_id)
+        payload = {'target_type': 2, 'target_application_id': str(application_id)}
+        return await self.bot.http.request(
+            route, json=payload, reason=_('Criando sessão de {name}', name=app_name)
+        )
+
     # I don't think these aliases are good, but idk another name.
-    @commands.command(aliases=['ytt', 'youtubetogether', 'watchtogether'])
+    @commands.command(aliases=['ytt', 'youtubetogether'])
     @commands.bot_has_guild_permissions(create_instant_invite=True)
-    async def watchyt(self, ctx, channel: discord.VoiceChannel):
+    async def watchyt(self, ctx, voice_channel: discord.VoiceChannel):
         """
-        Cria uma nova sessão do YouTube Together.
+        Cria uma nova sessão de YouTube Together.
 
         Apenas disponível em desktop.
         """
-        # We're making the request ourselves because d.py doesn't
-        # support this.
-        route = discord.http.Route('POST', '/channels/{channel_id}/invites', channel_id=channel.id)
-        payload = {'target_type': 2, 'target_application_id': '755600276941176913'}
-        invite_data = await self.bot.http.request(
-            route, json=payload, reason=_('Criando sessão Youtube Together.')
+        invite_data = await self._create_application_invite(
+            voice_channel.id, 755600276941176913, 'YouTube Together'
         )
 
         embed = discord.Embed(
             description=_(
-                '[Clique aqui]({invite}) para abrir a sessão YouTube Together.',
+                '[Clique aqui]({invite}) para abrir a sessão de {name}.',
+                name='YouTube Together',
+                invite=f'https://discord.gg/{invite_data["code"]}',
+            ),
+            color=config.MAIN_COLOR,
+        )
+
+        return await ctx.send(embed=embed)
+
+    @commands.command(aliases=['pn', 'pokernight'])
+    @commands.bot_has_guild_permissions(create_instant_invite=True)
+    async def poker(self, ctx, voice_channel: discord.VoiceChannel):
+        """
+        Cria uma nova sessão de Poker Night.
+
+        Apenas disponível em desktop.
+        """
+        invite_data = await self._create_application_invite(
+            voice_channel.id, 755827207812677713, 'Poker Night'
+        )
+
+        embed = discord.Embed(
+            description=_(
+                '[Clique aqui]({invite}) para abrir a sessão de {name}.',
+                name='Poker Night',
                 invite=f'https://discord.gg/{invite_data["code"]}',
             ),
             color=config.MAIN_COLOR,

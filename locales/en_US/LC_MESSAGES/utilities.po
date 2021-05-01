@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  kaibot\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-20 21:03-0300\n"
-"PO-Revision-Date: 2021-04-26 15:27-0300\n"
+"POT-Creation-Date: 2021-05-01 11:27-0300\n"
+"PO-Revision-Date: 2021-04-26 11:31-0300\n"
 "Last-Translator: \n"
 "Language: en_US\n"
 "Language-Team: English\n"
@@ -45,9 +45,8 @@ msgid "O dado não pode ter somente 1 lado."
 msgstr "The dice can't have only 1 side."
 
 #: kaibot/cogs/utilities.py:44
-#, fuzzy
 msgid "O dado precisa ter menos que 1000 lados."
-msgstr "The dice can't have only 1 side."
+msgstr "The dice needs to have less than 1000 sides."
 
 #: kaibot/cogs/utilities.py:46
 msgid "Você pode rolar no máximo 200 dados por vez."
@@ -74,21 +73,33 @@ msgstr "Shows all the redirects of the link."
 msgid "Redirecionamentos"
 msgstr "Redirects"
 
-#: kaibot/cogs/utilities.py:85
+#: kaibot/cogs/utilities.py:87
+msgid "Criando sessão de {name}"
+msgstr "Creating {name} session"
+
+#: kaibot/cogs/utilities.py:94
 #, docstring
 msgid ""
-"Cria uma nova sessão do YouTube Together.\n"
+"Cria uma nova sessão de YouTube Together.\n"
 "\n"
 "Apenas disponível em desktop."
 msgstr ""
 "Creates a new YouTube Together session.\n"
+"\n"
 "Only available in desktop."
 
-#: kaibot/cogs/utilities.py:95
-msgid "Criando sessão Youtube Together."
-msgstr ""
+#: kaibot/cogs/utilities.py:104 kaibot/cogs/utilities.py:127
+msgid "[Clique aqui]({invite}) para abrir a sessão de {name}."
+msgstr "[Click here]({invite}) to open the {name} session."
 
-#: kaibot/cogs/utilities.py:99
-msgid "[Clique aqui]({invite}) para abrir a sessão YouTube Together."
-msgstr "[Click here]({invite}) to open a new YouTube Together session."
+#: kaibot/cogs/utilities.py:117
+#, docstring
+msgid ""
+"Cria uma nova sessão de Poker Night.\n"
+"\n"
+"Apenas disponível em desktop."
+msgstr ""
+"Creates a new Poker Night session.\n"
+"\n"
+"Only available in desktop."
 
