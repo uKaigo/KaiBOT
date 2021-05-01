@@ -1,3 +1,6 @@
+import asyncio
+import functools
+
 from discord.ext import commands
 
 
@@ -16,5 +19,20 @@ def needs_chunk():
         else:
             func.__before_invoke__ = needs_chunk_hook
         return func
+
+    return decorator
+
+
+def in_executor(loop=None):
+    """Makes a blocking function non-blocking."""
+    loop = loop or asyncio.get_event_loop()
+
+    def decorator(func):
+        @functools.wraps(func)
+        def wrapper(*args, **kwargs):
+            partial = functools.partial(func, *args, **kwargs)
+            return loop.run_in_executor(None, partial)
+
+        return wrapper
 
     return decorator

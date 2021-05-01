@@ -7,6 +7,7 @@ from discord.ext import commands
 from .. import config
 from ..i18n import Translator
 from ..utils import custom, format_list
+from ..utils.decorators import in_executor
 
 _ = Translator(__name__)
 
@@ -76,6 +77,30 @@ class Utilities(custom.Cog, translator=_):
         embed.description = description
 
         return await ctx.send(embed=embed)
+
+    @in_executor()
+    def _convert_to_vaporwave(self, text):
+        output = ''
+        for char in text:
+            if 36 <= ord(char) <= 126:
+                # FF01 is the start of vaporwave "font".
+                output += chr(ord(char) - 33 + 0xFF01)
+            else:
+                output += char
+        return output
+
+    @commands.command()
+    async def vaporwave(self, ctx, *, text):
+        """Transforma o texto em ｖａｐｏｒｗａｖｅ."""
+        author_notes = '\n\n> ' + _('Texto por: {author}', author=ctx.author.mention)
+        max_len = 2000 - len(author_notes)
+        if len(text) > max_len:
+            return await ctx.send(_('O texto pode ter no máximo {max} caracteres.', max=max_len))
+
+        async with ctx.typing():
+            converted = await self._convert_to_vaporwave(text)
+
+        await ctx.send(converted + author_notes)
 
 
 def setup(bot):
