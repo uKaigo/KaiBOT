@@ -5,3 +5,4 @@ Babel
 python-dotenv
 aiohttp
 rich
+psutil

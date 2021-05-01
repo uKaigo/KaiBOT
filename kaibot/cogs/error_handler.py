@@ -43,6 +43,10 @@ class ErrorHandler(commands.Cog):
         if isinstance(original, self.IGNORED_ERRORS):
             return
 
+        if isinstance(original, discord.Forbidden):
+            if original.code == 50013 and not ctx.me.permissions_in(ctx.channel).embed_links:
+                error = commands.BotMissingPermissions(('embed_links',))
+
         if isinstance(error, commands.BadArgument):
             if getattr(error, 'is_kaibot', False):
                 return await ctx.send(str(error))
@@ -96,7 +100,7 @@ class ErrorHandler(commands.Cog):
             missing_perms = [str(PERMISSIONS[p]) for p in error.missing_perms]
             return await ctx.send(
                 _(
-                    'Eu preciso da permissão {perm} para executar esse comando.',
+                    'Eu preciso da permissão "{perm}" para executar esse comando.',
                     perm=missing_perms[0],
                 )
             )
