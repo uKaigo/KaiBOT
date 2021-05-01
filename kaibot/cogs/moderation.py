@@ -2,8 +2,8 @@ import discord
 from discord.ext import commands
 
 from ..i18n import Translator
-from ..utils import custom
-from ..utils.converters import Range
+from ..utils import can_ban, custom, escape_text
+from ..utils.converters import MemberOrUser, Range
 
 _ = Translator(__name__)
 
@@ -75,6 +75,53 @@ class Moderation(custom.Cog, translator=_):
         )
 
         await ctx.send(_('Canal desbloqueado.'))
+
+    @commands.command()
+    @commands.guild_only()
+    @commands.has_permissions(ban_members=True)
+    @commands.bot_has_permissions(ban_members=True)
+    async def ban(self, ctx, member: MemberOrUser, *, reason=None):
+        """
+        Bane um membro do servidor.
+
+        O membro não precisa estar no servidor.
+        """
+        if not can_ban(ctx.author, member):
+            return await ctx.send(
+                _('Você não tem permissão para banir **{member}**.', member=escape_text(member)),
+            )
+        if not can_ban(ctx.me, member):
+            return await ctx.send(
+                _('Eu não tenho permissão para banir **{member}**.', member=escape_text(member))
+            )
+
+        if reason is None:
+            reason = _('Não especificado.')
+
+        audit_reason = _('Por {author} | Motivo: {reason}', author=ctx.author, reason=reason)
+
+        await ctx.guild.ban(member, reason=audit_reason)
+
+        await ctx.send(
+            _(
+                '**{member}** banido por **{reason}**.',
+                member=escape_text(member),
+                reason=escape_text(reason),
+            )
+        )
+
+    @commands.command()
+    @commands.guild_only()
+    @commands.has_permissions(ban_members=True)
+    @commands.bot_has_permissions(ban_members=True)
+    async def unban(self, ctx, member: discord.User):
+        """Desbane um membro do servidor."""
+        try:
+            await ctx.guild.unban(member, reason=_('Por {member}', member=ctx.author))
+        except discord.NotFound:
+            return await ctx.send(_('O membro não está banido.'))
+
+        await ctx.send(_('**{member}** desbanido.', member=escape_text(member)))
 
 
 def setup(bot):

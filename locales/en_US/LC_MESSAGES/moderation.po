@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  kaibot\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-26 16:18-0300\n"
-"PO-Revision-Date: 2021-04-26 15:26-0300\n"
+"POT-Creation-Date: 2021-04-30 23:35-0300\n"
+"PO-Revision-Date: 2021-04-30 23:36-0300\n"
 "Last-Translator: \n"
 "Language: en_US\n"
 "Language-Team: English\n"
@@ -54,3 +54,50 @@ msgstr "The channel is already unlocked."
 msgid "Canal desbloqueado."
 msgstr "Channel unlocked"
 
+#: kaibot/cogs/moderation.py:84
+#, docstring
+msgid ""
+"Bane um membro do servidor.\n"
+"\n"
+"O membro não precisa estar no servidor."
+msgstr ""
+"Bans a member from the server.\n"
+"\n"
+"The member doesn't need to be in the server."
+
+#: kaibot/cogs/moderation.py:91
+msgid "Você não tem permissão para banir **{member}**."
+msgstr "You don't have permission to ban **{member}**."
+
+#: kaibot/cogs/moderation.py:95
+msgid "Eu não tenho permissão para banir **{member}**."
+msgstr "I don't have permission to ban **{member}**."
+
+#: kaibot/cogs/moderation.py:99
+msgid "Não especificado."
+msgstr "Not specified."
+
+#: kaibot/cogs/moderation.py:101
+msgid "Por {author} | Motivo: {reason}"
+msgstr "By {author} | Reason: {reason}"
+
+#: kaibot/cogs/moderation.py:106
+msgid "**{member}** banido por **{reason}**."
+msgstr "**{member}** banned for **{reason}**."
+
+#: kaibot/cogs/moderation.py:118
+#, docstring
+msgid "Desbane um membro do servidor."
+msgstr "Unbans a member of the server."
+
+#: kaibot/cogs/moderation.py:120
+msgid "Por {member}"
+msgstr "By {member}"
+
+#: kaibot/cogs/moderation.py:122
+msgid "O membro não está banido."
+msgstr "The member isn't banned."
+
+#: kaibot/cogs/moderation.py:124
+msgid "**{member}** desbanido."
+msgstr "**{member}** unbanned."
