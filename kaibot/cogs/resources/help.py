@@ -156,7 +156,7 @@ class Help(commands.HelpCommand):
 
         self._insert_command_info(embed, group)
 
-        subcommands = ''
+        paginator = commands.Paginator('', '', 1024)
 
         for command in group.commands:
             signature = f'{self.clean_prefix}{self.get_command_signature(command)}'
@@ -165,9 +165,11 @@ class Help(commands.HelpCommand):
             if isinstance(command, commands.Group):
                 doc += '\n' + _('_Possui subcomandos._')
 
-            subcommands += f'**{signature}**\n{doc}\n\n'
+            paginator.add_line(f'**{signature}**\n{doc}\n')
 
-        embed.add_field(name=_('Subcomandos:'), value=subcommands, inline=False)
+        embed.add_field(name=_('Subcomandos:'), value=paginator.pages[0], inline=False)
+        for page in paginator.pages[1:]:
+            embed.add_field(name='\N{ZERO WIDTH SPACE}', value=page, inline=False)
 
         await self.get_destination().send(embed=embed)
 
