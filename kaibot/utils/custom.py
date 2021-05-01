@@ -15,6 +15,8 @@ class _CogAttrMeta(commands.CogMeta):
     def __new__(cls, *args, **kwargs):
         name, bases, attrs = args
         translator = kwargs.pop('translator', Translator._noop)
+        if not translator:
+            return super().__new__(cls, name, bases, attrs, **kwargs)
         attrs['__translator__'] = translator
 
         for aname, attr in attrs.items():

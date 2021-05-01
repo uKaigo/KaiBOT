@@ -13,7 +13,7 @@ def _get_short_doc(command):
     if not command.help:
         return _('Sem descrição.')
 
-    cmd_help = command.translator(command.help)
+    cmd_help = getattr(command, 'translator', Translator._noop)(command.help)
     return cmd_help.split('\n', 1)[0]
 
 
@@ -48,7 +48,7 @@ class BotSource(menus.GroupByPageSource):
 
         embed = discord.Embed(color=config.MAIN_COLOR)
         embed.set_author(name=_('Comandos de {name}', name=key), icon_url=ctx.me.avatar_url)
-        embed.description = cog.__translator__(cog.description)
+        embed.description = getattr(cog, '__translator__', Translator._noop)(cog.description)
 
         for command in cmds:
             signature = f'{self.help.clean_prefix}{self.help.get_command_signature(command)}'
@@ -134,7 +134,7 @@ class Help(commands.HelpCommand):
             embed.add_field(name=_('Parente:'), value=command.parent.qualified_name)
 
     async def send_command_help(self, command):
-        translator = command.translator
+        translator = getattr(command, 'translator', Translator._noop)
 
         embed = discord.Embed(description=translator(command.help), color=config.MAIN_COLOR)
         embed.set_author(
@@ -147,7 +147,7 @@ class Help(commands.HelpCommand):
         await self.get_destination().send(embed=embed)
 
     async def send_group_help(self, group):
-        translator = group.translator
+        translator = getattr(group, 'translator', Translator._noop)
 
         embed = discord.Embed(description=translator(group.help), color=config.MAIN_COLOR)
         embed.set_author(
@@ -172,7 +172,7 @@ class Help(commands.HelpCommand):
         await self.get_destination().send(embed=embed)
 
     async def send_cog_help(self, cog):
-        translator = cog.__translator__
+        translator = getattr(cog, '__translator__', Translator._noop)
 
         embed = discord.Embed(description=translator(cog.description), color=config.MAIN_COLOR)
         embed.set_author(
