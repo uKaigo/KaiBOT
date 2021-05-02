@@ -115,7 +115,7 @@ class BotEvents(commands.Cog):
             self._set_info_from_dm(ctx, embed)
 
         content = discord.utils.escape_markdown(ctx.message.clean_content)
-        croped_content = content[:850] + '...' if len(content) > 850 else ''
+        croped_content = content[:850] + ('...' if len(content) > 850 else '')
         embed.add_field(
             name='Mensagem',
             value=(
