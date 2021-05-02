@@ -30,7 +30,7 @@ def escape_text(text):
     return escape_markdown(escape_mentions(str(text)))
 
 
-def can_ban(member, target):
+def can_modify(member, target):
     guild = member.guild
     if member == guild.owner or not isinstance(target, Member):
         return True

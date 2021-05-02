@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  kaibot\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-30 23:35-0300\n"
+"POT-Creation-Date: 2021-05-01 22:06-0300\n"
 "PO-Revision-Date: 2021-04-30 23:36-0300\n"
 "Last-Translator: \n"
 "Language: en_US\n"
@@ -19,42 +19,42 @@ msgstr ""
 msgid "Comandos de moderação."
 msgstr "Moderation commands."
 
-#: kaibot/cogs/moderation.py:21
+#: kaibot/cogs/moderation.py:26
 #, docstring
 msgid "Limpa `count` mensagens do canal."
 msgstr "Clears `count` messages in the channel."
 
-#: kaibot/cogs/moderation.py:31
+#: kaibot/cogs/moderation.py:36
 msgid "{count} mensagens foram deletadas."
 msgstr "{cuont} messages were deleted."
 
-#: kaibot/cogs/moderation.py:39
+#: kaibot/cogs/moderation.py:44
 #, docstring
 msgid "Bloqueia um canal."
 msgstr "Locks a channel."
 
-#: kaibot/cogs/moderation.py:45
+#: kaibot/cogs/moderation.py:50
 msgid "O canal já está bloqueado."
 msgstr "The channel is already locked."
 
-#: kaibot/cogs/moderation.py:55
+#: kaibot/cogs/moderation.py:60
 msgid "Canal bloqueado."
 msgstr "Channel locked."
 
-#: kaibot/cogs/moderation.py:61
+#: kaibot/cogs/moderation.py:66
 #, docstring
 msgid "Desbloqueia um canal."
 msgstr "Unlocks a channel."
 
-#: kaibot/cogs/moderation.py:67
+#: kaibot/cogs/moderation.py:72
 msgid "O canal já está desbloqueado."
 msgstr "The channel is already unlocked."
 
-#: kaibot/cogs/moderation.py:77
+#: kaibot/cogs/moderation.py:82
 msgid "Canal desbloqueado."
 msgstr "Channel unlocked"
 
-#: kaibot/cogs/moderation.py:84
+#: kaibot/cogs/moderation.py:88
 #, docstring
 msgid ""
 "Bane um membro do servidor.\n"
@@ -65,39 +65,87 @@ msgstr ""
 "\n"
 "The member doesn't need to be in the server."
 
-#: kaibot/cogs/moderation.py:91
+#: kaibot/cogs/moderation.py:95
 msgid "Você não tem permissão para banir **{member}**."
 msgstr "You don't have permission to ban **{member}**."
 
-#: kaibot/cogs/moderation.py:95
+#: kaibot/cogs/moderation.py:99
 msgid "Eu não tenho permissão para banir **{member}**."
 msgstr "I don't have permission to ban **{member}**."
 
-#: kaibot/cogs/moderation.py:99
+#: kaibot/cogs/moderation.py:103 kaibot/cogs/moderation.py:154
 msgid "Não especificado."
 msgstr "Not specified."
 
-#: kaibot/cogs/moderation.py:101
+#: kaibot/cogs/moderation.py:105 kaibot/cogs/moderation.py:170
 msgid "Por {author} | Motivo: {reason}"
 msgstr "By {author} | Reason: {reason}"
 
-#: kaibot/cogs/moderation.py:106
+#: kaibot/cogs/moderation.py:110
 msgid "**{member}** banido por **{reason}**."
 msgstr "**{member}** banned for **{reason}**."
 
-#: kaibot/cogs/moderation.py:118
+#: kaibot/cogs/moderation.py:121
 #, docstring
 msgid "Desbane um membro do servidor."
 msgstr "Unbans a member of the server."
 
-#: kaibot/cogs/moderation.py:120
-msgid "Por {member}"
-msgstr "By {member}"
+#: kaibot/cogs/moderation.py:123 kaibot/cogs/moderation.py:203
+msgid "Por {author}"
+msgstr "By {author}"
 
-#: kaibot/cogs/moderation.py:122
+#: kaibot/cogs/moderation.py:125
 msgid "O membro não está banido."
 msgstr "The member isn't banned."
 
-#: kaibot/cogs/moderation.py:124
+#: kaibot/cogs/moderation.py:127
 msgid "**{member}** desbanido."
 msgstr "**{member}** unbanned."
+
+#: kaibot/cogs/moderation.py:133 kaibot/cogs/moderation.py:164
+msgid "Criando o cargo de Silenciado"
+msgstr "Creating the role of Muted"
+
+#: kaibot/cogs/moderation.py:141
+#, docstring
+msgid "Silencia um membro."
+msgstr "Mutes a member."
+
+#: kaibot/cogs/moderation.py:143
+msgid "Você não tem permissão para silenciar **{member}**."
+msgstr "You don't have permission to mute **{member}**."
+
+#: kaibot/cogs/moderation.py:150
+msgid "Eu não tenho permissão para silenciar **{member}**."
+msgstr "I don't have permission to mute **{member}**."
+
+#: kaibot/cogs/moderation.py:156 kaibot/cogs/moderation.py:161
+#: kaibot/cogs/moderation.py:199
+msgid "Silenciado"
+msgstr "Muted"
+
+#: kaibot/cogs/moderation.py:174
+msgid "**{member}** silenciado por **{reason}**"
+msgstr "**{member}** muted for **{reason}**."
+
+#: kaibot/cogs/moderation.py:185
+#, docstring
+msgid "Remove o silenciamento de um membro."
+msgstr "Removes the mute of a member."
+
+#: kaibot/cogs/moderation.py:187
+msgid "Você não tem permissão para desilenciar **{member}**."
+msgstr "You don't have permission to unmute **{member}**."
+
+#: kaibot/cogs/moderation.py:193
+msgid "Eu não tenho permissão para desilenciar **{member}**."
+msgstr "I don't have permission to unmute **{member}**."
+
+#: kaibot/cogs/moderation.py:201
+msgid "Cargo \"Silenciado\" não encontrado."
+msgstr "Role \"Muted\" not found."
+
+#: kaibot/cogs/moderation.py:205
+msgid "**{member}** desilenciado."
+msgstr "**{member}** unmuted."
+
