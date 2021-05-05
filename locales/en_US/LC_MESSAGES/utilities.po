@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  kaibot\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-04 23:17-0300\n"
-"PO-Revision-Date: 2021-05-04 23:18-0300\n"
+"POT-Creation-Date: 2021-05-04 23:31-0300\n"
+"PO-Revision-Date: 2021-05-04 23:31-0300\n"
 "Last-Translator: \n"
 "Language: en_US\n"
 "Language-Team: English\n"
@@ -73,33 +73,33 @@ msgstr "Shows all the redirects of the link."
 msgid "Redirecionamentos"
 msgstr "Redirects"
 
-#: kaibot/cogs/utilities.py:100
+#: kaibot/cogs/utilities.py:101
 #, docstring
 msgid "Transforma o texto em ｖａｐｏｒｗａｖｅ."
 msgstr "Transforms the text to ｖａｐｏｒｗａｖｅ."
 
-#: kaibot/cogs/utilities.py:101 kaibot/cogs/utilities.py:142
+#: kaibot/cogs/utilities.py:102 kaibot/cogs/utilities.py:142
 msgid "Texto por: {author}"
 msgstr "Text by: {author}"
 
-#: kaibot/cogs/utilities.py:104 kaibot/cogs/utilities.py:145
+#: kaibot/cogs/utilities.py:105
 msgid "O texto pode ter no máximo {max} caracteres."
 msgstr "The text can have up to {max} characters."
 
-#: kaibot/cogs/utilities.py:113
+#: kaibot/cogs/utilities.py:114
 #, docstring
 msgid "Tradutor de [brainfuck](https://pt.wikipedia.org/wiki/Brainfuck)."
 msgstr "[brainfuck](https://en.wikipedia.org/wiki/Brainfuck) translator."
 
-#: kaibot/cogs/utilities.py:118
-#, docstring
+#: kaibot/cogs/utilities.py:119
+#, docstring, fuzzy
 msgid ""
 "Decodificador de [brainfuck](https://pt.wikipedia.org/wiki/Brainfuck).\n"
 "\n"
 "`,` lerá o próximo valor de uma string `A-Za-z0-9`.\n"
 "Por exemplo: `,.` imprimiria \"A\".\n"
 "\n"
-"Loops aninhados (++**[**>++**[**-]-]) não são suportados."
+"Loops aninhados (+**[[**-]) não são suportados."
 msgstr ""
 "[brainfuck](https://en.wikipedia.org/wiki/Brainfuck) decoder.\n"
 "\n"
@@ -119,3 +119,8 @@ msgstr "Time exceeded."
 #: kaibot/cogs/utilities.py:140
 msgid "Nenhuma saída."
 msgstr "No output."
+
+#: kaibot/cogs/utilities.py:144
+msgid "A saída é muito grande."
+msgstr "The output is too big."
+
