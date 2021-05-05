@@ -11,11 +11,13 @@ class BrainfuckDecoder:
         self.while_code = None
         self.cancelled = False
 
-    def _parse(self, code, output):
+    def _raise_if_cancelled(self):
         if self.cancelled:
             raise CancelledError()
 
+    def _parse(self, code, output):
         for char in code:
+            self._raise_if_cancelled()
             if char == ']' and self.while_code is not None:
                 code = self.while_code
                 self.while_code = None
