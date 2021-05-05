@@ -43,7 +43,7 @@ class Fun(custom.Cog, translator=_):
 
     async def _create_application_invite(self, channel_id, application_id, app_name):
         # We're making the request ourselves because d.py doesn't
-        # support this.
+        # support this (only in 2.0).
         route = discord.http.Route('POST', '/channels/{channel_id}/invites', channel_id=channel_id)
         payload = {'target_type': 2, 'target_application_id': str(application_id)}
         return await self.bot.http.request(

@@ -72,6 +72,7 @@ class Utilities(custom.Cog, translator=_):
         if not link.strip('<>').startswith(('http://', 'https://')):
             link = 'http://' + link
 
+        # FIXME: Really. Fix this mess.
         description = ''
         async with ctx.typing():
             dest = await self.bot.session.get(link.strip('<>'))
@@ -84,7 +85,7 @@ class Utilities(custom.Cog, translator=_):
 
         return await ctx.send(embed=embed)
 
-    @in_executor()
+    @in_executor
     def _convert_to_vaporwave(self, text):
         output = ''
         for char in text:
@@ -98,7 +99,7 @@ class Utilities(custom.Cog, translator=_):
     @commands.command()
     async def vaporwave(self, ctx, *, text):
         """Transforma o texto em ｖａｐｏｒｗａｖｅ."""
-        author_notes = '\n\n> ' + _('Texto por: {author}', author=ctx.author.mention)
+        author_notes = f'\n\n> {_("Texto por: {author}", author=ctx.author.mention)}'
         max_len = 2000 - len(author_notes)
         if len(text) > max_len:
             return await ctx.send(_('O texto pode ter no máximo {max} caracteres.', max=max_len))
@@ -121,15 +122,14 @@ class Utilities(custom.Cog, translator=_):
         `,` lerá o próximo valor de uma string `A-Za-z0-9`.
         Por exemplo: `,.` imprimiria "A".
 
-        Loops aninhados (++**[**>++**[**-]-]) não são suportados.
+        Loops aninhados (+**[[**-]) não são suportados.
         """
         decoder = BrainfuckDecoder(self.BF_INPUT)
-        runner = in_executor()(decoder)
+        runner = in_executor(decoder)
 
-        fut = runner(text)
         try:
             async with ctx.typing():
-                out = await asyncio.wait_for(fut, timeout=30)
+                out = await asyncio.wait_for(runner(text), timeout=30)
         except ValueError:
             return await ctx.send(_('Loops aninhados não são suportados.'))
         except asyncio.TimeoutError:
@@ -139,10 +139,9 @@ class Utilities(custom.Cog, translator=_):
         if not out:
             return await ctx.send(_('Nenhuma saída.'))
 
-        author_notes = '\n\n> ' + _('Texto por: {author}', author=ctx.author.mention)
-        max_len = 2000 - len(author_notes)
-        if len(text) > max_len:
-            return await ctx.send(_('O texto pode ter no máximo {max} caracteres.', max=max_len))
+        author_notes = f'\n\n> {_("Texto por: {author}", author=ctx.author.mention)}'
+        if len(text) > 2000 - len(author_notes):
+            return await ctx.send(_('A saída é muito grande.'))
 
         out += author_notes
         return await ctx.send(out)

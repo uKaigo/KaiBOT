@@ -23,16 +23,13 @@ def needs_chunk():
     return decorator
 
 
-def in_executor(loop=None):
+def in_executor(func):
     """Makes a blocking function non-blocking."""
-    loop = loop or asyncio.get_event_loop()
+    loop = asyncio.get_event_loop()
 
-    def decorator(func):
-        @functools.wraps(func)
-        def wrapper(*args, **kwargs):
-            partial = functools.partial(func, *args, **kwargs)
-            return loop.run_in_executor(None, partial)
-
-        return wrapper
+    @functools.wraps(func)
+    def decorator(*args, **kwargs):
+        partial = functools.partial(func, *args, **kwargs)
+        return loop.run_in_executor(None, partial)
 
     return decorator

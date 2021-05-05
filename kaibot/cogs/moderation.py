@@ -43,19 +43,15 @@ class Moderation(custom.Cog, translator=_):
     async def lock(self, ctx):
         """Bloqueia um canal."""
         role = ctx.guild.default_role
-        overwrites = ctx.channel.overwrites.get(role)
         read_messages = None
-        if overwrites:
+
+        if overwrites := ctx.channel.overwrites.get(role):
             if overwrites.send_messages is False:
                 return await ctx.send(_('O canal já está bloqueado.'))
+
             read_messages = overwrites.read_messages
 
-        await ctx.channel.set_permissions(
-            role,
-            send_messages=False,
-            # There is a bug where read_messages is reset.
-            read_messages=read_messages,
-        )
+        await ctx.channel.set_permissions(role, send_messages=False, read_messages=read_messages)
 
         await ctx.send(_('Canal bloqueado.'))
 
@@ -65,21 +61,22 @@ class Moderation(custom.Cog, translator=_):
     async def unlock(self, ctx):
         """Desbloqueia um canal."""
         role = ctx.guild.default_role
-        overwrites = ctx.channel.overwrites.get(role)
         read_messages = None
-        if overwrites:
+
+        if overwrites := ctx.channel.overwrites.get(role):
             if overwrites.send_messages is not False:
                 return await ctx.send(_('O canal já está desbloqueado.'))
             read_messages = overwrites.read_messages
 
-        await ctx.channel.set_permissions(
-            role,
-            send_messages=True,
-            # There is a bug where read_messages is reset.
-            read_messages=read_messages,
-        )
+        await ctx.channel.set_permissions(role, send_messages=True, read_messages=read_messages)
 
         await ctx.send(_('Canal desbloqueado.'))
+
+    def _get_no_permission_txt(self, ctx, target):
+        if not can_modify(ctx.author, target):
+            return _('Você não pode fazer isso com **{member}**.', member=escape_text(target))
+        if not can_modify(ctx.me, target):
+            return _('Eu não posso fazer isso com **{member}**.', member=escape_text(target))
 
     @commands.command()
     @commands.has_permissions(ban_members=True)
@@ -90,14 +87,9 @@ class Moderation(custom.Cog, translator=_):
 
         O membro não precisa estar no servidor.
         """
-        if not can_modify(ctx.author, member):
-            return await ctx.send(
-                _('Você não tem permissão para banir **{member}**.', member=escape_text(member)),
-            )
-        if not can_modify(ctx.me, member):
-            return await ctx.send(
-                _('Eu não tenho permissão para banir **{member}**.', member=escape_text(member))
-            )
+        txt = self._get_no_permission_txt(ctx, member)
+        if txt:
+            return await ctx.send(txt)
 
         if reason is None:
             reason = _('Não especificado.')
@@ -139,24 +131,16 @@ class Moderation(custom.Cog, translator=_):
     @commands.bot_has_permissions(manage_roles=True, manage_channels=True)
     async def mute(self, ctx, member: discord.Member, *, reason=None):
         """Silencia um membro."""
-        if not can_modify(ctx.author, member):
-            msg = _(
-                'Você não tem permissão para silenciar **{member}**.',
-                member=escape_text(member),
-            )
-            return await ctx.send(msg)
-        if not can_modify(ctx.me, member):
-            return await ctx.send(
-                _('Eu não tenho permissão para silenciar **{member}**.', member=escape_text(member))
-            )
+        txt = self._get_no_permission_txt(ctx, member)
+        if txt:
+            return await ctx.send(txt)
 
         if reason is None:
             reason = _('Não especificado.')
 
         mute_role = discord.utils.get(ctx.guild.roles, name=_('Silenciado'))
         if not mute_role:
-            permissions = discord.Permissions.text()
-            permissions.update(send_messages=False, add_reactions=False, speak=False)
+            permissions = discord.Permissions(send_messages=False, add_reactions=False, speak=False)
             mute_role = await ctx.guild.create_role(
                 name=_('Silenciado'),
                 permissions=permissions,
@@ -183,18 +167,9 @@ class Moderation(custom.Cog, translator=_):
     @commands.bot_has_permissions(manage_roles=True)
     async def unmute(self, ctx, member: discord.Member):
         """Remove o silenciamento de um membro."""
-        if not can_modify(ctx.author, member):
-            msg = _(
-                'Você não tem permissão para desilenciar **{member}**.',
-                member=escape_text(member),
-            )
-            return await ctx.send(msg)
-        if not can_modify(ctx.me, member):
-            msg = _(
-                'Eu não tenho permissão para desilenciar **{member}**.',
-                member=escape_text(member),
-            )
-            return await ctx.send(msg)
+        txt = self._get_no_permission_txt(ctx, member)
+        if txt:
+            return await ctx.send(txt)
 
         mute_role = discord.utils.get(ctx.guild.roles, name=_('Silenciado'))
         if not mute_role:
