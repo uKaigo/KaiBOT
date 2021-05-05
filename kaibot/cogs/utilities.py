@@ -1,3 +1,5 @@
+import asyncio
+
 import re
 from random import randint
 
@@ -8,6 +10,7 @@ from .. import config
 from ..i18n import Translator
 from ..utils import custom, format_list
 from ..utils.decorators import in_executor
+from .resources.brainfuck import BrainfuckDecoder
 
 _ = Translator(__name__)
 
@@ -15,8 +18,11 @@ _ = Translator(__name__)
 class Utilities(custom.Cog, translator=_):
     """Comandos úteis."""
 
+    DICE_REGEX = re.compile(r'((?P<count>\d*)d)?(?P<sides>\d+(?!\d*d))')  # Regex Sucks
+    # Includes: 0-9 a-z A-Z
+    BF_INPUT = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+
     def __init__(self, bot):
-        self.DICE_REGEX = re.compile(r'((?P<count>\d*)d)?(?P<sides>\d+(?!\d*d))')  # Regex Sucks
         self.bot = bot
 
     @commands.command()
@@ -101,6 +107,45 @@ class Utilities(custom.Cog, translator=_):
             converted = await self._convert_to_vaporwave(text)
 
         await ctx.send(converted + author_notes)
+
+    @commands.group(invoke_without_command=True)
+    async def brainfuck(self, ctx):
+        """Tradutor de [brainfuck](https://pt.wikipedia.org/wiki/Brainfuck)."""
+        await ctx.send_help(self.brainfuck)
+
+    @brainfuck.command(name='decode')
+    async def bf_decode(self, ctx, *, text):
+        """
+        Decodificador de [brainfuck](https://pt.wikipedia.org/wiki/Brainfuck).
+
+        `,` lerá o próximo valor de uma string `A-Za-z0-9`.
+        Por exemplo: `,.` imprimiria "A".
+
+        Loops aninhados (++**[**>++**[**-]-]) não são suportados.
+        """
+        decoder = BrainfuckDecoder(self.BF_INPUT)
+        runner = in_executor()(decoder)
+
+        fut = runner(text)
+        try:
+            async with ctx.typing():
+                out = await asyncio.wait_for(fut, timeout=30)
+        except ValueError:
+            return await ctx.send(_('Loops aninhados não são suportados.'))
+        except asyncio.TimeoutError:
+            decoder.cancelled = True
+            return await ctx.send(_('Tempo excedido.'))
+
+        if not out:
+            return await ctx.send(_('Nenhuma saída.'))
+
+        author_notes = '\n\n> ' + _('Texto por: {author}', author=ctx.author.mention)
+        max_len = 2000 - len(author_notes)
+        if len(text) > max_len:
+            return await ctx.send(_('O texto pode ter no máximo {max} caracteres.', max=max_len))
+
+        out += author_notes
+        return await ctx.send(out)
 
 
 def setup(bot):
