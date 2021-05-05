@@ -50,8 +50,8 @@ class BrainfuckDecoder:
                 _tmp = ord(self.input.read(1))
                 if _tmp == 0:
                     self.input.seek(0)
-                else:
-                    self.mem[self.ptr] = _tmp if _tmp else -1
+                    _tmp = ord(self.input.read(1))
+                self.mem[self.ptr] = _tmp if _tmp else -1
             elif char == '[':
                 while_code = ''
 
