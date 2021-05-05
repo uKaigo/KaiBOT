@@ -8,7 +8,6 @@ class BrainfuckDecoder:
         self.input = io.StringIO(input_ + '\x00')
         self.mem = defaultdict(int)
         self.ptr = 0
-        self.while_code = None
         self.cancelled = False
 
     def _raise_if_cancelled(self):
@@ -16,21 +15,23 @@ class BrainfuckDecoder:
             raise CancelledError()
 
     def _parse(self, code, output):
+        while_code = None
+        enclosure_count = 0
+
         for char in code:
             self._raise_if_cancelled()
-            if char == ']' and self.while_code is not None:
-                code = self.while_code
-                self.while_code = None
-
+            if char == ']' and while_code is not None and enclosure_count == 0:
+                code = while_code
+                while_code = None
                 while self.mem[self.ptr]:
                     self._parse(code, output)
 
-            elif self.while_code is not None:
+            elif while_code is not None:
                 if char == '[':
-                    # TODO: Implement nested loops
-                    raise ValueError('Nested loops are disabled.')
-
-                self.while_code += char
+                    enclosure_count += 1
+                elif char == ']':
+                    enclosure_count -= 1
+                while_code += char
             elif char == '>':
                 self.ptr += 1
             elif char == '<':
@@ -52,7 +53,7 @@ class BrainfuckDecoder:
                 else:
                     self.mem[self.ptr] = _tmp if _tmp else -1
             elif char == '[':
-                self.while_code = ''
+                while_code = ''
 
     def __call__(self, code):
         output = io.StringIO()
