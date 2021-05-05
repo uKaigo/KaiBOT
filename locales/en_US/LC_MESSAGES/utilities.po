@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  kaibot\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-04 23:31-0300\n"
-"PO-Revision-Date: 2021-05-04 23:31-0300\n"
+"POT-Creation-Date: 2021-05-05 13:19-0300\n"
+"PO-Revision-Date: 2021-05-04 13:23-0300\n"
 "Last-Translator: \n"
 "Language: en_US\n"
 "Language-Team: English\n"
@@ -14,12 +14,12 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.9.0\n"
 
-#: kaibot/cogs/utilities.py:19
+#: kaibot/cogs/utilities.py:20
 #, docstring
 msgid "Comandos úteis."
 msgstr "Useful commands."
 
-#: kaibot/cogs/utilities.py:30
+#: kaibot/cogs/utilities.py:31
 #, docstring
 msgid ""
 "Rola um dado.\n"
@@ -36,91 +36,91 @@ msgstr ""
 "`d100` will roll 1 100-sided dice.\n"
 "`100` will roll 1 100-sided dice."
 
-#: kaibot/cogs/utilities.py:46
+#: kaibot/cogs/utilities.py:47
 msgid "Nenhum dos valores pode ser 0."
 msgstr "None of the values can be 0."
 
-#: kaibot/cogs/utilities.py:48
+#: kaibot/cogs/utilities.py:49
 msgid "O dado não pode ter somente 1 lado."
 msgstr "The dice can't have only 1 side."
 
-#: kaibot/cogs/utilities.py:50
+#: kaibot/cogs/utilities.py:51
 msgid "O dado precisa ter menos que 1000 lados."
 msgstr "The dice needs to have less than 1000 sides."
 
-#: kaibot/cogs/utilities.py:52
+#: kaibot/cogs/utilities.py:53
 msgid "Você pode rolar no máximo 200 dados por vez."
 msgstr "You can roll up to 200 dices at a time."
 
-#: kaibot/cogs/utilities.py:59
+#: kaibot/cogs/utilities.py:60
 msgid "Seu dado resultou em: {result}"
 msgstr "Your dice result: {result}"
 
-#: kaibot/cogs/utilities.py:62
+#: kaibot/cogs/utilities.py:63
 msgid "Seus dados resultaram em: {results}"
 msgstr "Your dice results: {results}"
 
-#: kaibot/cogs/utilities.py:64
+#: kaibot/cogs/utilities.py:65
 msgid "Soma: {sum}"
 msgstr "Sum: {sum}"
 
-#: kaibot/cogs/utilities.py:69
+#: kaibot/cogs/utilities.py:70
 #, docstring
 msgid "Mostra todos os redirecionamentos do link."
 msgstr "Shows all the redirects of the link."
 
-#: kaibot/cogs/utilities.py:70
+#: kaibot/cogs/utilities.py:71
 msgid "Redirecionamentos"
 msgstr "Redirects"
 
-#: kaibot/cogs/utilities.py:101
+#: kaibot/cogs/utilities.py:102
 #, docstring
 msgid "Transforma o texto em ｖａｐｏｒｗａｖｅ."
 msgstr "Transforms the text to ｖａｐｏｒｗａｖｅ."
 
-#: kaibot/cogs/utilities.py:102 kaibot/cogs/utilities.py:142
+#: kaibot/cogs/utilities.py:103
 msgid "Texto por: {author}"
 msgstr "Text by: {author}"
 
-#: kaibot/cogs/utilities.py:105
+#: kaibot/cogs/utilities.py:106
 msgid "O texto pode ter no máximo {max} caracteres."
 msgstr "The text can have up to {max} characters."
 
-#: kaibot/cogs/utilities.py:114
+#: kaibot/cogs/utilities.py:115
 #, docstring
 msgid "Tradutor de [brainfuck](https://pt.wikipedia.org/wiki/Brainfuck)."
 msgstr "[brainfuck](https://en.wikipedia.org/wiki/Brainfuck) translator."
 
-#: kaibot/cogs/utilities.py:119
-#, docstring, fuzzy
+#: kaibot/cogs/utilities.py:120
+#, docstring
 msgid ""
 "Decodificador de [brainfuck](https://pt.wikipedia.org/wiki/Brainfuck).\n"
 "\n"
 "`,` lerá o próximo valor de uma string `A-Za-z0-9`.\n"
-"Por exemplo: `,.` imprimiria \"A\".\n"
-"\n"
-"Loops aninhados (+**[[**-]) não são suportados."
+"Por exemplo: `,.` imprimiria \"A\"."
 msgstr ""
 "[brainfuck](https://en.wikipedia.org/wiki/Brainfuck) decoder.\n"
 "\n"
 "`,` will read the next value of a `A-Za-z0-9` string.\n"
-"For example: `,.` would print \"A\".\n"
-"\n"
-"Nested loops (++**[**>++**[**-]-]) aren't supported."
+"For example: `,.` would print \"A\"."
 
 #: kaibot/cogs/utilities.py:134
-msgid "Loops aninhados não são suportados."
-msgstr "Nested loops aren't supported."
-
-#: kaibot/cogs/utilities.py:137
 msgid "Tempo excedido."
 msgstr "Time exceeded."
 
-#: kaibot/cogs/utilities.py:140
+#: kaibot/cogs/utilities.py:137
 msgid "Nenhuma saída."
 msgstr "No output."
 
-#: kaibot/cogs/utilities.py:144
-msgid "A saída é muito grande."
-msgstr "The output is too big."
+#: kaibot/cogs/utilities.py:143
+msgid "Texto por: {author} ({author.id})"
+msgstr "Text by: {author} ({author.id})"
+
+#: kaibot/cogs/utilities.py:146
+msgid "Saída:"
+msgstr "Output:"
+
+#: kaibot/cogs/utilities.py:147
+msgid "Memória:"
+msgstr "Memory:"
 

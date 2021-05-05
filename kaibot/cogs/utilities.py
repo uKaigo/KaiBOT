@@ -1,6 +1,7 @@
-import asyncio
-
 import re
+import json
+import sys
+import asyncio
 from random import randint
 
 import discord
@@ -121,8 +122,6 @@ class Utilities(custom.Cog, translator=_):
 
         `,` lerá o próximo valor de uma string `A-Za-z0-9`.
         Por exemplo: `,.` imprimiria "A".
-
-        Loops aninhados (+**[[**-]) não são suportados.
         """
         decoder = BrainfuckDecoder(self.BF_INPUT)
         runner = in_executor(decoder)
@@ -130,8 +129,6 @@ class Utilities(custom.Cog, translator=_):
         try:
             async with ctx.typing():
                 out = await asyncio.wait_for(runner(text), timeout=30)
-        except ValueError:
-            return await ctx.send(_('Loops aninhados não são suportados.'))
         except asyncio.TimeoutError:
             decoder.cancelled = True
             return await ctx.send(_('Tempo excedido.'))
@@ -139,13 +136,22 @@ class Utilities(custom.Cog, translator=_):
         if not out:
             return await ctx.send(_('Nenhuma saída.'))
 
-        author_notes = f'\n\n> {_("Texto por: {author}", author=ctx.author.mention)}'
-        if len(text) > 2000 - len(author_notes):
-            return await ctx.send(_('A saída é muito grande.'))
+        mem = json.dumps(decoder.mem, indent=2, check_circular=False).replace('"', '')
 
-        out += author_notes
-        return await ctx.send(out)
+        embed = discord.Embed(title='Brainfuck', color=config.MAIN_COLOR)
+        embed.set_footer(
+            text=_('Texto por: {author} ({author.id})', author=ctx.author),
+            icon_url=ctx.author.avatar_url,
+        )
+        embed.add_field(name=_('Saída:'), value=out, inline=False)
+        embed.add_field(name=_('Memória:'), value=f'```py\n{mem}```', inline=False)
+
+        return await ctx.send(embed=embed)
 
 
 def setup(bot):
     bot.add_cog(Utilities(bot))
+
+
+def teardown(bot):
+    sys.modules.pop('kaibot.cogs.resources.brainfuck')
