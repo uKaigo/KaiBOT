@@ -1,12 +1,15 @@
 import logging
+import os
 
 import aiohttp
 from discord import Activity, ActivityType, DMChannel, AllowedMentions
 from discord.ext import commands
+from motor.motor_asyncio import AsyncIOMotorClient
 
 from . import config
 from .i18n import current_language
 from .utils import get_intents_from
+from .utils.database import DatabaseManager
 
 log = logging.getLogger('kaibot')
 
@@ -23,6 +26,8 @@ class KaiBOT(commands.Bot):
         self.uptime = None
         self.session = aiohttp.ClientSession()
         self.load_all_extensions(config.EXTENSIONS)
+        self.db_client = AsyncIOMotorClient(os.environ['MONGO_URI'])
+        self.db = DatabaseManager(self.db_client)
 
     # - HELPERS -
 
