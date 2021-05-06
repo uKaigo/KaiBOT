@@ -152,9 +152,9 @@ class Info(custom.Cog, translator=_):
         """Mostra os membros mais antigos do servidor."""
         async with ctx.typing():
 
-            def mapper(member):
-                idx, member = member
-                you = ' - ' + _('Você') if member == ctx.author else ''
+            def mapper(idx_member):
+                idx, member = idx_member
+                you = f' - {_("Você")}' if member == ctx.author else ''
                 return f'`{idx+1}º` — `{member}`' + you
 
             members = map(
