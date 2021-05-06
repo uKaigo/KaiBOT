@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  kaibot\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-05 13:19-0300\n"
+"POT-Creation-Date: 2021-05-06 12:15-0300\n"
 "PO-Revision-Date: 2021-05-04 13:23-0300\n"
 "Last-Translator: \n"
 "Language: en_US\n"
@@ -108,19 +108,15 @@ msgstr ""
 msgid "Tempo excedido."
 msgstr "Time exceeded."
 
-#: kaibot/cogs/utilities.py:137
-msgid "Nenhuma saída."
-msgstr "No output."
-
-#: kaibot/cogs/utilities.py:143
+#: kaibot/cogs/utilities.py:140
 msgid "Texto por: {author} ({author.id})"
 msgstr "Text by: {author} ({author.id})"
 
-#: kaibot/cogs/utilities.py:146
+#: kaibot/cogs/utilities.py:144
 msgid "Saída:"
 msgstr "Output:"
 
-#: kaibot/cogs/utilities.py:147
+#: kaibot/cogs/utilities.py:145
 msgid "Memória:"
 msgstr "Memory:"
 
