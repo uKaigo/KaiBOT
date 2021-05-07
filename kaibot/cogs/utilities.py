@@ -140,7 +140,7 @@ class Utilities(custom.Cog, translator=_):
             text=_('Texto por: {author} ({author.id})', author=ctx.author),
             icon_url=ctx.author.avatar_url,
         )
-        if out:
+        if out.strip():
             embed.add_field(name=_('Saída:'), value=out, inline=False)
         embed.add_field(name=_('Memória:'), value=f'```py\n{mem}```', inline=False)
 
