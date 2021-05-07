@@ -25,9 +25,12 @@ class KaiBOT(commands.Bot):
 
         self.uptime = None
         self.session = aiohttp.ClientSession()
-        self.load_all_extensions(config.EXTENSIONS)
+
         self.db_client = AsyncIOMotorClient(os.environ['MONGO_URI'])
-        self.db = DatabaseManager(self.db_client)
+        self.db = DatabaseManager('KaiBOT', client=self.db_client)
+        self.db.create_collection('Guilds', {'prefix': None, 'language': None})
+
+        self.load_all_extensions(config.EXTENSIONS)
 
     # - HELPERS -
 
@@ -49,12 +52,23 @@ class KaiBOT(commands.Bot):
         log.debug(f'Loaded {len(self.extensions)} extensions with {len(self.commands)} commands.')
 
     async def get_language_for(self, guild):
+        doc = await self.db.guilds.find(guild.id)
+        if doc and doc.language:
+            return doc.language
+
         return config.DEFAULT_LANGUAGE
 
-    def prefix_getter(self, bot, message):
+    async def prefix_getter(self, bot, message):
         if isinstance(message.channel, DMChannel):
             return commands.when_mentioned_or(*config.PREFIXES, '')(bot, message)
-        return commands.when_mentioned_or(*config.PREFIXES)(bot, message)
+
+        prefixes = config.PREFIXES
+
+        doc = await self.db.guilds.find(message.guild.id)
+        if doc and doc.prefix:
+            prefixes = [doc.prefix]
+
+        return commands.when_mentioned_or(*prefixes)(bot, message)
 
     # - EVENTS -
 

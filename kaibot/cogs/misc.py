@@ -32,11 +32,15 @@ class Miscelaneous(custom.Cog, translator=_):
     @commands.command()
     async def ping(self, ctx):
         """Envia a latência da websocket e o tempo de resposta."""
-        txt = _('🏓 Ping\n- Websocket: {}ms\n- Tempo de resposta: {}ms')
-        msg = await ctx.send(txt.format('NaN', 'NaN'))
-        diff = (msg.created_at - ctx.message.created_at).total_seconds()
+        txt = _('🏓 Ping\n- Websocket: {}ms\n- Database: {}ms\n- Tempo de resposta: {}ms')
+        msg = await ctx.send(txt.format('NaN', 'NaN', 'NaN'))
 
-        await msg.edit(content=txt.format(int(self.bot.latency * 1000), int(diff * 1000)))
+        diff = (msg.created_at - ctx.message.created_at).total_seconds()
+        db_ping = await self.bot.db.guilds.ping()
+
+        await msg.edit(
+            content=txt.format(int(self.bot.latency * 1000), int(db_ping * 1000), int(diff * 1000))
+        )
 
     @commands.command(aliases=['privacidade'])
     async def privacy(self, ctx):
