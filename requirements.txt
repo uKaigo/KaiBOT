@@ -6,5 +6,4 @@ python-dotenv
 aiohttp
 rich
 psutil
-dns-python
 motor
