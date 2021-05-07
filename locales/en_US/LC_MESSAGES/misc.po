@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  kaibot\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-10 15:35-0300\n"
+"POT-Creation-Date: 2021-05-06 23:26-0300\n"
 "PO-Revision-Date: 2021-04-30 11:28-0300\n"
 "Last-Translator: \n"
 "Language: en_US\n"
@@ -23,12 +23,12 @@ msgstr "Commands that doesn't fit in another category."
 msgid "Mostra essa mensagem."
 msgstr "Shows this message."
 
-#: kaibot/cogs/misc.py:34
+#: kaibot/cogs/misc.py:37
 #, docstring
 msgid "Envia a latência da websocket e o tempo de resposta."
 msgstr "Sends the websocket's latency and the response time."
 
-#: kaibot/cogs/misc.py:35
+#: kaibot/cogs/misc.py:38
 msgid ""
 "🏓 Ping\n"
 "- Websocket: {}ms\n"
@@ -38,20 +38,20 @@ msgstr ""
 "- Websocket: {}ms\n"
 "- Response time: {}ms"
 
-#: kaibot/cogs/misc.py:43
+#: kaibot/cogs/misc.py:46
 #, docstring
 msgid "Políticas de privacidade."
 msgstr "Privacy policies."
 
-#: kaibot/cogs/misc.py:46
+#: kaibot/cogs/misc.py:49
 msgid "Políticas de privacidade | KaiBOT"
 msgstr "Privacy policies | KaiBOT"
 
-#: kaibot/cogs/misc.py:50
+#: kaibot/cogs/misc.py:53
 msgid "As políticas de privacidade podem ser encontradas [nesse link]({policy})."
 msgstr "The privacy policies can be found at [this link]({policy})."
 
-#: kaibot/cogs/misc.py:54
+#: kaibot/cogs/misc.py:57
 msgid "Caso você não concorda com essa política, pare de usar o bot e (opcionalmente) peça a exclusão dos seus dados."
 msgstr "If you don't agree with this policy, stop using the bot and (optionally) ask for the deletion of your data."
 

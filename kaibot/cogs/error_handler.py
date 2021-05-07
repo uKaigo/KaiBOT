@@ -47,6 +47,11 @@ class ErrorHandler(commands.Cog):
             if original.code == 50013 and not ctx.me.permissions_in(ctx.channel).embed_links:
                 error = commands.BotMissingPermissions(('embed_links',))
 
+        if isinstance(error, commands.MaxConcurrencyReached):
+            return await ctx.send(
+                _('Você já está executando o comando "{command}".', command=ctx.invoked_with)
+            )
+
         if isinstance(error, commands.BadArgument):
             if getattr(error, 'is_kaibot', False):
                 return await ctx.send(str(error))

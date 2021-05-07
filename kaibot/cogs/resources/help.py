@@ -118,7 +118,7 @@ class Help(commands.HelpCommand):
         source = BotSource(entries=commands, per_page=10, key=key, help=self)
         pages = HelpMenuPages(source=source, check_embeds=True, clear_reactions_after=True)
 
-        await pages.start(self.context, channel=self.get_destination())
+        await pages.start(self.context, channel=self.get_destination(), wait=True)
 
     def _insert_command_info(self, embed, command):
         embed.add_field(

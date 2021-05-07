@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  kaibot\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-01 12:51-0300\n"
-"PO-Revision-Date: 2021-04-26 12:53-0300\n"
+"POT-Creation-Date: 2021-05-06 23:26-0300\n"
+"PO-Revision-Date: 2021-05-06 23:27-0300\n"
 "Last-Translator: \n"
 "Language: en_US\n"
 "Language-Team: English\n"
@@ -14,43 +14,47 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.9.0\n"
 
-#: kaibot/cogs/error_handler.py:54
+#: kaibot/cogs/error_handler.py:52
+msgid "Você já está executando o comando \"{command}\"."
+msgstr "You're already running the \"{command}\" command."
+
+#: kaibot/cogs/error_handler.py:59
 msgid "Insira um número válido."
 msgstr "Insert a valid number."
 
-#: kaibot/cogs/error_handler.py:57
+#: kaibot/cogs/error_handler.py:62
 msgid "Este comando só pode ser executado em servidores."
 msgstr "This command can only run in servers."
 
-#: kaibot/cogs/error_handler.py:64
+#: kaibot/cogs/error_handler.py:69
 msgid "O membro \"{string}\" não foi encontrado."
 msgstr "The member \"{string}\" wasn't found."
 
-#: kaibot/cogs/error_handler.py:71
+#: kaibot/cogs/error_handler.py:76
 msgid "Canal não encontrado."
 msgstr "Channel not found."
 
-#: kaibot/cogs/error_handler.py:75
+#: kaibot/cogs/error_handler.py:80
 msgid "membro"
 msgstr "member"
 
-#: kaibot/cogs/error_handler.py:76
+#: kaibot/cogs/error_handler.py:81
 msgid "usuário"
 msgstr "user"
 
-#: kaibot/cogs/error_handler.py:83
+#: kaibot/cogs/error_handler.py:88
 msgid "Não foi possível converter \"{string}\" para {converters}."
 msgstr "Couldn't convert \"{string}\" to {converters}."
 
-#: kaibot/cogs/error_handler.py:93
+#: kaibot/cogs/error_handler.py:98
 msgid "Você precisa da permissão \"{perm}\" para executar esse comando."
 msgstr "You need the \"{perm}\" permission to run this command."
 
-#: kaibot/cogs/error_handler.py:102
+#: kaibot/cogs/error_handler.py:107
 msgid "Eu preciso da permissão \"{perm}\" para executar esse comando."
 msgstr "I need the \"{perm}\" permission to run this command."
 
-#: kaibot/cogs/error_handler.py:134
+#: kaibot/cogs/error_handler.py:139
 msgid ""
 "Ocorreu um erro ao executar este comando.\n"
 "Tente contatar o suporte para resolver o problema.\n"
