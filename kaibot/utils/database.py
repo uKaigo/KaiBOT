@@ -4,6 +4,13 @@ from pymongo import ReturnDocument
 # TODO: Implement caching.
 
 
+class _missing:
+    obj = object()
+
+
+MISSING = _missing()
+
+
 class Document:
     __slots__ = ('__collection', '__data')
 
@@ -16,11 +23,10 @@ class Document:
         return iter(self.__data.items())
 
     def __getattr__(self, attr):
-        value = self.__data.get(attr)
-        if value:
+        value = self.__data.get(attr, MISSING)
+        if value is not MISSING:
             return value
-        else:
-            raise AttributeError(f"'Document' object has no attribute '{attr}'")
+        super().__getattr__(attr)
 
     def __setattr__(self, attr, value):
         self.__data[attr] = value
@@ -48,33 +54,34 @@ class CollectionManager:
         template = self.template.copy()
         template.update({'_id': str(id)})
 
-        return await self.__collection.insert_one(template)
+        data = await self.__collection.insert_one(template)
+        return Document(data=data, collection=self)
 
     async def delete(self, id):
         id = str(id)
 
-        await self.collection.delete_one({'_id': id})
+        await self.__collection.delete_one({'_id': id})
 
     async def find(self, id):
         id = str(id)
 
-        return await self.collection.find_one({'_id': id})
+        data = await self.__collection.find_one({'_id': id})
+        if not data:
+            return None
+        return Document(data=data, collection=self)
 
     async def update(self, id, operation, data):
         id = str(id)
 
-        return await self.__collection.find_one_and_update(
+        data = await self.__collection.find_one_and_update(
             {'_id': id}, {f'${operation}': data}, return_document=ReturnDocument.AFTER
         )
-
-    async def delete(self, id):
-        id = str(id)
-        await self.__collection.delete({'_id': id})
+        return Document(data=data, collection=self)
 
     async def all(self):
-        cursor = self.collection.find({})
+        cursor = self.__collection.find({})
         async for doc in cursor:
-            yield doc
+            yield Document(data=doc, collection=self)
 
     async def ping(self):
         start = time.perf_counter()
@@ -83,10 +90,18 @@ class CollectionManager:
 
 
 class DatabaseManager:
-    __slots__ = ('__db',)
+    __slots__ = ('__db', '__name', '__cache')
 
     def __init__(self, name, *, client):
+        self.__cache = {}
         self.__db = client[name]
 
-    def get_collection(self, name, template=None):
-        return CollectionManager(collection=self.__db[name], template=template)
+    def create_collection(self, name, template=None):
+        col = CollectionManager(collection=self.__db[name], template=template)
+        self.__cache[name.casefold()] = col
+        return col
+
+    def __getattr__(self, attr):
+        if attr.casefold() in self.__cache:
+            return self.__cache[attr.casefold()]
+        super().__getattr__(attr)
