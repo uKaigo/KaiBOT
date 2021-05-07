@@ -90,7 +90,7 @@ class CollectionManager:
 
 
 class DatabaseManager:
-    __slots__ = ('__db', '__name', '__cache')
+    __slots__ = ('__db', '__cache')
 
     def __init__(self, name, *, client):
         self.__cache = {}
