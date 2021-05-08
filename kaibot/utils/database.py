@@ -1,7 +1,7 @@
 import time
-from pymongo import ReturnDocument
+from collections import deque
 
-# TODO: Implement caching.
+from pymongo import ReturnDocument
 
 
 class _missing:
@@ -41,12 +41,55 @@ class Document:
         return self.__collection.delete(self._id)
 
 
+class LRUCache:
+    def __init__(self, max_size=None):
+        self.max_size = max_size
+        self.__container = deque()
+        self.__map = dict()
+
+    def _reallocate(self):
+        self.__map = dict()
+        if len(self.__container) > 0:
+            for key, value in enumerate(self.__container):
+                self.__map[value[0]] = key
+
+    def get(self, key):
+        if key in self.__map:
+            value = self.__container[self.__map[key]]
+            self.__container.remove(value)
+            self.__container.appendleft(value)
+            self._reallocate()
+
+            return value[1]
+
+        return MISSING
+
+    def insert(self, key, value):
+        if key in self.__map:
+            index = self.__map[key]
+            self.__container[index] = (key, value)
+        else:
+            if len(self.__container) == self.max_size:
+                self.__container.pop()
+            self.__container.appendleft((key, value))
+
+        self._reallocate()
+
+        return value
+
+    def delete(self, key):
+        if key in self.__map:
+            self.__container[self.__map[key]].remove()
+            self._reallocate()
+
+
 class CollectionManager:
-    __slots__ = ('__collection', 'template')
+    __slots__ = ('__collection', '__cache', 'template')
 
     def __init__(self, *, collection, template=None):
         if template is None:
             template = {}
+        self.__cache = LRUCache(500)
         self.__collection = collection
         self.template = template
 
@@ -55,20 +98,25 @@ class CollectionManager:
         template.update({'_id': str(id)})
 
         data = await self.__collection.insert_one(template)
-        return Document(data=data, collection=self)
+        return self.__cache.insert(id, Document(data=data, collection=self))
 
     async def delete(self, id):
         id = str(id)
 
         await self.__collection.delete_one({'_id': id})
+        self.__cache.delete(id)
 
     async def find(self, id):
         id = str(id)
 
+        cached = self.__cache.get(id)
+        if cached is not MISSING:
+            return cached
+
         data = await self.__collection.find_one({'_id': id})
         if not data:
-            return None
-        return Document(data=data, collection=self)
+            return self.__cache.insert(id, None)
+        return self.__cache.insert(id, Document(data=data, collection=self))
 
     async def update(self, id, operation, data):
         id = str(id)
@@ -76,7 +124,7 @@ class CollectionManager:
         data = await self.__collection.find_one_and_update(
             {'_id': id}, {f'${operation}': data}, return_document=ReturnDocument.AFTER
         )
-        return Document(data=data, collection=self)
+        return self.__cache.insert(id, Document(data=data, collection=self))
 
     async def all(self):
         cursor = self.__collection.find({})
