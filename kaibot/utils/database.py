@@ -14,7 +14,7 @@ MISSING = _missing()
 class Document:
     __slots__ = ('__collection', '__data')
 
-    def __init__(self, *, data, collection):
+    def __init__(self, data, collection):
         # Don't call our __setattr__
         object.__setattr__(self, '_Document__collection', collection)
         object.__setattr__(self, '_Document__data', data)
@@ -98,7 +98,7 @@ class CollectionManager:
         template.update({'_id': str(id)})
 
         data = await self.__collection.insert_one(template)
-        return self.__cache.insert(id, Document(data=data, collection=self))
+        return self.__cache.insert(id, Document(data, self))
 
     async def delete(self, id):
         id = str(id)
@@ -116,7 +116,7 @@ class CollectionManager:
         data = await self.__collection.find_one({'_id': id})
         if not data:
             return self.__cache.insert(id, None)
-        return self.__cache.insert(id, Document(data=data, collection=self))
+        return self.__cache.insert(id, Document(data, self))
 
     async def update(self, id, operation, data):
         id = str(id)
@@ -124,12 +124,12 @@ class CollectionManager:
         data = await self.__collection.find_one_and_update(
             {'_id': id}, {f'${operation}': data}, return_document=ReturnDocument.AFTER
         )
-        return self.__cache.insert(id, Document(data=data, collection=self))
+        return self.__cache.insert(id, Document(data, self))
 
     async def all(self):
         cursor = self.__collection.find({})
         async for doc in cursor:
-            yield Document(data=doc, collection=self)
+            yield Document(doc, self)
 
     async def ping(self):
         start = time.perf_counter()
