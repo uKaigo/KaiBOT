@@ -26,7 +26,7 @@ class Document:
         value = self.__data.get(attr, MISSING)
         if value is not MISSING:
             return value
-        super().__getattr__(attr)
+        raise AttributeError(f"'Document' object has no attribute '{attr}'")
 
     def __setattr__(self, attr, value):
         self.__data[attr] = value
@@ -152,4 +152,4 @@ class DatabaseManager:
     def __getattr__(self, attr):
         if attr.casefold() in self.__cache:
             return self.__cache[attr.casefold()]
-        super().__getattr__(attr)
+        raise AttributeError(f"'DatabaseManager' object has no attribute '{attr}'")

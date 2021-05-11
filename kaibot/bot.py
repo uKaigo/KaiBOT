@@ -28,7 +28,7 @@ class KaiBOT(commands.Bot):
 
         self.db_client = AsyncIOMotorClient(os.environ['MONGO_URI'])
         self.db = DatabaseManager('KaiBOT', client=self.db_client)
-        self.db.create_collection('Guilds', {'prefix': None, 'language': None})
+        self.db.create_collection('Guilds', {'prefixes': None, 'language': None})
 
         self.load_all_extensions(config.EXTENSIONS)
 
@@ -65,8 +65,8 @@ class KaiBOT(commands.Bot):
         prefixes = config.PREFIXES
 
         doc = await self.db.guilds.find(message.guild.id)
-        if doc and doc.prefix:
-            prefixes = [doc.prefix]
+        if doc and doc.prefixes:
+            prefixes = doc.prefixes
 
         return commands.when_mentioned_or(*prefixes)(bot, message)
 
