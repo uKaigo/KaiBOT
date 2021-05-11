@@ -1,9 +1,14 @@
+from glob import glob
+from functools import cached_property
+from os.path import split as split_path
+
 import discord
 from discord.ext import commands
 
-from ..i18n import Translator
-from ..utils import can_modify, custom, escape_text
-from ..utils.converters import MemberOrUser, Range
+from .. import config
+from ..i18n import Translator, current_language
+from ..utils import can_modify, custom, escape_text, format_list
+from ..utils.converters import MemberOrUser, Prefix, Range
 
 _ = Translator(__name__)
 
@@ -178,6 +183,101 @@ class Moderation(custom.Cog, translator=_):
         await member.remove_roles(mute_role, reason=_('Por {author}', author=ctx.author))
 
         await ctx.send(_('**{member}** desilenciado.', member=escape_text(member)))
+
+    @cached_property
+    def _available_languages(self):
+        languages = [l.strip('/') for l in glob('../locales/*/')]
+        return [split_path(l)[1] for l in languages] + ['pt_BR']
+
+    def transform_language(self, language):
+        def pred(lang):
+            full_lang = lang.casefold().replace('-', '_')
+            lang_name = full_lang.split('_')[0]
+            return language.replace('-', '_').casefold() in [full_lang, lang_name]
+
+        return discord.utils.find(pred, self._available_languages)
+
+    @commands.command(aliases=['setlang'])
+    @commands.has_permissions(manage_guild=True)
+    async def lang(self, ctx, new_language):
+        """Altera a linguagem do servidor."""
+        new_language = self.transform_language(new_language)
+
+        available = self._available_languages
+        if new_language not in available:
+            return await ctx.send(_('Escolha entre {languages}.', languages=format_list(available)))
+        if new_language == current_language.get():
+            return await ctx.send(_('Essa linguagem já está sendo usada.'))
+
+        to_set = new_language if new_language != 'pt_BR' else None
+
+        await self.bot.db.guilds.update(ctx.guild.id, 'set', {'language': to_set})
+
+        current_language.set(new_language)
+
+        await ctx.send(_('Linguagem alterada para {lang}.', lang=new_language))
+
+    @commands.group(invoke_without_command=True)
+    async def prefix(self, ctx):
+        """Configuração de prefixos do servidor."""
+        prefixes = (f'@{self.bot.user.name}',)
+
+        doc = await self.bot.db.guilds.find(ctx.guild.id)
+        if not doc or not doc.prefixes:
+            prefixes += config.PREFIXES
+        else:
+            prefixes += tuple(doc.prefixes)
+
+        prefixes = (f'`{prefix}`' for prefix in prefixes)
+
+        await ctx.send(_('Os prefixos do servidor são: {prefixes}', prefixes=format_list(prefixes)))
+
+    @prefix.command(name='add')
+    @commands.has_permissions(manage_guild=True)
+    async def prefix_add(self, ctx, new_prefix: Prefix):
+        """
+        Adiciona um prefixo.
+        
+        É permitido no máximo 3 prefixos por vez.
+        """
+        mentions = (f'<@{self.bot.user.id}>', f'<@!{self.bot.user.id}>')
+        if len(new_prefix) > 5:
+            return await ctx.send(_('O prefixo pode ter no máximo 5 caracteres.'))
+
+        doc = await self.bot.db.guilds.find(ctx.guild.id)
+        if doc and doc.prefixes:
+            if len(doc.prefixes) == 3:
+                return await ctx.send(_('O limite de 3 prefixos foi atigindo.'))
+
+            if new_prefix in doc.prefixes:
+                return await ctx.send(_('Esse prefixo já está sendo utilizado.'))
+
+        if not doc:
+            doc = await self.bot.db.guilds.new(ctx.guild.id)
+
+        doc.prefixes = doc.prefixes or []
+        doc.prefixes.append(new_prefix)
+        await doc.sync()
+
+        await ctx.send(_('Prefixo `{prefix}` adicionado.', prefix=new_prefix))
+
+    @prefix.command(name='remove', aliases=['rm'])
+    @commands.has_permissions(manage_guild=True)
+    async def prefix_remove(self, ctx, prefix: Prefix):
+        """
+        Remove um prefixo.
+        
+        Caso todos os prefixos sejam removidos, os padrões serão usados.
+        """
+
+        doc = await self.bot.db.guilds.find(ctx.guild.id)
+        if not doc or not doc.prefixes or not prefix in doc.prefixes:
+            return await ctx.send(_('Este prefixo não está sendo utilizado.'))
+
+        doc.prefixes.remove(prefix)
+        await doc.sync()
+
+        await ctx.send(_('Prefixo `{prefix}` removido.', prefix=prefix))
 
 
 def setup(bot):
