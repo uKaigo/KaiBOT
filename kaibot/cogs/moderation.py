@@ -220,9 +220,20 @@ class Moderation(custom.Cog, translator=_):
     @commands.group(invoke_without_command=True)
     async def prefix(self, ctx):
         """Configuração de prefixos do servidor."""
-        await ctx.send_help(self.prefix)
+        prefixes = (f'@{self.bot.user.name}',)
+
+        doc = await self.bot.db.guilds.find(ctx.guild.id)
+        if not doc or not doc.prefixes:
+            prefixes += config.PREFIXES
+        else:
+            prefixes += tuple(doc.prefixes)
+
+        prefixes = (f'`{prefix}`' for prefix in prefixes)
+
+        await ctx.send(_('Os prefixos do servidor são: {prefixes}', prefixes=format_list(prefixes)))
 
     @prefix.command(name='add')
+    @commands.has_permissions(manage_guild=True)
     async def prefix_add(self, ctx, new_prefix: Prefix):
         """
         Adiciona um prefixo.
@@ -251,6 +262,7 @@ class Moderation(custom.Cog, translator=_):
         await ctx.send(_('Prefixo `{prefix}` adicionado.', prefix=new_prefix))
 
     @prefix.command(name='remove', aliases=['rm'])
+    @commands.has_permissions(manage_guild=True)
     async def prefix_remove(self, ctx, prefix: Prefix):
         """
         Remove um prefixo.
