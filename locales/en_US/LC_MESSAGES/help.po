@@ -45,7 +45,7 @@ msgstr "{name} commands"
 #: kaibot/cogs/resources/help.py:58 kaibot/cogs/resources/help.py:169
 #: kaibot/cogs/resources/help.py:196
 msgid "_Possui subcomandos._"
-msgstr "Subcommands:"
+msgstr "_Has subcommands._:"
 
 #: kaibot/cogs/resources/help.py:64
 msgid "Página {current}/{max}"
