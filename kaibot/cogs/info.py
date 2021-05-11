@@ -77,10 +77,10 @@ class Info(custom.Cog, translator=_):
 
         await ctx.send(embed=embed)
 
-    @avatar.command()
+    @avatar.command(name='random')
     @commands.guild_only()
     @needs_chunk()
-    async def random(self, ctx):
+    async def avatar_random(self, ctx):
         """Mostra um avatar aleatório."""
         member = choice(ctx.guild.members)
         await self.avatar(ctx, member=member)

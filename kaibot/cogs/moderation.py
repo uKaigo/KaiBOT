@@ -223,7 +223,7 @@ class Moderation(custom.Cog, translator=_):
         await ctx.send_help(self.prefix)
 
     @prefix.command(name='add')
-    async def add(self, ctx, new_prefix):
+    async def prefix_add(self, ctx, new_prefix):
         """
         Adiciona um prefixo.
         
@@ -250,7 +250,7 @@ class Moderation(custom.Cog, translator=_):
         await ctx.send(_('Prefixo `{prefix}` adicionado.', prefix=new_prefix))
 
     @prefix.command(name='remove', aliases=['rm'])
-    async def remove(self, ctx, prefix):
+    async def prefix_remove(self, ctx, prefix):
         """
         Remove um prefixo.
         

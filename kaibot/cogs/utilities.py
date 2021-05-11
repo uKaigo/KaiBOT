@@ -116,7 +116,7 @@ class Utilities(custom.Cog, translator=_):
         await ctx.send_help(self.brainfuck)
 
     @brainfuck.command(name='decode')
-    async def bf_decode(self, ctx, *, text):
+    async def brainfuck_decode(self, ctx, *, text):
         """
         Decodificador de [brainfuck](https://pt.wikipedia.org/wiki/Brainfuck).
 
@@ -146,6 +146,7 @@ class Utilities(custom.Cog, translator=_):
 
         return await ctx.send(embed=embed)
 
+    # TODO: Brainfuck Encode?
 
 def setup(bot):
     bot.add_cog(Utilities(bot))
