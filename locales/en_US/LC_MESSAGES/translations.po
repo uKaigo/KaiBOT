@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  kaibot\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-20 21:03-0300\n"
-"PO-Revision-Date: 2021-04-26 15:27-0300\n"
+"POT-Creation-Date: 2021-05-11 19:49-0300\n"
+"PO-Revision-Date: 2021-05-11 20:03-0300\n"
 "Last-Translator: \n"
 "Language: en_US\n"
 "Language-Team: English\n"
@@ -153,4 +153,8 @@ msgstr "{date} at {time}"
 #: kaibot/utils/translations.py:57
 msgid "Insira um número entre {0.min} e {0.max}."
 msgstr "Insert a number between {0.min} and {0.max}."
+
+#: kaibot/utils/translations.py:58
+msgid "Esse prefixo está reservado."
+msgstr "This prefix is reserverd."
 

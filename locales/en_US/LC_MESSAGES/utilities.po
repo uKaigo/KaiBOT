@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  kaibot\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-06 12:15-0300\n"
-"PO-Revision-Date: 2021-05-04 13:23-0300\n"
+"POT-Creation-Date: 2021-05-11 19:49-0300\n"
+"PO-Revision-Date: 2021-05-11 20:03-0300\n"
 "Last-Translator: \n"
 "Language: en_US\n"
 "Language-Team: English\n"
@@ -91,7 +91,7 @@ msgstr "The text can have up to {max} characters."
 msgid "Tradutor de [brainfuck](https://pt.wikipedia.org/wiki/Brainfuck)."
 msgstr "[brainfuck](https://en.wikipedia.org/wiki/Brainfuck) translator."
 
-#: kaibot/cogs/utilities.py:120
+#: kaibot/cogs/utilities.py:121
 #, docstring
 msgid ""
 "Decodificador de [brainfuck](https://pt.wikipedia.org/wiki/Brainfuck).\n"
@@ -104,19 +104,19 @@ msgstr ""
 "`,` will read the next value of a `A-Za-z0-9` string.\n"
 "For example: `,.` would print \"A\"."
 
-#: kaibot/cogs/utilities.py:134
+#: kaibot/cogs/utilities.py:135
 msgid "Tempo excedido."
 msgstr "Time exceeded."
 
-#: kaibot/cogs/utilities.py:140
+#: kaibot/cogs/utilities.py:141
 msgid "Texto por: {author} ({author.id})"
 msgstr "Text by: {author} ({author.id})"
 
-#: kaibot/cogs/utilities.py:144
+#: kaibot/cogs/utilities.py:145
 msgid "Saída:"
 msgstr "Output:"
 
-#: kaibot/cogs/utilities.py:145
+#: kaibot/cogs/utilities.py:146
 msgid "Memória:"
 msgstr "Memory:"
 

@@ -219,7 +219,7 @@ class Moderation(custom.Cog, translator=_):
 
     @commands.group(invoke_without_command=True)
     async def prefix(self, ctx):
-        """Configuração de prefixos do servidor."""
+        """Comandos relacionados ao prefixo do servidor."""
         prefixes = (f'@{self.bot.user.name}',)
 
         doc = await self.bot.db.guilds.find(ctx.guild.id)
