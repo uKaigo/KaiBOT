@@ -237,14 +237,18 @@ class Moderation(custom.Cog, translator=_):
             return await ctx.send(_('O prefixo pode ter no máximo 5 caracteres.'))
 
         doc = await self.bot.db.guilds.find(ctx.guild.id)
-        if doc and doc.prefixes and len(doc.prefixes) == 3:
-            return await ctx.send(_('O limite de 3 prefixos foi atigindo.'))
+        if doc and doc.prefixes:
+            if len(doc.prefixes) == 3:
+                return await ctx.send(_('O limite de 3 prefixos foi atigindo.'))
+
+            if new_prefix.strip().casefold() in doc.prefixes:
+                return await ctx.send(_('Esse prefixo já está sendo utilizado.'))
 
         if not doc:
             doc = await self.bot.db.guilds.new(ctx.guild.id)
 
         doc.prefixes = doc.prefixes or []
-        doc.prefixes.append(new_prefix)
+        doc.prefixes.append(new_prefix.strip().casefold())
         await doc.sync()
 
         await ctx.send(_('Prefixo `{prefix}` adicionado.', prefix=new_prefix))
@@ -261,10 +265,10 @@ class Moderation(custom.Cog, translator=_):
             return await ctx.send(_('Esse prefixo está reservado.'))
 
         doc = await self.bot.db.guilds.find(ctx.guild.id)
-        if not doc or not doc.prefixes or not prefix in doc.prefixes:
+        if not doc or not doc.prefixes or not prefix.strip().casefold() in doc.prefixes:
             return await ctx.send(_('Este prefixo não está sendo utilizado.'))
 
-        doc.prefixes.remove(prefix)
+        doc.prefixes.remove(prefix.strip().casefold())
         await doc.sync()
 
         await ctx.send(_('Prefixo `{prefix}` removido.', prefix=prefix))
