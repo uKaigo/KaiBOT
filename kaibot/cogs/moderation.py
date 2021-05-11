@@ -8,7 +8,7 @@ from discord.ext import commands
 from .. import config
 from ..i18n import Translator, current_language
 from ..utils import can_modify, custom, escape_text, format_list
-from ..utils.converters import MemberOrUser, Range
+from ..utils.converters import MemberOrUser, Prefix, Range
 
 _ = Translator(__name__)
 
@@ -223,16 +223,13 @@ class Moderation(custom.Cog, translator=_):
         await ctx.send_help(self.prefix)
 
     @prefix.command(name='add')
-    async def prefix_add(self, ctx, new_prefix):
+    async def prefix_add(self, ctx, new_prefix: Prefix):
         """
         Adiciona um prefixo.
         
         É permitido no máximo 3 prefixos por vez.
         """
         mentions = (f'<@{self.bot.user.id}>', f'<@!{self.bot.user.id}>')
-        if new_prefix.casefold() in config.PREFIXES + mentions:
-            return await ctx.send(_('Esse prefixo está reservado.'))
-
         if len(new_prefix) > 5:
             return await ctx.send(_('O prefixo pode ter no máximo 5 caracteres.'))
 
@@ -241,34 +238,31 @@ class Moderation(custom.Cog, translator=_):
             if len(doc.prefixes) == 3:
                 return await ctx.send(_('O limite de 3 prefixos foi atigindo.'))
 
-            if new_prefix.strip().casefold() in doc.prefixes:
+            if new_prefix in doc.prefixes:
                 return await ctx.send(_('Esse prefixo já está sendo utilizado.'))
 
         if not doc:
             doc = await self.bot.db.guilds.new(ctx.guild.id)
 
         doc.prefixes = doc.prefixes or []
-        doc.prefixes.append(new_prefix.strip().casefold())
+        doc.prefixes.append(new_prefix)
         await doc.sync()
 
         await ctx.send(_('Prefixo `{prefix}` adicionado.', prefix=new_prefix))
 
     @prefix.command(name='remove', aliases=['rm'])
-    async def prefix_remove(self, ctx, prefix):
+    async def prefix_remove(self, ctx, prefix: Prefix):
         """
         Remove um prefixo.
         
         Caso todos os prefixos sejam removidos, os padrões serão usados.
         """
-        mentions = (f'<@{self.bot.user.id}>', f'<@!{self.bot.user.id}>')
-        if prefix.casefold() in config.PREFIXES + mentions:
-            return await ctx.send(_('Esse prefixo está reservado.'))
 
         doc = await self.bot.db.guilds.find(ctx.guild.id)
-        if not doc or not doc.prefixes or not prefix.strip().casefold() in doc.prefixes:
+        if not doc or not doc.prefixes or not prefix in doc.prefixes:
             return await ctx.send(_('Este prefixo não está sendo utilizado.'))
 
-        doc.prefixes.remove(prefix.strip().casefold())
+        doc.prefixes.remove(prefix)
         await doc.sync()
 
         await ctx.send(_('Prefixo `{prefix}` removido.', prefix=prefix))

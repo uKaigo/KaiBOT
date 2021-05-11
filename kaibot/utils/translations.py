@@ -55,4 +55,5 @@ DATETIME = _('{date} às {time}')
 
 ERRORS = {
     'not_in_range': _('Insira um número entre {0.min} e {0.max}.'),
+    'reserved_prefix': _('Esse prefixo está reservado.')
 }

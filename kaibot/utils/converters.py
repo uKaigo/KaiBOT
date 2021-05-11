@@ -3,6 +3,7 @@ from typing import Union
 import discord
 from discord.ext import commands
 
+from .. import config
 from .translations import ERRORS
 
 MemberOrUser = Union[discord.Member, discord.User]
@@ -37,3 +38,14 @@ class Range(commands.Converter):
             min_ = 0
             max_ = slc
         return cls(min_, max_)
+
+class Prefix(commands.Converter):
+    async def convert(self, ctx, argument):
+        prefix = argument.strip().casefold()
+
+        mentions = (f'<@{ctx.bot.user.id}>', f'<@!{ctx.bot.user.id}>')
+
+        if prefix in config.PREFIXES + mentions:
+            raise BadArgument(ERRORS['reserved_prefix'])
+
+        return prefix
