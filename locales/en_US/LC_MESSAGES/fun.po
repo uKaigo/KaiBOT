@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  kaibot\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-01 11:35-0300\n"
-"PO-Revision-Date: 2021-05-01 11:35-0300\n"
+"POT-Creation-Date: 2021-05-12 23:49-0300\n"
+"PO-Revision-Date: 2021-05-12 23:50-0300\n"
 "Last-Translator: \n"
 "Language: en_US\n"
 "Language-Team: English\n"
@@ -40,11 +40,19 @@ msgstr "You're already in a game."
 msgid "**{player}** já está em um jogo."
 msgstr "**{player}** is already in a game."
 
-#: kaibot/cogs/fun.py:50
+#: kaibot/cogs/fun.py:40
+msgid "{player}, deseja jogar Jogo da Velha contra {author}?"
+msgstr "{player}, do you want to play TicTacToe against {author}?"
+
+#: kaibot/cogs/fun.py:56
+msgid "{player} não aceitou."
+msgstr "{player} declined."
+
+#: kaibot/cogs/fun.py:67
 msgid "Criando sessão de {name}"
 msgstr "Creating {name} session"
 
-#: kaibot/cogs/fun.py:57
+#: kaibot/cogs/fun.py:74
 #, docstring
 msgid ""
 "Cria uma nova sessão de YouTube Together.\n"
@@ -55,11 +63,11 @@ msgstr ""
 "\n"
 "Only available in desktop."
 
-#: kaibot/cogs/fun.py:67 kaibot/cogs/fun.py:90
+#: kaibot/cogs/fun.py:84 kaibot/cogs/fun.py:107
 msgid "[Clique aqui]({invite}) para abrir a sessão de {name}."
 msgstr "[Click here]({invite}) to open the {name} session."
 
-#: kaibot/cogs/fun.py:80
+#: kaibot/cogs/fun.py:97
 #, docstring
 msgid ""
 "Cria uma nova sessão de Poker Night.\n"

@@ -37,7 +37,24 @@ class Fun(custom.Cog, translator=_):
                 _('**{player}** já está em um jogo.', player=escape_text(player.display_name))
             )
 
-        msg = await ctx.send('\N{ZERO WIDTH SPACE}')
+        text = _(
+            '{player}, deseja jogar Jogo da Velha contra {author}?',
+            author=ctx.author.mention,
+            player=player.mention,
+        )
+        msg = await ctx.send(text, allowed_mentions=discord.AllowedMentions(users=True))
+        await msg.add_reaction('✅')
+        await msg.add_reaction('❌')
+
+        check = lambda r, u: r.message == msg and u == player and r.emoji in ['✅', '❌']
+        reaction, user = await self.bot.wait_for('reaction_add', check=check)
+
+        if ctx.me.permissions_in(ctx.channel).manage_messages:
+            await msg.clear_reactions()
+
+        if reaction.emoji == '❌':
+            not_accepted_text = _('{player} não aceitou.', player=player.mention)
+            return await msg.edit(content=text + '\n- ' + not_accepted_text)
 
         await self._ttt_game.start(msg, ctx.author, player)
 
