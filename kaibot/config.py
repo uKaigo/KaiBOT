@@ -18,6 +18,6 @@ EXTENSIONS = (
     '.cogs.moderation',
 )
 
-LOGS = {'commands': 822644877673496626, 'errors': 822644820170113057}
+LOGS = {'commands': 822644877673496626, 'errors': 822644820170113057, 'guilds': 842229415223623682}
 
 __import__('os').environ.update({f'JISHAKU_{FLAG}': '1' for FLAG in JISHAKU_FLAGS})

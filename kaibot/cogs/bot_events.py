@@ -1,5 +1,6 @@
 from datetime import datetime
 from io import StringIO
+from kaibot.utils import escape_text
 from sys import version_info as py_version_i
 
 import discord
@@ -133,6 +134,26 @@ class BotEvents(commands.Cog):
 
         embed.timestamp = ctx.message.created_at
         await channel.send(embed=embed, file=file)
+
+    @commands.Cog.listener()
+    async def on_guild_join(self, guild):
+        channel = self.bot.get_channel(config.LOGS['guilds'])
+
+        embed = discord.Embed(title='Novo servidor', color=config.MAIN_COLOR)
+        embed.set_author(name=f'{guild.name} [{guild.id}]', icon_url=guild.icon_url)
+        embed.description = f'Dono: <@{guild.owner_id}>'
+
+        await channel.send(embed=embed)
+
+    @commands.Cog.listener()
+    async def on_guild_remove(self, guild):
+        channel = self.bot.get_channel(config.LOGS['guilds'])
+
+        embed = discord.Embed(title='Removido de um servidor', color=config.MAIN_COLOR)
+        embed.set_author(name=f'{guild.name} [{guild.id}]', icon_url=guild.icon_url)
+        embed.description = f'Dono: <@{guild.owner_id}>'
+
+        await channel.send(embed=embed)
 
 
 def setup(bot):
