@@ -32,7 +32,17 @@ class KaiBOT(commands.Bot):
 
         self.load_all_extensions(config.EXTENSIONS)
 
+        self.private_guild = None
+        self.loop.create_task(self.lazy_init())
+
+        self._flags_cache = {}
+
     # - HELPERS -
+
+    async def lazy_init(self):
+        await self.wait_until_ready()
+        self.private_guild = self.get_guild(config.PRIVATE_GUILD)
+        await self.private_guild.chunk()
 
     async def close(self):
         await self.session.close()
@@ -50,6 +60,25 @@ class KaiBOT(commands.Bot):
                 log.info(f'Loaded "{extension}".')
 
         log.debug(f'Loaded {len(self.extensions)} extensions with {len(self.commands)} commands.')
+
+    def get_flags_for(self, user):
+        member = self.private_guild.get_member(user.id)
+
+        if user.id in self._flags_cache:
+            return self._flags_cache[member.id]
+
+        flags = 0
+
+        if member:
+            role_ids = [r.id for r in member.roles]
+
+            for flag, i in config.FLAGS.items():
+                if flag in role_ids:
+                    flags |= i
+
+        self._flags_cache[member.id] = flags
+
+        return flags
 
     async def get_language_for(self, guild):
         doc = await self.db.guilds.find(guild.id)

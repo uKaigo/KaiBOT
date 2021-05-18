@@ -9,6 +9,7 @@ from ..utils import custom, format_datetime, format_list
 from ..utils.converters import MemberOrUser
 from ..utils.decorators import needs_chunk
 from ..utils.translations import PERMISSIONS
+from ..utils.enums import Flags
 
 _ = Translator(__name__)
 
@@ -97,6 +98,18 @@ class Info(custom.Cog, translator=_):
 
         embed_info = discord.Embed(color=member.color)
         embed_info.set_author(name=f'{member} [{member.id}]', icon_url=member.avatar_url)
+
+        flags = []
+        user_flags = self.bot.get_flags_for(member)
+
+        if user_flags & Flags.DEVELOPER:
+            flags.append('💻  ' + _('Desenvolvedor'))
+        if user_flags & Flags.TRANSLATOR:
+            flags.append('📖  ' + _('Tradutor'))
+        if user_flags & Flags.VIP:
+            flags.append('⭐  ' + _('VIP'))
+
+        embed_info.description = '\n'.join(flags)
 
         embed_info.add_field(
             name=_('🗓️ Criou a conta em'),
