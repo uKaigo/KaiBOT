@@ -1,4 +1,5 @@
 import sys
+from asyncio import TimeoutError
 
 import discord
 import discord.http
@@ -47,10 +48,13 @@ class Fun(custom.Cog, translator=_):
         await msg.add_reaction('❌')
 
         check = lambda r, u: r.message == msg and u == player and r.emoji in ['✅', '❌']
-        reaction, user = await self.bot.wait_for('reaction_add', check=check)
-
-        if ctx.me.permissions_in(ctx.channel).manage_messages:
-            await msg.clear_reactions()
+        try:
+            reaction, user = await self.bot.wait_for('reaction_add', check=check, timeout=30)
+        except TimeoutError:
+            return await msg.edit(content=text + '\n- ' + _('Tempo excedido.'))
+        finally:
+            if ctx.me.permissions_in(ctx.channel).manage_messages:
+                await msg.clear_reactions()
 
         if reaction.emoji == '❌':
             not_accepted_text = _('{player} não aceitou.', player=player.mention)
