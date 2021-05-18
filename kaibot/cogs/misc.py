@@ -35,7 +35,7 @@ class Miscelaneous(custom.Cog, translator=_):
     @commands.command()
     async def ping(self, ctx):
         """Envia a latência da websocket e o tempo de resposta."""
-        txt = _('🏓 Ping\n- Websocket: {}ms\n- Database: {}ms\n- Tempo de resposta: {}ms')
+        txt = _('🏓 Pong\n- Websocket: {}ms\n- Database: {}ms\n- Tempo de resposta: {}ms')
         msg = await ctx.send(txt.format('NaN', 'NaN', 'NaN'))
 
         diff = (msg.created_at - ctx.message.created_at).total_seconds()
