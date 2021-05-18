@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  kaibot\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-11 19:49-0300\n"
-"PO-Revision-Date: 2021-05-11 20:03-0300\n"
+"POT-Creation-Date: 2021-05-18 20:05-0300\n"
+"PO-Revision-Date: 2021-05-18 20:10-0300\n"
 "Last-Translator: \n"
 "Language: en_US\n"
 "Language-Team: English\n"
@@ -52,7 +52,7 @@ msgstr "The channel is already unlocked."
 
 #: kaibot/cogs/moderation.py:78
 msgid "Canal desbloqueado."
-msgstr "Channel unlocked"
+msgstr "Channel unlocked."
 
 #: kaibot/cogs/moderation.py:82
 msgid "Você não pode fazer isso com **{member}**."
@@ -170,23 +170,23 @@ msgstr ""
 "\n"
 "3 prefixes are allowed at a time."
 
-#: kaibot/cogs/moderation.py:245
+#: kaibot/cogs/moderation.py:244
 msgid "O prefixo pode ter no máximo 5 caracteres."
 msgstr "The prefix can have up to 5 characters."
 
-#: kaibot/cogs/moderation.py:250
+#: kaibot/cogs/moderation.py:249
 msgid "O limite de 3 prefixos foi atigindo."
 msgstr "The limit of 3 prefixes was reached."
 
-#: kaibot/cogs/moderation.py:253
+#: kaibot/cogs/moderation.py:252
 msgid "Esse prefixo já está sendo utilizado."
 msgstr "This prefix is already in use."
 
-#: kaibot/cogs/moderation.py:262
+#: kaibot/cogs/moderation.py:261
 msgid "Prefixo `{prefix}` adicionado."
 msgstr "Prefix `{prefix}` added."
 
-#: kaibot/cogs/moderation.py:267
+#: kaibot/cogs/moderation.py:266
 #, docstring
 msgid ""
 "Remove um prefixo.\n"
@@ -197,10 +197,11 @@ msgstr ""
 "\n"
 "If all prefixes are removed, the defaults will be used."
 
-#: kaibot/cogs/moderation.py:275
+#: kaibot/cogs/moderation.py:274
 msgid "Este prefixo não está sendo utilizado."
 msgstr "This prefix isn't in use."
 
-#: kaibot/cogs/moderation.py:280
+#: kaibot/cogs/moderation.py:279
 msgid "Prefixo `{prefix}` removido."
 msgstr "Prefix `{prefix}` removed."
+
