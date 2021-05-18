@@ -223,7 +223,7 @@ class TTTIntegration:
 
         msg = await self._do_rollover(message)
 
-        if msg != message:
+        if msg != message and game.winner is None:
             self._create_task(self._add_reactions(msg, game))
 
             for player in players:
