@@ -237,10 +237,9 @@ class Moderation(custom.Cog, translator=_):
     async def prefix_add(self, ctx, new_prefix: Prefix):
         """
         Adiciona um prefixo.
-        
+
         É permitido no máximo 3 prefixos por vez.
         """
-        mentions = (f'<@{self.bot.user.id}>', f'<@!{self.bot.user.id}>')
         if len(new_prefix) > 5:
             return await ctx.send(_('O prefixo pode ter no máximo 5 caracteres.'))
 
@@ -266,7 +265,7 @@ class Moderation(custom.Cog, translator=_):
     async def prefix_remove(self, ctx, prefix: Prefix):
         """
         Remove um prefixo.
-        
+
         Caso todos os prefixos sejam removidos, os padrões serão usados.
         """
 
