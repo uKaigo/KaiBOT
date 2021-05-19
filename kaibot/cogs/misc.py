@@ -1,10 +1,14 @@
+from datetime import datetime
 import sys
 
+import psutil
 import discord
+import humanize
 from discord.ext import commands
 
+
 from .. import config
-from ..i18n import Translator
+from ..i18n import Translator, current_language
 from ..utils import custom
 from .resources.help import Help
 
@@ -63,6 +67,42 @@ class Miscelaneous(custom.Cog, translator=_):
             'peça a exclusão dos seus dados.'
         )
 
+        await ctx.send(embed=embed)
+
+    @commands.command(aliases=['bi'])
+    async def botinfo(self, ctx):
+        embed = discord.Embed(color=config.MAIN_COLOR)
+        embed.set_author(name=_('Informações sobre mim'), icon_url=self.bot.user.avatar_url)
+
+        who_am_i = _('Sou KaiBOT, um bot criado para te ajudar no seu servidor.')
+        who_am_i += '\n' + _(
+            'Tenho vários comandos, incluindo moderação, diversão, utilitários e mais!'
+        )
+
+        embed.add_field(name=_('Quem sou eu?'), value=who_am_i, inline=False)
+
+        delta = datetime.utcnow() - self.bot.uptime
+        if current_language.get() != 'en_US':
+            humanize.activate(current_language.get())
+        else:
+            humanize.deactivate()
+
+        embed.add_field(
+            name=_('Estou online a:'),
+            value=humanize.precisedelta(delta, format='%d') + '.',
+            inline=False,
+        )
+
+        resources = ''
+        proc = psutil.Process()
+
+        with proc.oneshot():
+            mem = proc.memory_full_info()
+            resources += _('Usando {mem} de memória RAM.', mem=humanize.naturalsize(mem.uss))
+
+            resources += '\n' + _('Usando {percent}% de CPU.', percent=int(proc.cpu_percent()))
+
+        embed.add_field(name=_('Recursos:'), value=resources, inline=False)
         await ctx.send(embed=embed)
 
 

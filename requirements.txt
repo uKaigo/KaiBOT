@@ -3,8 +3,11 @@ git+https://github.com/Gorialis/jishaku
 git+https://github.com/Rapptz/discord-ext-menus
 Babel
 python-dotenv
-aiohttp
 rich
 psutil
 motor
 dnspython
+
+# These are already installed as dependencies, but let's keep it here.
+aiohttp
+humanize
