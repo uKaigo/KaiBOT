@@ -6,6 +6,7 @@ from random import randint
 
 import discord
 from discord.ext import commands
+from aiohttp import ClientConnectorError
 
 from .. import config
 from ..i18n import Translator
@@ -76,7 +77,13 @@ class Utilities(custom.Cog, translator=_):
         # FIXME: Really. Fix this mess.
         description = ''
         async with ctx.typing():
-            dest = await self.bot.session.get(link.strip('<>'))
+            try:
+                dest = await self.bot.session.get(link.strip('<>'))
+            except ClientConnectorError as e:
+                return await ctx.send(
+                    _('Não pude me conectar com o site: `{error}`', error=e.strerror)
+                )
+
             h_len = len(dest.history)
             for index, res in enumerate(dest.history + (dest,)):
                 em = '🔷' if index in (0, h_len) else '🔹'
@@ -148,6 +155,7 @@ class Utilities(custom.Cog, translator=_):
         return await ctx.send(embed=embed)
 
     # TODO: Brainfuck Encode?
+
 
 def setup(bot):
     bot.add_cog(Utilities(bot))
