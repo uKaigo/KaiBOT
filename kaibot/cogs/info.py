@@ -66,6 +66,7 @@ class Info(custom.Cog, translator=_):
             name=_('Avatar de {member}', member=member.display_name),
             icon_url=member.avatar_url,
         )
+        embed.set_footer(text=_('Executado por: {author}', author=ctx.author))
 
         formats = ['png', 'jpg', 'webp']
         if member.is_avatar_animated():
