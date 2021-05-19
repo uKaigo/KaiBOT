@@ -68,7 +68,7 @@ class ErrorHandler(commands.Cog):
             return await ctx.send(
                 _(
                     'O membro "{string}" não foi encontrado.',
-                    string=escape_text(error.argument),
+                    string=escape_text(error.argument)[:1000],
                 )
             )
 
@@ -87,7 +87,7 @@ class ErrorHandler(commands.Cog):
             return await ctx.send(
                 _(
                     'Não foi possível converter "{string}" para {converters}.',
-                    string=escape_text(arg),
+                    string=escape_text(arg)[:1000],
                     converters=format_list(converters, style='or'),
                 )
             )
