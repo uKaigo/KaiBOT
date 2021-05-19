@@ -138,8 +138,11 @@ class Utilities(custom.Cog, translator=_):
             async with ctx.typing():
                 out = await asyncio.wait_for(runner(text), timeout=30)
         except asyncio.TimeoutError:
+            await ctx.send(_('Tempo excedido.'))
+
             decoder.cancelled = True
-            return await ctx.send(_('Tempo excedido.'))
+            await asyncio.sleep(0.3)  # Let decoder cancel
+            return decoder.mem.clear()
 
         mem = json.dumps(decoder.mem, indent=2, check_circular=False).replace('"', '')
 
