@@ -37,6 +37,8 @@ class KaiBOT(commands.Bot):
 
         self._flags_cache = {}
 
+        self.add_check(self.send_messages_check)
+
     # - HELPERS -
 
     async def lazy_init(self):
@@ -98,6 +100,11 @@ class KaiBOT(commands.Bot):
             prefixes = doc.prefixes
 
         return commands.when_mentioned_or(*prefixes)(bot, message)
+
+    def send_messages_check(self, ctx):
+        if not ctx.me.permissions_in(ctx.channel).send_messages:
+            return False
+        return True
 
     # - EVENTS -
 
