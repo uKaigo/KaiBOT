@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  kaibot\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-18 20:05-0300\n"
-"PO-Revision-Date: 2021-05-18 20:09-0300\n"
+"POT-Creation-Date: 2021-05-20 07:13-0300\n"
+"PO-Revision-Date: 2021-05-20 07:14-0300\n"
 "Last-Translator: \n"
 "Language: en_US\n"
 "Language-Team: English\n"
@@ -14,21 +14,21 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.9.0\n"
 
-#: kaibot/cogs/misc.py:15
+#: kaibot/cogs/misc.py:19
 #, docstring
 msgid "Comandos que não se encaixam em outra categoria."
 msgstr "Commands that doesn't fit in another category."
 
-#: kaibot/cogs/misc.py:24
+#: kaibot/cogs/misc.py:28
 msgid "Mostra essa mensagem."
 msgstr "Shows this message."
 
-#: kaibot/cogs/misc.py:37
+#: kaibot/cogs/misc.py:41
 #, docstring
 msgid "Envia a latência da websocket e o tempo de resposta."
 msgstr "Sends the websocket's latency and the response time."
 
-#: kaibot/cogs/misc.py:38
+#: kaibot/cogs/misc.py:42
 msgid ""
 "🏓 Pong\n"
 "- Websocket: {}ms\n"
@@ -40,20 +40,70 @@ msgstr ""
 "- Database: {}ms\n"
 "- Response time: {}ms"
 
-#: kaibot/cogs/misc.py:50
+#: kaibot/cogs/misc.py:54
 #, docstring
 msgid "Políticas de privacidade."
 msgstr "Privacy policies."
 
-#: kaibot/cogs/misc.py:53
+#: kaibot/cogs/misc.py:57
 msgid "Políticas de privacidade | KaiBOT"
 msgstr "Privacy policies | KaiBOT"
 
-#: kaibot/cogs/misc.py:57
+#: kaibot/cogs/misc.py:61
 msgid "As políticas de privacidade podem ser encontradas [nesse link]({policy})."
 msgstr "The privacy policies can be found at [this link]({policy})."
 
-#: kaibot/cogs/misc.py:61
+#: kaibot/cogs/misc.py:65
 msgid "Caso você não concorda com essa política, pare de usar o bot e (opcionalmente) peça a exclusão dos seus dados."
 msgstr "If you don't agree with this policy, stop using the bot and (optionally) ask for the deletion of your data."
+
+#: kaibot/cogs/misc.py:74
+#, docstring
+msgid "Informações sobre mim."
+msgstr "Information about me."
+
+#: kaibot/cogs/misc.py:76
+msgid "Informações sobre mim"
+msgstr "Information about me."
+
+#: kaibot/cogs/misc.py:78
+msgid "Sou KaiBOT, um bot criado para te ajudar no seu servidor."
+msgstr "I'm KaiBOT, a bot created to help you in your server."
+
+#: kaibot/cogs/misc.py:79
+msgid "Tenho vários comandos, incluindo moderação, diversão, utilitários e mais!"
+msgstr "I have many commands, including moderation, fun, utilities and more!"
+
+#: kaibot/cogs/misc.py:83
+msgid "Quem sou eu?"
+msgstr "Who am I?"
+
+#: kaibot/cogs/misc.py:92
+msgid "Estou online a:"
+msgstr "I'm online for:"
+
+#: kaibot/cogs/misc.py:97
+msgid "{commands} comandos."
+msgstr "{commands} commands."
+
+#: kaibot/cogs/misc.py:98
+msgid "{guilds} servidores."
+msgstr "{guilds} servers."
+
+#: kaibot/cogs/misc.py:100
+msgid "Possuo:"
+msgstr "I have:"
+
+#: kaibot/cogs/misc.py:107
+msgid "Usando {mem} de memória RAM."
+msgstr "Using {mem} of RAM."
+
+#: kaibot/cogs/misc.py:109
+#, python-format
+msgid "Usando {percent}% de CPU."
+msgstr "Using {percent}% of CPU."
+
+#: kaibot/cogs/misc.py:111
+msgid "Recursos:"
+msgstr "Resources:"
 
