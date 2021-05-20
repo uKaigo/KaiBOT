@@ -71,6 +71,7 @@ class Miscelaneous(custom.Cog, translator=_):
 
     @commands.command(aliases=['bi'])
     async def botinfo(self, ctx):
+        """Informações sobre mim."""
         embed = discord.Embed(color=config.MAIN_COLOR)
         embed.set_author(name=_('Informações sobre mim'), icon_url=self.bot.user.avatar_url)
 
@@ -92,6 +93,11 @@ class Miscelaneous(custom.Cog, translator=_):
             value=humanize.precisedelta(delta, format='%d') + '.',
             inline=False,
         )
+
+        stats = _('{commands} comandos.', commands=len(self.bot.commands))
+        stats += '\n' + _('{guilds} servidores.', guilds=len(self.bot.guilds))
+
+        embed.add_field(name=_('Possuo:'), value=stats, inline=False)
 
         resources = ''
         proc = psutil.Process()
