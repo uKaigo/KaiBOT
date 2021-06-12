@@ -209,7 +209,7 @@ class Moderation(custom.Cog, translator=_):
         if new_language == current_language.get():
             return await ctx.send(_('Essa linguagem já está sendo usada.'))
 
-        to_set = new_language if new_language != 'pt_BR' else None
+        to_set = new_language if new_language != config.DEFAULT_LANGUAGE else None
 
         await self.bot.db.guilds.update(ctx.guild.id, 'set', {'language': to_set})
 
