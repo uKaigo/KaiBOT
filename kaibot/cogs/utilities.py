@@ -3,6 +3,7 @@ import json
 import sys
 import asyncio
 from random import randint
+from functools import cached_property
 
 import discord
 from discord.ext import commands
@@ -158,6 +159,61 @@ class Utilities(custom.Cog, translator=_):
         return await ctx.send(embed=embed)
 
     # TODO: Brainfuck Encode?
+
+    @commands.group(invoke_without_command=True)
+    async def encrypt(self, ctx, criptography, text):
+        """Comandos para criptografar um texto."""
+        await ctx.send_help(self.encrypt)
+
+    @commands.group(invoke_without_command=True)
+    async def decrypt(self, ctx, criptography, code):
+        """Comandos para descriptografar um código."""
+        await ctx.send_help(self.decrypt)
+
+    # MORSE #
+
+    @cached_property
+    def morse_table(self):
+        with open('cogs/resources/morse.jsonc') as f:
+            to_parse = re.sub('//.+', '', f.read())
+            return json.loads(to_parse)
+
+    @cached_property
+    def inverted_morse_table(self):
+        return dict(zip(self.morse_table.values(), self.morse_table.keys()))
+
+    @encrypt.command(name='morse')
+    async def encrypt_morse(self, ctx, *, text: str.split):
+        """Criptografar código morse."""
+        final = ''
+        for word in text:
+            for char in word:
+                try:
+                    final += self.morse_table[char.upper()] + ' '
+                except KeyError:
+                    pass
+
+            final += ' / '
+
+        author_notes = f'\n\n> {_("Texto por: {author}", author=ctx.author.mention)}'
+        await ctx.send(final[:-2] + author_notes)
+
+    @decrypt.command(name='morse')
+    async def decrypt_morse(self, ctx, *, code):
+        """Descriptografar código morse."""
+        final = ''
+        code = code.split('/')
+
+        for word in code:
+            for char in word.split():
+                try:
+                    final += self.inverted_morse_table[char]
+                except KeyError:
+                    pass
+            final += ' '
+
+        author_notes = f'\n\n> {_("Texto por: {author}", author=ctx.author.mention)}'
+        await ctx.send(final + author_notes)
 
 
 def setup(bot):

@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  kaibot\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-19 16:33-0300\n"
-"PO-Revision-Date: 2021-05-19 11:41-0300\n"
+"POT-Creation-Date: 2021-06-12 02:48-0300\n"
+"PO-Revision-Date: 2021-06-12 02:53-0300\n"
 "Last-Translator: \n"
 "Language: en_US\n"
 "Language-Team: English\n"
@@ -12,14 +12,14 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.9.0\n"
+"Generated-By: Babel 2.9.1\n"
 
-#: kaibot/cogs/utilities.py:21
+#: kaibot/cogs/utilities.py:22
 #, docstring
 msgid "Comandos úteis."
 msgstr "Useful commands."
 
-#: kaibot/cogs/utilities.py:32
+#: kaibot/cogs/utilities.py:33
 #, docstring
 msgid ""
 "Rola um dado.\n"
@@ -36,66 +36,67 @@ msgstr ""
 "`d100` will roll 1 100-sided dice.\n"
 "`100` will roll 1 100-sided dice."
 
-#: kaibot/cogs/utilities.py:48
+#: kaibot/cogs/utilities.py:49
 msgid "Nenhum dos valores pode ser 0."
 msgstr "None of the values can be 0."
 
-#: kaibot/cogs/utilities.py:50
+#: kaibot/cogs/utilities.py:51
 msgid "O dado não pode ter somente 1 lado."
 msgstr "The dice can't have only 1 side."
 
-#: kaibot/cogs/utilities.py:52
+#: kaibot/cogs/utilities.py:53
 msgid "O dado precisa ter menos que 1000 lados."
 msgstr "The dice needs to have less than 1000 sides."
 
-#: kaibot/cogs/utilities.py:54
+#: kaibot/cogs/utilities.py:55
 msgid "Você pode rolar no máximo 200 dados por vez."
 msgstr "You can roll up to 200 dices at a time."
 
-#: kaibot/cogs/utilities.py:61
+#: kaibot/cogs/utilities.py:62
 msgid "Seu dado resultou em: {result}"
 msgstr "Your dice result: {result}"
 
-#: kaibot/cogs/utilities.py:64
+#: kaibot/cogs/utilities.py:65
 msgid "Seus dados resultaram em: {results}"
 msgstr "Your dice results: {results}"
 
-#: kaibot/cogs/utilities.py:66
+#: kaibot/cogs/utilities.py:67
 msgid "Soma: {sum}"
 msgstr "Sum: {sum}"
 
-#: kaibot/cogs/utilities.py:71
+#: kaibot/cogs/utilities.py:72
 #, docstring
 msgid "Mostra todos os redirecionamentos do link."
 msgstr "Shows all the redirects of the link."
 
-#: kaibot/cogs/utilities.py:72
+#: kaibot/cogs/utilities.py:73
 msgid "Redirecionamentos"
 msgstr "Redirects"
 
-#: kaibot/cogs/utilities.py:84
+#: kaibot/cogs/utilities.py:85
 msgid "Não pude me conectar com o site: `{error}`"
 msgstr "I couldn't connect with the site: `{error}`"
 
-#: kaibot/cogs/utilities.py:109
+#: kaibot/cogs/utilities.py:110
 #, docstring
 msgid "Transforma o texto em ｖａｐｏｒｗａｖｅ."
 msgstr "Transforms the text to ｖａｐｏｒｗａｖｅ."
 
-#: kaibot/cogs/utilities.py:110
+#: kaibot/cogs/utilities.py:111 kaibot/cogs/utilities.py:198
+#: kaibot/cogs/utilities.py:215
 msgid "Texto por: {author}"
 msgstr "Text by: {author}"
 
-#: kaibot/cogs/utilities.py:113
+#: kaibot/cogs/utilities.py:114
 msgid "O texto pode ter no máximo {max} caracteres."
 msgstr "The text can have up to {max} characters."
 
-#: kaibot/cogs/utilities.py:122
+#: kaibot/cogs/utilities.py:123
 #, docstring
 msgid "Tradutor de [brainfuck](https://pt.wikipedia.org/wiki/Brainfuck)."
 msgstr "[brainfuck](https://en.wikipedia.org/wiki/Brainfuck) translator."
 
-#: kaibot/cogs/utilities.py:128
+#: kaibot/cogs/utilities.py:129
 #, docstring
 msgid ""
 "Decodificador de [brainfuck](https://pt.wikipedia.org/wiki/Brainfuck).\n"
@@ -108,19 +109,39 @@ msgstr ""
 "`,` will read the next value of a `A-Za-z0-9` string.\n"
 "For example: `,.` would print \"A\"."
 
-#: kaibot/cogs/utilities.py:141
+#: kaibot/cogs/utilities.py:142
 msgid "Tempo excedido."
 msgstr "Time exceeded."
 
-#: kaibot/cogs/utilities.py:151
+#: kaibot/cogs/utilities.py:152
 msgid "Texto por: {author} ({author.id})"
 msgstr "Text by: {author} ({author.id})"
 
-#: kaibot/cogs/utilities.py:155
+#: kaibot/cogs/utilities.py:156
 msgid "Saída:"
 msgstr "Output:"
 
-#: kaibot/cogs/utilities.py:156
+#: kaibot/cogs/utilities.py:157
 msgid "Memória:"
 msgstr "Memory:"
+
+#: kaibot/cogs/utilities.py:165
+#, docstring
+msgid "Comandos para criptografar um texto."
+msgstr "Commands to encrypt a text."
+
+#: kaibot/cogs/utilities.py:170
+#, docstring
+msgid "Comandos para descriptografar um código."
+msgstr "Commands to decrypt a text."
+
+#: kaibot/cogs/utilities.py:187
+#, docstring
+msgid "Criptografar código morse."
+msgstr "Encrypt morse code."
+
+#: kaibot/cogs/utilities.py:203
+#, docstring
+msgid "Descriptografar código morse."
+msgstr "Decrypt morse code."
 
