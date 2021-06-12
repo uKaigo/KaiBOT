@@ -133,7 +133,7 @@ class CollectionManager:
 
     async def ping(self):
         start = time.perf_counter()
-        await self.__collection.find_one({})
+        await self.__collection.database.command('ping')
         return time.perf_counter() - start
 
 
