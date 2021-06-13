@@ -31,6 +31,12 @@ class Document:
     def __setattr__(self, attr, value):
         self.__data[attr] = value
 
+    def __getitem__(self, item):
+        return self.__getattr__(item)
+
+    def __setitem__(self, item, value):
+        self.__setattr__(item, value)
+
     def update(self, data):
         self.__data.update(data)
 
@@ -118,13 +124,34 @@ class CollectionManager:
             return self.__cache.insert(id, None)
         return self.__cache.insert(id, Document(data, self))
 
+    def _update_doc(self, doc, operation, data):
+        if operation == 'inc':
+            for k, v in data.items():
+                doc[k] += v
+
+        elif operation == 'set':
+            for k, v in data.items():
+                doc[k] = v
+
     async def update(self, id, operation, data):
         id = str(id)
 
-        data = await self.__collection.find_one_and_update(
-            {'_id': id}, {f'${operation}': data}, return_document=ReturnDocument.AFTER
-        )
-        return self.__cache.insert(id, Document(data, self))
+        doc = await self.find(id)
+
+        if doc:
+            self._update_doc(doc, operation, data)
+
+            await self.__collection.update_one({'_id': id}, {f'${operation}': data})
+
+            return self.__cache.insert(id, doc)
+        else:
+            template = self.template.copy()
+            template.update({'_id': id})
+            self._update_doc(template, operation, data)
+
+            await self.__collection.insert_one(template)
+
+            return self.__cache.insert(id, Document(template, self))
 
     async def all(self):
         cursor = self.__collection.find({})
