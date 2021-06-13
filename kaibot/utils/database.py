@@ -84,9 +84,11 @@ class LRUCache:
         return value
 
     def delete(self, key):
-        if key in self.__map:
-            self.__container[self.__map[key]].remove()
+        try:
+            self.__container.remove(self.__container[self.__map[key]])
             self._reallocate()
+        except KeyError:
+            return
 
 
 class CollectionManager:
