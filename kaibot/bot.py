@@ -112,5 +112,6 @@ class KaiBOT(commands.Bot):
         log.info('Bot is ready.')
 
     async def on_message(self, message):
-        current_language.set(await self.get_language_for(message.guild))
-        await self.process_commands(message)
+        if not message.author.bot:
+            current_language.set(await self.get_language_for(message.guild))
+            await self.process_commands(message)
