@@ -192,7 +192,7 @@ class TTTIntegration:
                 }
                 if value == Players.UNSET:
                     base['style'] = 2
-                    base['label'] = '\u200b       \u200b'
+                    base['label'] = '\u200b' + ' ' * 7 + '\u200b'
                 elif value == Players.X:
                     base['style'] = 1
                     base['emoji'] = {'id': '854070394964017164'}
