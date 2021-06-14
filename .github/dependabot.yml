@@ -9,7 +9,6 @@ updates:
       interval: 'daily'
     commit-message:
       prefix: 'Update deps: '
-      prefix-development: 'Update dev deps: '
       include: 'scope'
     assignees:
       - 'uKaigo'
