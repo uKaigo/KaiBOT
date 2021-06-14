@@ -180,15 +180,21 @@ class TTTIntegration:
         payload = {'content': txt, 'allowed_mentions': {'parse': ['users']}}
         payload['components'] = []
 
+        disabled = game.winner is not None
+
         for column, rows in enumerate(game.table):
             btn_row = []
             for row, value in enumerate(rows):
-                base = {'type': 2, 'custom_id': CUSTOM_ID_PREFIX + str((3 * column + 1) + row)}
+                base = {
+                    'type': 2,
+                    'custom_id': CUSTOM_ID_PREFIX + str((3 * column + 1) + row),
+                    'disabled': disabled,
+                }
                 if value == Players.UNSET:
                     base['style'] = 2
-                    base['label'] = '\u200b     \u200b'
+                    base['label'] = '\u200b    \u200b'
                 elif value == Players.X:
-                    base['style'] = 1
+                    base['style'] = 3
                     base['label'] = 'X'
                 elif value == Players.O:
                     base['style'] = 4
