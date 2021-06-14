@@ -1,3 +1,4 @@
+import asyncio
 import sys
 from asyncio import TimeoutError
 
@@ -24,6 +25,55 @@ class Fun(custom.Cog, translator=_):
     def cog_unload(self):
         self._ttt_game.destroy()
 
+    async def _send_confirmation(self, channel_id, text):
+        route = discord.http.Route('POST', '/channels/{channel_id}/messages', channel_id=channel_id)
+        payload = {'content': text}
+        payload['components'] = [
+            {
+                'type': 1,
+                'components': [
+                    {'label': _('Sim'), 'style': 3, 'custom_id': 'choice_1', 'type': 2},
+                    {'label': _('Não'), 'style': 4, 'custom_id': 'choice_0', 'type': 2},
+                ],
+            }
+        ]
+
+        data = await self.bot.http.request(route, json=payload)
+        return data['id']
+
+    async def _get_confirmation(self, msg_id, player):
+        while True:
+            event = await self.bot.wait_for('socket_response', timeout=60)
+
+            if event['t'] != 'INTERACTION_CREATE':
+                continue
+
+            payload = event['d']
+
+            route = discord.http.Route(
+                'POST',
+                '/interactions/{interaction_id}/{interaction_token}/callback',
+                interaction_id=payload['id'],
+                interaction_token=payload['token'],
+            )
+            to_send = {'type': 6}
+
+            # ACK
+            await self.bot.http.request(route, json=to_send)
+
+            try:
+                if payload['message']['id'] != str(msg_id):
+                    continue
+
+                if payload['member']['user']['id'] != str(player.id):
+                    continue
+            except KeyError as e:
+                continue
+
+            choice = payload['data']['custom_id'][7:]
+
+            return int(choice)
+
     @commands.command(aliases=['tictactoe', 'jogodavelha', 'jdv'])
     @commands.guild_only()
     @commands.bot_has_permissions(add_reactions=True)
@@ -45,22 +95,18 @@ class Fun(custom.Cog, translator=_):
             author=ctx.author.mention,
             player=player.mention,
         )
-        msg = await ctx.send(text, allowed_mentions=discord.AllowedMentions(users=True))
-        await msg.add_reaction('✅')
-        await msg.add_reaction('❌')
+        msg_id = await self._send_confirmation(ctx.channel.id, text)
+        msg = self.bot._connection._get_message(int(msg_id))
 
-        check = lambda r, u: r.message == msg and u == player and r.emoji in ['✅', '❌']
         try:
             self.waiting.append(player.id)
-            reaction, user = await self.bot.wait_for('reaction_add', check=check, timeout=30)
+            choice = await asyncio.wait_for(self._get_confirmation(msg.id, player), timeout=60)
         except TimeoutError:
             return await msg.edit(content=text + '\n- ' + _('Tempo excedido.'))
         finally:
             self.waiting.remove(player.id)
-            if ctx.me.permissions_in(ctx.channel).manage_messages:
-                await msg.clear_reactions()
 
-        if reaction.emoji == '❌':
+        if choice == 0:
             not_accepted_text = _('{player} não aceitou.', player=player.mention)
             return await msg.edit(content=text + '\n- ' + not_accepted_text)
 
