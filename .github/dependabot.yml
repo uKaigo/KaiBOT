@@ -8,7 +8,7 @@ updates:
     schedule:
       interval: 'daily'
     commit-message:
-      prefix: 'Update deps: '
+      prefix: 'Update deps '
       include: 'scope'
     assignees:
       - 'uKaigo'
