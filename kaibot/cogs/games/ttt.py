@@ -154,18 +154,18 @@ class TTTIntegration:
 
             payload = event['d']
 
+            await self.ack_interaction(payload['id'], payload['token'])
 
-            if not payload.get('message') or payload['message']['id'] != str(msg_id):
-                await self.ack_interaction(payload['id'], payload['token'])
-                continue
+            try:
+                if payload['message']['id'] != str(msg_id):
+                    continue
 
-            if not payload.get('member') or payload['member']['user']['id'] != str(player.id):
-                await self.ack_interaction(payload['id'], payload['token'])
-                continue
+                if payload['member']['user']['id'] != str(player.id):
+                    continue
+            except KeyError:
+                return
 
             index = payload['data']['custom_id'][len(CUSTOM_ID_PREFIX) :]
-
-            await self.ack_interaction(payload['id'], payload['token'])
 
             return int(index) - 1
 
