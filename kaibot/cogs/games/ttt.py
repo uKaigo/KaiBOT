@@ -177,7 +177,7 @@ class TTTIntegration:
             message_id=msg.id,
         )
 
-        payload = {'content': txt, 'allowed_mentions': self.bot.allowed_mentions.to_dict()}
+        payload = {'content': txt, 'allowed_mentions': {'parse': ['users']}}
         payload['components'] = []
 
         for column, rows in enumerate(game.table):
