@@ -194,10 +194,10 @@ class TTTIntegration:
                     base['style'] = 2
                     base['label'] = '\u200b       \u200b'
                 elif value == Players.X:
-                    base['style'] = 3
+                    base['style'] = 1
                     base['emoji'] = {'id': '854070394964017164'}
                 elif value == Players.O:
-                    base['style'] = 4
+                    base['style'] = 1
                     base['emoji'] = {'id': '854070394754433026'}
                 btn_row.append(base)
             payload['components'].append({'type': 1, 'components': btn_row})
