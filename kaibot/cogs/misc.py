@@ -106,7 +106,9 @@ class Miscelaneous(custom.Cog, translator=_):
             mem = proc.memory_full_info()
             resources += _('Usando {mem} de memória RAM.', mem=humanize.naturalsize(mem.uss))
 
-            resources += '\n' + _('Usando {percent}% de CPU.', percent=int(proc.cpu_percent()))
+            # TRANSLATORS: There's a "%" after percent, it was removed
+            # Babel doesn't insert the python-format flag.
+            resources += '\n' + _('Usando {percent} de CPU.', percent=f'{proc.cpu_percent()}%')
 
         embed.add_field(name=_('Recursos:'), value=resources, inline=False)
         await ctx.send(embed=embed)
