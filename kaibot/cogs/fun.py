@@ -8,6 +8,7 @@ from discord.ext import commands
 from .. import config
 from ..i18n import Translator
 from ..utils import custom, escape_text
+from ..utils.interactions import wait_for_click
 from .games.ttt import TTTIntegration
 
 _ = Translator(__name__)
@@ -23,6 +24,22 @@ class Fun(custom.Cog, translator=_):
 
     def cog_unload(self):
         self._ttt_game.destroy()
+
+    async def _send_confirmation(self, channel_id, text):
+        route = discord.http.Route('POST', '/channels/{channel_id}/messages', channel_id=channel_id)
+        payload = {'content': text}
+        payload['components'] = [
+            {
+                'type': 1,
+                'components': [
+                    {'label': _('Sim'), 'style': 3, 'custom_id': 'choice_1', 'type': 2},
+                    {'label': _('Não'), 'style': 4, 'custom_id': 'choice_0', 'type': 2},
+                ],
+            }
+        ]
+
+        data = await self.bot.http.request(route, json=payload)
+        return data['id']
 
     @commands.command(aliases=['tictactoe', 'jogodavelha', 'jdv'])
     @commands.guild_only()
@@ -45,22 +62,19 @@ class Fun(custom.Cog, translator=_):
             author=ctx.author.mention,
             player=player.mention,
         )
-        msg = await ctx.send(text, allowed_mentions=discord.AllowedMentions(users=True))
-        await msg.add_reaction('✅')
-        await msg.add_reaction('❌')
+        msg_id = await self._send_confirmation(ctx.channel.id, text)
+        msg = self.bot._connection._get_message(int(msg_id))
 
-        check = lambda r, u: r.message == msg and u == player and r.emoji in ['✅', '❌']
+        self.waiting.append(player.id)
+
         try:
-            self.waiting.append(player.id)
-            reaction, user = await self.bot.wait_for('reaction_add', check=check, timeout=30)
+            choice = await wait_for_click(self.bot, msg.id, player.id, timeout=60)
         except TimeoutError:
             return await msg.edit(content=text + '\n- ' + _('Tempo excedido.'))
         finally:
             self.waiting.remove(player.id)
-            if ctx.me.permissions_in(ctx.channel).manage_messages:
-                await msg.clear_reactions()
 
-        if reaction.emoji == '❌':
+        if choice == 'choice_0':
             not_accepted_text = _('{player} não aceitou.', player=player.mention)
             return await msg.edit(content=text + '\n- ' + not_accepted_text)
 
