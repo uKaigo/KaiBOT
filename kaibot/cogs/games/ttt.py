@@ -6,6 +6,7 @@ import discord
 import discord.http
 
 from ...i18n import Translator
+from ...utils.interactions import ack_interaction, wait_for_click
 
 _ = Translator(__name__)
 
@@ -131,44 +132,6 @@ class TTTIntegration:
             return await channel.send('\N{ZERO WIDTH SPACE}')
         return message
 
-    async def ack_interaction(self, interaction_id, interaction_token):
-        route = discord.http.Route(
-            'POST',
-            '/interactions/{interaction_id}/{interaction_token}/callback',
-            interaction_id=interaction_id,
-            interaction_token=interaction_token,
-        )
-
-        payload = {'type': 6}
-
-        await self.bot.http.request(route, json=payload)
-
-    async def get_move_for(self, msg_id, player):
-        while True:
-            # Something is wrong if we don't receive a single event in 1
-            # minute, but let's keep it here.
-            event = await self.bot.wait_for('socket_response', timeout=60)
-
-            if event['t'] != 'INTERACTION_CREATE':
-                continue
-
-            payload = event['d']
-
-            await self.ack_interaction(payload['id'], payload['token'])
-
-            try:
-                if payload['message']['id'] != str(msg_id):
-                    continue
-
-                if payload['member']['user']['id'] != str(player.id):
-                    continue
-            except KeyError:
-                return
-
-            index = payload['data']['custom_id'][len(CUSTOM_ID_PREFIX) :]
-
-            return int(index) - 1
-
     async def edit_message(self, msg, txt, game, force_disabled=False):
         route = discord.http.Route(
             'PATCH',
@@ -225,10 +188,10 @@ class TTTIntegration:
                 message = self.games[players[0].id][0]
 
                 player = players[game.turn]
-                move = await asyncio.wait_for(self.get_move_for(message.id, player), timeout=60 * 2)
+                move = await wait_for_click(self.bot, message.id, player.id, timeout=120)
 
                 try:
-                    game.make_move(move)
+                    game.make_move(int(move[len(CUSTOM_ID_PREFIX) :]) - 1)
                 except ValueError:
                     continue
 

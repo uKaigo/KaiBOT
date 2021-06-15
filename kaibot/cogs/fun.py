@@ -1,4 +1,3 @@
-import asyncio
 import sys
 from asyncio import TimeoutError
 
@@ -9,6 +8,7 @@ from discord.ext import commands
 from .. import config
 from ..i18n import Translator
 from ..utils import custom, escape_text
+from ..utils.interactions import wait_for_click
 from .games.ttt import TTTIntegration
 
 _ = Translator(__name__)
@@ -41,39 +41,6 @@ class Fun(custom.Cog, translator=_):
         data = await self.bot.http.request(route, json=payload)
         return data['id']
 
-    async def _get_confirmation(self, msg_id, player):
-        while True:
-            event = await self.bot.wait_for('socket_response', timeout=60)
-
-            if event['t'] != 'INTERACTION_CREATE':
-                continue
-
-            payload = event['d']
-
-            route = discord.http.Route(
-                'POST',
-                '/interactions/{interaction_id}/{interaction_token}/callback',
-                interaction_id=payload['id'],
-                interaction_token=payload['token'],
-            )
-            to_send = {'type': 6}
-
-            # ACK
-            await self.bot.http.request(route, json=to_send)
-
-            try:
-                if payload['message']['id'] != str(msg_id):
-                    continue
-
-                if payload['member']['user']['id'] != str(player.id):
-                    continue
-            except KeyError as e:
-                continue
-
-            choice = payload['data']['custom_id'][7:]
-
-            return int(choice)
-
     @commands.command(aliases=['tictactoe', 'jogodavelha', 'jdv'])
     @commands.guild_only()
     @commands.bot_has_permissions(add_reactions=True)
@@ -98,15 +65,16 @@ class Fun(custom.Cog, translator=_):
         msg_id = await self._send_confirmation(ctx.channel.id, text)
         msg = self.bot._connection._get_message(int(msg_id))
 
+        self.waiting.append(player.id)
+
         try:
-            self.waiting.append(player.id)
-            choice = await asyncio.wait_for(self._get_confirmation(msg.id, player), timeout=60)
+            choice = await wait_for_click(self.bot, msg.id, player.id, timeout=60)
         except TimeoutError:
             return await msg.edit(content=text + '\n- ' + _('Tempo excedido.'))
         finally:
             self.waiting.remove(player.id)
 
-        if choice == 0:
+        if choice == 'choice_0':
             not_accepted_text = _('{player} não aceitou.', player=player.mention)
             return await msg.edit(content=text + '\n- ' + not_accepted_text)
 
