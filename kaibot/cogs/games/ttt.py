@@ -169,7 +169,7 @@ class TTTIntegration:
 
             return int(index) - 1
 
-    async def edit_message(self, msg, txt, game):
+    async def edit_message(self, msg, txt, game, force_disabled=False):
         route = discord.http.Route(
             'PATCH',
             '/channels/{channel_id}/messages/{message_id}',
@@ -180,7 +180,7 @@ class TTTIntegration:
         payload = {'content': txt, 'allowed_mentions': {'parse': ['users']}}
         payload['components'] = []
 
-        disabled = game.winner is not None
+        disabled = game.winner is not None or force_disabled
 
         for column, rows in enumerate(game.table):
             btn_row = []
@@ -234,7 +234,8 @@ class TTTIntegration:
 
                 await self._update_game(message, game, players)
         except asyncio.TimeoutError:
-            return await self.games[players[0].id][0].edit(content='Tempo excedido.')
+            message = self.games[players[0].id][0]
+            return await self.edit_message(message, 'Tempo excedido', game, True)
         finally:
             del self.games[players[0].id], self.games[players[1].id]
 
