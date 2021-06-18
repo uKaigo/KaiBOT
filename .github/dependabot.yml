@@ -7,9 +7,6 @@ updates:
     directory: '/'
     schedule:
       interval: 'daily'
-    commit-message:
-      prefix: 'Update deps '
-      include: 'scope'
     assignees:
       - 'uKaigo'
     open-pull-requests-limit: 10
