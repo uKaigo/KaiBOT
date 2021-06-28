@@ -1,4 +1,4 @@
-discord.py==1.7.3
+git+https://github.com/Rapptz/discord.py@e3a66bcccc7f8122e9fbe682bc3e1352792ce7fb
 jishaku==2.0.0
 git+https://github.com/Rapptz/discord-ext-menus@309c70222eec33acacb8c21bbb0fbe9bc57de661
 Babel==2.9.1
