@@ -150,7 +150,7 @@ class Utilities(custom.Cog, translator=_):
         embed = discord.Embed(title='Brainfuck', color=config.MAIN_COLOR)
         embed.set_footer(
             text=_('Texto por: {author} ({author.id})', author=ctx.author),
-            icon_url=ctx.author.avatar_url,
+            icon_url=ctx.author.avatar,
         )
         if out.strip():
             embed.add_field(name=_('Saída:'), value=out, inline=False)

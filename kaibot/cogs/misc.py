@@ -55,7 +55,7 @@ class Miscelaneous(custom.Cog, translator=_):
         embed = discord.Embed(color=config.MAIN_COLOR, description='')
         embed.set_author(
             name=_('Políticas de privacidade | KaiBOT'),
-            icon_url=ctx.me.avatar_url,
+            icon_url=ctx.me.avatar,
         )
 
         embed.description += _(
@@ -73,7 +73,7 @@ class Miscelaneous(custom.Cog, translator=_):
     async def botinfo(self, ctx):
         """Informações sobre mim."""
         embed = discord.Embed(color=config.MAIN_COLOR)
-        embed.set_author(name=_('Informações sobre mim'), icon_url=self.bot.user.avatar_url)
+        embed.set_author(name=_('Informações sobre mim'), icon_url=self.bot.user.avatar)
 
         who_am_i = _('Sou KaiBOT, um bot criado para te ajudar no seu servidor.')
         who_am_i += '\n' + _(

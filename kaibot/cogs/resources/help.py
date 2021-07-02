@@ -22,7 +22,7 @@ class HelpMenuPages(menus.MenuPages):
     async def show_help(self, payload):
         embed = discord.Embed(color=config.MAIN_COLOR)
         embed.description = _('A estrutura é simples.')
-        embed.set_author(name=_('Ajuda'), icon_url=self.ctx.me.avatar_url)
+        embed.set_author(name=_('Ajuda'), icon_url=self.ctx.me.avatar)
 
         fields = (
             ('<argument>', _('Isto significa que o argumento é __**obrigatório**__.')),
@@ -47,7 +47,7 @@ class BotSource(menus.GroupByPageSource):
         cog = ctx.bot.get_cog(key)
 
         embed = discord.Embed(color=config.MAIN_COLOR)
-        embed.set_author(name=_('Comandos de {name}', name=key), icon_url=ctx.me.avatar_url)
+        embed.set_author(name=_('Comandos de {name}', name=key), icon_url=ctx.me.avatar)
         embed.description = getattr(cog, '__translator__', Translator._noop)(cog.description)
 
         for command in cmds:
@@ -142,7 +142,7 @@ class Help(commands.HelpCommand):
         embed = discord.Embed(description=translator(command.help), color=config.MAIN_COLOR)
         embed.set_author(
             name=_('Ajuda | {bucket}', bucket=command.name),
-            icon_url=self.bot.user.avatar_url,
+            icon_url=self.bot.user.avatar,
         )
 
         self._insert_command_info(embed, command)
@@ -154,7 +154,7 @@ class Help(commands.HelpCommand):
 
         embed = discord.Embed(description=translator(group.help), color=config.MAIN_COLOR)
         embed.set_author(
-            name=_('Ajuda | {bucket}', bucket=group.name), icon_url=self.bot.user.avatar_url
+            name=_('Ajuda | {bucket}', bucket=group.name), icon_url=self.bot.user.avatar
         )
 
         self._insert_command_info(embed, group)
@@ -181,7 +181,7 @@ class Help(commands.HelpCommand):
 
         embed = discord.Embed(description=translator(cog.description), color=config.MAIN_COLOR)
         embed.set_author(
-            name=_('Ajuda | {bucket}', bucket=cog.qualified_name, icon_url=self.bot.user.avatar_url)
+            name=_('Ajuda | {bucket}', bucket=cog.qualified_name, icon_url=self.bot.user.avatar)
         )
 
         cmds = await self.filter_commands(cog.get_commands())

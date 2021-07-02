@@ -64,18 +64,18 @@ class Info(custom.Cog, translator=_):
         embed = discord.Embed(color=config.MAIN_COLOR, description='')
         embed.set_author(
             name=_('Avatar de {member}', member=member.display_name),
-            icon_url=member.avatar_url,
+            icon_url=member.avatar,
         )
         embed.set_footer(text=_('Executado por: {author}', author=ctx.author))
 
         formats = ['png', 'jpg', 'webp']
-        if member.is_avatar_animated():
+        if member.avatar.is_animated():
             formats.append('gif')
 
         for fmt in formats:
-            embed.description += f'[`{fmt.upper()}`]({member.avatar_url_as(format=fmt)}) '
+            embed.description += f'[`{fmt.upper()}`]({member.avatar.with_format(fmt)}) '
 
-        embed.set_image(url=member.avatar_url)
+        embed.set_image(url=member.avatar)
 
         await ctx.send(embed=embed)
 
@@ -98,7 +98,7 @@ class Info(custom.Cog, translator=_):
             member = ctx.author
 
         embed_info = discord.Embed(color=member.color)
-        embed_info.set_author(name=f'{member} [{member.id}]', icon_url=member.avatar_url)
+        embed_info.set_author(name=f'{member} [{member.id}]', icon_url=member.avatar)
 
         flags = []
         user_flags = self.bot.get_flags_for(member)
@@ -142,7 +142,7 @@ class Info(custom.Cog, translator=_):
             return
 
         embed_perms = discord.Embed(color=member.color)
-        embed_perms.set_author(name=f'{member} [{member.id}]', icon_url=member.avatar_url)
+        embed_perms.set_author(name=f'{member} [{member.id}]', icon_url=member.avatar)
 
         perms = [str(PERMISSIONS[k]) for k, v in ctx.channel.permissions_for(member) if v]
 

@@ -107,7 +107,7 @@ class BotEvents(commands.Cog):
 
         embed.set_author(
             name=f'{ctx.author} [{ctx.author.id}]',
-            icon_url=ctx.author.avatar_url,
+            icon_url=ctx.author.avatar,
         )
 
         if ctx.guild:
@@ -140,7 +140,7 @@ class BotEvents(commands.Cog):
         channel = self.bot.get_channel(config.LOGS['guilds'])
 
         embed = discord.Embed(title='Novo servidor', color=config.MAIN_COLOR)
-        embed.set_author(name=f'{guild.name} [{guild.id}]', icon_url=guild.icon_url)
+        embed.set_author(name=f'{guild.name} [{guild.id}]', icon_url=guild.icon)
         embed.description = f'Dono: <@{guild.owner_id}>'
 
         await channel.send(embed=embed)
@@ -150,7 +150,7 @@ class BotEvents(commands.Cog):
         channel = self.bot.get_channel(config.LOGS['guilds'])
 
         embed = discord.Embed(title='Removido de um servidor', color=config.MAIN_COLOR)
-        embed.set_author(name=f'{guild.name} [{guild.id}]', icon_url=guild.icon_url)
+        embed.set_author(name=f'{guild.name} [{guild.id}]', icon_url=guild.icon)
         embed.description = f'Dono: <@{guild.owner_id}>'
 
         await channel.send(embed=embed)
