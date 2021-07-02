@@ -37,7 +37,7 @@ class ErrorHandler(commands.Cog):
     async def on_command_error(self, ctx, error):
         if not ctx.me.permissions_in(ctx.channel).send_messages == True:
             return
-        
+
         original = error.__cause__
 
         if isinstance(error, self.IGNORED_ERRORS):
@@ -96,7 +96,7 @@ class ErrorHandler(commands.Cog):
             )
 
         if isinstance(error, commands.MissingPermissions):
-            missing_perms = [str(PERMISSIONS[p]) for p in error.missing_perms]
+            missing_perms = [str(PERMISSIONS[p]) for p in error.missing_permissions]
             return await ctx.send(
                 _(
                     'Você precisa da permissão "{perm}" para executar esse comando.',
