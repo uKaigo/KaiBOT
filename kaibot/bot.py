@@ -102,7 +102,7 @@ class KaiBOT(commands.Bot):
         return commands.when_mentioned_or(*prefixes)(bot, message)
 
     def send_messages_check(self, ctx):
-        if not ctx.me.permissions_in(ctx.channel).send_messages:
+        if not ctx.channel.permissions_for(ctx.me).send_messages:
             return False
         return True
 

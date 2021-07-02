@@ -35,7 +35,7 @@ class ErrorHandler(commands.Cog):
 
     @commands.Cog.listener()
     async def on_command_error(self, ctx, error):
-        if not ctx.me.permissions_in(ctx.channel).send_messages == True:
+        if not ctx.channel.permissions_for(ctx.me).send_messages == True:
             return
 
         original = error.__cause__
@@ -47,7 +47,7 @@ class ErrorHandler(commands.Cog):
             return
 
         if isinstance(original, discord.Forbidden):
-            if original.code == 50013 and not ctx.me.permissions_in(ctx.channel).embed_links:
+            if original.code == 50013 and not ctx.channel.permissions_for(ctx.me).embed_links:
                 error = commands.BotMissingPermissions(('embed_links',))
 
         if isinstance(error, commands.MaxConcurrencyReached):

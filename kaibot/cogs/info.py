@@ -144,7 +144,7 @@ class Info(custom.Cog, translator=_):
         embed_perms = discord.Embed(color=member.color)
         embed_perms.set_author(name=f'{member} [{member.id}]', icon_url=member.avatar_url)
 
-        perms = [str(PERMISSIONS[k]) for k, v in member.permissions_in(ctx.channel) if v]
+        perms = [str(PERMISSIONS[k]) for k, v in ctx.channel.permissions_for(member) if v]
 
         if not perms:
             perms = [_('Nenhuma.')]
