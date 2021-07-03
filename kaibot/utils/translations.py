@@ -49,11 +49,16 @@ PERMISSIONS = {
     'manage_emojis': _('Gerenciar emojis'),
     'use_slash_commands': _('Usar comandos /'),
     'request_to_speak': _('Pedir para falar'),
+    # TODO: Use the name client uses.
+    'manage_events': _('Gerenciar eventos do servidor'),
+    'manage_threads': _('Gerenciar Threads'),
+    'use_threads': _('Utilizar Threads Públicas'),
+    'use_private_threads': _('Utilizar Threads Privadas'),
 }
 
 DATETIME = _('{date} às {time}')
 
 ERRORS = {
     'not_in_range': _('Insira um número entre {0.min} e {0.max}.'),
-    'reserved_prefix': _('Esse prefixo está reservado.')
+    'reserved_prefix': _('Esse prefixo está reservado.'),
 }
