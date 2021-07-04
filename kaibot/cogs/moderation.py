@@ -161,7 +161,7 @@ class Moderation(custom.Cog, translator=_):
 
         await ctx.send(
             _(
-                '**{member}** silenciado por **{reason}**',
+                '**{member}** silenciado por **{reason}**.',
                 member=escape_text(member),
                 reason=escape_text(reason),
             )

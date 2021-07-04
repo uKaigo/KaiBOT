@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  kaibot\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-12 02:48-0300\n"
-"PO-Revision-Date: 2021-06-12 02:53-0300\n"
+"POT-Creation-Date: 2021-07-04 00:06-0300\n"
+"PO-Revision-Date: 2021-07-04 00:03-0300\n"
 "Last-Translator: \n"
 "Language: en_US\n"
 "Language-Team: English\n"
@@ -29,7 +29,7 @@ msgid ""
 "`d100` irá rodar 1 dado de 100 lados.\n"
 "`100` irá rodar 1 dado de 100 lados."
 msgstr ""
-"Rolls a dice.\n"
+"Roll a dice.\n"
 "\n"
 "Explanation (`count`d`sides`):\n"
 "`5d100` will roll 5 100-sided dices.\n"
@@ -53,27 +53,31 @@ msgid "Você pode rolar no máximo 200 dados por vez."
 msgstr "You can roll up to 200 dices at a time."
 
 #: kaibot/cogs/utilities.py:62
+#, python-brace-format
 msgid "Seu dado resultou em: {result}"
 msgstr "Your dice result: {result}"
 
 #: kaibot/cogs/utilities.py:65
+#, python-brace-format
 msgid "Seus dados resultaram em: {results}"
 msgstr "Your dice results: {results}"
 
 #: kaibot/cogs/utilities.py:67
+#, python-brace-format
 msgid "Soma: {sum}"
 msgstr "Sum: {sum}"
 
 #: kaibot/cogs/utilities.py:72
 #, docstring
 msgid "Mostra todos os redirecionamentos do link."
-msgstr "Shows all the redirects of the link."
+msgstr "Shows all redirects of the link."
 
 #: kaibot/cogs/utilities.py:73
 msgid "Redirecionamentos"
 msgstr "Redirects"
 
 #: kaibot/cogs/utilities.py:85
+#, python-brace-format
 msgid "Não pude me conectar com o site: `{error}`"
 msgstr "I couldn't connect with the site: `{error}`"
 
@@ -88,13 +92,14 @@ msgid "Texto por: {author}"
 msgstr "Text by: {author}"
 
 #: kaibot/cogs/utilities.py:114
+#, python-brace-format
 msgid "O texto pode ter no máximo {max} caracteres."
 msgstr "The text can have up to {max} characters."
 
 #: kaibot/cogs/utilities.py:123
 #, docstring
 msgid "Tradutor de [brainfuck](https://pt.wikipedia.org/wiki/Brainfuck)."
-msgstr "[brainfuck](https://en.wikipedia.org/wiki/Brainfuck) translator."
+msgstr "[Brainfuck](https://en.wikipedia.org/wiki/Brainfuck) translator."
 
 #: kaibot/cogs/utilities.py:129
 #, docstring
@@ -104,7 +109,7 @@ msgid ""
 "`,` lerá o próximo valor de uma string `A-Za-z0-9`.\n"
 "Por exemplo: `,.` imprimiria \"A\"."
 msgstr ""
-"[brainfuck](https://en.wikipedia.org/wiki/Brainfuck) decoder.\n"
+"[Brainfuck](https://en.wikipedia.org/wiki/Brainfuck) decoder.\n"
 "\n"
 "`,` will read the next value of a `A-Za-z0-9` string.\n"
 "For example: `,.` would print \"A\"."
@@ -114,6 +119,7 @@ msgid "Tempo excedido."
 msgstr "Time exceeded."
 
 #: kaibot/cogs/utilities.py:152
+#, python-brace-format
 msgid "Texto por: {author} ({author.id})"
 msgstr "Text by: {author} ({author.id})"
 

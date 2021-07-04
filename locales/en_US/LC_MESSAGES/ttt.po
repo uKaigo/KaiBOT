@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  kaibot\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-20 21:03-0300\n"
-"PO-Revision-Date: 2021-04-26 15:27-0300\n"
+"POT-Creation-Date: 2021-07-04 00:06-0300\n"
+"PO-Revision-Date: 2021-07-03 23:58-0300\n"
 "Last-Translator: \n"
 "Language: en_US\n"
 "Language-Team: English\n"
@@ -12,21 +12,19 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.9.0\n"
+"Generated-By: Babel 2.9.1\n"
 
-#: kaibot/cogs/games/ttt.py:209
-msgid "Jogo da velha"
-msgstr "TicTacToe"
-
-#: kaibot/cogs/games/ttt.py:217
+#: kaibot/cogs/games/ttt.py:208
+#, python-brace-format
 msgid "Vez de {player}."
 msgstr "{player}'s turn."
 
-#: kaibot/cogs/games/ttt.py:220
+#: kaibot/cogs/games/ttt.py:211
 msgid "Deu velha!"
-msgstr "It's a draw!"
+msgstr "It's a tie!"
 
-#: kaibot/cogs/games/ttt.py:222
+#: kaibot/cogs/games/ttt.py:213
+#, python-brace-format
 msgid "{player} ganhou!"
 msgstr "{player} won!"
 

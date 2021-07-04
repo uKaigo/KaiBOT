@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  kaibot\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-01 12:03-0300\n"
-"PO-Revision-Date: 2021-04-26 15:55-0300\n"
+"POT-Creation-Date: 2021-07-04 00:06-0300\n"
+"PO-Revision-Date: 2021-07-03 23:50-0300\n"
 "Last-Translator: \n"
 "Language: en_US\n"
 "Language-Team: English\n"
@@ -12,7 +12,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.9.0\n"
+"Generated-By: Babel 2.9.1\n"
 
 #: kaibot/cogs/resources/help.py:14
 msgid "Sem descrição."
@@ -35,10 +35,11 @@ msgid "Isto significa que o argumento é __**opcional**__."
 msgstr "This means that the argument is __**optional**__."
 
 #: kaibot/cogs/resources/help.py:30
-msgid "Isto significa que o valor padrão do argumento é __**X**__. "
-msgstr "This means that the default value of the argument is __**X**__."
+msgid "Isto significa que o valor padrão do argumento é __**X**__."
+msgstr "This means that the argument's default value is __**X**__."
 
 #: kaibot/cogs/resources/help.py:50
+#, python-brace-format
 msgid "Comandos de {name}"
 msgstr "{name} commands"
 
@@ -48,18 +49,22 @@ msgid "_Possui subcomandos._"
 msgstr "_Has subcommands._"
 
 #: kaibot/cogs/resources/help.py:64
+#, python-brace-format
 msgid "Página {current}/{max}"
 msgstr "Page {current}/{max}"
 
 #: kaibot/cogs/resources/help.py:94
+#, python-brace-format
 msgid "Comando \"{string}\" não foi encontrado."
 msgstr "The command \"{string}\" wasn't found."
 
 #: kaibot/cogs/resources/help.py:98
+#, python-brace-format
 msgid "O comando \"{command}\" não possui um subcomando chamado \"{string}\""
 msgstr "The command \"{command}\" doesn't have a subcommand called \"{string}\""
 
 #: kaibot/cogs/resources/help.py:103
+#, python-brace-format
 msgid "O comando \"{command}\" não possui subcomandos."
 msgstr "The command \"{command}\" doesn't have subcommands."
 
@@ -77,6 +82,7 @@ msgstr "Parent:"
 
 #: kaibot/cogs/resources/help.py:144 kaibot/cogs/resources/help.py:157
 #: kaibot/cogs/resources/help.py:184
+#, python-brace-format
 msgid "Ajuda | {bucket}"
 msgstr "Help | {bucket}"
 

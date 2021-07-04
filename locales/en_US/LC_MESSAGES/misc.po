@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  kaibot\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-15 02:20-0300\n"
-"PO-Revision-Date: 2021-05-20 02:21-0300\n"
+"POT-Creation-Date: 2021-07-04 00:06-0300\n"
+"PO-Revision-Date: 2021-07-03 23:53-0300\n"
 "Last-Translator: \n"
 "Language: en_US\n"
 "Language-Team: English\n"
@@ -56,7 +56,7 @@ msgstr "The privacy policies can be found at [this link]({policy})."
 
 #: kaibot/cogs/misc.py:65
 msgid "Caso você não concorda com essa política, pare de usar o bot e (opcionalmente) peça a exclusão dos seus dados."
-msgstr "If you don't agree with this policy, stop using the bot and (optionally) ask for the deletion of your data."
+msgstr "If you don't agree with this policy, stop using the bot and (optionally) ask for the exclusion of your data."
 
 #: kaibot/cogs/misc.py:74
 #, docstring
@@ -65,7 +65,7 @@ msgstr "Information about me."
 
 #: kaibot/cogs/misc.py:76
 msgid "Informações sobre mim"
-msgstr "Information about me."
+msgstr "Information about me"
 
 #: kaibot/cogs/misc.py:78
 msgid "Sou KaiBOT, um bot criado para te ajudar no seu servidor."

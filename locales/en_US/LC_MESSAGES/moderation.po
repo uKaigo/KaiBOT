@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  kaibot\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-18 20:05-0300\n"
-"PO-Revision-Date: 2021-05-18 20:10-0300\n"
+"POT-Creation-Date: 2021-07-04 00:06-0300\n"
+"PO-Revision-Date: 2021-07-03 23:57-0300\n"
 "Last-Translator: \n"
 "Language: en_US\n"
 "Language-Team: English\n"
@@ -12,7 +12,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.9.0\n"
+"Generated-By: Babel 2.9.1\n"
 
 #: kaibot/cogs/moderation.py:17
 #, docstring
@@ -25,8 +25,9 @@ msgid "Limpa `count` mensagens do canal."
 msgstr "Clears `count` messages in the channel."
 
 #: kaibot/cogs/moderation.py:41
+#, python-brace-format
 msgid "{count} mensagens foram deletadas."
-msgstr "{cuont} messages were deleted."
+msgstr "{count} messages were deleted."
 
 #: kaibot/cogs/moderation.py:49
 #, docstring
@@ -55,10 +56,12 @@ msgid "Canal desbloqueado."
 msgstr "Channel unlocked."
 
 #: kaibot/cogs/moderation.py:82
+#, python-brace-format
 msgid "Você não pode fazer isso com **{member}**."
 msgstr "You can't do this to **{member}**."
 
 #: kaibot/cogs/moderation.py:84
+#, python-brace-format
 msgid "Eu não posso fazer isso com **{member}**."
 msgstr "I can't do this to **{member}**."
 
@@ -78,10 +81,12 @@ msgid "Não especificado."
 msgstr "Not specified."
 
 #: kaibot/cogs/moderation.py:102 kaibot/cogs/moderation.py:159
+#, python-brace-format
 msgid "Por {author} | Motivo: {reason}"
 msgstr "By {author} | Reason: {reason}"
 
 #: kaibot/cogs/moderation.py:107
+#, python-brace-format
 msgid "**{member}** banido por **{reason}**."
 msgstr "**{member}** banned for **{reason}**."
 
@@ -91,6 +96,7 @@ msgid "Desbane um membro do servidor."
 msgstr "Unbans a member of the server."
 
 #: kaibot/cogs/moderation.py:120 kaibot/cogs/moderation.py:183
+#, python-brace-format
 msgid "Por {author}"
 msgstr "By {author}"
 
@@ -99,6 +105,7 @@ msgid "O membro não está banido."
 msgstr "The member isn't banned."
 
 #: kaibot/cogs/moderation.py:124
+#, python-brace-format
 msgid "**{member}** desbanido."
 msgstr "**{member}** unbanned."
 
@@ -117,28 +124,31 @@ msgid "Silenciado"
 msgstr "Muted"
 
 #: kaibot/cogs/moderation.py:163
-msgid "**{member}** silenciado por **{reason}**"
+#, python-brace-format
+msgid "**{member}** silenciado por **{reason}**."
 msgstr "**{member}** muted for **{reason}**."
 
 #: kaibot/cogs/moderation.py:174
 #, docstring
 msgid "Remove o silenciamento de um membro."
-msgstr "Removes the mute of a member."
+msgstr "Unmutes a member."
 
 #: kaibot/cogs/moderation.py:181
 msgid "Cargo \"Silenciado\" não encontrado."
 msgstr "Role \"Muted\" not found."
 
 #: kaibot/cogs/moderation.py:185
+#, python-brace-format
 msgid "**{member}** desilenciado."
 msgstr "**{member}** unmuted."
 
 #: kaibot/cogs/moderation.py:203
 #, docstring
 msgid "Altera a linguagem do servidor."
-msgstr "Changes the language of the server."
+msgstr "Changes the server's language."
 
 #: kaibot/cogs/moderation.py:208
+#, python-brace-format
 msgid "Escolha entre {languages}."
 msgstr "Choose between {languages}."
 
@@ -147,6 +157,7 @@ msgid "Essa linguagem já está sendo usada."
 msgstr "This language is already in use."
 
 #: kaibot/cogs/moderation.py:218
+#, python-brace-format
 msgid "Linguagem alterada para {lang}."
 msgstr "Language changed to {lang}."
 
@@ -156,6 +167,7 @@ msgid "Comandos relacionados ao prefixo do servidor."
 msgstr "Commands related to the server prefix."
 
 #: kaibot/cogs/moderation.py:233
+#, python-brace-format
 msgid "Os prefixos do servidor são: {prefixes}"
 msgstr "The prefixes of the server are: {prefixes}"
 
@@ -183,6 +195,7 @@ msgid "Esse prefixo já está sendo utilizado."
 msgstr "This prefix is already in use."
 
 #: kaibot/cogs/moderation.py:261
+#, python-brace-format
 msgid "Prefixo `{prefix}` adicionado."
 msgstr "Prefix `{prefix}` added."
 
@@ -202,6 +215,7 @@ msgid "Este prefixo não está sendo utilizado."
 msgstr "This prefix isn't in use."
 
 #: kaibot/cogs/moderation.py:279
+#, python-brace-format
 msgid "Prefixo `{prefix}` removido."
 msgstr "Prefix `{prefix}` removed."
 

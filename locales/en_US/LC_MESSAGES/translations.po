@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  kaibot\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-11 19:49-0300\n"
-"PO-Revision-Date: 2021-05-11 20:03-0300\n"
+"POT-Creation-Date: 2021-07-04 00:06-0300\n"
+"PO-Revision-Date: 2021-07-03 23:57-0300\n"
 "Last-Translator: \n"
 "Language: en_US\n"
 "Language-Team: English\n"
@@ -12,7 +12,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.9.0\n"
+"Generated-By: Babel 2.9.1\n"
 
 #: kaibot/utils/translations.py:19
 msgid "Criar convite"
@@ -147,14 +147,16 @@ msgid "Pedir para falar"
 msgstr "Request to speak"
 
 #: kaibot/utils/translations.py:54
+#, python-brace-format
 msgid "{date} às {time}"
 msgstr "{date} at {time}"
 
 #: kaibot/utils/translations.py:57
+#, python-brace-format
 msgid "Insira um número entre {0.min} e {0.max}."
 msgstr "Insert a number between {0.min} and {0.max}."
 
 #: kaibot/utils/translations.py:58
 msgid "Esse prefixo está reservado."
-msgstr "This prefix is reserverd."
+msgstr "This prefix is reserved."
 
