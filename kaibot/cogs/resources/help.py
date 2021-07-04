@@ -87,6 +87,12 @@ class Help(commands.HelpCommand):
         if self.context:
             return self.context.bot
 
+    @property
+    def clean_prefix(self):
+        # TODO: Remove this alias.
+        if self.context:
+            return self.context.clean_prefix
+
     def _fake_command_not_found(self):
         return self.send_error_message(self.command_not_found(self.context.kwargs['command']))
 
