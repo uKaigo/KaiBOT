@@ -37,7 +37,7 @@ class ErrorHandler(commands.Cog):
     async def on_command_error(self, ctx, error):
         if not ctx.me.permissions_in(ctx.channel).send_messages == True:
             return
-        
+
         original = error.__cause__
 
         if isinstance(error, self.IGNORED_ERRORS):
