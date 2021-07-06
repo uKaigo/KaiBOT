@@ -1,12 +1,9 @@
-import asyncio
-from enum import IntEnum
-from typing import NamedTuple
+from enum import Enum, IntEnum
 
 import discord
 import discord.http
 
 from ...i18n import Translator
-from ...utils.interactions import ack_interaction, wait_for_click
 
 _ = Translator(__name__)
 
@@ -19,10 +16,9 @@ class Players(IntEnum):
     UNSET = 2
 
 
-class GameInfo(NamedTuple):
-    message: discord.Message
-    game: 'TTTImplementation'
-    players: tuple[discord.Member, discord.Member]
+class Emotes(Enum):
+    X = discord.PartialEmoji(name='X', id=854070394964017164)
+    O = discord.PartialEmoji(name='O', id=854070394754433026)
 
 
 # Implementation #
@@ -94,128 +90,73 @@ class TTTImplementation:
 
 
 # Integration #
-CUSTOM_ID_PREFIX = 'btn_'
 
+# TODO: Implement rollover somehow?
+async def update_message(view, response: discord.InteractionResponse):
+    board = view.board
+    winner = board.winner
+    players = view.players
 
-class TTTIntegration:
-    def __init__(self, bot):
-        self.bot = bot
-        self.games: dict[int, GameInfo] = {}
-        self.__tasks = []
-
-    def __contains__(self, value):
-        return value in self.games
-
-    def destroy(self):
-        for task in self.tasks:
-            task.cancel()
-        self.games = {}
-
-    # HELPERS
-
-    def _create_task(self, coro):
-        task = self.bot.loop.create_task(coro)
-        self.__tasks.append(task)
-        task.add_done_callback(lambda f: self.__tasks.remove(task))
-
-    async def _do_rollover(self, message):
-        channel = message.channel
-        if channel.last_message == message:
-            return message
-
-        history = await channel.history(limit=6, after=message).flatten()
-        if len(history) > 5:
-            try:
-                await message.delete()
-            except discord.HTTPException:
-                pass
-            return await channel.send('\N{ZERO WIDTH SPACE}')
-        return message
-
-    async def edit_message(self, msg, txt, game, force_disabled=False):
-        route = discord.http.Route(
-            'PATCH',
-            '/channels/{channel_id}/messages/{message_id}',
-            channel_id=msg.channel.id,
-            message_id=msg.id,
-        )
-
-        payload = {'content': txt, 'allowed_mentions': {'parse': ['users']}}
-        payload['components'] = []
-
-        disabled = game.winner is not None or force_disabled
-
-        for column, rows in enumerate(game.table):
-            btn_row = []
-            for row, value in enumerate(rows):
-                base = {
-                    'type': 2,
-                    'custom_id': CUSTOM_ID_PREFIX + str((3 * column + 1) + row),
-                    'disabled': disabled,
-                }
-                if value == Players.UNSET:
-                    base['style'] = 2
-                    base['label'] = '\u200b' + ' ' * 7 + '\u200b'
-                elif value == Players.X:
-                    base['style'] = 1
-                    base['emoji'] = {'id': '854070394964017164'}
-                elif value == Players.O:
-                    base['style'] = 1
-                    base['emoji'] = {'id': '854070394754433026'}
-                btn_row.append(base)
-            payload['components'].append({'type': 1, 'components': btn_row})
-
-        await self.bot.http.request(route, json=payload)
-
-    # GAME
-
-    async def start(self, message, player_x, player_o):
-        game = TTTImplementation()
-
-        info = GameInfo(message, game, (player_x, player_o))
-        self.games[player_x.id] = info
-        self.games[player_o.id] = info
-
-        self._create_task(self._internal_loop(*info))
-        await self._update_game(*info)
-
-    async def _internal_loop(self, _, game, players):
-        try:
-            bot = self.bot
-            while game.winner is None:
-                # We need to dinamically access message, so rollover
-                # works.
-                message = self.games[players[0].id][0]
-
-                player = players[game.turn]
-                move = await wait_for_click(self.bot, message.id, player.id, timeout=120)
-
-                try:
-                    game.make_move(int(move[len(CUSTOM_ID_PREFIX) :]) - 1)
-                except ValueError:
-                    continue
-
-                await self._update_game(message, game, players)
-        except asyncio.TimeoutError:
-            message = self.games[players[0].id][0]
-            return await self.edit_message(message, 'Tempo excedido', game, True)
-        finally:
-            del self.games[players[0].id], self.games[players[1].id]
-
-    async def _update_game(self, message, game, players):
-        winner = game.winner
-        if winner is None:
-            txt = _('Vez de {player}.', player=players[game.turn].mention)
+    if winner is None:
+        txt = _('Vez de {player}.', player=players[board.turn].mention)
+    else:
+        if winner == Players.UNSET:
+            txt = _('Deu velha!')
         else:
-            if winner == Players.UNSET:
-                txt = _('Deu velha!')
-            else:
-                txt = _('{player} ganhou!', player=players[winner].mention)
+            txt = _('{player} ganhou!', player=players[winner].mention)
 
-        msg = await self._do_rollover(message)
+        for child in view.children:
+            child.disabled = True
 
-        if msg != message and game.winner is None:
-            for player in players:
-                self.games[player.id] = (msg, game, players)
+        view.stop()
 
-        await self.edit_message(msg, txt, game)
+    await response.edit_message(content=txt, view=view)
+
+
+class TTTButton(discord.ui.Button):
+    def __init__(self, n):
+        label = '\u200b' + ' ' * 7 + '\u200b'
+        super().__init__(label=label, row=(n // 3), style=discord.ButtonStyle.gray)
+        self.n = n
+
+    async def callback(self, interaction: discord.Interaction):
+        players = self.view.players
+        board = self.view.board
+
+        if interaction.user not in players:
+            return
+
+        if players.index(interaction.user) != board.turn:
+            return
+
+        try:
+            board.make_move(self.n)
+        except ValueError:
+            return
+
+        self.style = discord.ButtonStyle.blurple
+        self.label = None
+
+        if board.turn == Players.O:
+            self.emoji = Emotes.X
+        else:
+            self.emoji = Emotes.O
+
+        await update_message(self.view, interaction.response)
+
+
+class TTTView(discord.ui.View):
+    def __init__(self, message, players):
+        super().__init__(timeout=60)
+        self.board = TTTImplementation()
+        self.message = message
+        self.players = players
+
+        for column in range(3):
+            for row in range(3):
+                self.add_item(TTTButton((3 * column) + row))
+
+    async def on_timeout(self):
+        for child in self.children:
+            child.disabled = True
+        await self.message.edit(content=_('Tempo excedido.'), view=self)

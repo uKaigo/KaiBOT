@@ -1,5 +1,4 @@
 import sys
-from asyncio import TimeoutError
 
 import discord
 import discord.http
@@ -7,9 +6,8 @@ from discord.ext import commands
 
 from .. import config
 from ..i18n import Translator
-from ..utils import custom, escape_text
-from ..utils.interactions import wait_for_click
-from .games.ttt import TTTIntegration
+from ..utils import custom
+from .games.ttt import TTTView
 
 _ = Translator(__name__)
 
@@ -19,11 +17,6 @@ class Fun(custom.Cog, translator=_):
 
     def __init__(self, bot):
         self.bot = bot
-        self._ttt_game = TTTIntegration(bot)
-        self.waiting = []
-
-    def cog_unload(self):
-        self._ttt_game.destroy()
 
     async def _send_confirmation(self, channel_id, text):
         route = discord.http.Route('POST', '/channels/{channel_id}/messages', channel_id=channel_id)
@@ -50,35 +43,12 @@ class Fun(custom.Cog, translator=_):
             return await ctx.send(_('O outro jogador não pode ser um bot.'))
         if ctx.author == player:
             return await ctx.send(_('Você não pode jogar com você mesmo.'))
-        if ctx.author.id in self._ttt_game:
-            return await ctx.send(_('Você já está em um jogo.'))
-        if player.id in self._ttt_game or player.id in self.waiting:
-            return await ctx.send(
-                _('**{player}** já está em um jogo.', player=escape_text(player.display_name))
-            )
 
-        text = _(
-            '{player}, deseja jogar Jogo da Velha contra {author}?',
-            author=ctx.author.mention,
-            player=player.mention,
+        msg = await ctx.send('\u200b')
+        await msg.edit(
+            content=_('Vez de {player}.', player=ctx.author.mention),
+            view=TTTView(msg, (ctx.author, player)),
         )
-        msg_id = await self._send_confirmation(ctx.channel.id, text)
-        msg = self.bot._connection._get_message(int(msg_id))
-
-        self.waiting.append(player.id)
-
-        try:
-            choice = await wait_for_click(self.bot, msg.id, player.id, timeout=60)
-        except TimeoutError:
-            return await msg.edit(content=text + '\n- ' + _('Tempo excedido.'))
-        finally:
-            self.waiting.remove(player.id)
-
-        if choice == 'choice_0':
-            not_accepted_text = _('{player} não aceitou.', player=player.mention)
-            return await msg.edit(content=text + '\n- ' + not_accepted_text)
-
-        await self._ttt_game.start(msg, ctx.author, player)
 
     async def _create_application_invite(self, channel_id, application_id, app_name):
         # We're making the request ourselves because d.py doesn't
