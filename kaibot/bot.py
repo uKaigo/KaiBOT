@@ -78,7 +78,7 @@ class KaiBOT(commands.Bot):
                 if flag in role_ids:
                     flags |= i
 
-        self._flags_cache[member.id] = flags
+            self._flags_cache[member.id] = flags
 
         return flags
 
