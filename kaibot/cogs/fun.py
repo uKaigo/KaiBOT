@@ -7,6 +7,7 @@ from discord.ext import commands
 from .. import config
 from ..i18n import Translator
 from ..utils import custom
+from ..utils.views import Confirm
 from .games.ttt import TTTView
 
 _ = Translator(__name__)
@@ -18,22 +19,6 @@ class Fun(custom.Cog, translator=_):
     def __init__(self, bot):
         self.bot = bot
 
-    async def _send_confirmation(self, channel_id, text):
-        route = discord.http.Route('POST', '/channels/{channel_id}/messages', channel_id=channel_id)
-        payload = {'content': text}
-        payload['components'] = [
-            {
-                'type': 1,
-                'components': [
-                    {'label': _('Sim'), 'style': 3, 'custom_id': 'choice_1', 'type': 2},
-                    {'label': _('Não'), 'style': 4, 'custom_id': 'choice_0', 'type': 2},
-                ],
-            }
-        ]
-
-        data = await self.bot.http.request(route, json=payload)
-        return data['id']
-
     @commands.command(aliases=['tictactoe', 'jogodavelha', 'jdv'])
     @commands.guild_only()
     @commands.bot_has_permissions(add_reactions=True)
@@ -44,7 +29,24 @@ class Fun(custom.Cog, translator=_):
         if ctx.author == player:
             return await ctx.send(_('Você não pode jogar com você mesmo.'))
 
-        msg = await ctx.send('\u200b')
+        text = _(
+            '{player}, deseja jogar Jogo da Velha contra {author}?',
+            author=ctx.author.mention,
+            player=player.mention,
+        )
+
+        confirm_view = Confirm(player, timeout=60)
+
+        msg = await ctx.send(text, view=confirm_view)
+
+        await confirm_view.wait()
+
+        if confirm_view.value is None:
+            return await msg.edit(content=text + '\n- ' + _('Tempo excedido.'))
+        elif confirm_view.value is False:
+            not_accepted_text = _('{player} não aceitou.', player=player.mention)
+            return await msg.edit(content=text + '\n -' + not_accepted_text)
+
         await msg.edit(
             content=_('Vez de {player}.', player=ctx.author.mention),
             view=TTTView(msg, (ctx.author, player)),
