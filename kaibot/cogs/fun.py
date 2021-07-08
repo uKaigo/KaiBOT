@@ -52,15 +52,6 @@ class Fun(custom.Cog, translator=_):
             view=TTTView(msg, (ctx.author, player)),
         )
 
-    async def _create_application_invite(self, channel_id, application_id, app_name):
-        # We're making the request ourselves because d.py doesn't
-        # support this (only in 2.0).
-        route = discord.http.Route('POST', '/channels/{channel_id}/invites', channel_id=channel_id)
-        payload = {'target_type': 2, 'target_application_id': str(application_id)}
-        return await self.bot.http.request(
-            route, json=payload, reason=_('Criando sessão de {name}', name=app_name)
-        )
-
     # I don't think these aliases are good, but idk another name.
     @commands.command(aliases=['ytt', 'youtubetogether'])
     @commands.bot_has_guild_permissions(create_instant_invite=True)
@@ -70,15 +61,17 @@ class Fun(custom.Cog, translator=_):
 
         Apenas disponível em desktop.
         """
-        invite_data = await self._create_application_invite(
-            voice_channel.id, 755600276941176913, 'YouTube Together'
+        invite = await voice_channel.create_invite(
+            target_type=discord.InviteTarget.embedded_application,
+            target_application_id=755600276941176913,
+            reason=_('Criando sessão de {name}', name='YouTube Together'),
         )
 
         embed = discord.Embed(
             description=_(
                 '[Clique aqui]({invite}) para abrir a sessão de {name}.',
                 name='YouTube Together',
-                invite=f'https://discord.gg/{invite_data["code"]}',
+                invite=invite,
             ),
             color=config.MAIN_COLOR,
         )
@@ -93,15 +86,17 @@ class Fun(custom.Cog, translator=_):
 
         Apenas disponível em desktop.
         """
-        invite_data = await self._create_application_invite(
-            voice_channel.id, 755827207812677713, 'Poker Night'
+        invite = await voice_channel.create_invite(
+            target_type=discord.InviteTarget.embedded_application,
+            target_application_id=755827207812677713,
+            reason=_('Criando sessão de {name}', name='Poker Night'),
         )
 
         embed = discord.Embed(
             description=_(
                 '[Clique aqui]({invite}) para abrir a sessão de {name}.',
                 name='Poker Night',
-                invite=f'https://discord.gg/{invite_data["code"]}',
+                invite=invite,
             ),
             color=config.MAIN_COLOR,
         )
