@@ -26,9 +26,6 @@ class Miscelaneous(custom.Cog, translator=_):
             command_attrs={
                 'aliases': ['ajuda'],
                 'help': _('Mostra essa mensagem.'),
-                'max_concurrency': commands.MaxConcurrency(
-                    1, per=commands.BucketType.member, wait=False
-                ),
             },
         )
         bot.help_command.cog = self

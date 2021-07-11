@@ -4,6 +4,7 @@ from discord.ext import commands, menus
 from ... import config
 from ...i18n import Translator
 from ...utils import format_list
+from ...utils.enums import Emotes
 
 _ = Translator(__name__)
 
@@ -17,12 +18,68 @@ def _get_short_doc(command):
     return cmd_help.split('\n', 1)[0]
 
 
-class HelpMenuPages(menus.MenuPages):
-    @menus.button('❔', position=menus.Last(3))
-    async def show_help(self, payload):
+class HelpView(discord.ui.View):
+    def __init__(self, source, message):
+        self.source = source
+        self.current_page = 0
+        self.message = message
+        super().__init__(timeout=60)
+
+    async def show_current_page(self):
+        entry = await self.source.get_page(self.current_page)
+        embed = self.source.format_page(self, entry)
+
+        for child in self.children:
+            if child.emoji in {Emotes.FIRST, Emotes.PREVIOUS}:
+                child.disabled = self.current_page == 0
+            elif child.emoji in {Emotes.LAST, Emotes.NEXT}:
+                child.disabled = self.current_page == self.source.get_max_pages() - 1
+            else:
+                child.disabled = False
+
+        await self.message.edit(embed=embed, view=self)
+
+    @discord.ui.button(emoji=Emotes.FIRST, style=discord.ButtonStyle.blurple)
+    async def go_to_first(self, button: discord.ui.Button, interaction: discord.Interaction):
+        self.current_page = 0
+        await self.show_current_page()
+
+    @discord.ui.button(emoji=Emotes.PREVIOUS, style=discord.ButtonStyle.blurple)
+    async def go_to_previous(self, button: discord.ui.Button, interaction: discord.Interaction):
+        self.current_page -= 1
+        await self.show_current_page()
+
+    @discord.ui.button(emoji=Emotes.STOP, style=discord.ButtonStyle.red)
+    async def stop_help(self, button: discord.ui.Button, interaction: discord.Interaction):
+        for child in self.children:
+            child.disabled = True
+
+        await self.message.edit(view=self)
+
+        self.stop()
+
+    async def on_timeout(self):
+        for child in self.children:
+            child.disabled = True
+
+        await self.message.edit(view=self)
+
+    @discord.ui.button(emoji=Emotes.NEXT, style=discord.ButtonStyle.blurple)
+    async def go_to_next(self, button: discord.ui.Button, interaction: discord.Interaction):
+        self.current_page += 1
+        await self.show_current_page()
+
+    @discord.ui.button(emoji=Emotes.LAST, style=discord.ButtonStyle.blurple)
+    async def go_to_last(self, button: discord.ui.Button, interaction: discord.Interaction):
+        self.current_page = self.source.get_max_pages() - 1
+        await self.show_current_page()
+
+    @discord.ui.button(emoji=Emotes.QUESTION, row=1)
+    async def show_help(self, button: discord.ui.Button, interaction: discord.Interaction):
+        # TODO: Use a different view to go back to the menu.
         embed = discord.Embed(color=config.MAIN_COLOR)
         embed.description = _('A estrutura é simples.')
-        embed.set_author(name=_('Ajuda'), icon_url=self.ctx.me.avatar)
+        embed.set_author(name=_('Ajuda'), icon_url=self.message.guild.me.avatar)
 
         fields = (
             ('<argument>', _('Isto significa que o argumento é __**obrigatório**__.')),
@@ -33,9 +90,12 @@ class HelpMenuPages(menus.MenuPages):
         for name, value in fields:
             embed.add_field(name=name, value=value, inline=False)
 
-        await self.message.edit(embed=embed)
+        button.disabled = True
+
+        await self.message.edit(embed=embed, view=self)
 
 
+# TODO: Don't use BotSource
 class BotSource(menus.GroupByPageSource):
     def __init__(self, *args, **kwargs):
         self.help = kwargs.pop('help')
@@ -122,9 +182,10 @@ class Help(commands.HelpCommand):
         commands = await self.filter_commands(self.bot.commands)
         key = lambda cmd: cmd.cog.qualified_name
         source = BotSource(entries=commands, per_page=10, key=key, help=self)
-        pages = HelpMenuPages(source=source, check_embeds=True, clear_reactions_after=True)
+        msg = await self.get_destination().send('\N{ZERO WIDTH SPACE}')
 
-        await pages.start(self.context, channel=self.get_destination(), wait=True)
+        view = HelpView(source, msg)
+        await view.show_current_page()
 
     def _insert_command_info(self, embed, command):
         embed.add_field(
