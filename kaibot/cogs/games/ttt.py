@@ -158,10 +158,10 @@ class TTTIntegration:
                     base['label'] = '\u200b' + ' ' * 7 + '\u200b'
                 elif value == Players.X:
                     base['style'] = 1
-                    base['emoji'] = {'id': '854070394964017164'}
+                    base['emoji'] = {'id': '863602074285375520'}
                 elif value == Players.O:
                     base['style'] = 1
-                    base['emoji'] = {'id': '854070394754433026'}
+                    base['emoji'] = {'id': '863602074545553418'}
                 btn_row.append(base)
             payload['components'].append({'type': 1, 'components': btn_row})
 
