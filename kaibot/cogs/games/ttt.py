@@ -1,8 +1,9 @@
-from enum import Enum, IntEnum
+from enum import IntEnum
 
 import discord
 import discord.http
 
+from ...utils.enums import Emotes
 from ...i18n import Translator
 
 _ = Translator(__name__)
@@ -14,11 +15,6 @@ class Players(IntEnum):
     X = 0
     O = 1
     UNSET = 2
-
-
-class Emotes(Enum):
-    X = discord.PartialEmoji(name='X', id=854070394964017164)
-    O = discord.PartialEmoji(name='O', id=854070394754433026)
 
 
 # Implementation #
