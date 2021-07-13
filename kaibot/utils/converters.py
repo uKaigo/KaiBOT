@@ -39,6 +39,7 @@ class Range(commands.Converter):
             max_ = slc
         return cls(min_, max_)
 
+
 class Prefix(commands.Converter):
     async def convert(self, ctx, argument):
         prefix = argument.strip().casefold()

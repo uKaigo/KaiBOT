@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  kaibot\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-18 20:05-0300\n"
-"PO-Revision-Date: 2021-05-18 20:08-0300\n"
+"POT-Creation-Date: 2021-07-04 00:06-0300\n"
+"PO-Revision-Date: 2021-07-03 23:44-0300\n"
 "Last-Translator: \n"
 "Language: en_US\n"
 "Language-Team: English\n"
@@ -12,51 +12,63 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.9.0\n"
+"Generated-By: Babel 2.9.1\n"
 
-#: kaibot/cogs/fun.py:17
+#: kaibot/cogs/fun.py:18
 #, docstring
 msgid "Comandos de diversão."
 msgstr "Fun commands."
 
-#: kaibot/cogs/fun.py:29
+#: kaibot/cogs/fun.py:35
+msgid "Sim"
+msgstr "Yes"
+
+#: kaibot/cogs/fun.py:36
+msgid "Não"
+msgstr "No"
+
+#: kaibot/cogs/fun.py:48
 #, docstring
 msgid "Começa um jogo da velha."
 msgstr "Starts a TicTacToe game."
 
-#: kaibot/cogs/fun.py:31
+#: kaibot/cogs/fun.py:50
 msgid "O outro jogador não pode ser um bot."
 msgstr "The other player can't be a bot."
 
-#: kaibot/cogs/fun.py:33
+#: kaibot/cogs/fun.py:52
 msgid "Você não pode jogar com você mesmo."
 msgstr "You can't play with yourself."
 
-#: kaibot/cogs/fun.py:35
+#: kaibot/cogs/fun.py:54
 msgid "Você já está em um jogo."
 msgstr "You're already in a game."
 
-#: kaibot/cogs/fun.py:38
+#: kaibot/cogs/fun.py:57
+#, python-brace-format
 msgid "**{player}** já está em um jogo."
 msgstr "**{player}** is already in a game."
 
-#: kaibot/cogs/fun.py:41
+#: kaibot/cogs/fun.py:60
+#, python-brace-format
 msgid "{player}, deseja jogar Jogo da Velha contra {author}?"
 msgstr "{player}, do you want to play TicTacToe against {author}?"
 
-#: kaibot/cogs/fun.py:54
+#: kaibot/cogs/fun.py:73
 msgid "Tempo excedido."
 msgstr "Time exceeded."
 
-#: kaibot/cogs/fun.py:60
+#: kaibot/cogs/fun.py:78
+#, python-brace-format
 msgid "{player} não aceitou."
 msgstr "{player} declined."
 
-#: kaibot/cogs/fun.py:71
+#: kaibot/cogs/fun.py:89
+#, python-brace-format
 msgid "Criando sessão de {name}"
 msgstr "Creating {name} session"
 
-#: kaibot/cogs/fun.py:78
+#: kaibot/cogs/fun.py:96
 #, docstring
 msgid ""
 "Cria uma nova sessão de YouTube Together.\n"
@@ -67,11 +79,12 @@ msgstr ""
 "\n"
 "Only available in desktop."
 
-#: kaibot/cogs/fun.py:88 kaibot/cogs/fun.py:111
+#: kaibot/cogs/fun.py:106 kaibot/cogs/fun.py:129
+#, python-brace-format
 msgid "[Clique aqui]({invite}) para abrir a sessão de {name}."
 msgstr "[Click here]({invite}) to open the {name} session."
 
-#: kaibot/cogs/fun.py:101
+#: kaibot/cogs/fun.py:119
 #, docstring
 msgid ""
 "Cria uma nova sessão de Poker Night.\n"

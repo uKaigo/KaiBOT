@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  kaibot\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-19 11:39-0300\n"
-"PO-Revision-Date: 2021-05-18 20:09-0300\n"
+"POT-Creation-Date: 2021-07-04 00:06-0300\n"
+"PO-Revision-Date: 2021-07-03 23:52-0300\n"
 "Last-Translator: \n"
 "Language: en_US\n"
 "Language-Team: English\n"
@@ -12,7 +12,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.9.0\n"
+"Generated-By: Babel 2.9.1\n"
 
 #: kaibot/cogs/info.py:33
 msgid "OldMembers"
@@ -23,6 +23,7 @@ msgid "Estes são os membros mais antigos do servidor."
 msgstr "These are the oldest members of the server."
 
 #: kaibot/cogs/info.py:38
+#, python-brace-format
 msgid "Página {current} de {max}"
 msgstr "Page {current} of {max}"
 
@@ -43,10 +44,12 @@ msgstr ""
 "The user doesn't need to be in the server."
 
 #: kaibot/cogs/info.py:66
+#, python-brace-format
 msgid "Avatar de {member}"
 msgstr "{member}'s avatar"
 
 #: kaibot/cogs/info.py:69
+#, python-brace-format
 msgid "Executado por: {author}"
 msgstr "Ran by: {author}"
 
