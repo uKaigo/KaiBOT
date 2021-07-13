@@ -3,7 +3,7 @@ jishaku==2.1.0
 git+https://github.com/Rapptz/discord-ext-menus@309c70222eec33acacb8c21bbb0fbe9bc57de661
 Babel==2.9.1
 python-dotenv==0.18.0
-rich==10.5.0
+rich==10.6.0
 psutil==5.8.0
 motor==2.4.0
 dnspython==2.1.0
