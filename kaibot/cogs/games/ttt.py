@@ -116,14 +116,7 @@ class TTTButton(discord.ui.Button):
         self.n = n
 
     async def callback(self, interaction: discord.Interaction):
-        players = self.view.players
         board = self.view.board
-
-        if interaction.user not in players:
-            return
-
-        if players.index(interaction.user) != board.turn:
-            return
 
         try:
             board.make_move(self.n)
@@ -156,3 +149,14 @@ class TTTView(discord.ui.View):
         for child in self.children:
             child.disabled = True
         await self.message.edit(content=_('Tempo excedido.'), view=self)
+
+    async def interaction_check(self, interaction: discord.Interaction):
+        if interaction.user not in self.players:
+            await interaction.response.send_message(_('Você não está nesse jogo.'), ephemeral=True)
+            return False
+
+        if self.players.index(interaction.user) != self.board.turn:
+            await interaction.response.send_message(_('Não é a sua vez.'), ephemeral=True)
+            return False
+
+        return True
