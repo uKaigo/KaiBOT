@@ -87,11 +87,15 @@ class TTTImplementation:
 
 # Integration #
 
-# TODO: Implement rollover somehow?
+
 async def update_message(view, response: discord.InteractionResponse):
     board = view.board
     winner = board.winner
+
     players = view.players
+
+    message = view.message
+    channel = message.channel
 
     if winner is None:
         txt = _('Vez de {player}.', player=players[board.turn].mention)
@@ -105,6 +109,19 @@ async def update_message(view, response: discord.InteractionResponse):
             child.disabled = True
 
         view.stop()
+
+    if channel.last_message != message:
+        history = await channel.history(limit=6, after=message).flatten()
+        if len(history) > 5:
+            await response.defer()
+
+            try:
+                await message.delete()
+            except discord.HTTPException:
+                pass
+
+            view.message = await channel.send(content=txt, view=view)
+            return
 
     await response.edit_message(content=txt, view=view)
 
@@ -138,7 +155,7 @@ class TTTView(discord.ui.View):
     def __init__(self, message, players):
         super().__init__(timeout=60)
         self.board = TTTImplementation()
-        self.message = message
+        self.message: discord.Message = message
         self.players = players
 
         for column in range(3):
