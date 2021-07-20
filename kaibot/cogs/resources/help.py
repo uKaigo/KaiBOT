@@ -39,7 +39,6 @@ class HelpView(PaginatorView):
 
     @discord.ui.button(emoji=Emotes.QUESTION, row=1)
     async def show_help(self, button: discord.ui.Button, interaction: discord.Interaction):
-        # TODO: Use a different view to go back to the menu.
         embed = discord.Embed(color=config.MAIN_COLOR)
         embed.description = _('A estrutura é simples.')
         embed.set_author(name=_('Ajuda'), icon_url=self.message.guild.me.avatar)
