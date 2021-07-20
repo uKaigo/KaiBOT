@@ -49,7 +49,7 @@ class Fun(custom.Cog, translator=_):
 
         await msg.edit(
             content=_('Vez de {player}.', player=ctx.author.mention),
-            view=TTTView(msg, (ctx.author, player)),
+            view=TTTView(self.bot, msg, (ctx.author, player)),
         )
 
     # I don't think these aliases are good, but idk another name.

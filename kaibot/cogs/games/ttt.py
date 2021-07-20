@@ -4,7 +4,7 @@ import discord
 import discord.http
 
 from ...utils.enums import Emotes
-from ...i18n import Translator
+from ...i18n import Translator, current_language
 
 _ = Translator(__name__)
 
@@ -114,8 +114,9 @@ class TTTButton(discord.ui.Button):
 
 
 class TTTView(discord.ui.View):
-    def __init__(self, message, players):
+    def __init__(self, bot, message, players):
         super().__init__(timeout=60)
+        self.bot = bot
         self.board = TTTImplementation()
         self.message = message
         self.players = players
@@ -125,6 +126,8 @@ class TTTView(discord.ui.View):
                 self.add_item(TTTButton((3 * column) + row))
 
     async def update_message(self, response: discord.InteractionResponse):
+        current_language.set(await self.bot.get_language_for(self.message.guild))
+
         winner = self.board.winner
 
         players = self.players
