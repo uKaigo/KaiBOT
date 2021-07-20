@@ -74,7 +74,7 @@ class BotSource(menus.GroupByPageSource):
         embed.description = getattr(cog, '__translator__', Translator._noop)(cog.description)
 
         for command in cmds:
-            signature = f'{self.help.clean_prefix}{self.help.get_command_signature(command)}'
+            signature = f'{ctx.clean_prefix}{self.help.get_command_signature(command)}'
 
             doc = _get_short_doc(command).strip()
             if isinstance(command, commands.Group):
@@ -109,12 +109,6 @@ class Help(commands.HelpCommand):
     def bot(self):
         if self.context:
             return self.context.bot
-
-    @property
-    def clean_prefix(self):
-        # TODO: Remove this alias.
-        if self.context:
-            return self.context.clean_prefix
 
     def _fake_command_not_found(self):
         return self.send_error_message(self.command_not_found(self.context.kwargs['command']))
@@ -153,7 +147,7 @@ class Help(commands.HelpCommand):
     def _insert_command_info(self, embed, command):
         embed.add_field(
             name=_('Modo de usar:'),
-            value=f'{self.clean_prefix}{self.get_command_signature(command)}',
+            value=f'{self.context.clean_prefix}{self.get_command_signature(command)}',
             inline=False,
         )
         if command.aliases:
@@ -192,7 +186,7 @@ class Help(commands.HelpCommand):
         paginator = commands.Paginator('', '', 1024)
 
         for command in group.commands:
-            signature = f'{self.clean_prefix}{self.get_command_signature(command)}'
+            signature = f'{self.context.clean_prefix}{self.get_command_signature(command)}'
 
             doc = _get_short_doc(command).strip()
             if isinstance(command, commands.Group):
@@ -219,7 +213,7 @@ class Help(commands.HelpCommand):
             return await self._fake_command_not_found()
 
         for command in cmds:
-            signature = f'{self.clean_prefix}{self.get_command_signature(command)}'
+            signature = f'{self.context.clean_prefix}{self.get_command_signature(command)}'
 
             doc = _get_short_doc(command).strip()
             if isinstance(command, commands.Group):
