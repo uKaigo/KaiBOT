@@ -44,7 +44,7 @@ class Fun(custom.Cog, translator=_):
     @commands.command(aliases=['tictactoe', 'jogodavelha', 'jdv'])
     @commands.guild_only()
     @commands.bot_has_permissions(add_reactions=True)
-    async def ttt(self, ctx, player: discord.Member):
+    async def ttt(self, ctx, *, player: discord.Member):
         """Começa um jogo da velha."""
         if player.bot:
             return await ctx.send(_('O outro jogador não pode ser um bot.'))
