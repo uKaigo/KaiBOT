@@ -95,7 +95,6 @@ class TTTButton(discord.ui.Button):
         self.n = n
 
     async def callback(self, interaction: discord.Interaction):
-
         board = self.view.board
 
         try:
@@ -111,7 +110,7 @@ class TTTButton(discord.ui.Button):
         else:
             self.emoji = Emotes.O
 
-        await self.view.update_message(self.view, interaction.response)
+        await self.view.update_message(interaction.response)
 
 
 class TTTView(discord.ui.View):
