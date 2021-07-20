@@ -89,8 +89,7 @@ class TTTImplementation:
 
 
 async def update_message(view, response: discord.InteractionResponse):
-    board = view.board
-    winner = board.winner
+    winner = view.board.winner
 
     players = view.players
 
@@ -98,7 +97,7 @@ async def update_message(view, response: discord.InteractionResponse):
     channel = message.channel
 
     if winner is None:
-        txt = _('Vez de {player}.', player=players[board.turn].mention)
+        txt = _('Vez de {player}.', player=players[view.board.turn].mention)
     else:
         if winner == Players.UNSET:
             txt = _('Deu velha!')
@@ -155,7 +154,7 @@ class TTTView(discord.ui.View):
     def __init__(self, message, players):
         super().__init__(timeout=60)
         self.board = TTTImplementation()
-        self.message: discord.Message = message
+        self.message = message
         self.players = players
 
         for column in range(3):
