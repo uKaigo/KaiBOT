@@ -4,6 +4,7 @@ from discord.ext import commands, menus
 from ... import config
 from ...i18n import Translator
 from ...utils import format_list
+from ...utils.views import PaginatorView
 from ...utils.enums import Emotes
 
 _ = Translator(__name__)
@@ -18,61 +19,23 @@ def _get_short_doc(command):
     return cmd_help.split('\n', 1)[0]
 
 
-class HelpView(discord.ui.View):
+class HelpView(PaginatorView):
     def __init__(self, source, message):
+        super().__init__(message=message, timeout=60)
+
         self.source = source
-        self.current_page = 0
-        self.message = message
-        super().__init__(timeout=60)
+        self.get_max_pages = self.source.get_max_pages
 
     async def show_current_page(self):
         entry = await self.source.get_page(self.current_page)
         embed = self.source.format_page(self, entry)
 
-        for child in self.children:
-            if child.emoji in {Emotes.FIRST, Emotes.PREVIOUS}:
-                child.disabled = self.current_page == 0
-            elif child.emoji in {Emotes.LAST, Emotes.NEXT}:
-                child.disabled = self.current_page == self.source.get_max_pages() - 1
-            else:
-                child.disabled = False
+        self.go_to_first.disabled = self.current_page == 0
+        self.go_to_previous.disabled = self.current_page == 0
+        self.go_to_last.disabled = self.current_page == self.get_max_pages() - 1
+        self.go_to_next.disabled = self.current_page == self.get_max_pages() - 1
 
         await self.message.edit(embed=embed, view=self)
-
-    @discord.ui.button(emoji=Emotes.FIRST, style=discord.ButtonStyle.blurple)
-    async def go_to_first(self, button: discord.ui.Button, interaction: discord.Interaction):
-        self.current_page = 0
-        await self.show_current_page()
-
-    @discord.ui.button(emoji=Emotes.PREVIOUS, style=discord.ButtonStyle.blurple)
-    async def go_to_previous(self, button: discord.ui.Button, interaction: discord.Interaction):
-        self.current_page -= 1
-        await self.show_current_page()
-
-    @discord.ui.button(emoji=Emotes.STOP, style=discord.ButtonStyle.red)
-    async def stop_help(self, button: discord.ui.Button, interaction: discord.Interaction):
-        for child in self.children:
-            child.disabled = True
-
-        await self.message.edit(view=self)
-
-        self.stop()
-
-    async def on_timeout(self):
-        for child in self.children:
-            child.disabled = True
-
-        await self.message.edit(view=self)
-
-    @discord.ui.button(emoji=Emotes.NEXT, style=discord.ButtonStyle.blurple)
-    async def go_to_next(self, button: discord.ui.Button, interaction: discord.Interaction):
-        self.current_page += 1
-        await self.show_current_page()
-
-    @discord.ui.button(emoji=Emotes.LAST, style=discord.ButtonStyle.blurple)
-    async def go_to_last(self, button: discord.ui.Button, interaction: discord.Interaction):
-        self.current_page = self.source.get_max_pages() - 1
-        await self.show_current_page()
 
     @discord.ui.button(emoji=Emotes.QUESTION, row=1)
     async def show_help(self, button: discord.ui.Button, interaction: discord.Interaction):

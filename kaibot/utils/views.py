@@ -1,5 +1,6 @@
 import discord
 from .translations import CONFIRM
+from .enums import Emotes
 
 
 class Confirm(discord.ui.View):
@@ -28,3 +29,51 @@ class Confirm(discord.ui.View):
     async def cancel(self, button: discord.ui.Button, interaction: discord.Interaction):
         self.value = False
         self.stop()
+
+
+class PaginatorView(discord.ui.View):
+    def __init__(self, *, message, timeout=180):
+        self.message = message
+        self.current_page = 0
+        super().__init__(timeout=timeout)
+
+    async def show_current_page(self):
+        raise NotImplementedError()
+
+    def get_max_pages(self):
+        raise NotImplementedError
+
+    @discord.ui.button(emoji=Emotes.FIRST, style=discord.ButtonStyle.blurple)
+    async def go_to_first(self, button: discord.ui.Button, interaction: discord.Interaction):
+        self.current_page = 0
+        await self.show_current_page()
+
+    @discord.ui.button(emoji=Emotes.PREVIOUS, style=discord.ButtonStyle.blurple)
+    async def go_to_previous(self, button: discord.ui.Button, interaction: discord.Interaction):
+        self.current_page -= 1
+        await self.show_current_page()
+
+    @discord.ui.button(emoji=Emotes.STOP, style=discord.ButtonStyle.red)
+    async def stop_help(self, button: discord.ui.Button, interaction: discord.Interaction):
+        for child in self.children:
+            child.disabled = True
+
+        await self.message.edit(view=self)
+
+        self.stop()
+
+    async def on_timeout(self):
+        for child in self.children:
+            child.disabled = True
+
+        await self.message.edit(view=self)
+
+    @discord.ui.button(emoji=Emotes.NEXT, style=discord.ButtonStyle.blurple)
+    async def go_to_next(self, button: discord.ui.Button, interaction: discord.Interaction):
+        self.current_page += 1
+        await self.show_current_page()
+
+    @discord.ui.button(emoji=Emotes.LAST, style=discord.ButtonStyle.blurple)
+    async def go_to_last(self, button: discord.ui.Button, interaction: discord.Interaction):
+        self.current_page = self.get_max_pages() - 1
+        await self.show_current_page()
