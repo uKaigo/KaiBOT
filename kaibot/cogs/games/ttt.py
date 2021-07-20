@@ -88,43 +88,6 @@ class TTTImplementation:
 # Integration #
 
 
-async def update_message(view, response: discord.InteractionResponse):
-    winner = view.board.winner
-
-    players = view.players
-
-    message = view.message
-    channel = message.channel
-
-    if winner is None:
-        txt = _('Vez de {player}.', player=players[view.board.turn].mention)
-    else:
-        if winner == Players.UNSET:
-            txt = _('Deu velha!')
-        else:
-            txt = _('{player} ganhou!', player=players[winner].mention)
-
-        for child in view.children:
-            child.disabled = True
-
-        view.stop()
-
-    if channel.last_message != message:
-        history = await channel.history(limit=6, after=message).flatten()
-        if len(history) > 5:
-            await response.defer()
-
-            try:
-                await message.delete()
-            except discord.HTTPException:
-                pass
-
-            view.message = await channel.send(content=txt, view=view)
-            return
-
-    await response.edit_message(content=txt, view=view)
-
-
 class TTTButton(discord.ui.Button):
     def __init__(self, n):
         label = '\u200b' + ' ' * 7 + '\u200b'
@@ -147,7 +110,7 @@ class TTTButton(discord.ui.Button):
         else:
             self.emoji = Emotes.O
 
-        await update_message(self.view, interaction.response)
+        await self.view.date_message(self.view, interaction.response)
 
 
 class TTTView(discord.ui.View):
@@ -160,6 +123,42 @@ class TTTView(discord.ui.View):
         for column in range(3):
             for row in range(3):
                 self.add_item(TTTButton((3 * column) + row))
+
+    async def update_message(self, response: discord.InteractionResponse):
+        winner = self.board.winner
+
+        players = self.players
+
+        message = self.message
+        channel = message.channel
+
+        if winner is None:
+            txt = _('Vez de {player}.', player=players[self.board.turn].mention)
+        else:
+            if winner == Players.UNSET:
+                txt = _('Deu velha!')
+            else:
+                txt = _('{player} ganhou!', player=players[winner].mention)
+
+            for child in self.children:
+                child.disabled = True
+
+            self.stop()
+
+        if channel.last_message != message:
+            history = await channel.history(limit=6, after=message).flatten()
+            if len(history) > 5:
+                await response.defer()
+
+                try:
+                    await message.delete()
+                except discord.HTTPException:
+                    pass
+
+                self.message = await channel.send(content=txt, view=self)
+                return
+
+        await response.edit_message(content=txt, view=self)
 
     async def on_timeout(self):
         for child in self.children:
