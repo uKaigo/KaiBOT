@@ -14,17 +14,29 @@ from ..utils.enums import Flags
 _ = Translator(__name__)
 
 
-class UserinfoMenu(menus.Menu):
+class UserinfoView(discord.ui.View):
     def __init__(self, embeds, **kwargs):
         super().__init__(**kwargs)
+        self.current = 0
         self.embeds = embeds
-        self.is_first_embed = True
+        # TODO: Think of better emojis.
+        self.buttons = [
+            {'label': _('Permissões'), 'emoji': '🛡️'},
+            {'label': _('Informações'), 'emoji': '👤'},
+        ]
 
-    @menus.button('🛡️')
-    async def update_embed(self, _):
-        self.is_first_embed = not self.is_first_embed
-        idx = not self.is_first_embed
-        await self.message.edit(embed=self.embeds[idx])
+        self.toggle_perms.label = self.buttons[0]['label']
+        self.toggle_perms.emoji = self.buttons[0]['emoji']
+
+    @discord.ui.button()
+    async def toggle_perms(self, button: discord.ui.Button, interaction: discord.Interaction):
+        self.current ^= 1
+        button_info = self.buttons[self.current]
+
+        button.label = button_info['label']
+        button.emoji = button_info['emoji']
+
+        await interaction.response.edit_message(embed=self.embeds[self.current], view=self)
 
 
 class OldMembersSource(menus.ListPageSource):
@@ -136,10 +148,8 @@ class Info(custom.Cog, translator=_):
                 roles = [_('Nenhum.')]
 
             embed_info.add_field(name=_('🛠️ Cargos'), value=format_list(roles), inline=False)
-
-        msg = await ctx.send(embed=embed_info)
-        if not isinstance(member, discord.Member):
-            return
+        else:
+            return await ctx.send(embed=embed_info)
 
         embed_perms = discord.Embed(color=member.color)
         embed_perms.set_author(name=f'{member} [{member.id}]', icon_url=member.avatar)
@@ -151,13 +161,7 @@ class Info(custom.Cog, translator=_):
 
         embed_perms.add_field(name=_('🛡️ Permissões'), value=format_list(perms), inline=False)
 
-        menu = UserinfoMenu(
-            (embed_info, embed_perms),
-            timeout=60,
-            message=msg,
-            check_embeds=True,
-        )
-        await menu.start(ctx=ctx)
+        await ctx.send(embed=embed_info, view=UserinfoView((embed_info, embed_perms), timeout=60))
 
     @commands.command()
     @commands.guild_only()
