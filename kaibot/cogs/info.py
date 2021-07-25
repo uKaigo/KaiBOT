@@ -10,6 +10,7 @@ from ..utils.converters import MemberOrUser
 from ..utils.decorators import needs_chunk
 from ..utils.translations import PERMISSIONS
 from ..utils.enums import Flags
+from ..utils.views import PaginatorView
 
 _ = Translator(__name__)
 
@@ -39,8 +40,15 @@ class UserinfoView(discord.ui.View):
         await interaction.response.edit_message(embed=self.embeds[self.current], view=self)
 
 
-class OldMembersSource(menus.ListPageSource):
-    def format_page(self, menu, pages):
+class OldmembersView(PaginatorView):
+    def __init__(self, message, members, *, per_page=10, **kwargs):
+        super().__init__(message=message, **kwargs)
+        self.pages = tuple(members[i : i + per_page] for i in range(0, len(members), per_page))
+
+    def get_max_pages(self):
+        return len(self.pages)
+
+    async def show_current_page(self):
         embed = discord.Embed(
             title=_('OldMembers'),
             description=_('Estes são os membros mais antigos do servidor.'),
@@ -49,12 +57,18 @@ class OldMembersSource(menus.ListPageSource):
         embed.set_footer(
             text=_(
                 'Página {current} de {max}',
-                current=menu.current_page + 1,
+                current=self.current_page + 1,
                 max=self.get_max_pages(),
             )
         )
-        embed.description = '\n'.join(pages)
-        return embed
+        embed.description = '\n'.join(self.pages[self.current_page])
+
+        self.go_to_first.disabled = self.current_page == 0
+        self.go_to_previous.disabled = self.current_page == 0
+        self.go_to_last.disabled = self.current_page == self.get_max_pages() - 1
+        self.go_to_next.disabled = self.current_page == self.get_max_pages() - 1
+
+        await self.message.edit(embed=embed, view=self)
 
 
 class Info(custom.Cog, translator=_):
@@ -180,9 +194,9 @@ class Info(custom.Cog, translator=_):
                 enumerate(sorted(ctx.guild.members, key=lambda m: m.joined_at)),
             )
 
-        source = OldMembersSource(tuple(members), per_page=10)
-        pages = menus.MenuPages(source=source, clear_reactions_after=True)
-        await pages.start(ctx)
+        msg = await ctx.send('\N{ZERO WIDTH SPACE}')
+        view = OldmembersView(msg, tuple(members), timeout=60)
+        await view.show_current_page()
 
 
 def setup(bot):
