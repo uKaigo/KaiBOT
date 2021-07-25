@@ -54,7 +54,7 @@ class PaginatorView(discord.ui.View):
         await self.show_current_page()
 
     @discord.ui.button(emoji=Emotes.STOP, style=discord.ButtonStyle.red)
-    async def stop_help(self, button: discord.ui.Button, interaction: discord.Interaction):
+    async def stop_paginator(self, button: discord.ui.Button, interaction: discord.Interaction):
         for child in self.children:
             child.disabled = True
 
