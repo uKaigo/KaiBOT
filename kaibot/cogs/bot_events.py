@@ -53,17 +53,6 @@ class BotEvents(commands.Cog):
             inline=False,
         )
 
-    def _set_info_from_dm(self, ctx, embed):
-        embed.add_field(name='Servidor', value='_Executado em DM._', inline=False)
-        embed.add_field(name='Canal', value=f'\> ID: {ctx.channel.id}', inline=False)
-
-    def _get_member_count(self):
-        # Gets the total member count. Not unique.
-        members = 0
-        for guild in self.bot.guilds:
-            members += guild.member_count
-        return members
-
     @commands.Cog.listener()
     async def on_ready(self):
         bot = self.bot
@@ -78,7 +67,7 @@ class BotEvents(commands.Cog):
 
         stats.add_row('Guilds', str(len(self.bot.guilds)))
 
-        stats.add_row('Members', str(self._get_member_count()))
+        stats.add_row('Members', str(sum(g.member_count for g in bot.guilds)))
 
         versions = Table(show_edge=False, show_header=False, box=box.MINIMAL)
         fmt = '{0.major}.{0.minor}.{0.micro}'

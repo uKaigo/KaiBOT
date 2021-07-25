@@ -27,7 +27,7 @@ class Moderation(custom.Cog, translator=_):
     @commands.command()
     @commands.has_permissions(manage_messages=True)
     @commands.bot_has_permissions(manage_messages=True)
-    async def clear(self, ctx, count: Range[2, 100] = 100, member: discord.Member = None):
+    async def clear(self, ctx, count: Range[2, 100] = 100, *, member: discord.Member = None):
         """Limpa `count` mensagens do canal."""
         if member:
             check = lambda m: m.author == member and m != ctx.message
@@ -114,7 +114,7 @@ class Moderation(custom.Cog, translator=_):
     @commands.command()
     @commands.has_permissions(ban_members=True)
     @commands.bot_has_permissions(ban_members=True)
-    async def unban(self, ctx, member: discord.User):
+    async def unban(self, ctx, *, member: discord.User):
         """Desbane um membro do servidor."""
         try:
             await ctx.guild.unban(member, reason=_('Por {author}', author=ctx.author))
@@ -170,7 +170,7 @@ class Moderation(custom.Cog, translator=_):
     @commands.command()
     @commands.has_permissions(manage_roles=True)
     @commands.bot_has_permissions(manage_roles=True)
-    async def unmute(self, ctx, member: discord.Member):
+    async def unmute(self, ctx, *, member: discord.Member):
         """Remove o silenciamento de um membro."""
         txt = self._get_no_permission_txt(ctx, member)
         if txt:
