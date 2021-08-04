@@ -1,11 +1,12 @@
 from random import choice
 
 import discord
-from discord.ext import commands, menus
+from discord.utils import format_dt
+from discord.ext import commands
 
 from .. import config
 from ..i18n import Translator
-from ..utils import custom, format_datetime, format_list
+from ..utils import custom, format_list
 from ..utils.converters import MemberOrUser
 from ..utils.decorators import needs_chunk
 from ..utils.translations import PERMISSIONS
@@ -140,20 +141,20 @@ class Info(custom.Cog, translator=_):
 
         embed_info.add_field(
             name=_('🗓️ Criou a conta em'),
-            value=format_datetime(member.created_at),
+            value=format_dt(member.created_at, 'f'),
             inline=False,
         )
         if isinstance(member, discord.Member):
             embed_info.add_field(
                 name=_('🗓️ Entrou no servidor em'),
-                value=format_datetime(member.joined_at),
+                value=format_dt(member.joined_at, 'f'),
                 inline=False,
             )
 
             if ps := member.premium_since:
                 embed_info.add_field(
                     name=_('♦️ Impulsionando desde'),
-                    value=format_datetime(ps),
+                    value=format_dt(ps, 'f'),
                     inline=False,
                 )
 

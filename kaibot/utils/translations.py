@@ -56,8 +56,6 @@ PERMISSIONS = {
     'use_private_threads': _('Utilizar Threads Privadas'),
 }
 
-DATETIME = _('{date} às {time}')
-
 CONFIRM = {'yes': _('Sim'), 'no': _('Não')}
 
 ERRORS = {
