@@ -43,15 +43,32 @@ class BotEvents(commands.Cog):
             inline=False,
         )
 
-        embed.add_field(
-            name='Canal',
-            value=(
-                f'\> Nome: {ctx.channel.name}\n'
-                f'\> ID: {ctx.channel.id}\n'
-                f'\> NSFW: {ctx.channel.nsfw}'
-            ),
-            inline=False,
-        )
+        if isinstance(ctx.channel, discord.Thread):
+            embed.add_field(
+                name='Canal',
+                value=(
+                    f'\> Nome: {ctx.channel.parent.name}\n'
+                    f'\> ID: {ctx.channel.parent.id}\n'
+                    f'\> NSFW: {ctx.channel.parent.nsfw}'
+                ),
+                inline=False,
+            )
+
+            embed.add_field(
+                name='Thread',
+                value=(f'\> Nome: {ctx.channel.name}\n \> ID: {ctx.channel.id}\n'),
+                inline=False,
+            )
+        else:
+            embed.add_field(
+                name='Canal',
+                value=(
+                    f'\> Nome: {ctx.channel.name}\n'
+                    f'\> ID: {ctx.channel.id}\n'
+                    f'\> NSFW: {ctx.channel.nsfw}'
+                ),
+                inline=False,
+            )
 
     def _set_info_from_dm(self, ctx, embed):
         embed.add_field(name='Servidor', value='_Executado em DM._', inline=False)

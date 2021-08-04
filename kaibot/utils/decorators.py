@@ -1,7 +1,14 @@
 import asyncio
 import functools
 
+import discord
 from discord.ext import commands
+
+from .translations import ERRORS
+
+
+class NoThread(commands.CheckFailure):
+    is_kaibot = True
 
 
 async def needs_chunk_hook(self, ctx):
@@ -33,3 +40,12 @@ def in_executor(func):
         return loop.run_in_executor(None, partial)
 
     return decorator
+
+
+def no_thread():
+    async def predicate(ctx):
+        if isinstance(ctx.channel, discord.Thread):
+            raise NoThread(str(ERRORS['no_thread']))
+        return True
+
+    return commands.check(predicate)

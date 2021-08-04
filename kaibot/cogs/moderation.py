@@ -8,6 +8,7 @@ from discord.ext import commands
 from .. import config
 from ..i18n import Translator, current_language
 from ..utils import can_modify, custom, escape_text, format_list
+from ..utils.decorators import no_thread
 from ..utils.converters import MemberOrUser, Prefix, Range
 
 _ = Translator(__name__)
@@ -45,6 +46,7 @@ class Moderation(custom.Cog, translator=_):
     @commands.command()
     @commands.has_permissions(manage_channels=True)
     @commands.bot_has_permissions(manage_channels=True)
+    @no_thread()
     async def lock(self, ctx):
         """Bloqueia um canal."""
         role = ctx.guild.default_role
@@ -63,6 +65,7 @@ class Moderation(custom.Cog, translator=_):
     @commands.command()
     @commands.has_permissions(manage_channels=True)
     @commands.bot_has_permissions(manage_channels=True)
+    @no_thread()
     async def unlock(self, ctx):
         """Desbloqueia um canal."""
         role = ctx.guild.default_role

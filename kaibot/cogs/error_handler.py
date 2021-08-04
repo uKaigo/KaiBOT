@@ -46,6 +46,9 @@ class ErrorHandler(commands.Cog):
         if isinstance(original, self.IGNORED_ERRORS):
             return
 
+        if getattr(error, 'is_kaibot', False):
+            return await ctx.send(str(error))
+
         if isinstance(original, discord.Forbidden):
             if original.code == 50013 and not ctx.channel.permissions_for(ctx.me).embed_links:
                 error = commands.BotMissingPermissions(('embed_links',))
@@ -56,8 +59,6 @@ class ErrorHandler(commands.Cog):
             )
 
         if isinstance(error, commands.BadArgument):
-            if getattr(error, 'is_kaibot', False):
-                return await ctx.send(str(error))
             if 'int' in str(error):
                 return await ctx.send(_('Insira um número válido.'))
 
