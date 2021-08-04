@@ -1,8 +1,8 @@
 git+https://github.com/Rapptz/discord.py@c748e4bce58a74cfb6c8778693a3f034cbdf9a67
-jishaku==2.1.0
+jishaku==2.2.0
 git+https://github.com/Rapptz/discord-ext-menus@309c70222eec33acacb8c21bbb0fbe9bc57de661
 Babel==2.9.1
-python-dotenv==0.18.0
+python-dotenv==0.19.0
 rich==10.6.0
 psutil==5.8.0
 motor==2.5.0
@@ -10,4 +10,4 @@ dnspython==2.1.0
 
 # These are already installed as dependencies, but let's keep it here.
 aiohttp==3.7.4.post0
-humanize==3.9.0
+humanize==3.11.0

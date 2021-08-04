@@ -53,6 +53,10 @@ class BotEvents(commands.Cog):
             inline=False,
         )
 
+    def _set_info_from_dm(self, ctx, embed):
+        embed.add_field(name='Servidor', value='_Executado em DM._', inline=False)
+        embed.add_field(name='Canal', value=f'\> ID: {ctx.channel.id}', inline=False)
+
     @commands.Cog.listener()
     async def on_ready(self):
         bot = self.bot
