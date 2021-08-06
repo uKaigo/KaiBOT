@@ -35,7 +35,7 @@ class Moderation(custom.Cog, translator=_):
             check = lambda m: m != ctx.message
 
         async with ctx.typing():
-            await ctx.message.delete()
+#            await ctx.message.delete()
             deleted = await ctx.channel.purge(limit=count, check=check)
 
         txt = _('{count} mensagens foram deletadas.', count=len(deleted))
