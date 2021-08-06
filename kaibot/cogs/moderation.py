@@ -30,17 +30,16 @@ class Moderation(custom.Cog, translator=_):
     async def clear(self, ctx, count: Range[2, 100] = 100, *, member: discord.Member = None):
         """Limpa `count` mensagens do canal."""
         if member:
-            check = lambda m: m.author == member and m != ctx.message
+            check = lambda m: m.author == member
         else:
-            check = lambda m: m != ctx.message
+            check = lambda m: True
 
         async with ctx.typing():
-#            await ctx.message.delete()
+            await ctx.message.delete()
             deleted = await ctx.channel.purge(limit=count, check=check)
 
         txt = _('{count} mensagens foram deletadas.', count=len(deleted))
         await ctx.send(txt, delete_after=3)
-        await ctx.message.delete(delay=3)
 
     @commands.command()
     @commands.has_permissions(manage_channels=True)
