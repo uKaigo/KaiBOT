@@ -1,3 +1,4 @@
+from time import time
 from glob import glob
 from functools import cached_property
 from os.path import split as split_path
@@ -25,23 +26,54 @@ class Moderation(custom.Cog, translator=_):
             raise commands.NoPrivateMessage()
         return True
 
+    async def _purge(self, channel, *, limit, check):
+        """
+        Similar to discord.py's purge, but it won't delete messages
+        older than 14 days.
+        """
+        if limit > 100:
+            raise ValueError('Only purge 100 messages at a time.')
+        iterator = channel.history(limit=limit)
+
+        to_delete = []
+        not_deleted = 0
+
+        fourteen_days_ago = int(time() - 14 * 24 * 60 * 60) * 1000
+        minimum_time = (fourteen_days_ago - 1420070400000) << 22
+
+        async for message in iterator:
+            if message.id < minimum_time or not check(message):
+                # older than 14 days or does not meet the check.
+                not_deleted += 1
+            else:
+                to_delete.append(message)
+
+        await channel.delete_messages(to_delete)
+
+        return (len(to_delete), not_deleted)
+
     @commands.command()
     @commands.has_permissions(manage_messages=True)
     @commands.bot_has_permissions(manage_messages=True)
     async def clear(self, ctx, count: Range[2, 100] = 100, *, member: discord.Member = None):
         """Limpa `count` mensagens do canal."""
         if member:
-            check = lambda m: m.author == member and m != ctx.message
+            check = lambda m: m.author == member
         else:
-            check = lambda m: m != ctx.message
+            check = lambda m: True
 
         async with ctx.typing():
             await ctx.message.delete()
-            deleted = await ctx.channel.purge(limit=count, check=check)
+            deleted, not_deleted = await self._purge(ctx.channel, limit=count, check=check)
 
-        txt = _('{count} mensagens foram deletadas.', count=len(deleted))
+        txt = _('{count} mensagens foram deletadas.', count=deleted)
+        if not_deleted:
+            txt += '\n' + _(
+                '{count} mensagens foram ignoradas por serem muito antigas ou '
+                'não seguirem o filtro fornecido.',
+                count=not_deleted,
+            )
         await ctx.send(txt, delete_after=3)
-        await ctx.message.delete(delay=3)
 
     @commands.command()
     @commands.has_permissions(manage_channels=True)
