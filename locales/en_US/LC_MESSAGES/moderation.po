@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  kaibot\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-04 00:06-0300\n"
-"PO-Revision-Date: 2021-07-03 23:57-0300\n"
+"POT-Creation-Date: 2021-08-06 19:42-0300\n"
+"PO-Revision-Date: 2021-08-06 19:46-0300\n"
 "Last-Translator: \n"
 "Language: en_US\n"
 "Language-Team: English\n"
@@ -14,58 +14,63 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.9.1\n"
 
-#: kaibot/cogs/moderation.py:17
+#: kaibot/cogs/moderation.py:18
 #, docstring
 msgid "Comandos de moderação."
 msgstr "Moderation commands."
 
-#: kaibot/cogs/moderation.py:31
+#: kaibot/cogs/moderation.py:58
 #, docstring
 msgid "Limpa `count` mensagens do canal."
 msgstr "Clears `count` messages in the channel."
 
-#: kaibot/cogs/moderation.py:41
+#: kaibot/cogs/moderation.py:68
 #, python-brace-format
 msgid "{count} mensagens foram deletadas."
 msgstr "{count} messages were deleted."
 
-#: kaibot/cogs/moderation.py:49
+#: kaibot/cogs/moderation.py:70
+#, python-brace-format
+msgid "{count} mensagens foram ignoradas por serem muito antigas ou não seguirem o filtro fornecido."
+msgstr "{count} messages were ignored for being too old or not following the given filter."
+
+#: kaibot/cogs/moderation.py:81
 #, docstring
 msgid "Bloqueia um canal."
 msgstr "Locks a channel."
 
-#: kaibot/cogs/moderation.py:55
+#: kaibot/cogs/moderation.py:87
 msgid "O canal já está bloqueado."
 msgstr "The channel is already locked."
 
-#: kaibot/cogs/moderation.py:61
+#: kaibot/cogs/moderation.py:93
 msgid "Canal bloqueado."
 msgstr "Channel locked."
 
-#: kaibot/cogs/moderation.py:67
+#: kaibot/cogs/moderation.py:99
 #, docstring
 msgid "Desbloqueia um canal."
 msgstr "Unlocks a channel."
 
-#: kaibot/cogs/moderation.py:73
+#: kaibot/cogs/moderation.py:105
 msgid "O canal já está desbloqueado."
 msgstr "The channel is already unlocked."
 
-#: kaibot/cogs/moderation.py:78
+#: kaibot/cogs/moderation.py:110
 msgid "Canal desbloqueado."
 msgstr "Channel unlocked."
 
-#: kaibot/cogs/moderation.py:82
+#: kaibot/cogs/moderation.py:114
 #, python-brace-format
 msgid "Você não pode fazer isso com **{member}**."
 msgstr "You can't do this to **{member}**."
 
-#: kaibot/cogs/moderation.py:84
+#: kaibot/cogs/moderation.py:116
 #, python-brace-format
 msgid "Eu não posso fazer isso com **{member}**."
 msgstr "I can't do this to **{member}**."
 
-#: kaibot/cogs/moderation.py:90
+#: kaibot/cogs/moderation.py:122
 #, docstring
 msgid ""
 "Bane um membro do servidor.\n"
@@ -76,102 +81,102 @@ msgstr ""
 "\n"
 "The member doesn't need to be in the server."
 
-#: kaibot/cogs/moderation.py:100 kaibot/cogs/moderation.py:144
+#: kaibot/cogs/moderation.py:132 kaibot/cogs/moderation.py:176
 msgid "Não especificado."
 msgstr "Not specified."
 
-#: kaibot/cogs/moderation.py:102 kaibot/cogs/moderation.py:159
+#: kaibot/cogs/moderation.py:134 kaibot/cogs/moderation.py:191
 #, python-brace-format
 msgid "Por {author} | Motivo: {reason}"
 msgstr "By {author} | Reason: {reason}"
 
-#: kaibot/cogs/moderation.py:107
+#: kaibot/cogs/moderation.py:139
 #, python-brace-format
 msgid "**{member}** banido por **{reason}**."
 msgstr "**{member}** banned for **{reason}**."
 
-#: kaibot/cogs/moderation.py:118
+#: kaibot/cogs/moderation.py:150
 #, docstring
 msgid "Desbane um membro do servidor."
 msgstr "Unbans a member of the server."
 
-#: kaibot/cogs/moderation.py:120 kaibot/cogs/moderation.py:183
+#: kaibot/cogs/moderation.py:152 kaibot/cogs/moderation.py:215
 #, python-brace-format
 msgid "Por {author}"
 msgstr "By {author}"
 
-#: kaibot/cogs/moderation.py:122
+#: kaibot/cogs/moderation.py:154
 msgid "O membro não está banido."
 msgstr "The member isn't banned."
 
-#: kaibot/cogs/moderation.py:124
+#: kaibot/cogs/moderation.py:156
 #, python-brace-format
 msgid "**{member}** desbanido."
 msgstr "**{member}** unbanned."
 
-#: kaibot/cogs/moderation.py:130 kaibot/cogs/moderation.py:153
+#: kaibot/cogs/moderation.py:162 kaibot/cogs/moderation.py:185
 msgid "Criando o cargo de Silenciado"
 msgstr "Creating the role of Muted"
 
-#: kaibot/cogs/moderation.py:138
+#: kaibot/cogs/moderation.py:170
 #, docstring
 msgid "Silencia um membro."
 msgstr "Mutes a member."
 
-#: kaibot/cogs/moderation.py:146 kaibot/cogs/moderation.py:150
-#: kaibot/cogs/moderation.py:179
+#: kaibot/cogs/moderation.py:178 kaibot/cogs/moderation.py:182
+#: kaibot/cogs/moderation.py:211
 msgid "Silenciado"
 msgstr "Muted"
 
-#: kaibot/cogs/moderation.py:163
+#: kaibot/cogs/moderation.py:195
 #, python-brace-format
 msgid "**{member}** silenciado por **{reason}**."
 msgstr "**{member}** muted for **{reason}**."
 
-#: kaibot/cogs/moderation.py:174
+#: kaibot/cogs/moderation.py:206
 #, docstring
 msgid "Remove o silenciamento de um membro."
 msgstr "Unmutes a member."
 
-#: kaibot/cogs/moderation.py:181
+#: kaibot/cogs/moderation.py:213
 msgid "Cargo \"Silenciado\" não encontrado."
 msgstr "Role \"Muted\" not found."
 
-#: kaibot/cogs/moderation.py:185
+#: kaibot/cogs/moderation.py:217
 #, python-brace-format
 msgid "**{member}** desilenciado."
 msgstr "**{member}** unmuted."
 
-#: kaibot/cogs/moderation.py:203
+#: kaibot/cogs/moderation.py:235
 #, docstring
 msgid "Altera a linguagem do servidor."
 msgstr "Changes the server's language."
 
-#: kaibot/cogs/moderation.py:208
+#: kaibot/cogs/moderation.py:240
 #, python-brace-format
 msgid "Escolha entre {languages}."
 msgstr "Choose between {languages}."
 
-#: kaibot/cogs/moderation.py:210
+#: kaibot/cogs/moderation.py:242
 msgid "Essa linguagem já está sendo usada."
 msgstr "This language is already in use."
 
-#: kaibot/cogs/moderation.py:218
+#: kaibot/cogs/moderation.py:250
 #, python-brace-format
 msgid "Linguagem alterada para {lang}."
 msgstr "Language changed to {lang}."
 
-#: kaibot/cogs/moderation.py:222
+#: kaibot/cogs/moderation.py:254
 #, docstring
 msgid "Comandos relacionados ao prefixo do servidor."
 msgstr "Commands related to the server prefix."
 
-#: kaibot/cogs/moderation.py:233
+#: kaibot/cogs/moderation.py:265
 #, python-brace-format
 msgid "Os prefixos do servidor são: {prefixes}"
 msgstr "The prefixes of the server are: {prefixes}"
 
-#: kaibot/cogs/moderation.py:238
+#: kaibot/cogs/moderation.py:270
 #, docstring
 msgid ""
 "Adiciona um prefixo.\n"
@@ -182,24 +187,24 @@ msgstr ""
 "\n"
 "3 prefixes are allowed at a time."
 
-#: kaibot/cogs/moderation.py:244
+#: kaibot/cogs/moderation.py:276
 msgid "O prefixo pode ter no máximo 5 caracteres."
 msgstr "The prefix can have up to 5 characters."
 
-#: kaibot/cogs/moderation.py:249
+#: kaibot/cogs/moderation.py:281
 msgid "O limite de 3 prefixos foi atigindo."
 msgstr "The limit of 3 prefixes was reached."
 
-#: kaibot/cogs/moderation.py:252
+#: kaibot/cogs/moderation.py:284
 msgid "Esse prefixo já está sendo utilizado."
 msgstr "This prefix is already in use."
 
-#: kaibot/cogs/moderation.py:261
+#: kaibot/cogs/moderation.py:293
 #, python-brace-format
 msgid "Prefixo `{prefix}` adicionado."
 msgstr "Prefix `{prefix}` added."
 
-#: kaibot/cogs/moderation.py:266
+#: kaibot/cogs/moderation.py:298
 #, docstring
 msgid ""
 "Remove um prefixo.\n"
@@ -210,11 +215,11 @@ msgstr ""
 "\n"
 "If all prefixes are removed, the defaults will be used."
 
-#: kaibot/cogs/moderation.py:274
+#: kaibot/cogs/moderation.py:306
 msgid "Este prefixo não está sendo utilizado."
 msgstr "This prefix isn't in use."
 
-#: kaibot/cogs/moderation.py:279
+#: kaibot/cogs/moderation.py:311
 #, python-brace-format
 msgid "Prefixo `{prefix}` removido."
 msgstr "Prefix `{prefix}` removed."
