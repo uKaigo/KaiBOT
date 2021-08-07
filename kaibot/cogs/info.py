@@ -16,7 +16,7 @@ from ..utils.views import PaginatorView
 _ = Translator(__name__)
 
 
-class UserinfoView(discord.ui.View):
+class UserinfoView(custom.View):
     def __init__(self, embeds, **kwargs):
         super().__init__(**kwargs)
         self.current = 0

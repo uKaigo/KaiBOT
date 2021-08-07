@@ -8,7 +8,7 @@ from discord.ext import commands
 
 from .. import config
 from ..i18n import Translator
-from ..utils import escape_text, format_list
+from ..utils import escape_text, format_list, custom
 from ..utils.translations import PERMISSIONS
 
 _ = Translator(__name__)
@@ -173,6 +173,34 @@ class ErrorHandler(commands.Cog):
         channel = self.bot.get_channel(config.LOGS['errors'])
         await channel.send(**kwgs)
 
+    async def on_view_error(self, view, error, item, interaction):
+        log.error(
+            f'An occurred in the view {view} in the item {item!r}. '
+            f'User ID: {interaction.user.id}, Channel ID: {interaction.channel_id}',
+            exc_info=error,
+        )
+
+        tb_exc = traceback.TracebackException.from_exception(error)
+
+        embed = discord.Embed(
+            title=f'Erro na view "{view.__class__.__name__}"',
+            description=f'**View:** `{view!r}`\n **Item:** `{item!r}`\n'
+            f'**ID do usuário:** {interaction.user.id}\n '
+            f'**ID do canal:** {interaction.channel_id}',
+            color=config.MAIN_COLOR,
+        )
+
+        paginator = commands.Paginator('```py\n', '```', 1024, '')
+        for line in tb_exc.format():
+            paginator.add_line(line)
+
+        kwgs = self._get_kwargs_from_paginator(embed, paginator)
+
+        channel = self.bot.get_channel(config.LOGS['errors'])
+        await channel.send(**kwgs)
+
 
 def setup(bot):
-    bot.add_cog(ErrorHandler(bot))
+    cog = ErrorHandler(bot)
+    bot.add_cog(cog)
+    custom.View._underlying_error_handler = cog.on_view_error

@@ -1,3 +1,4 @@
+import discord
 from discord.ext import commands
 
 from ..i18n import Translator
@@ -35,3 +36,21 @@ class _CogAttrMeta(commands.CogMeta):
 
 class Cog(commands.Cog, metaclass=_CogAttrMeta):
     pass
+
+
+class View(discord.ui.View):
+    """
+    Custom view that handles errors.
+
+    Since we can't access the bot instance from inside the view, this
+    is defined by the ErrorHandler, which can.
+
+    TODO: Use contextvars to get the bot.
+    """
+
+    _underlying_error_handler = None
+
+    def on_error(self, error, item, interaction):
+        if self._underlying_error_handler:
+            return self._underlying_error_handler(self, error, item, interaction)
+        return super().on_error(error, item, interaction)

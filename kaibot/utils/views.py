@@ -1,9 +1,10 @@
 import discord
 from .translations import CONFIRM
 from .enums import Emotes
+from .custom import View
 
 
-class Confirm(discord.ui.View):
+class Confirm(View):
     def __init__(self, member, *, timeout=180):
         super().__init__(timeout=timeout)
         self.member = member
@@ -31,7 +32,7 @@ class Confirm(discord.ui.View):
         self.stop()
 
 
-class PaginatorView(discord.ui.View):
+class PaginatorView(View):
     def __init__(self, *, message, timeout=180):
         self.message = message
         self.current_page = 0

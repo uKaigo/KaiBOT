@@ -1,8 +1,8 @@
 from enum import IntEnum
 
 import discord
-import discord.http
 
+from ...utils.custom import View
 from ...utils.enums import Emotes
 from ...i18n import Translator, current_language
 
@@ -113,7 +113,7 @@ class TTTButton(discord.ui.Button):
         await self.view.update_message(interaction.response)
 
 
-class TTTView(discord.ui.View):
+class TTTView(View):
     def __init__(self, bot, message, players):
         super().__init__(timeout=60)
         self.bot = bot
