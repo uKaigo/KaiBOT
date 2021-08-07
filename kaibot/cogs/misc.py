@@ -1,4 +1,3 @@
-from datetime import datetime
 import sys
 
 import psutil
@@ -79,7 +78,7 @@ class Miscelaneous(custom.Cog, translator=_):
 
         embed.add_field(name=_('Quem sou eu?'), value=who_am_i, inline=False)
 
-        delta = datetime.utcnow() - self.bot.uptime
+        delta = discord.utils.utcnow() - self.bot.uptime
         if current_language.get() != 'en_US':
             humanize.activate(current_language.get())
         else:

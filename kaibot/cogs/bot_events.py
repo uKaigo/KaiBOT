@@ -1,6 +1,4 @@
-from datetime import datetime
 from io import StringIO
-from kaibot.utils import escape_text
 from sys import version_info as py_version_i
 
 import discord
@@ -79,7 +77,7 @@ class BotEvents(commands.Cog):
         bot = self.bot
         if bot.uptime is not None:
             return
-        bot.uptime = datetime.utcnow()
+        bot.uptime = discord.utils.utcnow()
 
         console = get_console()
         console.print(f'[{color}]{ASCII_ART}\n')
