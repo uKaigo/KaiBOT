@@ -55,18 +55,12 @@ class PaginatorView(discord.ui.View):
 
     @discord.ui.button(emoji=Emotes.STOP, style=discord.ButtonStyle.red)
     async def stop_paginator(self, button: discord.ui.Button, interaction: discord.Interaction):
-        for child in self.children:
-            child.disabled = True
-
-        await self.message.edit(view=self)
+        await self.message.edit(view=None)
 
         self.stop()
 
     async def on_timeout(self):
-        for child in self.children:
-            child.disabled = True
-
-        await self.message.edit(view=self)
+        await self.message.edit(view=None)
 
     @discord.ui.button(emoji=Emotes.NEXT, style=discord.ButtonStyle.blurple)
     async def go_to_next(self, button: discord.ui.Button, interaction: discord.Interaction):

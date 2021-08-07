@@ -21,6 +21,7 @@ class UserinfoView(discord.ui.View):
         super().__init__(**kwargs)
         self.current = 0
         self.embeds = embeds
+
         # TODO: Think of better emojis.
         self.buttons = [
             {'label': _('Permissões'), 'emoji': '🛡️'},
@@ -29,6 +30,8 @@ class UserinfoView(discord.ui.View):
 
         self.toggle_perms.label = self.buttons[0]['label']
         self.toggle_perms.emoji = self.buttons[0]['emoji']
+
+        self.message = None
 
     @discord.ui.button()
     async def toggle_perms(self, button: discord.ui.Button, interaction: discord.Interaction):
@@ -39,6 +42,10 @@ class UserinfoView(discord.ui.View):
         button.emoji = button_info['emoji']
 
         await interaction.response.edit_message(embed=self.embeds[self.current], view=self)
+
+    async def on_timeout(self):
+        if self.message:
+            await self.message.edit(view=None)
 
 
 class OldmembersView(PaginatorView):
@@ -176,7 +183,9 @@ class Info(custom.Cog, translator=_):
 
         embed_perms.add_field(name=_('🛡️ Permissões'), value=format_list(perms), inline=False)
 
-        await ctx.send(embed=embed_info, view=UserinfoView((embed_info, embed_perms), timeout=60))
+        view = UserinfoView((embed_info, embed_perms), timeout=60)
+        msg = await ctx.send(embed=embed_info, view=view)
+        view.message = msg
 
     @commands.command()
     @commands.guild_only()
