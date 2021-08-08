@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  kaibot\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-04 00:06-0300\n"
-"PO-Revision-Date: 2021-07-03 23:58-0300\n"
+"POT-Creation-Date: 2021-08-08 00:28-0300\n"
+"PO-Revision-Date: 2021-08-08 00:45-0300\n"
 "Last-Translator: \n"
 "Language: en_US\n"
 "Language-Team: English\n"
@@ -14,17 +14,29 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.9.1\n"
 
-#: kaibot/cogs/games/ttt.py:208
+#: kaibot/cogs/games/ttt.py:139
 #, python-brace-format
 msgid "Vez de {player}."
 msgstr "{player}'s turn."
 
-#: kaibot/cogs/games/ttt.py:211
+#: kaibot/cogs/games/ttt.py:142
 msgid "Deu velha!"
 msgstr "It's a tie!"
 
-#: kaibot/cogs/games/ttt.py:213
+#: kaibot/cogs/games/ttt.py:144
 #, python-brace-format
 msgid "{player} ganhou!"
 msgstr "{player} won!"
+
+#: kaibot/cogs/games/ttt.py:169
+msgid "Tempo excedido."
+msgstr "Time exceeded."
+
+#: kaibot/cogs/games/ttt.py:173
+msgid "Você não está nesse jogo."
+msgstr "Your not in this game."
+
+#: kaibot/cogs/games/ttt.py:177
+msgid "Não é a sua vez."
+msgstr "It's not your turn."
 

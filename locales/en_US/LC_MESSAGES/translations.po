@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  kaibot\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-04 00:06-0300\n"
-"PO-Revision-Date: 2021-07-03 23:57-0300\n"
+"POT-Creation-Date: 2021-08-08 00:28-0300\n"
+"PO-Revision-Date: 2021-08-08 00:44-0300\n"
 "Last-Translator: \n"
 "Language: en_US\n"
 "Language-Team: English\n"
@@ -146,17 +146,24 @@ msgstr "Use Slash Commands"
 msgid "Pedir para falar"
 msgstr "Request to speak"
 
-#: kaibot/utils/translations.py:54
-#, python-brace-format
-msgid "{date} às {time}"
-msgstr "{date} at {time}"
+#: kaibot/utils/translations.py:59
+msgid "Sim"
+msgstr "Yes"
 
-#: kaibot/utils/translations.py:57
+#: kaibot/utils/translations.py:59
+msgid "Não"
+msgstr "No"
+
+#: kaibot/utils/translations.py:62
 #, python-brace-format
 msgid "Insira um número entre {0.min} e {0.max}."
 msgstr "Insert a number between {0.min} and {0.max}."
 
-#: kaibot/utils/translations.py:58
+#: kaibot/utils/translations.py:63
 msgid "Esse prefixo está reservado."
 msgstr "This prefix is reserved."
+
+#: kaibot/utils/translations.py:64
+msgid "Este comando não pode ser executado em threads."
+msgstr "This command cannot be executed in threads."
 
