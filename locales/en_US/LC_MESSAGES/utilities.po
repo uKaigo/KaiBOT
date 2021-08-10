@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  kaibot\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-04 00:06-0300\n"
-"PO-Revision-Date: 2021-07-04 00:03-0300\n"
+"POT-Creation-Date: 2021-08-10 13:36-0300\n"
+"PO-Revision-Date: 2021-08-10 13:38-0300\n"
 "Last-Translator: \n"
 "Language: en_US\n"
 "Language-Team: English\n"
@@ -81,27 +81,31 @@ msgstr "Redirects"
 msgid "Não pude me conectar com o site: `{error}`"
 msgstr "I couldn't connect with the site: `{error}`"
 
-#: kaibot/cogs/utilities.py:110
+#: kaibot/cogs/utilities.py:88
+msgid "O site redirecionou muitas vezes."
+msgstr "The site redirected too many times."
+
+#: kaibot/cogs/utilities.py:112
 #, docstring
 msgid "Transforma o texto em ｖａｐｏｒｗａｖｅ."
 msgstr "Transforms the text to ｖａｐｏｒｗａｖｅ."
 
-#: kaibot/cogs/utilities.py:111 kaibot/cogs/utilities.py:198
-#: kaibot/cogs/utilities.py:215
+#: kaibot/cogs/utilities.py:113 kaibot/cogs/utilities.py:200
+#: kaibot/cogs/utilities.py:217
 msgid "Texto por: {author}"
 msgstr "Text by: {author}"
 
-#: kaibot/cogs/utilities.py:114
+#: kaibot/cogs/utilities.py:116
 #, python-brace-format
 msgid "O texto pode ter no máximo {max} caracteres."
 msgstr "The text can have up to {max} characters."
 
-#: kaibot/cogs/utilities.py:123
+#: kaibot/cogs/utilities.py:125
 #, docstring
 msgid "Tradutor de [brainfuck](https://pt.wikipedia.org/wiki/Brainfuck)."
 msgstr "[Brainfuck](https://en.wikipedia.org/wiki/Brainfuck) translator."
 
-#: kaibot/cogs/utilities.py:129
+#: kaibot/cogs/utilities.py:131
 #, docstring
 msgid ""
 "Decodificador de [brainfuck](https://pt.wikipedia.org/wiki/Brainfuck).\n"
@@ -114,39 +118,39 @@ msgstr ""
 "`,` will read the next value of a `A-Za-z0-9` string.\n"
 "For example: `,.` would print \"A\"."
 
-#: kaibot/cogs/utilities.py:142
+#: kaibot/cogs/utilities.py:144
 msgid "Tempo excedido."
 msgstr "Time exceeded."
 
-#: kaibot/cogs/utilities.py:152
+#: kaibot/cogs/utilities.py:154
 #, python-brace-format
 msgid "Texto por: {author} ({author.id})"
 msgstr "Text by: {author} ({author.id})"
 
-#: kaibot/cogs/utilities.py:156
+#: kaibot/cogs/utilities.py:158
 msgid "Saída:"
 msgstr "Output:"
 
-#: kaibot/cogs/utilities.py:157
+#: kaibot/cogs/utilities.py:159
 msgid "Memória:"
 msgstr "Memory:"
 
-#: kaibot/cogs/utilities.py:165
+#: kaibot/cogs/utilities.py:167
 #, docstring
 msgid "Comandos para criptografar um texto."
 msgstr "Commands to encrypt a text."
 
-#: kaibot/cogs/utilities.py:170
+#: kaibot/cogs/utilities.py:172
 #, docstring
 msgid "Comandos para descriptografar um código."
 msgstr "Commands to decrypt a text."
 
-#: kaibot/cogs/utilities.py:187
+#: kaibot/cogs/utilities.py:189
 #, docstring
 msgid "Criptografar código morse."
 msgstr "Encrypt morse code."
 
-#: kaibot/cogs/utilities.py:203
+#: kaibot/cogs/utilities.py:205
 #, docstring
 msgid "Descriptografar código morse."
 msgstr "Decrypt morse code."

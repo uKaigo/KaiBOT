@@ -7,7 +7,7 @@ from functools import cached_property
 
 import discord
 from discord.ext import commands
-from aiohttp import ClientConnectorError
+from aiohttp import ClientConnectorError, TooManyRedirects
 
 from .. import config
 from ..i18n import Translator
@@ -79,11 +79,13 @@ class Utilities(custom.Cog, translator=_):
         description = ''
         async with ctx.typing():
             try:
-                dest = await self.bot.session.get(link.strip('<>'))
+                dest = await self.bot.session.get(link.strip('<>'), max_redirects=30)
             except ClientConnectorError as e:
                 return await ctx.send(
                     _('Não pude me conectar com o site: `{error}`', error=e.strerror)
                 )
+            except TooManyRedirects:
+                return await ctx.send(_('O site redirecionou muitas vezes.'))
 
             h_len = len(dest.history)
             for index, res in enumerate(dest.history + (dest,)):
