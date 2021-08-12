@@ -2,6 +2,7 @@ import argparse
 import logging
 import os
 import sys
+import asyncio
 from pathlib import Path
 
 from dotenv import load_dotenv
@@ -19,7 +20,7 @@ def parse_args():
     return parser.parse_args()
 
 
-def main():
+async def main():
     options = parse_args()
     if not options.token:
         options.token = os.getenv('DISCORD_TOKEN')
@@ -27,7 +28,11 @@ def main():
             raise RuntimeError('Token must be set with flag or DISCORD_TOKEN env.')
 
     bot = KaiBOT(chunk_guilds_at_startup=False)
-    bot.run(options.token)
+    try:
+        await bot.start(options.token)
+    finally:
+        if not bot.is_closed():
+            await bot.close()
 
 
 if __name__ == '__main__':
@@ -46,7 +51,7 @@ if __name__ == '__main__':
     log.info('Compiled.')
 
     try:
-        main()
+        asyncio.run(main())
     except SystemExit:
         raise
     except:
