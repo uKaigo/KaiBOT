@@ -49,6 +49,7 @@ class KaiBOT(commands.Bot):
             await self.private_guild.chunk()
 
     async def close(self):
+        log.info('Closing...')
         await self.session.close()
         await super().close()
 

@@ -59,5 +59,3 @@ if __name__ == '__main__':
         sys.exit(0)
     else:
         sys.exit(0)
-    finally:
-        log.info('Quitting...')
