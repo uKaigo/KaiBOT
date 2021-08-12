@@ -52,11 +52,11 @@ if __name__ == '__main__':
 
     try:
         asyncio.run(main())
-    except SystemExit:
-        raise
-    except:
+    except Exception:
         log.critical('Unhandled error occurred.', exc_info=True)
         sys.exit(1)
+    except (SystemExit, KeyboardInterrupt):
+        sys.exit(0)
     else:
         sys.exit(0)
     finally:
