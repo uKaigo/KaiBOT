@@ -2,13 +2,12 @@ import logging
 import os
 
 import aiohttp
-from discord import Activity, ActivityType, DMChannel, AllowedMentions
+from discord import Activity, ActivityType, DMChannel, AllowedMentions, Intents
 from discord.ext import commands
 from motor.motor_asyncio import AsyncIOMotorClient
 
 from . import config
 from .i18n import current_language
-from .utils import get_intents_from
 from .utils.database import DatabaseManager
 
 log = logging.getLogger('kaibot')
@@ -16,7 +15,7 @@ log = logging.getLogger('kaibot')
 
 class KaiBOT(commands.Bot):
     def __init__(self, *args, **kwargs):
-        kwargs.setdefault('intents', get_intents_from(config.INTENTS))
+        kwargs['intents'] = Intents(**{intent: True for intent in config.INTENTS})
         kwargs['command_prefix'] = self.prefix_getter
         kwargs['activity'] = Activity(name='k.help', type=ActivityType.listening)
         kwargs['allowed_mentions'] = AllowedMentions(everyone=False, users=False, roles=False)
