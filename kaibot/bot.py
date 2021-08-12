@@ -43,7 +43,10 @@ class KaiBOT(commands.Bot):
     async def lazy_init(self):
         await self.wait_until_ready()
         self.private_guild = self.get_guild(config.PRIVATE_GUILD)
-        await self.private_guild.chunk()
+        if not self.private_guild:
+            log.warning(f"Couldn't find the private guild ({config.PRIVATE_GUILD}).")
+        else:
+            await self.private_guild.chunk()
 
     async def close(self):
         await self.session.close()
@@ -63,6 +66,9 @@ class KaiBOT(commands.Bot):
         log.debug(f'Loaded {len(self.extensions)} extensions with {len(self.commands)} commands.')
 
     def get_flags_for(self, user):
+        if not self.private_guild:
+            return 0
+
         member = self.private_guild.get_member(user.id)
 
         if user.id in self._flags_cache:
