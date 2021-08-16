@@ -1,6 +1,5 @@
 from datetime import datetime
 from io import StringIO
-from kaibot.utils import escape_text
 from sys import version_info as py_version_i
 
 import discord
@@ -24,7 +23,7 @@ ASCII_ART = r'''
     '\n'
 )
 
-color = f'#{hex(config.MAIN_COLOR)[2:]}'
+color = f'#{config.MAIN_COLOR:0>6X}'
 
 
 class BotEvents(commands.Cog):
