@@ -10,6 +10,7 @@ from rich.columns import Columns
 from rich.panel import Panel
 from rich.table import Table
 
+from ..i18n import Translator, current_language
 from .. import config
 
 ASCII_ART = r'''
@@ -24,6 +25,8 @@ ASCII_ART = r'''
 )
 
 color = f'#{config.MAIN_COLOR:0>6X}'
+
+_ = Translator(__name__)
 
 
 class BotEvents(commands.Cog):
@@ -146,6 +149,23 @@ class BotEvents(commands.Cog):
         embed.description = f'Dono: <@{guild.owner_id}>'
 
         await channel.send(embed=embed)
+
+    @commands.Cog.listener()
+    async def on_message(self, message):
+        if message.content == message.guild.me.mention:
+            prefixes = config.PREFIXES
+
+            guild_doc = await self.bot.db.guilds.find(message.guild.id)
+            current_language.set(await self.bot.get_language_for(message.guild))
+
+            prefixes = config.PREFIXES
+
+            if guild_doc and guild_doc.prefixes:
+                prefixes = guild_doc.prefixes
+
+            await message.reply(
+                _('Olá! Sou KaiBOT, o prefixo desse servidor é `{prefix}`.', prefix=prefixes[0])
+            )
 
 
 def setup(bot):
