@@ -2,13 +2,12 @@ import logging
 import os
 
 import aiohttp
-from discord import Activity, ActivityType, DMChannel, AllowedMentions
+from discord import Activity, ActivityType, DMChannel, AllowedMentions, Intents
 from discord.ext import commands
 from motor.motor_asyncio import AsyncIOMotorClient
 
 from . import config
 from .i18n import current_language
-from .utils import get_intents_from
 from .utils.database import DatabaseManager
 
 log = logging.getLogger('kaibot')
@@ -16,7 +15,7 @@ log = logging.getLogger('kaibot')
 
 class KaiBOT(commands.Bot):
     def __init__(self, *args, **kwargs):
-        kwargs.setdefault('intents', get_intents_from(config.INTENTS))
+        kwargs['intents'] = Intents(**{intent: True for intent in config.INTENTS})
         kwargs['command_prefix'] = self.prefix_getter
         kwargs['activity'] = Activity(name='k.help', type=ActivityType.listening)
         kwargs['allowed_mentions'] = AllowedMentions(everyone=False, users=False, roles=False)
@@ -44,9 +43,13 @@ class KaiBOT(commands.Bot):
     async def lazy_init(self):
         await self.wait_until_ready()
         self.private_guild = self.get_guild(config.PRIVATE_GUILD)
-        await self.private_guild.chunk()
+        if not self.private_guild:
+            log.warning(f"Couldn't find the private guild ({config.PRIVATE_GUILD}).")
+        else:
+            await self.private_guild.chunk()
 
     async def close(self):
+        log.info('Closing...')
         await self.session.close()
         await super().close()
 
@@ -64,6 +67,9 @@ class KaiBOT(commands.Bot):
         log.debug(f'Loaded {len(self.extensions)} extensions with {len(self.commands)} commands.')
 
     def get_flags_for(self, user):
+        if not self.private_guild:
+            return 0
+
         member = self.private_guild.get_member(user.id)
 
         if user.id in self._flags_cache:

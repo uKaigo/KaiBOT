@@ -1,13 +1,8 @@
 from babel.lists import format_list as _fmt_list
-from discord import Intents, Member
+from discord import Member
 from discord.utils import escape_mentions, escape_markdown
 
 from ..i18n import get_babel_locale
-
-
-def get_intents_from(iter_):
-    """Get the intents object from List[str]."""
-    return Intents(**{intent: True for intent in iter_})
 
 
 def format_list(lst, style='standard'):

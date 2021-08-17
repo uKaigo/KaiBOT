@@ -2,6 +2,7 @@ import argparse
 import logging
 import os
 import sys
+import asyncio
 from pathlib import Path
 
 from dotenv import load_dotenv
@@ -9,7 +10,6 @@ from dotenv import load_dotenv
 from .bot import KaiBOT
 from .logging import config_logging
 from .scripts import mo_compiler as compile_mo
-from .utils import get_intents_from
 
 log = logging.getLogger('kaibot.main')
 
@@ -17,26 +17,22 @@ log = logging.getLogger('kaibot.main')
 def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument('-t', '--token', help='Run with the given token.')
-    parser.add_argument('--intents', help='Run with custom intents.', nargs='+')
     return parser.parse_args()
 
 
-def main():
+async def main():
     options = parse_args()
     if not options.token:
         options.token = os.getenv('DISCORD_TOKEN')
         if not options.token:
-            raise RuntimeError('Token must be set.')
+            raise RuntimeError('Token must be set with flag or DISCORD_TOKEN env.')
 
-    intents = None
-    if options.intents:
-        intents = get_intents_from(options.intents)
-
-    if intents:
-        bot = KaiBOT(intents=intents, chunk_guilds_at_startup=False)
-    else:
-        bot = KaiBOT(chunk_guilds_at_startup=False)
-    bot.run(options.token)
+    bot = KaiBOT(chunk_guilds_at_startup=False)
+    try:
+        await bot.start(options.token)
+    finally:
+        if not bot.is_closed():
+            await bot.close()
 
 
 if __name__ == '__main__':
@@ -55,13 +51,11 @@ if __name__ == '__main__':
     log.info('Compiled.')
 
     try:
-        main()
-    except SystemExit:
-        raise
-    except:
+        asyncio.run(main())
+    except Exception:
         log.critical('Unhandled error occurred.', exc_info=True)
         sys.exit(1)
+    except (SystemExit, KeyboardInterrupt):
+        sys.exit(0)
     else:
         sys.exit(0)
-    finally:
-        log.info('Quitting...')
