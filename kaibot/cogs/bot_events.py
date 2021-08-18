@@ -13,14 +13,14 @@ from rich.table import Table
 from ..i18n import Translator, current_language
 from .. import config
 
-ASCII_ART = r'''
+ASCII_ART = r"""
  _   __      _______  _____ _____ 
 | | / /     (_) ___ \|  _  |_   _|
 | |/ /  __ _ _| |_/ /| | | | | |  
 |    \ / _` | | ___ \| | | | | |  
 | |\  \ (_| | | |_/ /\ \_/ / | |  
 \_| \_/\__,_|_\____/  \___/  \_/  
-'''.strip(
+""".strip(
     '\n'
 )
 
