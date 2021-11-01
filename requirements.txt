@@ -9,5 +9,5 @@ motor==2.5.1
 dnspython==2.1.0
 
 # These are already installed as dependencies, but let's keep it here.
-aiohttp==3.7.4.post0
+aiohttp==3.8.0
 humanize==3.12.0
