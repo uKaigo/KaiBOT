@@ -1,5 +1,5 @@
 discord.py==1.7.3
-jishaku==2.2.0
+jishaku==2.3.2
 git+https://github.com/Rapptz/discord-ext-menus@309c70222eec33acacb8c21bbb0fbe9bc57de661
 Babel==2.9.1
 python-dotenv==0.19.1
