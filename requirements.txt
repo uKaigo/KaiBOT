@@ -10,4 +10,4 @@ dnspython==2.1.0
 
 # These are already installed as dependencies, but let's keep it here.
 aiohttp==3.8.1
-humanize==3.12.0
+humanize==3.13.0
