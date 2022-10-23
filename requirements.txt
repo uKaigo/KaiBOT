@@ -4,7 +4,7 @@ git+https://github.com/Rapptz/discord-ext-menus@309c70222eec33acacb8c21bbb0fbe9b
 Babel==2.10.3
 python-dotenv==0.21.0
 rich==12.5.1
-psutil==5.9.2
+psutil==5.9.3
 motor==3.0.0
 dnspython==2.2.1
 
